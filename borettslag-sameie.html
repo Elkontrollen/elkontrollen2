@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <header>
@@ -19,13 +20,18 @@
     <button class="menu-toggle" aria-label="Meny">&#9776;</button>
     <nav class="links">
       <a href="index.html">Hjem</a>
-      <a href="elkontroll-bolig.html">Elkontroll Bolig</a>
-      <a href="borettslag-sameie.html" class="current">Borettslag – Sameie</a>
-      <a href="naering.html">Næring</a>
-      <a href="landbruk.html">Landbruk</a>
-      <a href="elsjekk.html">Elsjekk</a>
-      <a href="brannalarm-nodlys.html">Brannalarm &amp; nødlys</a>
-      <a href="fatt-avvik.html">Fått avvik?</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-trigger" type="button">Tjenester <span class="care">&#9662;</span></button>
+        <div class="nav-drop-panel"><div class="nav-drop-panel-inner">
+          <a href="elkontroll-bolig.html">Elkontroll bolig</a>
+          <a href="borettslag-sameie.html">Borettslag &#8211; sameie</a>
+          <a href="naering.html">N&#230;ring</a>
+          <a href="landbruk.html">Landbruk</a>
+          <a href="elsjekk.html">Elsjekk</a>
+          <a href="brannalarm-nodlys.html">Brannalarm &amp; n&#248;dlys</a>
+        </div></div>
+      </div>
+      <a href="fatt-avvik.html">F&#229;tt avvik?</a>
       <a href="om-oss.html">Om oss</a>
       <a href="blogg/index.html">Blogg</a>
     </nav>
@@ -50,7 +56,7 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Styrets ansvar</span><h2>Hvorfor dette havner på styrets bord, ikke bare vaktmesterens</h2><p>Elektrisk brannrisiko i fellesbygg er ikke bare et vedlikeholdsspørsmål — det er noe styret kan bli holdt ansvarlig for hvis det ikke er fulgt opp.</p></div>
+    <div class="sec-head"><h2>Hvorfor dette havner på styrets bord, ikke bare vaktmesterens</h2><p>Elektrisk brannrisiko i fellesbygg er ikke bare et vedlikeholdsspørsmål — det er noe styret kan bli holdt ansvarlig for hvis det ikke er fulgt opp.</p></div>
     <div class="why-list">
       <div class="why-row"><span class="tag">01</span><div><h4>Internkontroll er styrets ansvar</h4><p>Brann- og elsikkerhet i fellesarealer faller under styrets internkontrollplikt.</p></div></div>
       <div class="why-row"><span class="tag">02</span><div><h4>Forsikringsvilkår</h4><p>Flere forsikringsselskaper premierer eller forutsetter jevnlig elkontroll av fellesanlegg.</p></div></div>
@@ -62,7 +68,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);" id="inkludert">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Hva er inkludert</span><h2>Fellesareal, boenheter og termografering — samlet</h2></div>
+    <div class="sec-head"><h2>Fellesareal, boenheter og termografering — samlet</h2></div>
     <div class="card-grid">
       <div class="card"><h3>Fellesarealer</h3><p>Kjeller, loft, fyrrom, vaskeri, garasjeanlegg og annet felles elektrisk anlegg.</p></div>
       <div class="card"><h3>Boenheter</h3><p>Sikringsskap i den enkelte leilighet, etter avtalt tilgang med styret og beboer.</p></div>
@@ -73,7 +79,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Prosessen</span><h2>Fra styrevedtak til ferdig rapport</h2></div>
+    <div class="sec-head"><h2>Fra styrevedtak til ferdig rapport</h2></div>
     <div class="steps">
       <div class="step"><span class="n">01</span><h4>Styret bestiller</h4><p>Send inn omfang (fellesarealer og/eller boenheter) og antall enheter.</p></div>
       <div class="step"><span class="n">02</span><h4>Vi koordinerer</h4><p>Tidspunkt avtales med styret, som varsler beboerne i god tid.</p></div>
@@ -85,7 +91,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Spørsmål fra styrer</span><h2>Ofte stilt av styremedlemmer</h2></div>
+    <div class="sec-head"><h2>Ofte stilt av styremedlemmer</h2></div>
     <div class="faq-item"><div class="faq-q"><span>Må alle beboere være hjemme samtidig?</span><span class="plus">+</span></div><div class="faq-a"><p>Nei. Vi avtaler et tidsvindu med styret, som informerer beboerne i forkant. Boenheter der ingen er hjemme kan avtales særskilt eller utsettes til neste runde.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Hva skjer hvis dere finner avvik?</span><span class="plus">+</span></div><div class="faq-a"><p>Dere får en tydelig, prioritert liste over funn i rapporten. Den kan brukes direkte til å innhente tilbud på utbedring.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Dekker forsikringen dette?</span><span class="plus">+</span></div><div class="faq-a"><p>Mange forsikringsselskaper gir rabatt ved dokumentert elkontroll, eller forutsetter det i vilkårene. Rapporten fra oss kan brukes som dokumentasjon.</p></div></div>

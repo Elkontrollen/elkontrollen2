@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <header>
@@ -19,13 +20,18 @@
     <button class="menu-toggle" aria-label="Meny">&#9776;</button>
     <nav class="links">
       <a href="index.html">Hjem</a>
-      <a href="elkontroll-bolig.html">Elkontroll Bolig</a>
-      <a href="borettslag-sameie.html">Borettslag – Sameie</a>
-      <a href="naering.html">Næring</a>
-      <a href="landbruk.html" class="current">Landbruk</a>
-      <a href="elsjekk.html">Elsjekk</a>
-      <a href="brannalarm-nodlys.html">Brannalarm &amp; nødlys</a>
-      <a href="fatt-avvik.html">Fått avvik?</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-trigger" type="button">Tjenester <span class="care">&#9662;</span></button>
+        <div class="nav-drop-panel"><div class="nav-drop-panel-inner">
+          <a href="elkontroll-bolig.html">Elkontroll bolig</a>
+          <a href="borettslag-sameie.html">Borettslag &#8211; sameie</a>
+          <a href="naering.html">N&#230;ring</a>
+          <a href="landbruk.html">Landbruk</a>
+          <a href="elsjekk.html">Elsjekk</a>
+          <a href="brannalarm-nodlys.html">Brannalarm &amp; n&#248;dlys</a>
+        </div></div>
+      </div>
+      <a href="fatt-avvik.html">F&#229;tt avvik?</a>
       <a href="om-oss.html">Om oss</a>
       <a href="blogg/index.html">Blogg</a>
     </nav>
@@ -60,7 +66,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Hvorfor landbruk er annerledes</span><h2>Samme forskrift, et helt annet driftsmiljø</h2></div>
+    <div class="sec-head"><h2>Samme forskrift, et helt annet driftsmiljø</h2></div>
     <div class="why-list">
       <div class="why-row"><span class="tag">01</span><div><h4>Fuktighet, støv og gjødselgasser</h4><p>Driftsmiljøet i fjøs og driftsbygninger sliter hardere på isolasjon og koblinger enn et vanlig boliganlegg.</p></div></div>
       <div class="why-row"><span class="tag">02</span><div><h4>Høy brannbelastning</h4><p>Fôr, høy og strø gjør at et branntilløp sprer seg raskt — og med dyrehold i bygget er marginene enda mindre.</p></div></div>
@@ -81,7 +87,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Vanlige spørsmål</span><h2>Det bønder lurer på før de bestiller</h2></div>
+    <div class="sec-head"><h2>Det bønder lurer på før de bestiller</h2></div>
     <div class="faq-item"><div class="faq-q"><span>Forstyrrer dere melking eller fôring?</span><span class="plus">+</span></div><div class="faq-a"><p>Nei, vi avtaler tidspunkt som passer rundt driftsrutinene deres — kontrollen legges opp etter gården, ikke omvendt.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Må vi ha kontroll hvert 3. år uansett?</span><span class="plus">+</span></div><div class="faq-a"><p>3-årsintervallet gjelder driftsbygninger med dyrehold. Uten aktiv drift følger anlegget samme 5-årsintervall som en ordinær bolig.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Dekker landbruksforsikringen dette?</span><span class="plus">+</span></div><div class="faq-a"><p>Mange landbruksforsikringer forutsetter eller gir rabatt ved dokumentert elkontroll. Sjekk med deres forsikringsselskap.</p></div></div>

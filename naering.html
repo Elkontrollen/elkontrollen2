@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <header>
@@ -19,13 +20,18 @@
     <button class="menu-toggle" aria-label="Meny">&#9776;</button>
     <nav class="links">
       <a href="index.html">Hjem</a>
-      <a href="elkontroll-bolig.html">Elkontroll Bolig</a>
-      <a href="borettslag-sameie.html">Borettslag – Sameie</a>
-      <a href="naering.html" class="current">Næring</a>
-      <a href="landbruk.html">Landbruk</a>
-      <a href="elsjekk.html">Elsjekk</a>
-      <a href="brannalarm-nodlys.html">Brannalarm &amp; nødlys</a>
-      <a href="fatt-avvik.html">Fått avvik?</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-trigger" type="button">Tjenester <span class="care">&#9662;</span></button>
+        <div class="nav-drop-panel"><div class="nav-drop-panel-inner">
+          <a href="elkontroll-bolig.html">Elkontroll bolig</a>
+          <a href="borettslag-sameie.html">Borettslag &#8211; sameie</a>
+          <a href="naering.html">N&#230;ring</a>
+          <a href="landbruk.html">Landbruk</a>
+          <a href="elsjekk.html">Elsjekk</a>
+          <a href="brannalarm-nodlys.html">Brannalarm &amp; n&#248;dlys</a>
+        </div></div>
+      </div>
+      <a href="fatt-avvik.html">F&#229;tt avvik?</a>
       <a href="om-oss.html">Om oss</a>
       <a href="blogg/index.html">Blogg</a>
     </nav>
@@ -61,7 +67,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Bygningstyper vi kjenner godt</span><h2>Vi har jobbet med det meste av næringsbygg</h2><p>Hvert bygningssegment har sine egne typiske risikoer — det legger vi til grunn før vi i det hele tatt kommer på befaring.</p></div>
+    <div class="sec-head"><h2>Vi har jobbet med det meste av næringsbygg</h2><p>Hvert bygningssegment har sine egne typiske risikoer — det legger vi til grunn før vi i det hele tatt kommer på befaring.</p></div>
     <div class="card-grid">
       <div class="card"><h3>Hoteller</h3><p>Døgnkontinuerlig drift og gjester som overnatter stiller høyere krav til rømningsveier og brannsikkerhet.</p></div>
       <div class="card"><h3>Bensinstasjoner</h3><p>Brannfarlig vare på området krever strengere sikkerhetsmarginer enn vanlig næringsbygg.</p></div>
@@ -75,7 +81,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Hvorfor FG-1400</span><h2>Dokumentasjon forsikringsselskapet faktisk godtar</h2></div>
+    <div class="sec-head"><h2>Dokumentasjon forsikringsselskapet faktisk godtar</h2></div>
     <div class="why-list">
       <div class="why-row"><span class="tag">01</span><div><h4>Ofte et forsikringsvilkår</h4><p>Mange næringsforsikringer forutsetter eller premierer elkontroll utført iht. FG-1400.</p></div></div>
       <div class="why-row"><span class="tag">02</span><div><h4>Reduserer reell brannrisiko</h4><p>FG-1400 er utviklet for å fange opp de elektriske feilene som statistisk sett starter branner i næringsbygg.</p></div></div>
@@ -87,7 +93,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Vanlige spørsmål</span><h2>Det næringsdrivende lurer på</h2></div>
+    <div class="sec-head"><h2>Det næringsdrivende lurer på</h2></div>
     <div class="faq-item"><div class="faq-q"><span>Kan dere komme utenom åpningstid?</span><span class="plus">+</span></div><div class="faq-a"><p>Ja, vi legger gjerne opp kontrollen til kveld eller stengt dag hvis det er viktig for dere å unngå driftsforstyrrelse.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Hva er FG-1400, og trenger vi det?</span><span class="plus">+</span></div><div class="faq-a"><p>FG-1400 er et sett bransjekrav til elektriske kontroller i næringsbygg, ofte forutsatt av forsikringsselskaper. Vi hjelper dere med å avklare hva som gjelder for akkurat deres bygg.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Vi har flere lokasjoner — kan dere samkjøre?</span><span class="plus">+</span></div><div class="faq-a"><p>Ja, vi setter gjerne opp en samlet plan og ett tilbud for flere bygg eller lokasjoner.</p></div></div>

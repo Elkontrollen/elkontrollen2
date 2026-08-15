@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <header>
@@ -19,13 +20,18 @@
     <button class="menu-toggle" aria-label="Meny">&#9776;</button>
     <nav class="links">
       <a href="index.html">Hjem</a>
-      <a href="elkontroll-bolig.html">Elkontroll Bolig</a>
-      <a href="borettslag-sameie.html">Borettslag – Sameie</a>
-      <a href="naering.html">Næring</a>
-      <a href="landbruk.html">Landbruk</a>
-      <a href="elsjekk.html">Elsjekk</a>
-      <a href="brannalarm-nodlys.html">Brannalarm &amp; nødlys</a>
-      <a href="fatt-avvik.html" class="current">Fått avvik?</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-trigger" type="button">Tjenester <span class="care">&#9662;</span></button>
+        <div class="nav-drop-panel"><div class="nav-drop-panel-inner">
+          <a href="elkontroll-bolig.html">Elkontroll bolig</a>
+          <a href="borettslag-sameie.html">Borettslag &#8211; sameie</a>
+          <a href="naering.html">N&#230;ring</a>
+          <a href="landbruk.html">Landbruk</a>
+          <a href="elsjekk.html">Elsjekk</a>
+          <a href="brannalarm-nodlys.html">Brannalarm &amp; n&#248;dlys</a>
+        </div></div>
+      </div>
+      <a href="fatt-avvik.html" class="current">F&#229;tt avvik?</a>
       <a href="om-oss.html">Om oss</a>
       <a href="blogg/index.html">Blogg</a>
     </nav>
@@ -55,7 +61,7 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Alvorlighetsgrader</span><h2>Slik kategoriserer vi funnene i rapporten</h2></div>
+    <div class="sec-head"><h2>Slik kategoriserer vi funnene i rapporten</h2></div>
     <div class="sev-grid">
       <div class="sev-card high"><span class="lvl">ALVORLIG AVVIK</span><h3>Bør utbedres straks</h3><p>Funn som utgjør en reell fare for liv, helse eller brann. Vi tar direkte kontakt hvis vi finner noe i denne kategorien.</p></div>
       <div class="sev-card mid"><span class="lvl">AVVIK</span><h3>Bør utbedres innen rimelig tid</h3><p>Noe er ikke i tråd med dagens krav, men utgjør ikke en umiddelbar fare. Planlegg utbedring, men det er ikke akutt.</p></div>
@@ -66,7 +72,7 @@
 
 <section class="section tight" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Neste steg</span><h2>Hva du gjør nå</h2></div>
+    <div class="sec-head"><h2>Hva du gjør nå</h2></div>
     <div class="step-list">
       <div class="step-row"><div class="step-num">1</div><div><h4>Les gjennom funnene og alvorlighetsgraden</h4><p>Rapporten viser hvert avvik med bilde, forklaring og hvilken kategori det er satt i.</p></div></div>
       <div class="step-row"><div class="step-num">2</div><div><h4>Prioriter etter alvorlighetsgrad</h4><p>Start med eventuelle alvorlige avvik. Resten kan planlegges over tid.</p></div></div>
@@ -79,7 +85,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Vanlige spørsmål</span><h2>Det folk lurer på etter en rapport med avvik</h2></div>
+    <div class="sec-head"><h2>Det folk lurer på etter en rapport med avvik</h2></div>
     <div class="faq-item"><div class="faq-q"><span>Må jeg utbedre alle avvik med en gang?</span><span class="plus">+</span></div><div class="faq-a"><p>Nei. Alvorlige avvik bør prioriteres raskt, men avvik og mindre avvik kan ofte planlegges over tid. Rapporten viser hvilken kategori hvert funn tilhører.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Kan dere utføre selve utbedringen?</span><span class="plus">+</span></div><div class="faq-a"><p>Ja, be om et tilbud basert på funnene i rapporten, så gir vi en konkret pris på utbedringsarbeidet.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Hva skjer hvis jeg ikke gjør noe?</span><span class="plus">+</span></div><div class="faq-a"><p>Avvikene blir stående, og risikoen de representerer vedvarer. Ved alvorlige avvik anbefaler vi på det sterkeste å utbedre snarest — det kan også påvirke forsikringsdekningen ved en eventuell skade.</p></div></div>

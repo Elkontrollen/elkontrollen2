@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="no">
 <head>
 <meta charset="UTF-8">
@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 <header>
@@ -19,13 +20,18 @@
     <button class="menu-toggle" aria-label="Meny">&#9776;</button>
     <nav class="links">
       <a href="index.html">Hjem</a>
-      <a href="elkontroll-bolig.html">Elkontroll Bolig</a>
-      <a href="borettslag-sameie.html">Borettslag – Sameie</a>
-      <a href="naering.html">Næring</a>
-      <a href="landbruk.html">Landbruk</a>
-      <a href="elsjekk.html">Elsjekk</a>
-      <a href="brannalarm-nodlys.html" class="current">Brannalarm &amp; nødlys</a>
-      <a href="fatt-avvik.html">Fått avvik?</a>
+      <div class="nav-dropdown">
+        <button class="nav-drop-trigger" type="button">Tjenester <span class="care">&#9662;</span></button>
+        <div class="nav-drop-panel"><div class="nav-drop-panel-inner">
+          <a href="elkontroll-bolig.html">Elkontroll bolig</a>
+          <a href="borettslag-sameie.html">Borettslag &#8211; sameie</a>
+          <a href="naering.html">N&#230;ring</a>
+          <a href="landbruk.html">Landbruk</a>
+          <a href="elsjekk.html">Elsjekk</a>
+          <a href="brannalarm-nodlys.html">Brannalarm &amp; n&#248;dlys</a>
+        </div></div>
+      </div>
+      <a href="fatt-avvik.html">F&#229;tt avvik?</a>
       <a href="om-oss.html">Om oss</a>
       <a href="blogg/index.html">Blogg</a>
     </nav>
@@ -50,7 +56,7 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Regelverket</span><h2>Hvorfor dette ikke kan gjøres på egen hånd</h2><p>Brannalarm og nødlys er sikkerhetsutstyr som skal fungere i akkurat det øyeblikket alt annet går galt — derfor stiller regelverket strengere krav enn til vanlig vedlikehold.</p></div>
+    <div class="sec-head"><h2>Hvorfor dette ikke kan gjøres på egen hånd</h2><p>Brannalarm og nødlys er sikkerhetsutstyr som skal fungere i akkurat det øyeblikket alt annet går galt — derfor stiller regelverket strengere krav enn til vanlig vedlikehold.</p></div>
     <div class="why-list">
       <div class="why-row"><span class="tag">01</span><div><h4>Lovpålagt årlig kontroll</h4><p>De fleste bygg med felles brannvarslingsanlegg — inkludert de aller fleste sameier, borettslag og næringsbygg — skal ha brannalarm og nødlys kontrollert minst én gang i året.</p></div></div>
       <div class="why-row"><span class="tag">02</span><div><h4>Krever FG-sertifisering</h4><p>I motsetning til enkle funksjonstester (som å trykke på testknappen) krever den årlige kontrollen at utførende personell har FG-750-sertifisering, tilknyttet et FG-760-godkjent foretak.</p></div></div>
@@ -62,7 +68,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);" id="inkludert">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Hva er inkludert</span><h2>Dette sjekkes i kontrollen</h2></div>
+    <div class="sec-head"><h2>Dette sjekkes i kontrollen</h2></div>
     <div class="card-grid">
       <div class="card"><h3>Detektorer</h3><p>At røyk- og varmefølere reagerer og varsler korrekt.</p></div>
       <div class="card"><h3>Brannsentral</h3><p>At sentralen registrerer og viser alarmer riktig, uten skjulte feilmeldinger.</p></div>
@@ -85,7 +91,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Prosessen</span><h2>Fra henvendelse til ferdig dokumentasjon</h2></div>
+    <div class="sec-head"><h2>Fra henvendelse til ferdig dokumentasjon</h2></div>
     <div class="steps">
       <div class="step"><span class="n">01</span><h4>Ta kontakt</h4><p>Fortell oss om bygget og om dere ønsker å samkjøre med elkontroll av fellesanlegget.</p></div>
       <div class="step"><span class="n">02</span><h4>Vi avtaler tid</h4><p>Tidspunkt avtales med styret eller bygningseier.</p></div>
@@ -97,7 +103,7 @@
 
 <section class="section" style="border-top:1px solid var(--line);">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Vanlige spørsmål</span><h2>Det styrer og bygningseiere lurer på</h2></div>
+    <div class="sec-head"><h2>Det styrer og bygningseiere lurer på</h2></div>
     <div class="faq-item"><div class="faq-q"><span>Kan vaktmesteren gjøre denne kontrollen selv?</span><span class="plus">+</span></div><div class="faq-a"><p>Nei. Enkle, daglige funksjonstester (som å trykke på testknappen) kan gjøres internt, men den årlige kontrollen krever FG-750-sertifisert personell tilknyttet et FG-760-godkjent foretak for å være gyldig.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Kan dere samkjøre dette med elkontroll av fellesanlegget?</span><span class="plus">+</span></div><div class="faq-a"><p>Ja. Vi er både FG-750/760-sertifisert og NEK 405-sertifisert, og kan gjennomføre begge kontrollene på ett og samme besøk — én avtale, én kontaktperson, samlet dokumentasjon.</p></div></div>
     <div class="faq-item"><div class="faq-q"><span>Hva skjer hvis dere finner avvik?</span><span class="plus">+</span></div><div class="faq-a"><p>Dere får en tydelig rapport med hva som må utbedres, slik at dere kan innhente tilbud på retting eller be oss om det direkte.</p></div></div>
