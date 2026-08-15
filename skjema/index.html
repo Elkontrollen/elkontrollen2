@@ -1,0 +1,2223 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elkontroll-skjema — Elkontrollen</title>
+<meta name="description" content="Digitalt elkontroll-skjema for kontrollør. Fyll ut periodisk elkontroll, brannforebyggende elkontroll (NEK 405-2-2), elkontroll næring (NEK 405-3) eller landbruk, og send rapport med PDF direkte fra siden.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#10182B;
+    --green:#2E7D46;
+    --green-dark:#1F5C33;
+    --paper:#F6F4EF;
+    --ink:#14171C;
+    --line:#DAD5C7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'IBM Plex Sans', Arial, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', Arial, sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit; text-decoration:none;}
+  site-header{display:block;}
+  header.site{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:50;
+  }
+  header.site .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 24px; max-width:1180px; margin:0 auto;
+  }
+  header.site .logo{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk'; font-weight:700; font-size:20px;}
+  header.site .logo .mark{
+    width:30px; height:30px; border:1.5px solid var(--ink); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  header.site .logo .mark svg{width:14px; height:14px;}
+  header.site .logo .el{color:var(--green);}
+  header.site .phone{font-size:14px; font-weight:600;}
+  header.site .phone a{opacity:0.85;}
+  header.site .phone a:hover{opacity:1; color:var(--green);}
+  main.skjema-main{max-width:900px; margin:0 auto; padding:24px 16px 60px;}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-row">
+    <a class="logo" href="/">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+      <span><span class="el">El</span>kontrollen</span>
+    </a>
+    <span class="phone"><a href="tel:+4798019154">+47 980 19 154</a></span>
+  </div>
+</header>
+
+<main class="skjema-main">
+<!--
+  ELKONTROLL-SKJEMA v2 - Støtter to kontrolltyper:
+  1. Periodisk elkontroll (48 sjekkpunkter, Ok/Avvik/IA)
+  2. Brannforebyggende Elkontroll Bolig - NEK 405-2-2 (14 sjekkpunkter, Ok/Avvik/Rettet
+     + 11 informasjonspunkter A-K til eier, Ja/Nei/Ikke besvart)
+
+  OPPSETT (gjøres én gang):
+  1. Opprett konto på https://www.emailjs.com
+     VIKTIG: PDF-vedlegg krever betalt plan ("Personal" el. høyere).
+     Uten betalt plan sendes rapporten fortsatt som e-posttekst, men uten PDF.
+  2. Legg til en "Email Service" (f.eks. Gmail) -> få en SERVICE_ID
+  3. Lag en "Email Template". "To Email" settes til din egen e-postadresse.
+     Content-feltet kan bruke disse variablene (dobbel krøllparentes i EmailJS selv):
+     kontrolltype, kontrollforetak, kontrollor_navn, sertifikat, dato, ordrenummer,
+     oppdragsgiver, adresse, postnr_sted, sammendrag, rapport_tekst, konklusjon, signatur
+  4. For PDF-vedlegg: gå til template -> "Attachments"-fanen og legg til 1 stk
+     "Variable Attachment": Parameter Name = attachment_1, Content Type = application/pdf,
+     Content = dobbel krøllparentes attachment_1, Filename = dobbel krøllparentes attachment_1_name.
+     Bilder som legges til på hvert sjekkpunkt limes automatisk inn INNI PDF-en,
+     så du trenger ikke egne vedleggsplasser for bilder lenger.
+  5. Under Account -> API Keys, finn din PUBLIC_KEY. Få TEMPLATE_ID fra malen.
+  6. Lim inn de tre verdiene i EMAILJS_CONFIG nederst i script-taggen.
+-->
+
+<div id="ek-form-wrapper">
+  <style>
+    #ek-form-wrapper {
+      --ek-primary: #1c6b4f;
+      --ek-primary-dark: #144f3a;
+      --ek-bg: #f7f8f7;
+      --ek-border: #d9dedb;
+      --ek-text: #1f2621;
+      --ek-ok: #1c6b4f;
+      --ek-avvik: #b3261e;
+      --ek-warn: #b8860b;
+      --ek-neutral: #8a8f8c;
+      max-width: 680px;
+      margin: 0 auto;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ek-text);
+      background: var(--ek-bg);
+      padding: 16px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    #ek-form-wrapper *, #ek-form-wrapper *::before, #ek-form-wrapper *::after { box-sizing: border-box; }
+    .ek-header { text-align: center; margin-bottom: 18px; }
+    .ek-header h1 { font-size: 19px; margin: 0 0 4px; color: var(--ek-primary-dark); }
+    .ek-header p { font-size: 13px; color: #556; margin: 0; }
+
+    .ek-section {
+      background: #fff;
+      border: 1px solid var(--ek-border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .ek-section h2 {
+      font-size: 14px;
+      margin: 0 0 12px;
+      color: var(--ek-primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--ek-border);
+      padding-bottom: 8px;
+    }
+    .ek-section h2 .ek-num {
+      background: var(--ek-primary);
+      color: #fff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ek-field { margin-bottom: 12px; }
+    .ek-field:last-child { margin-bottom: 0; }
+    .ek-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: #333; }
+    .ek-input, .ek-date, .ek-select, .ek-textarea {
+      width: 100%;
+      padding: 11px;
+      font-size: 16px;
+      border: 1px solid var(--ek-border);
+      border-radius: 8px;
+      background: #fdfdfd;
+      font-family: inherit;
+    }
+    .ek-textarea { min-height: 70px; resize: vertical; }
+    .ek-input:focus, .ek-date:focus, .ek-select:focus, .ek-textarea:focus { outline: none; border-color: var(--ek-primary); }
+    .ek-required { color: var(--ek-avvik); }
+    .ek-hint { font-size: 11.5px; color: #778; margin-top: 4px; }
+
+    .ek-type-choices { display: flex; flex-direction: column; gap: 8px; }
+    .ek-type-choices input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .ek-type-choices label {
+      display: block; width: 100%; text-align: center; padding: 14px 10px;
+      border: 1.5px solid var(--ek-border); border-radius: 10px; font-size: 13.5px; font-weight: 700;
+      cursor: pointer; background: #fafafa; box-sizing: border-box; line-height: 1.35;
+    }
+    .ek-type-choices input:checked + label { border-color: var(--ek-primary); background: var(--ek-primary); color: #fff; }
+
+    .ek-checkbox-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ek-checkbox-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    .ek-checkbox-item input { width: 16px; height: 16px; }
+
+    /* Checklist items */
+    .ek-item { padding: 10px 0; border-bottom: 1px solid #eef0ee; }
+    .ek-item:last-child { border-bottom: none; }
+    .ek-item-label { font-size: 13.5px; font-weight: 500; margin-bottom: 8px; line-height: 1.3; }
+    .ek-item-choices { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+    .ek-item-choices input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .ek-item-choices label {
+      flex: 1 1 auto;
+      min-width: 52px;
+      text-align: center;
+      padding: 9px 4px;
+      border: 1.5px solid var(--ek-border);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #fafafa;
+      user-select: none;
+      transition: all .12s ease;
+    }
+    .ek-item-choices input:checked + label.c-ok    { border-color: var(--ek-ok); background: var(--ek-ok); color: #fff; }
+    .ek-item-choices input:checked + label.c-avvik { border-color: var(--ek-avvik); background: var(--ek-avvik); color: #fff; }
+    .ek-item-choices input:checked + label.c-na    { border-color: var(--ek-neutral); background: var(--ek-neutral); color: #fff; }
+    .ek-item-choices input:checked + label.c-warn  { border-color: var(--ek-warn); background: var(--ek-warn); color: #fff; }
+    .ek-item-comment {
+      width: 100%;
+      padding: 8px 10px;
+      font-size: 13px;
+      border: 1px solid var(--ek-border);
+      border-radius: 6px;
+      background: #fdfdfd;
+      font-family: inherit;
+      margin-bottom: 8px;
+    }
+    .ek-photo-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .ek-photo-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px;
+      font-size: 12px; font-weight: 600; border: 1.5px dashed var(--ek-border); border-radius: 7px;
+      background: #fafafa; color: #444; cursor: pointer; user-select: none;
+    }
+    .ek-photo-btn input[type="file"] { display: none; }
+    .ek-photo-thumb {
+      position: relative; width: 52px; height: 52px; border-radius: 7px; overflow: hidden;
+      border: 1px solid var(--ek-border); flex-shrink: 0;
+    }
+    .ek-photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ek-photo-thumb .ek-photo-remove {
+      position: absolute; top: 0; right: 0; background: rgba(0,0,0,.6); color: #fff;
+      width: 18px; height: 18px; font-size: 12px; line-height: 18px; text-align: center;
+      cursor: pointer; border-bottom-left-radius: 6px;
+    }
+    .ek-photo-hint { font-size: 11px; color: #888; margin-top: 4px; text-align: center; }
+
+    .ek-legend {
+      display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: #556; margin-bottom: 14px;
+      background: #fff; border: 1px solid var(--ek-border); border-radius: 10px; padding: 10px 12px;
+    }
+    .ek-legend span { display: flex; align-items: center; gap: 4px; }
+    .ek-legend .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+    .ek-summary { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; font-weight: 700; margin-top: 4px; }
+    .ek-summary .pill { padding: 6px 10px; border-radius: 20px; color: #fff; }
+
+    .ek-choices-lg { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ek-choices-lg input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .ek-choices-lg label {
+      flex: 1 1 auto; min-width: 110px; text-align: center; padding: 12px 8px;
+      border: 1.5px solid var(--ek-border); border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; background: #fafafa;
+    }
+    .ek-choices-lg input:checked + label { border-color: var(--ek-primary); background: var(--ek-primary); color: #fff; }
+    .ek-choices-lg input:checked + label.danger { border-color: var(--ek-avvik); background: var(--ek-avvik); }
+    .ek-choices-lg input:checked + label.warn { border-color: var(--ek-warn); background: var(--ek-warn); }
+    .ek-choices-stack { display: flex; flex-direction: column; gap: 8px; }
+    .ek-choices-stack input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .ek-choices-stack label {
+      display: block; width: 100%; text-align: center; padding: 13px 10px;
+      border: 1.5px solid var(--ek-border); border-radius: 8px; font-size: 13.5px; font-weight: 600;
+      cursor: pointer; background: #fafafa; box-sizing: border-box;
+    }
+    .ek-choices-stack input:checked + label { border-color: var(--ek-primary); background: var(--ek-primary); color: #fff; }
+    .ek-choices-stack input:checked + label.danger { border-color: var(--ek-avvik); background: var(--ek-avvik); }
+    .ek-choices-stack input:checked + label.warn { border-color: var(--ek-warn); background: var(--ek-warn); }
+
+    .ek-submit-row { text-align: center; margin-top: 8px; }
+    .ek-submit {
+      width: 100%; padding: 15px; font-size: 16px; font-weight: 700; color: #fff;
+      background: var(--ek-primary); border: none; border-radius: 10px; cursor: pointer;
+    }
+    .ek-submit:disabled { opacity: .6; }
+    .ek-status { text-align: center; font-size: 13px; margin-top: 10px; min-height: 16px; }
+    .ek-status.err { color: var(--ek-avvik); }
+    .ek-success-screen {
+      display: none; text-align: center; background: #fff; border: 1px solid var(--ek-border);
+      border-radius: 12px; padding: 32px 16px;
+    }
+    .ek-success-screen h2 { color: var(--ek-primary-dark); margin: 0 0 8px; }
+    .ek-note-box {
+      background: #fdf6e8; border: 1px solid #eddfb8; border-radius: 8px; padding: 10px 12px;
+      font-size: 12.5px; color: #6b5a1f; margin-bottom: 12px;
+    }
+  </style>
+
+  <div class="ek-header">
+    <h1>Elkontroll</h1>
+    <p>Velg kontrolltype og fyll ut skjemaet på stedet</p>
+  </div>
+
+  <div id="ekDraftBanner" style="display:none; background:#fdf6e8; border:1px solid #eddfb8; border-radius:10px; padding:12px 14px; margin-bottom:12px; font-size:13px; color:#6b5a1f;">
+    <div id="ekDraftBannerText" style="margin-bottom:8px;"></div>
+    <div style="display:flex; gap:8px;">
+      <button type="button" id="ekDraftRestoreBtn" style="flex:1; padding:10px; border:none; border-radius:8px; background:#1c6b4f; color:#fff; font-weight:700; font-size:13px; cursor:pointer;">Gjenopprett utkast</button>
+      <button type="button" id="ekDraftDiscardBtn" style="flex:1; padding:10px; border:1.5px solid #d9dedb; border-radius:8px; background:#fff; color:#444; font-weight:700; font-size:13px; cursor:pointer;">Forkast</button>
+    </div>
+  </div>
+
+  <div style="background:#fff; border:1px solid #d9dedb; border-radius:10px; padding:12px 14px; margin-bottom:12px; font-size:13px;">
+    <label for="ekReloadFileInput" style="display:block; font-weight:600; margin-bottom:6px; color:#333;">Rette en tidligere sendt rapport?</label>
+    <div style="color:#667; font-size:12px; margin-bottom:8px;">Last opp datafilen som fulgte med på e-posten sammen med PDF-rapporten (filnavn slutter på .json), så fylles alle svarene inn på nytt her – rett det som trengs, og send inn igjen.</div>
+    <input type="file" id="ekReloadFileInput" accept=".json,application/json" style="width:100%; font-size:13px;">
+    <div id="ekReloadStatus" style="font-size:12px; margin-top:6px; min-height:14px;"></div>
+  </div>
+
+  <form id="ekForm">
+    <!-- Kontrolltype -->
+    <div class="ek-section">
+      <h2><span class="ek-num">1</span> Kontrolltype</h2>
+      <div class="ek-type-choices">
+        <div><input type="radio" name="kontrolltype" id="type-periodisk" value="periodisk" checked><label for="type-periodisk">Periodisk elkontroll</label></div>
+        <div><input type="radio" name="kontrolltype" id="type-brann" value="brann"><label for="type-brann">Brannforebyggende elkontroll (NEK 405-2-2)</label></div>
+        <div><input type="radio" name="kontrolltype" id="type-naring" value="naring"><label for="type-naring">Elkontroll næring (NEK 405-3)</label></div>
+        <div><input type="radio" name="kontrolltype" id="type-landbruk" value="landbruk"><label for="type-landbruk">Elkontroll landbruk (NEK 405-3 Tillegg B)</label></div>
+        <div><input type="radio" name="kontrolltype" id="type-avhending" value="avhending"><label for="type-avhending">Teknisk tilstandsvurdering ved boligsalg (NEK 405-2-3)</label></div>
+      </div>
+    </div>
+
+    <!-- Felles grunninfo -->
+    <div class="ek-section">
+      <h2><span class="ek-num">2</span> Kontrollinformasjon</h2>
+      <div class="ek-field">
+        <label class="ek-label">Kontrollforetak (firma som utfører kontrollen) <span class="ek-required">*</span></label>
+        <input class="ek-input" type="text" name="kontrollforetak" required>
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Kontrollør <span class="ek-required">*</span></label>
+        <input class="ek-input" type="text" name="kontrollor_navn" required>
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Din e-post (for å motta egen kopi av rapporten)</label>
+        <input class="ek-input" type="email" name="kontrollor_epost" placeholder="navn@firma.no">
+        <div class="ek-hint">Valgfritt – legges til som kopimottaker på e-posten som sendes</div>
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Sertifikatnummer</label>
+        <input class="ek-input" type="text" name="sertifikat">
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Ordrenummer</label>
+        <input class="ek-input" type="text" name="ordrenummer">
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Oppdragsgiver / kunde (firma/navn) <span class="ek-required">*</span></label>
+        <input class="ek-input" type="text" name="oppdragsgiver" required>
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Anleggsadresse <span class="ek-required">*</span></label>
+        <input class="ek-input" type="text" name="adresse" required>
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Postnr. / sted</label>
+        <input class="ek-input" type="text" name="postnr_sted">
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Dato <span class="ek-required">*</span></label>
+        <input class="ek-date" type="date" name="dato" required>
+      </div>
+      <div class="ek-field">
+        <label class="ek-label">Uavhengighetsnivå</label>
+        <select class="ek-select" name="uavhengighet">
+          <option value="LEVEL A">LEVEL A - Uavhengig foretak</option>
+          <option value="LEVEL B" selected>LEVEL B - Utfører selv prosjektering/bygging, men ikke av dette anlegget</option>
+          <option value="LEVEL C">LEVEL C - Ikke uavhengig, egen kontroll utført av annen person</option>
+          <option value="LEVEL D">LEVEL D - Ikke uavhengig</option>
+        </select>
+      </div>
+
+      <!-- Periodisk-only felt -->
+      <div class="type-only type-periodisk">
+        <div class="ek-field">
+          <label class="ek-label">Beskrivelse av anlegget</label>
+          <input class="ek-input" type="text" name="beskrivelse_anlegg" placeholder="F.eks. Enebolig">
+        </div>
+      </div>
+
+      <!-- Næring-only felt -->
+      <div class="type-only type-naring" style="display:none;">
+        <div class="ek-field">
+          <label class="ek-label">Kontraktnummer</label>
+          <input class="ek-input" type="text" name="kontrakt_nummer">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Ordreansvarlig</label>
+          <input class="ek-input" type="text" name="ordreansvarlig">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">System/anlegg</label>
+          <input class="ek-input" type="text" name="system_anlegg" placeholder="F.eks. Tilstandskontroll 2026">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Type bygg</label>
+          <input class="ek-input" type="text" name="type_bygg" placeholder="F.eks. Næringsbygg, Kontorbygg, Industri">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Spenning</label>
+          <input class="ek-input" type="text" name="spenning" placeholder="F.eks. 230V">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Forsyningssystem</label>
+          <input class="ek-input" type="text" name="forsyningssystem" placeholder="F.eks. IT, TN, TT">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Jordsystem</label>
+          <input class="ek-input" type="text" name="jordsystem">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Forskrifter og normer</label>
+          <input class="ek-input" type="text" name="forskrifter_normer" placeholder="F.eks. FEL, FSE, NEK 400">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Hvilke deler av anlegget omfattes av kontrollen</label>
+          <input class="ek-input" type="text" name="deler_omfattet" placeholder="F.eks. Alle bygg">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Driftsforhold under kontrollen</label>
+          <select class="ek-select" name="driftsforhold">
+            <option value="Lav">Lav</option>
+            <option value="Normal" selected>Normal</option>
+            <option value="Høy">Høy</option>
+          </select>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Tilkoblet reserve-/nødkraftsystem</label>
+          <select class="ek-select" name="reservekraft">
+            <option value="Nei" selected>Nei</option>
+            <option value="Ja">Ja</option>
+          </select>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Tilkoblet solcelleanlegg</label>
+          <select class="ek-select" name="solcelleanlegg">
+            <option value="Nei" selected>Nei</option>
+            <option value="Ja">Ja</option>
+          </select>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Er termografering utført?</label>
+          <select class="ek-select" name="termografering_utfort" id="ekTermograferingSelect">
+            <option value="Nei" selected>Nei</option>
+            <option value="Ja">Ja</option>
+          </select>
+        </div>
+        <div id="ekKalibrertUtstyr" style="display:none;">
+          <div class="ek-field">
+            <label class="ek-label">Kalibrert utstyr - verktøy/fabrikat/type</label>
+            <input class="ek-input" type="text" name="kalibrert_verktoy" placeholder="F.eks. Flir E75">
+          </div>
+          <div class="ek-field">
+            <label class="ek-label">Serienummer</label>
+            <input class="ek-input" type="text" name="kalibrert_serienummer">
+          </div>
+          <div class="ek-field">
+            <label class="ek-label">Kalibrert dato</label>
+            <input class="ek-date" type="date" name="kalibrert_dato">
+          </div>
+        </div>
+      </div>
+
+      <!-- Landbruk-only felt -->
+      <div class="type-only type-landbruk" style="display:none;">
+        <div class="ek-field">
+          <label class="ek-label">Kontraktnummer</label>
+          <input class="ek-input" type="text" name="lb_kontrakt_nummer">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Ordreansvarlig</label>
+          <input class="ek-input" type="text" name="lb_ordreansvarlig">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">System/anlegg</label>
+          <input class="ek-input" type="text" name="lb_system_anlegg" placeholder="F.eks. Elkontroll landbruk 2026">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Type bygg</label>
+          <input class="ek-input" type="text" name="lb_type_bygg" placeholder="F.eks. Driftsbygning, Fjøs, Løe">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Spenning</label>
+          <input class="ek-input" type="text" name="lb_spenning" placeholder="F.eks. 230V">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Forsyningssystem</label>
+          <input class="ek-input" type="text" name="lb_forsyningssystem" placeholder="F.eks. IT, TN, TT">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Jordsystem</label>
+          <input class="ek-input" type="text" name="lb_jordsystem">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Forskrifter og normer</label>
+          <input class="ek-input" type="text" name="lb_forskrifter_normer" placeholder="F.eks. FEL, FSE, NEK 400">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Hvilke deler av anlegget omfattes av kontrollen</label>
+          <input class="ek-input" type="text" name="lb_deler_omfattet" placeholder="F.eks. Hovedhus, driftsbygninger, korntørke">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Driftsforhold under kontrollen</label>
+          <select class="ek-select" name="lb_driftsforhold">
+            <option value="Lav">Lav</option>
+            <option value="Normal" selected>Normal</option>
+            <option value="Høy">Høy</option>
+          </select>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Tilkoblet reserve-/nødkraftsystem</label>
+          <select class="ek-select" name="lb_reservekraft">
+            <option value="Nei" selected>Nei</option>
+            <option value="Ja">Ja</option>
+          </select>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Tilkoblet solcelleanlegg</label>
+          <select class="ek-select" name="lb_solcelleanlegg">
+            <option value="Nei" selected>Nei</option>
+            <option value="Ja">Ja</option>
+          </select>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Er termografering utført?</label>
+          <select class="ek-select" name="lb_termografering_utfort" id="ekTermograferingSelectLandbruk">
+            <option value="Nei" selected>Nei</option>
+            <option value="Ja">Ja</option>
+          </select>
+        </div>
+        <div id="ekKalibrertUtstyrLandbruk" style="display:none;">
+          <div class="ek-field">
+            <label class="ek-label">Kalibrert utstyr - verktøy/fabrikat/type</label>
+            <input class="ek-input" type="text" name="lb_kalibrert_verktoy" placeholder="F.eks. Flir E75">
+          </div>
+          <div class="ek-field">
+            <label class="ek-label">Serienummer</label>
+            <input class="ek-input" type="text" name="lb_kalibrert_serienummer">
+          </div>
+          <div class="ek-field">
+            <label class="ek-label">Kalibrert dato</label>
+            <input class="ek-date" type="date" name="lb_kalibrert_dato">
+          </div>
+        </div>
+      </div>
+
+      <!-- Avhending-only felt -->
+      <div class="type-only type-avhending" style="display:none;">
+        <div class="ek-field">
+          <label class="ek-label">Oppdragsnummer / kontraktnummer</label>
+          <input class="ek-input" type="text" name="av_kontrakt_nummer">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Beskrivelse av anlegget</label>
+          <input class="ek-input" type="text" name="av_beskrivelse_anlegg" placeholder="F.eks. Enebolig, byggeår">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Referansenivå for tilstandsanalysen</label>
+          <select class="ek-select" name="av_referanseniva">
+            <option value="R1">R1 - Vurdert etter dagens krav</option>
+            <option value="R2" selected>R2 - Vurdert etter krav som gjaldt da anlegget ble bygget</option>
+            <option value="R3">R3 - Vurdert etter objektets drifts- og funksjonskrav</option>
+          </select>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Er termografering utført?</label>
+          <select class="ek-select" name="av_termografering_utfort" id="ekTermograferingSelectAvhending">
+            <option value="Nei" selected>Nei</option>
+            <option value="Ja">Ja</option>
+          </select>
+        </div>
+        <div id="ekKalibrertUtstyrAvhending" style="display:none;">
+          <div class="ek-field">
+            <label class="ek-label">Kalibrert utstyr - verktøy/fabrikat/type</label>
+            <input class="ek-input" type="text" name="av_kalibrert_verktoy" placeholder="F.eks. Flir E75">
+          </div>
+          <div class="ek-field">
+            <label class="ek-label">Serienummer</label>
+            <input class="ek-input" type="text" name="av_kalibrert_serienummer">
+          </div>
+          <div class="ek-field">
+            <label class="ek-label">Kalibrert dato</label>
+            <input class="ek-date" type="date" name="av_kalibrert_dato">
+          </div>
+        </div>
+      </div>
+
+      <!-- Brann-only felt -->
+      <div class="type-only type-brann" style="display:none;">
+        <div class="ek-field">
+          <label class="ek-label">Forsikringstaker</label>
+          <input class="ek-input" type="text" name="forsikringstaker">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Kundenummer</label>
+          <input class="ek-input" type="text" name="kundenummer">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Avtalenummer</label>
+          <input class="ek-input" type="text" name="avtalenummer">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Kontaktperson (oppdragsgiver)</label>
+          <input class="ek-input" type="text" name="kontaktperson">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Husnr/Bokstav</label>
+          <input class="ek-input" type="text" name="husnr_bokstav">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Boligmappa-ID</label>
+          <input class="ek-input" type="text" name="boligmappa_id">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Påbegynt dato <span class="ek-required">*</span></label>
+          <input class="ek-input" type="text" name="paabegynt_dato" placeholder="dd/mm/åååå tt:mm" required>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Avsluttet dato / planlagt ferdig</label>
+          <input class="ek-input" type="text" name="avsluttet_dato" placeholder="dd/mm/åååå tt:mm">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Hva skal kontrolleres</label>
+          <div class="ek-checkbox-row" id="ekBygningstype">
+            <label class="ek-checkbox-item"><input type="checkbox" value="Enebolig"> Enebolig</label>
+            <label class="ek-checkbox-item"><input type="checkbox" value="Rekkehus"> Rekkehus</label>
+            <label class="ek-checkbox-item"><input type="checkbox" value="Leilighet"> Leilighet</label>
+            <label class="ek-checkbox-item"><input type="checkbox" value="Fritidsbolig"> Fritidsbolig</label>
+            <label class="ek-checkbox-item"><input type="checkbox" value="Annen bygning"> Annen bygning</label>
+          </div>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Spesifiser</label>
+          <input class="ek-input" type="text" name="spesifiser">
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend periodisk -->
+    <div class="ek-legend type-only type-periodisk">
+      <span><span class="dot" style="background:var(--ek-ok)"></span>Ok = Ingen avvik</span>
+      <span><span class="dot" style="background:var(--ek-avvik)"></span>Avvik = Avvik registrert</span>
+      <span><span class="dot" style="background:var(--ek-neutral)"></span>IA = Ikke aktuelt</span>
+    </div>
+    <!-- Legend brann -->
+    <div class="ek-legend type-only type-brann" style="display:none;">
+      <span><span class="dot" style="background:var(--ek-ok)"></span>Ok = Godkjent</span>
+      <span><span class="dot" style="background:var(--ek-avvik)"></span>Avvik = Avvik registrert</span>
+      <span><span class="dot" style="background:var(--ek-warn)"></span>Rettet = Avvik rettet på stedet</span>
+    </div>
+    <!-- Legend næring -->
+    <div class="ek-legend type-only type-naring" style="display:none;">
+      <span><span class="dot" style="background:var(--ek-ok)"></span>Ok = Ingen avvik</span>
+      <span><span class="dot" style="background:var(--ek-avvik)"></span>Avvik = Avvik registrert</span>
+      <span><span class="dot" style="background:var(--ek-neutral)"></span>IA = Ikke aktuelt</span>
+    </div>
+    <!-- Legend landbruk -->
+    <div class="ek-legend type-only type-landbruk" style="display:none;">
+      <span><span class="dot" style="background:var(--ek-ok)"></span>Ok = Ingen avvik</span>
+      <span><span class="dot" style="background:var(--ek-avvik)"></span>Avvik = Avvik registrert</span>
+      <span><span class="dot" style="background:var(--ek-neutral)"></span>IA = Ikke aktuelt</span>
+    </div>
+    <!-- Legend avhending -->
+    <div class="ek-legend type-only type-avhending" style="display:none;">
+      <span><span class="dot" style="background:var(--ek-ok)"></span>TG0 = Ingen avvik</span>
+      <span><span class="dot" style="background:var(--ek-neutral)"></span>TG1 = Mindre avvik</span>
+      <span><span class="dot" style="background:var(--ek-warn)"></span>TG2 = Vesentlig avvik</span>
+      <span><span class="dot" style="background:var(--ek-avvik)"></span>TG3 = Alvorlig avvik</span>
+    </div>
+
+    <!-- Periodisk sjekkliste -->
+    <div class="type-only type-periodisk" id="ekChecklistPeriodicWrap">
+      <div id="ekChecklistPeriodic"></div>
+    </div>
+
+    <!-- Brann sjekkliste -->
+    <div class="type-only type-brann" id="ekChecklistBrannWrap" style="display:none;">
+      <div id="ekChecklistBrann"></div>
+      <div class="ek-section">
+        <div class="ek-note-box">Forhold som ikke er i orden (pkt 1-14) må rettes før rabatt i forsikringspremien blir gitt.</div>
+        <div class="ek-field">
+          <label class="ek-label">Kommentar til kontrollen</label>
+          <textarea class="ek-textarea" name="brann_kommentar" placeholder="Generell kommentar (valgfritt)"></textarea>
+        </div>
+      </div>
+      <div id="ekInfoBrannWrap" class="ek-section">
+        <h2><span class="ek-num">i</span> Informasjon gitt til eier/bruker</h2>
+        <div id="ekInfoBrann"></div>
+      </div>
+      <div class="ek-section">
+        <div class="ek-field">
+          <label class="ek-label">Person som har utbedret mangler (hvis aktuelt)</label>
+          <input class="ek-input" type="text" name="person_utbedret">
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Dato utbedret</label>
+          <input class="ek-input" type="date" name="dato_utbedret">
+        </div>
+      </div>
+    </div>
+
+    <!-- Næring sjekkliste -->
+    <div class="type-only type-naring" id="ekChecklistNaringWrap" style="display:none;">
+      <div id="ekChecklistNaring"></div>
+      <div class="ek-section">
+        <h2><span class="ek-num">O</span> Oppsummering etter kontroll</h2>
+        <div class="ek-field">
+          <label class="ek-label">Sammendrag</label>
+          <textarea class="ek-textarea" name="naring_sammendrag" placeholder="Kort sammendrag av kontrollen"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Vurdering av tilstand</label>
+          <textarea class="ek-textarea" name="naring_vurdering"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Anbefalinger</label>
+          <textarea class="ek-textarea" name="naring_anbefalinger"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Konklusjon</label>
+          <textarea class="ek-textarea" name="naring_konklusjon"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Landbruk sjekkliste -->
+    <div class="type-only type-landbruk" id="ekChecklistLandbrukWrap" style="display:none;">
+      <div id="ekChecklistLandbruk"></div>
+      <div class="ek-section">
+        <h2><span class="ek-num">O</span> Oppsummering etter kontroll</h2>
+        <div class="ek-field">
+          <label class="ek-label">Sammendrag</label>
+          <textarea class="ek-textarea" name="lb_sammendrag" placeholder="Kort sammendrag av kontrollen"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Vurdering av tilstand</label>
+          <textarea class="ek-textarea" name="lb_vurdering"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Anbefalinger</label>
+          <textarea class="ek-textarea" name="lb_anbefalinger"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Konklusjon</label>
+          <textarea class="ek-textarea" name="lb_konklusjon"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Avhending sjekkliste -->
+    <div class="type-only type-avhending" id="ekChecklistAvhendingWrap" style="display:none;">
+      <div id="ekChecklistAvhending"></div>
+      <div class="ek-section">
+        <h2><span class="ek-num">O</span> Oppsummering etter kontroll</h2>
+        <div class="ek-field">
+          <label class="ek-label">Sammendrag</label>
+          <textarea class="ek-textarea" name="av_sammendrag" placeholder="Kort sammendrag av kontrollen"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Vurdering av tilstand og gjenværende levetid</label>
+          <textarea class="ek-textarea" name="av_vurdering"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Anbefalinger</label>
+          <textarea class="ek-textarea" name="av_anbefalinger"></textarea>
+        </div>
+        <div class="ek-field">
+          <label class="ek-label">Konklusjon</label>
+          <textarea class="ek-textarea" name="av_konklusjon"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sammendrag (auto) -->
+    <div class="ek-section">
+      <h2><span class="ek-num">S</span> Sammendrag</h2>
+      <div class="ek-summary" id="ekTgSummary">
+        <span class="pill" style="background:var(--ek-avvik)">Avvik: 0</span>
+        <span class="pill" style="background:var(--ek-ok)">Ok: 0</span>
+        <span class="pill" style="background:var(--ek-neutral)">Annet: 0</span>
+      </div>
+    </div>
+
+    <!-- Konklusjon (kun periodisk) -->
+    <div class="ek-section type-only type-periodisk" id="ekKonklusjonSection">
+      <h2><span class="ek-num">K</span> Konklusjon</h2>
+      <div class="ek-field">
+        <div class="ek-choices-stack" data-group="konklusjon">
+          <div><input type="radio" name="konklusjon" id="ko1" value="Godkjent uten avvik" checked><label for="ko1">Godkjent uten avvik</label></div>
+          <div><input type="radio" name="konklusjon" id="ko2" value="Godkjent med avvik"><label for="ko2" class="warn">Godkjent med avvik</label></div>
+          <div><input type="radio" name="konklusjon" id="ko3" value="Ikke godkjent"><label for="ko3" class="danger">Ikke godkjent</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signatur -->
+    <div class="ek-section">
+      <h2><span class="ek-num">✓</span> Signatur</h2>
+      <div class="ek-field">
+        <label class="ek-label">Navn til bekreftelse av utfylt kontroll <span class="ek-required">*</span></label>
+        <input class="ek-input" type="text" name="signatur" required>
+      </div>
+    </div>
+
+    <div class="ek-submit-row">
+      <div class="ek-photo-hint" id="ekPhotoCountHint"></div>
+      <div id="ekAutosaveStatus" style="display:none; text-align:center; font-size:11.5px; color:#8a8f8c; margin-bottom:8px;"></div>
+      <button type="submit" class="ek-submit" id="ekSubmitBtn">Send inn rapport</button>
+      <div class="ek-status" id="ekStatus"></div>
+    </div>
+  </form>
+
+  <div class="ek-success-screen" id="ekSuccess">
+    <h2>Takk!</h2>
+    <p>Rapporten er sendt inn.</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script>
+(function () {
+  var EMAILJS_CONFIG = {
+    publicKey: "iY7Y2hva_CsmC1F3J",
+    serviceId: "service_x4thkpu",
+    templateId: "template_spl7gh7",
+    kontrollorCopyTemplateId: "template_d55ybbm"
+  };
+  emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
+
+  var form = document.getElementById("ekForm");
+  var photoStore = {};
+  var photoRowByField = {};
+  var isRestoringDraft = false;
+
+  // ===== Kontrolltype-bytte =====
+  var KONTROLLTYPE = "periodisk";
+  function setType(val) {
+    KONTROLLTYPE = val;
+    var els = document.querySelectorAll(".type-only");
+    els.forEach(function (el) {
+      var show = el.classList.contains("type-" + val);
+      el.style.display = show ? "" : "none";
+    });
+    form.paabegynt_dato.required = (val === "brann");
+    updateSummary();
+  }
+  form.querySelectorAll('input[name="kontrolltype"]').forEach(function (r) {
+    r.addEventListener("change", function () { setType(this.value); });
+  });
+
+  var termoSelect = document.getElementById("ekTermograferingSelect");
+  if (termoSelect) {
+    termoSelect.addEventListener("change", function () {
+      document.getElementById("ekKalibrertUtstyr").style.display = this.value === "Ja" ? "" : "none";
+    });
+  }
+
+  var termoSelectLandbruk = document.getElementById("ekTermograferingSelectLandbruk");
+  if (termoSelectLandbruk) {
+    termoSelectLandbruk.addEventListener("change", function () {
+      document.getElementById("ekKalibrertUtstyrLandbruk").style.display = this.value === "Ja" ? "" : "none";
+    });
+  }
+
+  var termoSelectAvhending = document.getElementById("ekTermograferingSelectAvhending");
+  if (termoSelectAvhending) {
+    termoSelectAvhending.addEventListener("change", function () {
+      document.getElementById("ekKalibrertUtstyrAvhending").style.display = this.value === "Ja" ? "" : "none";
+    });
+  }
+
+  // ===== Bildekomprimering (delt av begge sjekklister) =====
+  function compressImage(file, callback) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image();
+      img.onload = function () {
+        var maxW = 1000;
+        var scale = Math.min(1, maxW / img.width);
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        callback(canvas.toDataURL("image/jpeg", 0.7), canvas.width, canvas.height);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  function addPhotoThumb(fieldName, label, dataUrl, w, h) {
+    if (!photoStore[fieldName]) photoStore[fieldName] = [];
+    var photoObj = { label: label, dataUrl: dataUrl, width: w, height: h };
+    photoStore[fieldName].push(photoObj);
+    var photoRow = photoRowByField[fieldName];
+    if (!photoRow) { updatePhotoCountHint(); scheduleAutosave(); return; }
+    var thumb = document.createElement("div");
+    thumb.className = "ek-photo-thumb";
+    var img = document.createElement("img");
+    img.src = dataUrl;
+    thumb.appendChild(img);
+    var removeBtn = document.createElement("div");
+    removeBtn.className = "ek-photo-remove";
+    removeBtn.textContent = "×";
+    removeBtn.addEventListener("click", function () {
+      var arr = photoStore[fieldName];
+      if (arr) {
+        var idx = arr.indexOf(photoObj);
+        if (idx > -1) arr.splice(idx, 1);
+        if (arr.length === 0) delete photoStore[fieldName];
+      }
+      thumb.remove();
+      updatePhotoCountHint();
+      scheduleAutosave();
+    });
+    thumb.appendChild(removeBtn);
+    photoRow.appendChild(thumb);
+    updatePhotoCountHint();
+    scheduleAutosave();
+  }
+  function updatePhotoCountHint() {
+    var count = 0;
+    Object.keys(photoStore).forEach(function (k) {
+      count += (photoStore[k] || []).length;
+    });
+    var hint = document.getElementById("ekPhotoCountHint");
+    if (!hint) return;
+    hint.textContent = count > 0
+      ? count + " bilde(r) valgt - legges inn i PDF-rapporten"
+      : "";
+  }
+
+  // ===== Generisk sjekklistebygger (brukes av begge typer) =====
+  // choiceSet: array of {v, c} where c is css class c-ok/c-avvik/c-na
+  function renderChecklist(container, categories, itemMetaArray, choiceSet, idPrefix, withCost) {
+    var sectionNum = 1;
+    categories.forEach(function (cat, catIdx) {
+      var section = document.createElement("div");
+      section.className = "ek-section";
+      var h2 = document.createElement("h2");
+      h2.innerHTML = '<span class="ek-num">' + sectionNum + '</span> ' + cat.title;
+      section.appendChild(h2);
+      sectionNum++;
+
+      cat.items.forEach(function (label, itemIdx) {
+        var fieldName = idPrefix + "_cat" + catIdx + "_item" + itemIdx;
+        itemMetaArray.push({ name: fieldName, label: label, category: cat.title, withCost: !!withCost });
+
+        var itemDiv = document.createElement("div");
+        itemDiv.className = "ek-item";
+
+        var lab = document.createElement("div");
+        lab.className = "ek-item-label";
+        lab.textContent = label;
+        itemDiv.appendChild(lab);
+
+        var choicesDiv = document.createElement("div");
+        choicesDiv.className = "ek-item-choices";
+        choiceSet.forEach(function (choice, ci) {
+          var id = fieldName + "_" + ci;
+          var input = document.createElement("input");
+          input.type = "radio";
+          input.name = fieldName;
+          input.id = id;
+          input.value = choice.v;
+          var lbl = document.createElement("label");
+          lbl.setAttribute("for", id);
+          lbl.className = choice.c;
+          lbl.textContent = choice.v;
+          choicesDiv.appendChild(input);
+          choicesDiv.appendChild(lbl);
+        });
+        itemDiv.appendChild(choicesDiv);
+
+        var comment = document.createElement("input");
+        comment.type = "text";
+        comment.className = "ek-item-comment";
+        comment.name = fieldName + "_kommentar";
+        comment.placeholder = "Kommentar / merknad / målt verdi (valgfritt)";
+        itemDiv.appendChild(comment);
+
+        if (withCost) {
+          var costSelect = document.createElement("select");
+          costSelect.className = "ek-select";
+          costSelect.name = fieldName + "_kostnad";
+          costSelect.style.marginBottom = "8px";
+          costSelect.style.fontSize = "13px";
+          costSelect.style.padding = "8px";
+          [["", "Kostnadsoverslag (kun ved avvik)"], ["Under 5000 NOK", "Under 5000 NOK"], ["Over 5000 NOK", "Over 5000 NOK"]].forEach(function (opt) {
+            var o = document.createElement("option");
+            o.value = opt[0];
+            o.textContent = opt[1];
+            costSelect.appendChild(o);
+          });
+          itemDiv.appendChild(costSelect);
+        }
+
+        var photoRow = document.createElement("div");
+        photoRow.className = "ek-photo-row";
+        photoRowByField[fieldName] = photoRow;
+        var photoBtn = document.createElement("label");
+        photoBtn.className = "ek-photo-btn";
+        photoBtn.innerHTML = "📷 Legg til bilde";
+        var photoInput = document.createElement("input");
+        photoInput.type = "file";
+        photoInput.accept = "image/*";
+        photoInput.capture = "environment";
+        photoBtn.appendChild(photoInput);
+        photoRow.appendChild(photoBtn);
+        itemDiv.appendChild(photoRow);
+
+        photoInput.addEventListener("change", function () {
+          var file = photoInput.files[0];
+          if (!file) return;
+          compressImage(file, function (dataUrl, w, h) {
+            addPhotoThumb(fieldName, label, dataUrl, w, h);
+            photoInput.value = "";
+          });
+        });
+
+        section.appendChild(itemDiv);
+      });
+      container.appendChild(section);
+    });
+  }
+
+  var OK_AVVIK_IA = [{ v: "Ok", c: "c-ok" }, { v: "Avvik", c: "c-avvik" }, { v: "IA", c: "c-na" }];
+  var TG_0_1_2_3 = [{ v: "TG0", c: "c-ok" }, { v: "TG1", c: "c-na" }, { v: "TG2", c: "c-warn" }, { v: "TG3", c: "c-avvik" }];
+  var OK_AVVIK_RETTET = [{ v: "Ok", c: "c-ok" }, { v: "Avvik", c: "c-avvik" }, { v: "Rettet", c: "c-na" }];
+  var JA_NEI_IB = [{ v: "Ja", c: "c-ok" }, { v: "Nei", c: "c-avvik" }, { v: "Ikke besvart", c: "c-na" }];
+  var GITT_IKKE_IA = [{ v: "Gitt", c: "c-ok" }, { v: "Ikke gitt", c: "c-avvik" }, { v: "IA", c: "c-na" }];
+
+  // ===== PERIODISK ELKONTROLL - 48 sjekkpunkter =====
+  var PERIODIC_CATEGORIES = [
+    { title: "Generelt", items: [
+      "Gå en runde i huset og slå på alle brytere for varmekabler, utelys, alle kokeplater på komfyr, ovner, alt som er tilkoblet beskyttelsesleder (jordet utstyr)",
+      "Bruksendring",
+      "Visuell kontroll/tilstand"
+    ]},
+    { title: "Måling", items: [
+      "Isolasjonsresistansen på installasjonen",
+      "Temperatur/varmgang i fordeling",
+      "Kontinuitet i jordleder og utjevninger",
+      "Jordfeilbryter/jordfeilvarsler/utkobling/lyd",
+      "Overgangsmotstand til jord",
+      "Automatisk utkobling",
+      "Gulv- og veggresistans",
+      "Andre målinger",
+      "SELV, PELV og elektrisk atskillelse"
+    ]},
+    { title: "Sikringsskap", items: [
+      "Tilgjengelig for ettersyn",
+      "Merking av kurser og utstyr",
+      "Defekt utstyr, bunnskruer, sikringsautomater/elementer og rengjøring",
+      "Forhold mellom kabler og vern",
+      "Utstyrets kapslingsgrad",
+      "Kabelinnføringer",
+      "Tilkoblinger og varmgang",
+      "Overspenningsvern"
+    ]},
+    { title: "Jording", items: [
+      "Hovedjord tilkoblet",
+      "Tilleggsutjevningsforbindelser",
+      "Jording av stikkontakter og utstyr"
+    ]},
+    { title: "Installasjon", items: [
+      "Bruksendringer",
+      "Varmgang i kontakter, koblingsbokser, stikkontakter, plugger, motorer m.m.",
+      "Utstyrets kapslingsgrad",
+      "Utstyr montert iht. installasjonsveiledninger",
+      "Vedlikehold av utstyr",
+      "Kabler, ledninger og bevegelige ledninger",
+      "Branntetting",
+      "Belysningsanlegg",
+      "Varmeanlegg",
+      "Dokumentasjon på at installasjonen er utført etter 1999",
+      "Generell betraktning om den faste installasjonens tilstand",
+      "Eventuelt"
+    ]},
+    { title: "Brannvern", items: [
+      "Brannslukningsutstyr og rømningsveier",
+      "Brannvarslingsanlegg"
+    ]},
+    { title: "Informasjon (gitt til eier/bruker)", choiceSet: GITT_IKKE_IA, items: [
+      "Eier/brukers ansvar",
+      "Samsvarserklæring og dokumentasjon",
+      "Belysning og varme",
+      "Kabler og skjøteledninger",
+      "Spesielle hensyn i barnerom",
+      "Forsvarlig bruk av elektriske apparater",
+      "Overspenningsvern",
+      "Jordfeilbryter",
+      "Batteribytte røykvarslere"
+    ]},
+    { title: "Avsluttende", choiceSet: GITT_IKKE_IA, items: [
+      "Termografering er gjennomført",
+      "Er bruk av materiell, utstyr, timer og kjøring registrert og overlevert firma?"
+    ]}
+  ];
+
+  // ===== BRANNFOREBYGGENDE ELKONTROLL - NEK 405-2-2 - 14 sjekkpunkter =====
+  var BRANN_CATEGORIES = [
+    { title: "Inntak og sikringsskap", items: [
+      "01 Temperaturer ved belastet anlegg",
+      "02 Sikringsstørrelser og kabeltverrsnitt",
+      "03 Sikringslokk, bunnskruer og renhold",
+      "04 Kabelinnføring",
+      "05 Jording og utjevningsforbindelser",
+      "06 Isolasjonsmåling",
+      "07 Jordfeilbryter/-varsler",
+      "08 Overspenningsvern"
+    ]},
+    { title: "Installasjon for øvrig", items: [
+      "09 Varmgang i kontakter, koblingsbokser, stikkontakter, plugger m.v.",
+      "10 Kabler, ledninger, fastmontert utstyr og forbrukerutstyr",
+      "11 Lavvolt belysningsanlegg",
+      "12 Jording og utjevning"
+    ]},
+    { title: "Brannvern", items: [
+      "13 Fungerende røykvarsler(e)",
+      "14 Brannslukningsutstyr"
+    ]}
+  ];
+
+  var BRANN_INFO_ITEMS = [
+    { letter: "A", label: "Komfyrbranner" },
+    { letter: "B", label: "Eiers ansvar, samsvarserklæring og dokumentasjon" },
+    { letter: "C", label: "Tildekking av ovner og bruk av elektrisk forbrukerutstyr" },
+    { letter: "D", label: "Fare ved bruk av for store lyskilder" },
+    { letter: "E", label: "Fare ved utstrakt bruk av skjøteledninger" },
+    { letter: "F", label: "Risikoen ved løse lamper og ovner i barnerom" },
+    { letter: "G", label: "Risiko for TV- og monitorbranner" },
+    { letter: "H", label: "Behov for overspenningsvern" },
+    { letter: "I", label: "Behov for jordfeilbryter(e)" },
+    { letter: "J", label: "Tørt/sprøtt ledningsanlegg" },
+    { letter: "K", label: "Flytt en dunk - behov for å flytte søppelkasse/avfallscontainer for å redusere brannrisiko" }
+  ];
+
+  // ===== ELKONTROLL NÆRING - NEK 405-3 - 27 sjekkpunkter =====
+  var NARING_CATEGORIES = [
+    { title: "Virksomhetens rutiner og dokumentasjon", items: [
+      "Virksomheten har foretatt en risikovurdering for å kartlegge brann/personfare knyttet til det elektriske anlegget",
+      "Virksomheten har etablerte rutiner for å avdekke avvik på det elektriske anlegget (Egenkontroll)",
+      "Virksomheten har etablerte rutiner og handlingsplaner for å rette opp feil i det elektriske anlegget",
+      "Virksomheten har et organisasjonskart der det framgår hvem som har ansvaret for planlegging og utførelse av det elektriske anlegget"
+    ]},
+    { title: "Kabelføring og branntetting", items: [
+      "Kabelbroer og kanaler er betryggende festet, lokk er montert på kanaler og er det gjennomført branntetting ved brannskiller",
+      "Branntettinger og gjennomføringer inn i tavler og mellom brannskiller er tette og merket med utførelsesdato"
+    ]},
+    { title: "Jording", items: [
+      "Hovedjordledning er tilkoblet jordelektrode og utjevningsforbindelser lagt til utsatte ledende anleggsdeler",
+      "Jordelektroden tilfredsstiller krav i hht gjeldende forskrifter og normer"
+    ]},
+    { title: "Hovedfordeling", items: [
+      "Dokumentasjonen er komplett og komponenter er merket (kursfortegnelse, enlinjeskjema, Febdok)",
+      "Alle komponenter i fordelingen er merket og framgår av kursfortegnelse",
+      "Tavlen er beskyttet mot tilfeldig berøring, evt. merket med kun sakkyndig betjening og låseanordningene fungerer som de skal",
+      "Jordfeilovervåking/isolasjonsovervåking er funnet i orden",
+      "Alle kabler er ført inn i godkjente innføringer og alle ubenyttede kabelinnføringer er tettet",
+      "Tavla er rengjort, ingen komponenter er misfarget og intern kabling er forlagt fagmessig"
+    ]},
+    { title: "Underfordeling", items: [
+      "Det er dokumentasjon på fordelingen og montert utstyr er merket",
+      "Alle komponenter i fordelingen er merket og framgår av kursfortegnelse",
+      "Tavlen er beskyttet mot tilfeldig berøring, evt. merket med kun sakkyndig betjening og låseanordningene fungerer som de skal",
+      "Alle kabler er ført inn i godkjente innføringer og alle ubenyttede kabelinnføringer er tettet",
+      "Tavla er rengjort, ingen komponenter er misfarget og intern kabling er forlagt fagmessig"
+    ]},
+    { title: "Installasjon for øvrig", items: [
+      "Synlig kurs/kabelopplegg/utstyr er uten skader, festet og mekanisk beskyttet",
+      "Deksler og kapslinger på stikkontakter, brytere, kanaler og andre elektriske komponenter er på plass og uten synlige skader",
+      "Skjøteledningsbruk er i hht gjeldende forskrifter",
+      "Belysningsutstyret er kontrollert og funnet i orden",
+      "Fastmonterte varmekilder er uten synlige skader",
+      "Varmtvannsbereder er korrekt montert og tilkoblet",
+      "Utvendig belysning er kontrollert og funnet i orden",
+      "Styring av utelys fungerer som forutsatt"
+    ]}
+  ];
+
+  // ===== ELKONTROLL LANDBRUK - NEK 405-3 TILLEGG B =====
+  var LANDBRUK_CATEGORIES = [
+    { title: "Virksomhetens rutiner og dokumentasjon", items: [
+      "Det er foretatt en risikovurdering for å kartlegge brann-/personfare knyttet til det elektriske anlegget",
+      "Det finnes etablerte rutiner for å avdekke avvik på det elektriske anlegget (egenkontroll)",
+      "Det finnes rutiner/handlingsplaner for å rette opp feil på det elektriske anlegget",
+      "Ansvarsforhold for det elektriske anlegget er avklart og kjent"
+    ]},
+    { title: "Kabelføring og branntetting", items: [
+      "Kabelbroer/kanaler er betryggende festet, lokk montert, og branntetting er utført ved brannskiller",
+      "Branntettinger og gjennomføringer inn i tavler/mellom brannskiller er tette og merket med utførelsesdato",
+      "Kabler i driftsbygning er ført slik at de ikke er utsatt for mekanisk skade fra dyr, maskiner eller utstyr"
+    ]},
+    { title: "Jording og utjevningsforbindelser", items: [
+      "Hovedjordledning er tilkoblet jordelektrode og utjevningsforbindelser lagt til utsatte ledende anleggsdeler",
+      "Jordelektroden tilfredsstiller krav i hht gjeldende forskrifter og normer",
+      "Utjevningsforbindelse til vannrør/hovedstoppekran er til stede og verifiserbar",
+      "Potensialutjevning i dyrerom er vurdert og funnet i orden (jf. krav til dyrevennlig utjevning)"
+    ]},
+    { title: "Hoved- og underfordeling", items: [
+      "Dokumentasjonen er komplett og komponenter er merket (kursfortegnelse, enlinjeskjema)",
+      "Tavlen er beskyttet mot tilfeldig berøring og låseanordning fungerer som den skal",
+      "Alle kabelinnføringer og bunnen av fordelingen er tettet (hindrer skadedyr/støv/fukt)",
+      "Jordfeilovervåking/-bryter er funnet i orden",
+      "Tavla er rengjort, ingen komponenter er misfarget, og intern kabling er forlagt fagmessig",
+      "Overspenningsvern er montert og har tilstrekkelig tennspenning for anlegget"
+    ]},
+    { title: "Installasjon for øvrig", items: [
+      "Synlig kurs/kabelopplegg/utstyr er uten skader, festet og mekanisk beskyttet",
+      "Deksler og kapslinger på stikkontakter, brytere og andre komponenter er på plass og uten synlige skader",
+      "Skjøteledningsbruk er i hht gjeldende forskrifter",
+      "Fastmonterte varmekilder og varmtvannsbereder er uten synlige skader og korrekt tilkoblet"
+    ]},
+    { title: "Dyrerom og driftsbygninger", items: [
+      "Utstyr og materiell i dyrerom har kapslingsgrad tilpasset fukt, støv og korrosivt miljø",
+      "Belysning i fjøs/dyrerom er kontrollert og funnet i orden",
+      "Stikkontakter i dyrerom/tekniske rom er uten tegn til korrosjon eller tilsmussing som svekker funksjonen",
+      "Kabler og armaturer i dyrerom viser ikke tegn til uttørking, sprøhet eller skade"
+    ]},
+    { title: "Korntørke og tekniske rom", items: [
+      "Styring/kontaktorer til korntørke er kontrollert for varmgang og tilstand",
+      "Sikringsskap/underfordeling i fyrhus, korntørke og tekniske rom er ryddig, merket og uten varmgang",
+      "Termografering av belastede punkter er utført der det er relevant"
+    ]},
+    { title: "Fôrings- og driftsutstyr", items: [
+      "Bevegelige ledninger til maskiner (fôringsanlegg, melkeanlegg, kranmaskiner mv.) er egnet for formålet",
+      "Fast utstyr som burde vært fast tilkoblet er ikke tilkoblet med bevegelig ledning",
+      "Motorer, luftkompressorer og annet driftsutstyr har forskriftsmessige tilkoblinger (endehylser mv.)"
+    ]},
+    { title: "Utvendig anlegg og solcelle", items: [
+      "Utvendig belysning og styring av denne er kontrollert og funnet i orden",
+      "Solcelleanlegget er skiltet i hht gjeldende krav",
+      "Dokumentasjon/samsvarserklæring for solcelleanlegget er fremskaffet og kontrollert",
+      "Reserve-/nødkraftsystem, dersom tilkoblet, er kontrollert og funnet i orden"
+    ]}
+  ];
+
+  // ===== TEKNISK TILSTANDSVURDERING VED BOLIGSALG - NEK 405-2-3 =====
+  var AVHENDING_CATEGORIES = [
+    { title: "Dokumentasjon", items: [
+      "Foreligger eltilsynsrapport fra de siste 5 år, uten uutbedrede avvik",
+      "Foreligger samsvarserklæring på elektrisk arbeid utført etter 1.1.1999",
+      "Er alle elektriske arbeider utført av registrert elektroinstallasjonsvirksomhet",
+      "Finnes kursfortegnelse, og er den i samsvar med antall sikringer"
+    ]},
+    { title: "Generell tilstand og bruk", items: [
+      "Forekommer det ofte at sikringene løses ut",
+      "Har det vært brann, branntilløp eller varmgang i det elektriske anlegget",
+      "Er det tegn til termiske skader (varmgang) på kabler, brytere, downlights, stikkontakter eller elektrisk utstyr",
+      "Er det synlige defekter på kabler, eller er disse ikke tilstrekkelig festet"
+    ]},
+    { title: "Inntak og sikringsskap", items: [
+      "Er det tegn på at kabelinnføringer og hull i inntak/sikringsskap ikke er tette",
+      "Er sikringsskapet tilgjengelig for ettersyn og fritt for avvik ved bunnskruer/tilkoblinger",
+      "Er det montert jordfeilbryter/jordfeilvarsling",
+      "Er det montert overspenningsvern"
+    ]},
+    { title: "Baderom / våtrom", items: [
+      "Er det montert jordfeilbryter for kurser til våtrom",
+      "Har elektrisk utstyr i våtrom tilstrekkelig kapslingsgrad (IP-grad) for plasseringen",
+      "Er varmekabler/downlights i våtrom uten synlige avvik"
+    ]},
+    { title: "Kjøkken", items: [
+      "Er det montert komfyrvakt (der dette kreves iht. installasjonstidspunkt)",
+      "Er tilkobling til komfyr/platetopp uten tegn til varmgang"
+    ]},
+    { title: "Installasjon for øvrig", items: [
+      "Er downlights og annen innfelt belysning montert iht. fabrikantens veiledning",
+      "Er tilkoblinger på lamper avsluttet i egnet kapsling (ingen åpne skjøter)",
+      "Er skjøteledningsbruk i tråd med gjeldende forskrifter",
+      "Er stikkontakter og brytere uten synlige skader eller tegn til slitasje utover normalt"
+    ]},
+    { title: "Ekom-installasjoner", items: [
+      "Er det ekom-installasjon (tele/data/fiber) i boligen, og fremstår denne uten synlige avvik",
+      "Er det samsvar mellom antall uttak og det som er oppgitt av eier"
+    ]},
+    { title: "Elektrisk utstyr tilknyttet boligen", items: [
+      "Er varmtvannsbereder korrekt montert og tilkoblet, uten tegn til varmgang på plugg/tilkobling",
+      "Er fastmontert elektrisk utstyr (varmepumpe, ventilasjon mv.) uten synlige avvik",
+      "Fungerer hvitevarer og annet elektrisk utstyr som følger boligen"
+    ]},
+    { title: "Kapasitet og gjenværende levetid", items: [
+      "Har anlegget tilstrekkelig kapasitet for dagens og planlagt fremtidig bruk (f.eks. elbillading, varmepumpe)",
+      "Er det vurdert om deler av anlegget har kort gjenværende levetid"
+    ]}
+  ];
+
+  var periodicItemMeta = [];
+  var brannItemMeta = [];
+  var brannInfoMeta = [];
+  var naringItemMeta = [];
+  var landbrukItemMeta = [];
+  var avhendingItemMeta = [];
+
+  renderChecklist(document.getElementById("ekChecklistPeriodic"),
+    PERIODIC_CATEGORIES.filter(function (c) { return !c.choiceSet; }),
+    periodicItemMeta, OK_AVVIK_IA, "p");
+  renderChecklist(document.getElementById("ekChecklistPeriodic"),
+    PERIODIC_CATEGORIES.filter(function (c) { return c.choiceSet; }),
+    periodicItemMeta, GITT_IKKE_IA, "pinfo");
+
+  renderChecklist(document.getElementById("ekChecklistBrann"),
+    BRANN_CATEGORIES, brannItemMeta, OK_AVVIK_RETTET, "b");
+
+  renderChecklist(document.getElementById("ekChecklistNaring"),
+    NARING_CATEGORIES, naringItemMeta, OK_AVVIK_IA, "n", true);
+
+  renderChecklist(document.getElementById("ekChecklistLandbruk"),
+    LANDBRUK_CATEGORIES, landbrukItemMeta, OK_AVVIK_IA, "lb", true);
+
+  renderChecklist(document.getElementById("ekChecklistAvhending"),
+    AVHENDING_CATEGORIES, avhendingItemMeta, TG_0_1_2_3, "av", true);
+
+  // Informasjon A-K (brann) - egen enklere rendering med bokstav-header
+  (function renderBrannInfo() {
+    var container = document.getElementById("ekInfoBrann");
+    BRANN_INFO_ITEMS.forEach(function (item) {
+      var fieldName = "info_" + item.letter;
+      brannInfoMeta.push({ name: fieldName, label: item.letter + ") " + item.label, category: "Informasjon til eier/bruker" });
+
+      var itemDiv = document.createElement("div");
+      itemDiv.className = "ek-item";
+      var lab = document.createElement("div");
+      lab.className = "ek-item-label";
+      lab.textContent = item.letter + ") " + item.label;
+      itemDiv.appendChild(lab);
+
+      var choicesDiv = document.createElement("div");
+      choicesDiv.className = "ek-item-choices";
+      JA_NEI_IB.forEach(function (choice, ci) {
+        var id = fieldName + "_" + ci;
+        var input = document.createElement("input");
+        input.type = "radio";
+        input.name = fieldName;
+        input.id = id;
+        input.value = choice.v;
+        var lbl = document.createElement("label");
+        lbl.setAttribute("for", id);
+        lbl.className = choice.c;
+        lbl.textContent = choice.v;
+        choicesDiv.appendChild(input);
+        choicesDiv.appendChild(lbl);
+      });
+      itemDiv.appendChild(choicesDiv);
+
+      var comment = document.createElement("input");
+      comment.type = "text";
+      comment.className = "ek-item-comment";
+      comment.name = fieldName + "_kommentar";
+      comment.placeholder = "Eventuelle tiltak (valgfritt)";
+      itemDiv.appendChild(comment);
+
+      container.appendChild(itemDiv);
+    });
+  })();
+
+  // ===== Live sammendrag =====
+  function updateSummary() {
+    var activeMeta;
+    if (KONTROLLTYPE === "periodisk") activeMeta = periodicItemMeta;
+    else if (KONTROLLTYPE === "brann") activeMeta = brannItemMeta.concat(brannInfoMeta);
+    else if (KONTROLLTYPE === "landbruk") activeMeta = landbrukItemMeta;
+    else if (KONTROLLTYPE === "avhending") activeMeta = avhendingItemMeta;
+    else activeMeta = naringItemMeta;
+    var okLike = 0, avvikLike = 0, other = 0;
+    activeMeta.forEach(function (item) {
+      var checked = form.querySelector('input[name="' + item.name + '"]:checked');
+      if (!checked) return;
+      var v = checked.value;
+      if (v === "Ok" || v === "Ja" || v === "Gitt" || v === "Rettet" || v === "TG0") okLike++;
+      else if (v === "Avvik" || v === "Nei" || v === "Ikke gitt" || v === "TG2" || v === "TG3") avvikLike++;
+      else other++;
+    });
+    var summaryEl = document.getElementById("ekTgSummary");
+    summaryEl.innerHTML =
+      '<span class="pill" style="background:var(--ek-avvik)">Avvik: ' + avvikLike + '</span>' +
+      '<span class="pill" style="background:var(--ek-ok)">Ok: ' + okLike + '</span>' +
+      '<span class="pill" style="background:var(--ek-neutral)">Annet: ' + other + '</span>';
+  }
+  form.addEventListener("change", updateSummary);
+  updateSummary();
+
+  // ===== Autolagring av utkast (localStorage) =====
+  var DRAFT_STORAGE_KEY = "ekFormDraft_v1";
+  var AUTOSAVE_DEBOUNCE_MS = 700;
+  var autosaveTimer = null;
+
+  function storageAvailable() {
+    try {
+      var testKey = "__ek_storage_test__";
+      window.localStorage.setItem(testKey, "1");
+      window.localStorage.removeItem(testKey);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  var STORAGE_OK = storageAvailable();
+  var autosaveStatusEl = document.getElementById("ekAutosaveStatus");
+  if (STORAGE_OK && autosaveStatusEl) autosaveStatusEl.style.display = "";
+
+  function formatClock(d) {
+    return d.toLocaleTimeString("nb-NO", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function setAutosaveStatus(text) {
+    if (!autosaveStatusEl) return;
+    autosaveStatusEl.textContent = text;
+  }
+
+  function serializeDraft() {
+    var data = { savedAt: new Date().toISOString(), fields: {}, photos: {} };
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || el.type === "file") return;
+      if (el.type === "radio") {
+        if (el.checked) data.fields[el.name] = el.value;
+        return;
+      }
+      if (el.type === "checkbox") {
+        if (!data.fields[el.name]) data.fields[el.name] = [];
+        if (el.checked) data.fields[el.name].push(el.value);
+        return;
+      }
+      data.fields[el.name] = el.value;
+    });
+    Object.keys(photoStore).forEach(function (k) {
+      data.photos[k] = photoStore[k];
+    });
+    return data;
+  }
+
+  function saveDraft() {
+    if (!STORAGE_OK || isRestoringDraft) return;
+    var data = serializeDraft();
+    try {
+      window.localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(data));
+      setAutosaveStatus("Utkast lagret ✓ kl. " + formatClock(new Date()));
+    } catch (e) {
+      // Trolig fullt (mange/store bilder) - prøv å lagre uten bilder slik at tekstsvarene ikke går tapt
+      try {
+        var withoutPhotos = { savedAt: data.savedAt, fields: data.fields, photos: {}, photoWarning: true };
+        window.localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(withoutPhotos));
+        setAutosaveStatus("Utkast lagret (uten bilder) kl. " + formatClock(new Date()));
+      } catch (e2) {
+        setAutosaveStatus("Kunne ikke autolagre utkast");
+      }
+    }
+  }
+
+  function scheduleAutosave() {
+    if (!STORAGE_OK || isRestoringDraft) return;
+    setAutosaveStatus("Lagrer utkast…");
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(saveDraft, AUTOSAVE_DEBOUNCE_MS);
+  }
+
+  function clearDraft() {
+    if (!STORAGE_OK) return;
+    try { window.localStorage.removeItem(DRAFT_STORAGE_KEY); } catch (e) { /* ignorer */ }
+    setAutosaveStatus("");
+  }
+
+  form.addEventListener("input", scheduleAutosave);
+  form.addEventListener("change", scheduleAutosave);
+
+  function restoreDraft(data) {
+    isRestoringDraft = true;
+    if (data.fields && data.fields.kontrolltype) {
+      var typeRadio = form.querySelector('input[name="kontrolltype"][value="' + data.fields.kontrolltype + '"]');
+      if (typeRadio) {
+        typeRadio.checked = true;
+        setType(data.fields.kontrolltype);
+      }
+    }
+    Object.keys(data.fields || {}).forEach(function (name) {
+      if (name === "kontrolltype") return;
+      var val = data.fields[name];
+      var els = form.querySelectorAll('[name="' + name + '"]');
+      if (!els.length) return;
+      if (Array.isArray(val)) {
+        els.forEach(function (el) { el.checked = val.indexOf(el.value) !== -1; });
+        return;
+      }
+      if (els[0].type === "radio") {
+        for (var i = 0; i < els.length; i++) {
+          if (els[i].value === val) { els[i].checked = true; break; }
+        }
+        return;
+      }
+      els[0].value = val;
+    });
+    if (termoSelect) termoSelect.dispatchEvent(new Event("change"));
+    if (termoSelectLandbruk) termoSelectLandbruk.dispatchEvent(new Event("change"));
+    Object.keys(data.photos || {}).forEach(function (fieldName) {
+      var stored = data.photos[fieldName];
+      if (!stored) return;
+      var photosArr = Array.isArray(stored) ? stored : [stored]; // eldre datafiler/utkast har ett bilde som objekt, ikke liste
+      photosArr.forEach(function (p) {
+        if (!p) return;
+        addPhotoThumb(fieldName, p.label, p.dataUrl, p.width, p.height);
+      });
+    });
+    updateSummary();
+    isRestoringDraft = false;
+    // Lagre umiddelbart etter gjenoppretting slik at eventuelle mindre justeringer (f.eks. manglende bilder) fanges opp
+    saveDraft();
+  }
+
+  function formatSavedAt(iso) {
+    try {
+      var d = new Date(iso);
+      var datePart = d.toLocaleDateString("nb-NO");
+      var timePart = d.toLocaleTimeString("nb-NO", { hour: "2-digit", minute: "2-digit" });
+      return datePart + " kl. " + timePart;
+    } catch (e) { return ""; }
+  }
+
+  function checkForDraft() {
+    if (!STORAGE_OK) return;
+    var raw;
+    try { raw = window.localStorage.getItem(DRAFT_STORAGE_KEY); } catch (e) { return; }
+    if (!raw) return;
+    var data;
+    try { data = JSON.parse(raw); } catch (e) { return; }
+    if (!data || !data.fields) return;
+
+    var banner = document.getElementById("ekDraftBanner");
+    var text = document.getElementById("ekDraftBannerText");
+    if (!banner || !text) return;
+    text.textContent = "Du har et ulagret utkast fra " + formatSavedAt(data.savedAt) +
+      (data.photoWarning ? " (bilder kunne ikke lagres og må ev. legges til på nytt)" : "") + ".";
+    banner.style.display = "";
+
+    document.getElementById("ekDraftRestoreBtn").addEventListener("click", function () {
+      restoreDraft(data);
+      banner.style.display = "none";
+    });
+    document.getElementById("ekDraftDiscardBtn").addEventListener("click", function () {
+      clearDraft();
+      banner.style.display = "none";
+    });
+  }
+  checkForDraft();
+
+  // ===== Last opp datafil for å rette en tidligere sendt rapport =====
+  var reloadFileInput = document.getElementById("ekReloadFileInput");
+  var reloadStatus = document.getElementById("ekReloadStatus");
+  if (reloadFileInput) {
+    reloadFileInput.addEventListener("change", function () {
+      var file = reloadFileInput.files[0];
+      if (!file) return;
+      reloadStatus.textContent = "Leser fil...";
+      reloadStatus.style.color = "#667";
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var data;
+        try {
+          data = JSON.parse(e.target.result);
+        } catch (err) {
+          reloadStatus.textContent = "Kunne ikke lese filen - er dette riktig datafil (.json)?";
+          reloadStatus.style.color = "#b3261e";
+          return;
+        }
+        if (!data || !data.fields) {
+          reloadStatus.textContent = "Filen inneholder ikke gjenkjennbare skjemadata.";
+          reloadStatus.style.color = "#b3261e";
+          return;
+        }
+        restoreDraft(data);
+        reloadStatus.textContent = "Skjemaet er fylt ut på nytt fra filen. Rett det som trengs, og send inn igjen.";
+        reloadStatus.style.color = "#1c6b4f";
+        reloadFileInput.value = "";
+      };
+      reader.onerror = function () {
+        reloadStatus.textContent = "Kunne ikke lese filen.";
+        reloadStatus.style.color = "#b3261e";
+      };
+      reader.readAsText(file);
+    });
+  }
+
+  function buildRapportTekst(itemMetaArray) {
+    var lines = [];
+    var lastCategory = null;
+    itemMetaArray.forEach(function (item) {
+      var status = form.querySelector('input[name="' + item.name + '"]:checked');
+      var commentEl = form.querySelector('input[name="' + item.name + '_kommentar"]');
+      var comment = commentEl ? commentEl.value : "";
+      var costEl = item.withCost ? form.querySelector('select[name="' + item.name + '_kostnad"]') : null;
+      var cost = costEl ? costEl.value : "";
+      if (!status && !comment) return;
+      if (item.category !== lastCategory) {
+        lines.push("");
+        lines.push("== " + item.category + " ==");
+        lastCategory = item.category;
+      }
+      var line = "- " + item.label + ": " + (status ? status.value : "Ikke vurdert");
+      if (comment) line += " | Kommentar: " + comment;
+      if (cost) line += " | Kostnadsoverslag: " + cost;
+      lines.push(line);
+    });
+    return lines.join("\n").trim();
+  }
+
+  // ===== PDF-generering (felles hjelpefunksjoner, ulikt innhold per type) =====
+  function buildPdfDataUri(mode, counts) {
+    var doc = new window.jspdf.jsPDF({ unit: "pt", format: "a4" });
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var pageHeight = doc.internal.pageSize.getHeight();
+    var margin = 44;
+    var contentWidth = pageWidth - margin * 2;
+    var y = 0;
+
+    var C_PRIMARY = [28, 107, 79];
+    var C_OK = [28, 107, 79];
+    var C_AVVIK = [179, 38, 30];
+    var C_WARN = [184, 134, 11];
+    var C_NEUTRAL = [138, 143, 140];
+    var C_TEXT = [31, 38, 33];
+    var C_LABEL = [110, 118, 112];
+    var C_DIVIDER = [232, 235, 232];
+
+    function setText(rgb) { doc.setTextColor(rgb[0], rgb[1], rgb[2]); }
+    function setFill(rgb) { doc.setFillColor(rgb[0], rgb[1], rgb[2]); }
+    function setDraw(rgb) { doc.setDrawColor(rgb[0], rgb[1], rgb[2]); }
+
+    var title = mode === "brann" ? "BRANNFOREBYGGENDE ELKONTROLL (NEK 405-2-2)" : (mode === "naring" ? "ELKONTROLL NÆRING (NEK 405-3)" : (mode === "landbruk" ? "ELKONTROLL LANDBRUK (NEK 405-3 TILLEGG B)" : (mode === "avhending" ? "TEKNISK TILSTANDSVURDERING VED BOLIGSALG (NEK 405-2-3)" : "ELKONTROLL-RAPPORT")));
+
+    function drawHeader() {
+      setFill(C_PRIMARY);
+      doc.rect(0, 0, pageWidth, 84, "F");
+      setText([255, 255, 255]);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(mode === "periodisk" ? 19 : 14);
+      doc.text(title, margin, 38);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      var subtitle = (form.adresse.value || "") + (form.postnr_sted.value ? ", " + form.postnr_sted.value : "");
+      doc.text(subtitle, margin, 57);
+      var dateVal = mode === "brann" ? (form.paabegynt_dato.value || "-") : (form.dato.value || "-");
+      doc.text("Dato: " + dateVal + "   |   Ordre: " + (form.ordrenummer.value || "-"), margin, 71);
+      setText(C_TEXT);
+      y = 106;
+    }
+
+    function ensureSpace(extra) {
+      if (y + extra > pageHeight - 50) {
+        doc.addPage();
+        drawHeader();
+      }
+    }
+
+    drawHeader();
+
+    function addKeyValue(label, value) {
+      if (!value) return;
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      var lines = doc.splitTextToSize(value, contentWidth - 152);
+      ensureSpace(Math.max(15, lines.length * 13));
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      setText(C_LABEL);
+      doc.text(label.toUpperCase(), margin, y);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      setText(C_TEXT);
+      doc.text(lines, margin + 152, y);
+      y += Math.max(15, lines.length * 13);
+    }
+
+    addKeyValue("Kontrollforetak", form.kontrollforetak.value);
+    addKeyValue("Kontrollør", form.kontrollor_navn.value + (form.sertifikat.value ? "   (sertifikat " + form.sertifikat.value + ")" : ""));
+    addKeyValue("Oppdragsgiver", form.oppdragsgiver.value);
+
+    if (mode === "brann") {
+      addKeyValue("Forsikringstaker", form.forsikringstaker.value);
+      addKeyValue("Kundenummer", form.kundenummer.value);
+      addKeyValue("Avtalenummer", form.avtalenummer.value);
+      addKeyValue("Kontaktperson", form.kontaktperson.value);
+      var bygningstyper = Array.prototype.slice.call(document.querySelectorAll('#ekBygningstype input:checked')).map(function (i) { return i.value; }).join(", ");
+      addKeyValue("Hva skal kontrolleres", bygningstyper + (form.spesifiser.value ? " (" + form.spesifiser.value + ")" : ""));
+      addKeyValue("Avsluttet/planlagt", form.avsluttet_dato.value);
+    } else if (mode === "naring") {
+      addKeyValue("Kontraktnummer", form.kontrakt_nummer.value);
+      addKeyValue("Ordreansvarlig", form.ordreansvarlig.value);
+      addKeyValue("System/anlegg", form.system_anlegg.value);
+      addKeyValue("Type bygg", form.type_bygg.value);
+      addKeyValue("Uavhengighet", form.uavhengighet.value);
+      addKeyValue("Spenning / Forsyningssystem", (form.spenning.value || "-") + " / " + (form.forsyningssystem.value || "-"));
+      addKeyValue("Jordsystem", form.jordsystem.value);
+      addKeyValue("Forskrifter og normer", form.forskrifter_normer.value);
+      addKeyValue("Omfattede deler", form.deler_omfattet.value);
+      addKeyValue("Driftsforhold", form.driftsforhold.value);
+      addKeyValue("Reservekraft / Solcelle", (form.reservekraft.value) + " / " + (form.solcelleanlegg.value));
+      if (form.termografering_utfort.value === "Ja") {
+        addKeyValue("Kalibrert utstyr", (form.kalibrert_verktoy.value || "-") + (form.kalibrert_serienummer.value ? " (s/n " + form.kalibrert_serienummer.value + ")" : "") + (form.kalibrert_dato.value ? " - kalibrert " + form.kalibrert_dato.value : ""));
+      }
+    } else if (mode === "landbruk") {
+      addKeyValue("Kontraktnummer", form.lb_kontrakt_nummer.value);
+      addKeyValue("Ordreansvarlig", form.lb_ordreansvarlig.value);
+      addKeyValue("System/anlegg", form.lb_system_anlegg.value);
+      addKeyValue("Type bygg", form.lb_type_bygg.value);
+      addKeyValue("Uavhengighet", form.uavhengighet.value);
+      addKeyValue("Spenning / Forsyningssystem", (form.lb_spenning.value || "-") + " / " + (form.lb_forsyningssystem.value || "-"));
+      addKeyValue("Jordsystem", form.lb_jordsystem.value);
+      addKeyValue("Forskrifter og normer", form.lb_forskrifter_normer.value);
+      addKeyValue("Omfattede deler", form.lb_deler_omfattet.value);
+      addKeyValue("Driftsforhold", form.lb_driftsforhold.value);
+      addKeyValue("Reservekraft / Solcelle", (form.lb_reservekraft.value) + " / " + (form.lb_solcelleanlegg.value));
+      if (form.lb_termografering_utfort.value === "Ja") {
+        addKeyValue("Kalibrert utstyr", (form.lb_kalibrert_verktoy.value || "-") + (form.lb_kalibrert_serienummer.value ? " (s/n " + form.lb_kalibrert_serienummer.value + ")" : "") + (form.lb_kalibrert_dato.value ? " - kalibrert " + form.lb_kalibrert_dato.value : ""));
+      }
+    } else if (mode === "avhending") {
+      addKeyValue("Kontraktnummer", form.av_kontrakt_nummer.value);
+      addKeyValue("Anlegg", form.av_beskrivelse_anlegg.value);
+      addKeyValue("Uavhengighet", form.uavhengighet.value);
+      addKeyValue("Referansenivå", form.av_referanseniva.value);
+      if (form.av_termografering_utfort.value === "Ja") {
+        addKeyValue("Kalibrert utstyr", (form.av_kalibrert_verktoy.value || "-") + (form.av_kalibrert_serienummer.value ? " (s/n " + form.av_kalibrert_serienummer.value + ")" : "") + (form.av_kalibrert_dato.value ? " - kalibrert " + form.av_kalibrert_dato.value : ""));
+      }
+    } else {
+      addKeyValue("Anlegg", form.beskrivelse_anlegg.value);
+      addKeyValue("Uavhengighet", form.uavhengighet.value);
+    }
+
+    y += 8;
+    setDraw(C_DIVIDER);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 22;
+
+    function badgeWidth(text, size) {
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(size);
+      return doc.getTextWidth(text) + 20;
+    }
+    function drawBadge(x, yTop, text, rgb, size, h) {
+      var w = badgeWidth(text, size);
+      setFill(rgb);
+      doc.roundedRect(x, yTop, w, h, h / 2, h / 2, "F");
+      setText([255, 255, 255]);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(size);
+      doc.text(text, x + w / 2, yTop + h / 2 + size / 2 - 1.5, { align: "center" });
+      setText(C_TEXT);
+      return w;
+    }
+
+    ensureSpace(32);
+    var bx = margin;
+    bx += drawBadge(bx, y - 15, "AVVIK: " + counts.avvik, C_AVVIK, 10, 22) + 8;
+    bx += drawBadge(bx, y - 15, "OK: " + counts.ok, C_OK, 10, 22) + 8;
+    bx += drawBadge(bx, y - 15, "ANNET: " + counts.other, C_NEUTRAL, 10, 22) + 8;
+    y += 26;
+
+    if (mode === "periodisk") {
+      var konklusjon = form.konklusjon.value || "-";
+      var konkColor = C_OK;
+      if (konklusjon === "Godkjent med avvik") konkColor = C_WARN;
+      if (konklusjon === "Ikke godkjent") konkColor = C_AVVIK;
+      ensureSpace(36);
+      setFill(konkColor);
+      doc.roundedRect(margin, y - 16, contentWidth, 30, 6, 6, "F");
+      setText([255, 255, 255]);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("KONKLUSJON:  " + konklusjon, margin + 14, y + 3);
+      setText(C_TEXT);
+      y += 40;
+    } else if (mode === "brann") {
+      ensureSpace(30);
+      doc.setFont("helvetica", "italic");
+      doc.setFontSize(9);
+      setText(C_LABEL);
+      var noteLines = doc.splitTextToSize("Forhold som ikke er i orden (pkt 1-14) må rettes før rabatt i forsikringspremien blir gitt.", contentWidth);
+      doc.text(noteLines, margin, y);
+      y += noteLines.length * 12 + 10;
+      setText(C_TEXT);
+    }
+
+    function addSectionHeader(text) {
+      ensureSpace(30);
+      y += 6;
+      setFill(C_PRIMARY);
+      doc.rect(margin, y - 11, 3, 13, "F");
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11.5);
+      setText(C_PRIMARY);
+      doc.text(text.toUpperCase(), margin + 10, y);
+      setText(C_TEXT);
+      y += 16;
+    }
+
+    var STATUS_COLORS = {
+      Ok: C_OK, Avvik: C_AVVIK, IA: C_NEUTRAL, Rettet: C_WARN,
+      "Gitt": C_OK, "Ikke gitt": C_AVVIK,
+      "Ja": C_OK, "Nei": C_AVVIK, "Ikke besvart": C_NEUTRAL,
+      "TG0": C_OK, "TG1": C_NEUTRAL, "TG2": C_WARN, "TG3": C_AVVIK
+    };
+
+    function addItemRow(label, statusVal, comment, cost, photos) {
+      var badgeText = statusVal || "Ikke vurdert";
+      var bColor = STATUS_COLORS[statusVal] || C_NEUTRAL;
+      var bW = badgeWidth(badgeText, 8.5);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      var lines = doc.splitTextToSize(label, contentWidth - bW - 14);
+      var rowHeight = Math.max(16, lines.length * 12.5);
+      var commentText = comment || "";
+      if (cost) commentText += (commentText ? " | " : "") + "Kostnadsoverslag: " + cost;
+      var commentLines = [];
+      if (commentText) {
+        doc.setFontSize(9);
+        commentLines = doc.splitTextToSize("Kommentar: " + commentText, contentWidth - 12);
+      }
+      ensureSpace(rowHeight + commentLines.length * 11 + 10);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      setText(C_TEXT);
+      doc.text(lines, margin, y);
+      drawBadge(pageWidth - margin - bW, y - 10, badgeText, bColor, 8.5, 15);
+      y += rowHeight;
+
+      if (commentLines.length) {
+        doc.setFont("helvetica", "italic");
+        doc.setFontSize(9);
+        setText(C_LABEL);
+        doc.text(commentLines, margin + 8, y);
+        y += commentLines.length * 11;
+        setText(C_TEXT);
+      }
+
+      if (photos && photos.length) {
+        photos.forEach(function (photo) {
+          if (!photo || !photo.dataUrl) return;
+          var maxImgW = 220;
+          var maxImgH = 165;
+          var ratio = Math.min(maxImgW / photo.width, maxImgH / photo.height, 1);
+          var imgW = photo.width * ratio;
+          var imgH = photo.height * ratio;
+          ensureSpace(imgH + 10);
+          try {
+            doc.addImage(photo.dataUrl, "JPEG", margin + 8, y, imgW, imgH);
+          } catch (imgErr) { /* hopp over bilde hvis det feiler */ }
+          y += imgH + 8;
+        });
+      }
+
+      y += 8;
+      setDraw(C_DIVIDER);
+      doc.line(margin, y - 4, pageWidth - margin, y - 4);
+    }
+
+    function renderItems(itemMetaArray) {
+      var lastCategory = null;
+      itemMetaArray.forEach(function (item) {
+        var statusEl = form.querySelector('input[name="' + item.name + '"]:checked');
+        var commentEl = form.querySelector('input[name="' + item.name + '_kommentar"]');
+        var comment = commentEl ? commentEl.value : "";
+        var costEl = item.withCost ? form.querySelector('select[name="' + item.name + '_kostnad"]') : null;
+        var cost = costEl ? costEl.value : "";
+        var photos = photoStore[item.name];
+        if (!statusEl && !comment && !cost && (!photos || !photos.length)) return;
+        if (item.category !== lastCategory) {
+          addSectionHeader(item.category);
+          lastCategory = item.category;
+        }
+        addItemRow(item.label, statusEl ? statusEl.value : null, comment, cost, photos);
+      });
+    }
+
+    if (mode === "periodisk") {
+      renderItems(periodicItemMeta);
+    } else if (mode === "brann") {
+      renderItems(brannItemMeta);
+      if (form.brann_kommentar.value) {
+        ensureSpace(20);
+        y += 6;
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        setText(C_TEXT);
+        doc.text("Generell kommentar:", margin, y);
+        y += 13;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        var gcLines = doc.splitTextToSize(form.brann_kommentar.value, contentWidth);
+        ensureSpace(gcLines.length * 12);
+        doc.text(gcLines, margin, y);
+        y += gcLines.length * 12 + 6;
+      }
+      addSectionHeader("Informasjon gitt til eier/bruker");
+      renderItems(brannInfoMeta);
+
+      if (form.person_utbedret.value || form.dato_utbedret.value) {
+        ensureSpace(30);
+        y += 6;
+        addKeyValueDirect("Utbedret av", form.person_utbedret.value);
+        addKeyValueDirect("Dato utbedret", form.dato_utbedret.value);
+      }
+    } else if (mode === "landbruk") {
+      renderItems(landbrukItemMeta);
+      addSectionHeader("Oppsummering etter kontroll");
+      function addTextBlockLb(label, value) {
+        if (!value) return;
+        ensureSpace(20);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        setText(C_TEXT);
+        doc.text(label, margin, y);
+        y += 13;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        var tLines = doc.splitTextToSize(value, contentWidth);
+        ensureSpace(tLines.length * 12);
+        doc.text(tLines, margin, y);
+        y += tLines.length * 12 + 8;
+      }
+      addTextBlockLb("Sammendrag:", form.lb_sammendrag.value);
+      addTextBlockLb("Vurdering av tilstand:", form.lb_vurdering.value);
+      addTextBlockLb("Anbefalinger:", form.lb_anbefalinger.value);
+      addTextBlockLb("Konklusjon:", form.lb_konklusjon.value);
+    } else if (mode === "avhending") {
+      renderItems(avhendingItemMeta);
+      addSectionHeader("Oppsummering etter kontroll");
+      function addTextBlockAv(label, value) {
+        if (!value) return;
+        ensureSpace(20);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        setText(C_TEXT);
+        doc.text(label, margin, y);
+        y += 13;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        var tLines = doc.splitTextToSize(value, contentWidth);
+        ensureSpace(tLines.length * 12);
+        doc.text(tLines, margin, y);
+        y += tLines.length * 12 + 8;
+      }
+      addTextBlockAv("Sammendrag:", form.av_sammendrag.value);
+      addTextBlockAv("Vurdering av tilstand og gjenværende levetid:", form.av_vurdering.value);
+      addTextBlockAv("Anbefalinger:", form.av_anbefalinger.value);
+      addTextBlockAv("Konklusjon:", form.av_konklusjon.value);
+    } else {
+      renderItems(naringItemMeta);
+      addSectionHeader("Oppsummering etter kontroll");
+      function addTextBlock(label, value) {
+        if (!value) return;
+        ensureSpace(20);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(10);
+        setText(C_TEXT);
+        doc.text(label, margin, y);
+        y += 13;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(9.5);
+        var tLines = doc.splitTextToSize(value, contentWidth);
+        ensureSpace(tLines.length * 12);
+        doc.text(tLines, margin, y);
+        y += tLines.length * 12 + 8;
+      }
+      addTextBlock("Sammendrag:", form.naring_sammendrag.value);
+      addTextBlock("Vurdering av tilstand:", form.naring_vurdering.value);
+      addTextBlock("Anbefalinger:", form.naring_anbefalinger.value);
+      addTextBlock("Konklusjon:", form.naring_konklusjon.value);
+    }
+    function addKeyValueDirect(label, value) {
+      if (!value) return;
+      ensureSpace(15);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      setText(C_LABEL);
+      doc.text(label.toUpperCase(), margin, y);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      setText(C_TEXT);
+      doc.text(value, margin + 152, y);
+      y += 15;
+    }
+
+    ensureSpace(64);
+    y += 16;
+    setDraw([180, 184, 181]);
+    doc.line(margin, y, margin + 220, y);
+    y += 15;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    setText(C_TEXT);
+    doc.text("Signert av: " + (form.signatur.value || "-"), margin, y);
+
+    var totalPages = doc.getNumberOfPages();
+    for (var p = 1; p <= totalPages; p++) {
+      doc.setPage(p);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8.5);
+      setText([160, 164, 161]);
+      doc.text("Side " + p + " av " + totalPages, pageWidth - margin, pageHeight - 22, { align: "right" });
+      doc.text("Generert digitalt", margin, pageHeight - 22);
+    }
+
+    return doc.output("datauristring");
+  }
+
+  var btn = document.getElementById("ekSubmitBtn");
+  var status = document.getElementById("ekStatus");
+  var success = document.getElementById("ekSuccess");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    status.textContent = "";
+    status.className = "ek-status";
+    btn.disabled = true;
+    btn.textContent = "Sender...";
+
+    try {
+      submitForm();
+    } catch (err) {
+      status.textContent = "Feil ved forberedelse av innsending: " + err.message;
+      status.className = "ek-status err";
+      btn.disabled = false;
+      btn.textContent = "Send inn rapport";
+    }
+  });
+
+  function submitForm() {
+    var activeMeta;
+    if (KONTROLLTYPE === "periodisk") activeMeta = periodicItemMeta;
+    else if (KONTROLLTYPE === "brann") activeMeta = brannItemMeta.concat(brannInfoMeta);
+    else if (KONTROLLTYPE === "landbruk") activeMeta = landbrukItemMeta;
+    else if (KONTROLLTYPE === "avhending") activeMeta = avhendingItemMeta;
+    else activeMeta = naringItemMeta;
+    var counts = { ok: 0, avvik: 0, other: 0 };
+    activeMeta.forEach(function (item) {
+      var checked = form.querySelector('input[name="' + item.name + '"]:checked');
+      if (!checked) return;
+      var v = checked.value;
+      if (v === "Ok" || v === "Ja" || v === "Gitt" || v === "Rettet" || v === "TG0") counts.ok++;
+      else if (v === "Avvik" || v === "Nei" || v === "Ikke gitt" || v === "TG2" || v === "TG3") counts.avvik++;
+      else counts.other++;
+    });
+
+    var typeLabels = {
+      periodisk: "Periodisk elkontroll",
+      brann: "Brannforebyggende elkontroll (NEK 405-2-2)",
+      naring: "Elkontroll næring (NEK 405-3)",
+      landbruk: "Elkontroll landbruk (NEK 405-3 Tillegg B)",
+      avhending: "Teknisk tilstandsvurdering ved boligsalg (NEK 405-2-3)"
+    };
+
+    var params = {
+      kontrolltype: typeLabels[KONTROLLTYPE],
+      kontrollforetak: form.kontrollforetak.value,
+      kontrollor_navn: form.kontrollor_navn.value,
+      kontrollor_epost: form.kontrollor_epost.value,
+      sertifikat: form.sertifikat.value,
+      dato: form.dato.value,
+      ordrenummer: form.ordrenummer.value,
+      oppdragsgiver: form.oppdragsgiver.value,
+      adresse: form.adresse.value,
+      postnr_sted: form.postnr_sted.value,
+      uavhengighet: form.uavhengighet.value,
+      signatur: form.signatur.value,
+      sammendrag: "Avvik: " + counts.avvik + " | Ok: " + counts.ok + " | Annet: " + counts.other,
+      tg_sammendrag: "Avvik: " + counts.avvik + " | Ok: " + counts.ok + " | Annet: " + counts.other
+    };
+
+    if (KONTROLLTYPE === "periodisk") {
+      params.beskrivelse_anlegg = form.beskrivelse_anlegg.value;
+      params.konklusjon = form.konklusjon.value;
+      params.rapport_tekst = buildRapportTekst(periodicItemMeta);
+    } else if (KONTROLLTYPE === "brann") {
+      params.dato = form.paabegynt_dato.value;
+      params.forsikringstaker = form.forsikringstaker.value;
+      params.kundenummer = form.kundenummer.value;
+      params.avtalenummer = form.avtalenummer.value;
+      params.kontaktperson = form.kontaktperson.value;
+      params.husnr_bokstav = form.husnr_bokstav.value;
+      params.boligmappa_id = form.boligmappa_id.value;
+      params.paabegynt_dato = form.paabegynt_dato.value;
+      params.avsluttet_dato = form.avsluttet_dato.value;
+      params.bygningstype = Array.prototype.slice.call(document.querySelectorAll('#ekBygningstype input:checked')).map(function (i) { return i.value; }).join(", ");
+      params.spesifiser = form.spesifiser.value;
+      params.brann_kommentar = form.brann_kommentar.value;
+      params.person_utbedret = form.person_utbedret.value;
+      params.dato_utbedret = form.dato_utbedret.value;
+      params.konklusjon = "-";
+      var rTekst = buildRapportTekst(brannItemMeta);
+      rTekst += "\n\n== Informasjon gitt til eier/bruker ==\n" + buildRapportTekst(brannInfoMeta).replace(/^== .*? ==\n/, "");
+      params.rapport_tekst = rTekst;
+    } else if (KONTROLLTYPE === "landbruk") {
+      params.kontrakt_nummer = form.lb_kontrakt_nummer.value;
+      params.ordreansvarlig = form.lb_ordreansvarlig.value;
+      params.system_anlegg = form.lb_system_anlegg.value;
+      params.type_bygg = form.lb_type_bygg.value;
+      params.spenning = form.lb_spenning.value;
+      params.forsyningssystem = form.lb_forsyningssystem.value;
+      params.jordsystem = form.lb_jordsystem.value;
+      params.forskrifter_normer = form.lb_forskrifter_normer.value;
+      params.deler_omfattet = form.lb_deler_omfattet.value;
+      params.driftsforhold = form.lb_driftsforhold.value;
+      params.reservekraft = form.lb_reservekraft.value;
+      params.solcelleanlegg = form.lb_solcelleanlegg.value;
+      params.termografering_utfort = form.lb_termografering_utfort.value;
+      params.kalibrert_verktoy = form.lb_kalibrert_verktoy.value;
+      params.kalibrert_serienummer = form.lb_kalibrert_serienummer.value;
+      params.kalibrert_dato = form.lb_kalibrert_dato.value;
+      params.naring_sammendrag = form.lb_sammendrag.value;
+      params.naring_vurdering = form.lb_vurdering.value;
+      params.naring_anbefalinger = form.lb_anbefalinger.value;
+      params.naring_konklusjon = form.lb_konklusjon.value;
+      params.konklusjon = form.lb_konklusjon.value || "-";
+      var lbTekst = buildRapportTekst(landbrukItemMeta);
+      if (form.lb_sammendrag.value || form.lb_vurdering.value || form.lb_anbefalinger.value || form.lb_konklusjon.value) {
+        lbTekst += "\n\n== Oppsummering ==";
+        if (form.lb_sammendrag.value) lbTekst += "\nSammendrag: " + form.lb_sammendrag.value;
+        if (form.lb_vurdering.value) lbTekst += "\nVurdering av tilstand: " + form.lb_vurdering.value;
+        if (form.lb_anbefalinger.value) lbTekst += "\nAnbefalinger: " + form.lb_anbefalinger.value;
+        if (form.lb_konklusjon.value) lbTekst += "\nKonklusjon: " + form.lb_konklusjon.value;
+      }
+      params.rapport_tekst = lbTekst;
+    } else if (KONTROLLTYPE === "avhending") {
+      params.kontrakt_nummer = form.av_kontrakt_nummer.value;
+      params.beskrivelse_anlegg = form.av_beskrivelse_anlegg.value;
+      params.referanseniva = form.av_referanseniva.value;
+      params.termografering_utfort = form.av_termografering_utfort.value;
+      params.kalibrert_verktoy = form.av_kalibrert_verktoy.value;
+      params.kalibrert_serienummer = form.av_kalibrert_serienummer.value;
+      params.kalibrert_dato = form.av_kalibrert_dato.value;
+      params.naring_sammendrag = form.av_sammendrag.value;
+      params.naring_vurdering = form.av_vurdering.value;
+      params.naring_anbefalinger = form.av_anbefalinger.value;
+      params.naring_konklusjon = form.av_konklusjon.value;
+      params.konklusjon = form.av_konklusjon.value || "-";
+      var avTekst = buildRapportTekst(avhendingItemMeta);
+      if (form.av_sammendrag.value || form.av_vurdering.value || form.av_anbefalinger.value || form.av_konklusjon.value) {
+        avTekst += "\n\n== Oppsummering ==";
+        if (form.av_sammendrag.value) avTekst += "\nSammendrag: " + form.av_sammendrag.value;
+        if (form.av_vurdering.value) avTekst += "\nVurdering av tilstand og gjenværende levetid: " + form.av_vurdering.value;
+        if (form.av_anbefalinger.value) avTekst += "\nAnbefalinger: " + form.av_anbefalinger.value;
+        if (form.av_konklusjon.value) avTekst += "\nKonklusjon: " + form.av_konklusjon.value;
+      }
+      params.rapport_tekst = avTekst;
+    } else {
+      params.kontrakt_nummer = form.kontrakt_nummer.value;
+      params.ordreansvarlig = form.ordreansvarlig.value;
+      params.system_anlegg = form.system_anlegg.value;
+      params.type_bygg = form.type_bygg.value;
+      params.spenning = form.spenning.value;
+      params.forsyningssystem = form.forsyningssystem.value;
+      params.jordsystem = form.jordsystem.value;
+      params.forskrifter_normer = form.forskrifter_normer.value;
+      params.deler_omfattet = form.deler_omfattet.value;
+      params.driftsforhold = form.driftsforhold.value;
+      params.reservekraft = form.reservekraft.value;
+      params.solcelleanlegg = form.solcelleanlegg.value;
+      params.termografering_utfort = form.termografering_utfort.value;
+      params.kalibrert_verktoy = form.kalibrert_verktoy.value;
+      params.kalibrert_serienummer = form.kalibrert_serienummer.value;
+      params.kalibrert_dato = form.kalibrert_dato.value;
+      params.naring_sammendrag = form.naring_sammendrag.value;
+      params.naring_vurdering = form.naring_vurdering.value;
+      params.naring_anbefalinger = form.naring_anbefalinger.value;
+      params.naring_konklusjon = form.naring_konklusjon.value;
+      params.konklusjon = form.naring_konklusjon.value || "-";
+      var nTekst = buildRapportTekst(naringItemMeta);
+      if (form.naring_sammendrag.value || form.naring_vurdering.value || form.naring_anbefalinger.value || form.naring_konklusjon.value) {
+        nTekst += "\n\n== Oppsummering ==";
+        if (form.naring_sammendrag.value) nTekst += "\nSammendrag: " + form.naring_sammendrag.value;
+        if (form.naring_vurdering.value) nTekst += "\nVurdering av tilstand: " + form.naring_vurdering.value;
+        if (form.naring_anbefalinger.value) nTekst += "\nAnbefalinger: " + form.naring_anbefalinger.value;
+        if (form.naring_konklusjon.value) nTekst += "\nKonklusjon: " + form.naring_konklusjon.value;
+      }
+      params.rapport_tekst = nTekst;
+    }
+
+    try {
+      if (window.jspdf && window.jspdf.jsPDF) {
+        params.attachment_1 = buildPdfDataUri(KONTROLLTYPE, counts);
+        var pdfFilename = "elkontroll-" + (form.adresse.value || "rapport").replace(/[^a-zA-Z0-9æøåÆØÅ]/g, "_").slice(0, 40) + ".pdf";
+        params.attachment_1_name = pdfFilename;
+      } else {
+        params.rapport_tekst += "\n\n(PDF-biblioteket lastet ikke - rapport sendt uten PDF-vedlegg.)";
+      }
+    } catch (pdfErr) {
+      params.rapport_tekst += "\n\n(Kunne ikke lage PDF: " + pdfErr.message + ")";
+    }
+
+    // Datafil (JSON) med alle svarene, sendt som eget vedlegg - lar deg senere laste
+    // opp filen i skjemaet igjen for å rette og sende inn en oppdatert rapport.
+    try {
+      var reloadData = serializeDraft();
+      var reloadJson = JSON.stringify(reloadData);
+      var reloadBase64 = btoa(unescape(encodeURIComponent(reloadJson)));
+      params.attachment_2 = "data:application/json;base64," + reloadBase64;
+      params.attachment_2_name = "elkontroll-data-" + (form.adresse.value || "rapport").replace(/[^a-zA-Z0-9æøåÆØÅ]/g, "_").slice(0, 40) + ".json";
+    } catch (jsonErr) {
+      // Best-effort - skal aldri stoppe selve innsendingen av rapporten
+    }
+
+    emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, params)
+      .then(function () {
+        clearDraft();
+        form.style.display = "none";
+        success.style.display = "block";
+      })
+      .catch(function (err) {
+        status.textContent = "Noe gikk galt. Prøv igjen. (" + (err && err.text ? err.text : "ukjent feil") + ")";
+        status.className = "ek-status err";
+        btn.disabled = false;
+        btn.textContent = "Send inn rapport";
+      });
+
+    // Send en egen kopi til kontrolløren selv, kun hvis de har fylt inn sin e-post.
+    // Helt uavhengig send - påvirker aldri hovedinnsendingen over, uansett utfall.
+    if (params.kontrollor_epost && EMAILJS_CONFIG.kontrollorCopyTemplateId) {
+      emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.kontrollorCopyTemplateId, params)
+        .catch(function () {
+          // Stille feil - kontrolløren har uansett fått bekreftelse på at hovedrapporten er sendt
+        });
+    }
+  }
+})();
+</script>
+
+</main>
+</body>
+</html>
