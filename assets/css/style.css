@@ -321,6 +321,15 @@ textarea{resize:vertical; min-height:130px;}
 .data-table td:first-child{font-weight:600; font-family:'Space Grotesk';}
 .data-table-wrap{overflow-x:auto;}
 
+/* ---------- CHIP NAV (internkontroll hub) ---------- */
+.chip-nav{display:flex; gap:10px; flex-wrap:wrap; margin-top:28px;}
+.chip-nav a{font-size:13px; font-weight:600; color:#fff; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); padding:8px 16px; border-radius:100px;}
+.chip-nav a:hover{background:rgba(255,255,255,0.18); border-color:#fff;}
+.sub-block{border-top:1px solid var(--line); padding:56px 0;}
+.sub-block .sub-head{display:flex; align-items:baseline; gap:14px; margin-bottom:28px; flex-wrap:wrap;}
+.sub-block .sub-head h2{font-size:26px;}
+.sub-block .sub-head .n{font-family:'Space Grotesk'; color:var(--green); font-size:14px;}
+
 /* ---------- FOOTER ---------- */
 footer{background:var(--navy); color:#96A0B4; padding-top:64px;}
 .foot-grid{display:grid; grid-template-columns:1.4fr 0.9fr 0.9fr 1.1fr; gap:40px; padding-bottom:56px; border-bottom:1px solid var(--line-dark);}
