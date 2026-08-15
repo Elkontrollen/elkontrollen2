@@ -314,6 +314,13 @@ textarea{resize:vertical; min-height:130px;}
 .step-row h4{font-size:15.5px; margin-bottom:6px;}
 .step-row p{font-size:14px; color:var(--muted); line-height:1.6;}
 
+/* ---------- DATA TABLE (kontrollavtale) ---------- */
+.data-table{width:100%; border-collapse:collapse; font-size:14px; background:#fff;}
+.data-table th, .data-table td{border:1px solid var(--line); padding:14px 16px; text-align:left; vertical-align:top;}
+.data-table th{background:var(--paper-2); font-family:'Space Grotesk'; font-weight:600; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--muted);}
+.data-table td:first-child{font-weight:600; font-family:'Space Grotesk';}
+.data-table-wrap{overflow-x:auto;}
+
 /* ---------- FOOTER ---------- */
 footer{background:var(--navy); color:#96A0B4; padding-top:64px;}
 .foot-grid{display:grid; grid-template-columns:1.4fr 0.9fr 0.9fr 1.1fr; gap:40px; padding-bottom:56px; border-bottom:1px solid var(--line-dark);}
