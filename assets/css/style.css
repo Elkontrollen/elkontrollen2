@@ -115,6 +115,7 @@ nav.links a.current{opacity:1; border-color:var(--green); font-weight:600;}
 .service-photo.p1{background:repeating-linear-gradient(120deg,#E4DCC8 0 2px, var(--paper-2) 2px 28px);}
 .service-photo.p2{background:repeating-linear-gradient(60deg,#D8E3DB 0 2px, var(--paper-2) 2px 28px);}
 .service-photo.p3{background:repeating-linear-gradient(150deg,#DDE2EC 0 2px, var(--paper-2) 2px 28px);}
+.service-photo.p4{background:repeating-linear-gradient(30deg,#E8D5C8 0 2px, var(--paper-2) 2px 28px);}
 .service-tag{position:absolute; top:14px; left:14px; background:var(--ink); color:#fff; font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:6px 10px;}
 .service-idx{font-family:'Space Grotesk'; font-size:13px; color:var(--green); display:block; margin-bottom:10px;}
 .service h3{font-size:26px; margin-bottom:16px;}
