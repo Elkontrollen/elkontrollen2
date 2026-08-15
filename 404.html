@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siden er flyttet — Elkontrollen</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script>
+  // Gamle Shopify-adresser -> nye adresser på det redesignede nettstedet.
+  var redirectMap = {
+    "/pages/contact": "/kontakt.html",
+    "/pages/elsjekk": "/elsjekk.html",
+    "/pages/om-elkontrollen": "/om-oss.html",
+    "/pages/om-os": "/om-oss.html",
+    "/pages/fatt-avvik": "/fatt-avvik.html",
+    "/pages/landbruk": "/landbruk.html",
+    "/pages/naering": "/naering.html",
+    "/pages/skjemaer": "/skjemaer.html",
+    "/pages/borettslag-sameie": "/borettslag-sameie.html",
+    "/pages/borettslag-sameie-1": "/borettslag-sameie.html",
+    "/pages/blogg": "/blogg/index.html",
+
+    "/products/elsjekk": "/elsjekk.html",
+    "/products/elkontroll": "/elkontroll-bolig.html",
+    "/products/landbruk": "/landbruk.html",
+    "/products/naering": "/naering.html",
+    "/products/roykvarsler-palitelig-roykalarm-for-hjem-og-kontor": "/kontakt.html",
+
+    "/collections/frontpage": "/index.html",
+
+    "/blogs/news": "/blogg/index.html",
+    "/blogs/news/10-tegn-pa-at-det-elektriske-anlegget-bor-kontrolleres": "/blogg/10-tegn-pa-at-det-elektriske-anlegget-bor-kontrolleres.html",
+    "/blogs/news/arlig-kontroll-av-brannalarm-og-nodlys-i-sameier-dette-er-lovpalagt": "/blogg/arlig-kontroll-av-brannalarm-og-nodlys-i-sameier-dette-er-lovpalagt.html",
+    "/blogs/news/el-sjekk-vs-elkontroll-hva-er-egentlig-forskjellen": "/blogg/el-sjekk-vs-elkontroll-hva-er-egentlig-forskjellen.html",
+    "/blogs/news/elektrisk-due-diligence-ved-kjop-av-naeringseiendom-dette-bor-du-vite": "/blogg/elektrisk-due-diligence-ved-kjop-av-naeringseiendom-dette-bor-du-vite.html",
+    "/blogs/news/elkontroll-for-avfallshandtering-og-gjenvinningsanlegg-arlig-kontroll-er-kravet": "/blogg/elkontroll-for-avfallshandtering-og-gjenvinningsanlegg-arlig-kontroll-er-kravet.html",
+    "/blogs/news/elkontroll-for-bathavner-og-marinaer-ofte-oversett-men-reelt-palagt": "/blogg/elkontroll-for-bathavner-og-marinaer-ofte-oversett-men-reelt-palagt.html",
+    "/blogs/news/elkontroll-for-bensinstasjoner-og-vaskehaller-dette-sier-forsikringsbransjen": "/blogg/elkontroll-for-bensinstasjoner-og-vaskehaller-dette-sier-forsikringsbransjen.html",
+    "/blogs/news/elkontroll-for-butikklokaler": "/blogg/elkontroll-for-butikklokaler.html",
+    "/blogs/news/elkontroll-for-campingplasser": "/blogg/elkontroll-for-campingplasser.html",
+    "/blogs/news/elkontroll-for-dagligvarebutikker-nar-strombrudd-betyr-tapt-vareverdi-i-sanntid": "/blogg/elkontroll-for-dagligvarebutikker-nar-strombrudd-betyr-tapt-vareverdi-i-sanntid.html",
+    "/blogs/news/elkontroll-for-fredede-og-verneverdige-bygninger-strengere-krav-enn-de-fleste-tror": "/blogg/elkontroll-for-fredede-og-verneverdige-bygninger-strengere-krav-enn-de-fleste-tror.html",
+    "/blogs/news/elkontroll-for-hoteller-den-strengeste-risikoklassen-som-finnes": "/blogg/elkontroll-for-hoteller-den-strengeste-risikoklassen-som-finnes.html",
+    "/blogs/news/elkontroll-for-internat-folkehoyskoler-skoler-og-andre-bygg-med-overnatting": "/blogg/elkontroll-for-internat-folkehoyskoler-skoler-og-andre-bygg-med-overnatting.html",
+    "/blogs/news/elkontroll-for-kirker-og-menighetshus": "/blogg/elkontroll-for-kirker-og-menighetshus.html",
+    "/blogs/news/elkontroll-for-lagerbygg-ofte-lite-bemannet-men-hoy-verdi-a-beskytte": "/blogg/elkontroll-for-lagerbygg-ofte-lite-bemannet-men-hoy-verdi-a-beskytte.html",
+    "/blogs/news/elkontroll-for-parkeringshus-og-hvorfor-elbillading-gjor-det-enda-viktigere-1": "/blogg/elkontroll-for-parkeringshus-og-hvorfor-elbillading-gjor-det-enda-viktigere-1.html",
+    "/blogs/news/elkontroll-for-pumpestasjoner-kritisk-infrastruktur-som-lett-blir-glemt": "/blogg/elkontroll-for-pumpestasjoner-kritisk-infrastruktur-som-lett-blir-glemt.html",
+    "/blogs/news/elkontroll-for-svommehaller-idrettshaller-og-treningssentre": "/blogg/elkontroll-for-svommehaller-idrettshaller-og-treningssentre.html",
+    "/blogs/news/elkontroll-for-veterinaerklinikker": "/blogg/elkontroll-for-veterinaerklinikker.html",
+    "/blogs/news/elkontroll-landbruk-slik-kan-du-fa-rabatt-pa-forsikringen": "/blogg/elkontroll-landbruk-slik-kan-du-fa-rabatt-pa-forsikringen.html",
+    "/blogs/news/hva-er-samsvarserklaering-og-hvorfor-trenger-du-den": "/blogg/hva-er-samsvarserklaering-og-hvorfor-trenger-du-den.html",
+    "/blogs/news/hva-koster-elkontroll-full-prisguide": "/blogg/hva-koster-elkontroll-full-prisguide.html",
+    "/blogs/news/hvordan-oppstar-boligbranner-forebygg-med-elkontroll": "/blogg/hvordan-oppstar-boligbranner-forebygg-med-elkontroll.html",
+    "/blogs/news/kan-et-darlig-elektrisk-anlegg-koste-deg-boligsalget-dette-sier-rettspraksis": "/blogg/kan-et-darlig-elektrisk-anlegg-koste-deg-boligsalget-dette-sier-rettspraksis.html",
+    "/blogs/news/styrets-ansvar-for-det-elektriske-anlegget-dette-bor-dere-vite": "/blogg/styrets-ansvar-for-det-elektriske-anlegget-dette-bor-dere-vite.html"
+  };
+
+  (function () {
+    var path = window.location.pathname.replace(/\/$/, "").toLowerCase();
+    // Match case-insensitively and tolerate a trailing slash
+    var target = null;
+    for (var key in redirectMap) {
+      if (key.toLowerCase() === path) { target = redirectMap[key]; break; }
+    }
+    if (target) {
+      window.location.replace(target);
+    }
+  })();
+</script>
+</head>
+<body>
+<header>
+  <div class="nav-row">
+    <div class="logo">
+      <a href="/index.html" style="display:flex;align-items:center;gap:10px;"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><span><span class="el">El</span>kontrollen</span></a>
+    </div>
+    <div class="nav-right">
+      <span class="phone">+47 980 19 154</span>
+      <a class="btn btn-solid" href="/kontakt.html">Kontakt oss</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="stamp"><span class="dot"></span>Siden finnes ikke</span>
+    <h1>Denne siden ble ikke funnet</h1>
+    <p class="lead">Adressen kan være feilskrevet, eller peke til en side som fantes på vårt gamle nettsted. Prøv en av snarveiene under, eller gå til forsiden.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="/index.html">Til forsiden</a>
+      <a class="btn btn-outline-light" href="/kontakt.html">Kontakt oss</a>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <div class="card-grid cols-4">
+      <a href="/elkontroll-bolig.html" class="card"><h3>Elkontroll bolig →</h3></a>
+      <a href="/naering.html" class="card"><h3>Næring →</h3></a>
+      <a href="/borettslag-sameie.html" class="card"><h3>Borettslag – sameie →</h3></a>
+      <a href="/blogg/index.html" class="card"><h3>Blogg →</h3></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="org">Elkontrollen AS · Org.nr 825 176 942 · Sertifisert NEK 405 · DSB REG · ISO 9001 · © 2026</div>
+  </div>
+</footer>
+</body>
+</html>
