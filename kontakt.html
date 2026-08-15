@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt oss — Elkontrollen</title>
+<meta name="description" content="Ta kontakt med Elkontrollen AS for elkontroll, elsjekk eller tilbud. Vi svarer innen 24 timer. Telefon 980 19 154.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="nav-row">
+    <div class="logo">
+      <a href="index.html" style="display:flex;align-items:center;gap:10px;"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><span><span class="el">El</span>kontrollen</span></a>
+    </div>
+    <button class="menu-toggle" aria-label="Meny">&#9776;</button>
+    <nav class="links">
+      <a href="index.html">Hjem</a>
+      <a href="elkontroll-bolig.html">Elkontroll Bolig</a>
+      <a href="borettslag-sameie.html">Borettslag – Sameie</a>
+      <a href="naering.html">Næring</a>
+      <a href="landbruk.html">Landbruk</a>
+      <a href="elsjekk.html">Elsjekk</a>
+      <a href="fatt-avvik.html">Fått avvik?</a>
+      <a href="om-oss.html">Om oss</a>
+      <a href="blogg/index.html">Blogg</a>
+    </nav>
+    <div class="nav-right">
+      <span class="phone">+47 980 19 154</span>
+      <a class="btn btn-solid" href="kontakt.html">Kontakt oss</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="stamp"><span class="dot"></span>Vi svarer innen 24 timer</span>
+    <h1>Kontakt oss</h1>
+    <p class="lead">Enten du lurer på noe før du bestiller, vil ha tilbud på et større bygg, eller har spørsmål om en rapport dere har fått — send oss en melding, så tar vi kontakt.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="form-card">
+        <h2>Send oss en melding</h2>
+        <form action="mailto:post@elkontrollen.no" method="post" enctype="text/plain">
+          <div class="field-row">
+            <div><label class="field-label" for="name">Navn</label><input type="text" id="name" name="Navn" required></div>
+            <div><label class="field-label" for="email">E-post</label><input type="email" id="email" name="E-post" required></div>
+          </div>
+          <div class="field-row">
+            <div><label class="field-label" for="phone">Telefon (valgfritt)</label><input type="tel" id="phone" name="Telefon"></div>
+            <div>
+              <label class="field-label" for="subject">Gjelder</label>
+              <select id="subject" name="Gjelder">
+                <option>Bestille kontroll</option>
+                <option>Tilbud på næringsbygg</option>
+                <option>Spørsmål om rapport / avvik</option>
+                <option>Annet</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-full">
+            <label class="field-label" for="message">Melding</label>
+            <textarea id="message" name="Melding" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send melding</button>
+        </form>
+      </div>
+      <div class="info-card">
+        <h3>Kontaktinformasjon</h3>
+        <div class="info-row"><span class="lbl">Telefon</span><a href="tel:+4798019154">980 19 154</a></div>
+        <div class="info-row"><span class="lbl">E-post</span><a href="mailto:post@elkontrollen.no">post@elkontrollen.no</a></div>
+        <div class="info-row"><span class="lbl">Adresse</span>Lorangløkka 1<br>1782 Halden</div>
+        <div class="info-row"><span class="lbl">Område vi dekker</span><div class="area-tags"><span>Østfold</span><span>Akershus</span><span>Oslo</span></div></div>
+        <div style="border-top:1px solid rgba(255,255,255,.12); margin:20px 0; padding-top:16px; font-size:12.5px; color:rgba(255,255,255,.55);">Org.nr 825 176 942 · Elkontrollen AS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" style="border-top:1px solid var(--line); background:var(--paper-2);">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Raskere vei</span><h2>Vet du allerede hva du trenger?</h2></div>
+    <div class="card-grid cols-4">
+      <a href="elkontroll-bolig.html" class="card"><h3>Bestill elkontroll bolig →</h3></a>
+      <a href="borettslag-sameie.html" class="card"><h3>Borettslag / sameie →</h3></a>
+      <a href="naering.html" class="card"><h3>Tilbud næringsbygg →</h3></a>
+      <a href="fatt-avvik.html" class="card"><h3>Fått avvik i rapport? →</h3></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>Elkontrollen</div>
+        <p class="foot-desc">Ledende innen presise elkontroller i Oslo og omegn. Sertifisert, kvalitet og sikkerhet.</p>
+      </div>
+      <div>
+        <h5>Tjenester</h5>
+        <ul>
+          <li><a href="elkontroll-bolig.html">Elkontroll bolig</a></li>
+          <li><a href="elsjekk.html">Elsjekk</a></li>
+          <li><a href="naering.html">Næring</a></li>
+          <li><a href="landbruk.html">Landbruk</a></li>
+          <li><a href="borettslag-sameie.html">Borettslag – sameie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Selskap</h5>
+        <ul>
+          <li><a href="om-oss.html">Om oss</a></li>
+          <li><a href="blogg/index.html">Blogg</a></li>
+          <li><a href="fatt-avvik.html">Fått avvik?</a></li>
+          <li><a href="skjemaer.html">Skjemaer</a></li>
+          <li><a href="kontakt.html">Kontakt oss</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li>Elkontrollen AS</li>
+          <li>Lorangløkka 1, 1782 Halden</li>
+          <li><a href="tel:+4798019154">+47 980 19 154</a></li>
+          <li><a href="mailto:post@elkontrollen.no">post@elkontrollen.no</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="org">Elkontrollen AS · Org.nr 825 176 942 · Sertifisert NEK 405 · DSB REG · ISO 9001 · © 2026</div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
