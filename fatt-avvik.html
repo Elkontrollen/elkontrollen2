@@ -114,14 +114,120 @@
   </div>
 </section>
 
-<section class="section tight" style="padding-top:0;">
+<section class="section" style="border-top:1px solid var(--line);" id="tilbud">
   <div class="wrap">
-    <div class="cta-band">
-      <div><h3>Klar for å be om tilbud på utbedring?</h3><div class="sub">Svar innen 24 timer</div></div>
-      <a href="kontakt.html" class="btn btn-solid" style="background:#E8562E;">Be om tilbud</a>
+    <div class="sec-head"><h2>Be om pristilbud på utbedring</h2><p>Fyll ut skjemaet under og last opp dokumentet dere fikk med avvik, så gir vi et konkret pristilbud på å rette dem.</p></div>
+    <div class="form-card" style="max-width:640px;">
+      <form id="avvikForm">
+        <div class="field-row">
+          <div><label class="field-label" for="av-navn">Navn</label><input type="text" id="av-navn" name="navn" required></div>
+          <div><label class="field-label" for="av-adresse">Adresse</label><input type="text" id="av-adresse" name="adresse" required></div>
+        </div>
+        <div class="field-row">
+          <div><label class="field-label" for="av-epost">E-post</label><input type="email" id="av-epost" name="epost" required></div>
+          <div><label class="field-label" for="av-telefon">Telefon</label><input type="tel" id="av-telefon" name="telefon" required></div>
+        </div>
+        <div class="field-row">
+          <div><label class="field-label" for="av-dato">Ønsket dato for utbedring</label><input type="date" id="av-dato" name="dato"></div>
+          <div><label class="field-label" for="av-dokument">Last opp dokumentet med avvik</label><input type="file" id="av-dokument" name="dokument" accept=".pdf,.jpg,.jpeg,.png"></div>
+        </div>
+        <div class="field-full">
+          <label class="field-label" for="av-melding">Kort beskrivelse (valgfritt)</label>
+          <textarea id="av-melding" name="melding" placeholder="F.eks. hvilke avvik dere ønsker utbedret først"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="avvikBtn">Send inn og be om tilbud</button>
+        <p id="avvikStatus" style="font-size:13.5px; margin-top:12px; color:var(--muted);"></p>
+      </form>
+      <div id="avvikSuccess" style="display:none; text-align:center; padding:24px 0;">
+        <h3 style="margin-bottom:10px;">Takk! Vi har mottatt henvendelsen.</h3>
+        <p style="color:var(--muted); font-size:14.5px;">Vi svarer med et konkret pristilbud innen 24 timer.</p>
+      </div>
     </div>
   </div>
 </section>
+
+<section class="section tight" style="padding-top:0;">
+  <div class="wrap">
+    <div class="cta-band">
+      <div><h3>Vil du heller ringe eller sende e-post direkte?</h3><div class="sub">Svar innen 24 timer</div></div>
+      <a href="kontakt.html" class="btn btn-solid" style="background:#E8562E;">Kontakt oss</a>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function () {
+  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
+  var EMAILJS_SERVICE_ID = "service_x4thkpu";
+  // VIKTIG: Opprett en ny, enkel mal i EmailJS-dashbordet (emailjs.com -> Email Templates -> Create new)
+  // med disse merge-feltene i innholdet: {{navn}} {{adresse}} {{epost}} {{telefon}} {{dato}} {{melding}}
+  // Legg til én vedleggsplass under "Attachments": Content = {{attachment_1}}, Filename = {{attachment_1_name}}
+  // Lim inn mal-ID-en under (erstatt "template_ERSTATT_MEG"):
+  var EMAILJS_TEMPLATE_ID = "template_ERSTATT_MEG";
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  var form = document.getElementById("avvikForm");
+  var btn = document.getElementById("avvikBtn");
+  var status = document.getElementById("avvikStatus");
+  var success = document.getElementById("avvikSuccess");
+
+  function fileToDataUri(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () { resolve(reader.result); };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = "Sender...";
+    status.textContent = "";
+
+    var params = {
+      navn: form.navn.value,
+      adresse: form.adresse.value,
+      epost: form.epost.value,
+      telefon: form.telefon.value,
+      dato: form.dato.value || "Ikke oppgitt",
+      melding: form.melding.value || "-"
+    };
+
+    var fileInput = document.getElementById("av-dokument");
+    var filePromise = Promise.resolve();
+    if (fileInput.files && fileInput.files[0]) {
+      var file = fileInput.files[0];
+      if (file.size > 4 * 1024 * 1024) {
+        status.textContent = "Filen er for stor (maks 4 MB). Prøv et mindre bilde/dokument, eller send den på e-post til post@elkontrollen.no.";
+        status.style.color = "#C0432A";
+        btn.disabled = false;
+        btn.textContent = "Send inn og be om tilbud";
+        return;
+      }
+      filePromise = fileToDataUri(file).then(function (dataUri) {
+        params.attachment_1 = dataUri;
+        params.attachment_1_name = file.name;
+      });
+    }
+
+    filePromise.then(function () {
+      return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    }).then(function () {
+      form.style.display = "none";
+      success.style.display = "block";
+    }).catch(function (err) {
+      status.textContent = "Noe gikk galt. Prøv igjen, eller send oss en e-post direkte. (" + (err && err.text ? err.text : "ukjent feil") + ")";
+      status.style.color = "#C0432A";
+      btn.disabled = false;
+      btn.textContent = "Send inn og be om tilbud";
+    });
+  });
+})();
+</script>
 
 <footer>
   <div class="wrap">
