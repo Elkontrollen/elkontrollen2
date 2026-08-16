@@ -26,7 +26,7 @@
 {"@context":"https://schema.org","@type":"Organization","name":"Elkontrollen AS","url":"https://elkontrollen.no/","logo":"https://elkontrollen.no/assets/favicon.svg","telephone":"+4798019154","email":"post@elkontrollen.no","address":{"@type":"PostalAddress","streetAddress":"Lorangl\u00f8kka 1","postalCode":"1782","addressLocality":"Halden","addressCountry":"NO"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","serviceType":"Elkontroll bolig — NEK 405-2","provider":{"@type":"Organization","name":"Elkontrollen AS"},"areaServed":["\u00d8stfold","Akershus","Oslo"],"description":"Elkontroll av bolig etter NEK 405-2, med termografering inkludert. Fastpris, rapport samme dag. Østfold, Akershus og Oslo."}
+{"@context":"https://schema.org","@type":"Service","serviceType":"Elkontroll bolig — NEK 405-2","provider":{"@type":"Organization","name":"Elkontrollen AS"},"areaServed":["\u00d8stfold","Akershus","Oslo"],"description":"Elkontroll av bolig etter NEK 405-2, med termografering inkludert. Fastpris, rapport samme dag. Østfold, Akershus og Oslo.","offers":{"@type":"Offer","price":"5000","priceCurrency":"NOK","availability":"https://schema.org/InStock"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Hvor lang tid tar kontrollen?","acceptedAnswer":{"@type":"Answer","text":"De fleste boligkontroller tar rundt 1,5–2 timer, avhengig av boligens størrelse og alder på anlegget."}},{"@type":"Question","name":"Må jeg være hjemme under hele kontrollen?","acceptedAnswer":{"@type":"Answer","text":"Ja, siden elektrikeren trenger tilgang til hele boligen, inkludert sikringsskap og eventuelt loft/kjeller."}},{"@type":"Question","name":"Hva skjer hvis dere finner avvik?","acceptedAnswer":{"@type":"Answer","text":"Du får en tydelig rapport med funn og anbefalinger. Selve utbedringen er ikke inkludert, men vi kan gi et eget tilbud på det ved behov."}},{"@type":"Question","name":"Er dette pålagt, eller frivillig?","acceptedAnswer":{"@type":"Answer","text":"Elkontroll av private boliger er frivillig, men anbefales jevnlig — og enkelte forsikringsselskaper gir rabatt ved dokumentert kontroll."}}]}
@@ -82,8 +82,9 @@
     <div class="buybox">
       <div class="badge"><span class="d"></span>Ledig denne uken</div>
       <h3>Elkontroll bolig</h3>
-      <p>Fastpris · ingen skjulte tillegg. Kontakt oss for pris tilpasset boligens størrelse.</p>
-      <a class="btn btn-solid" href="kontakt.html" style="width:100%;">Bestill elkontroll</a>
+      <p style="font-family:'Space Grotesk'; font-size:28px; font-weight:600; color:var(--ink); margin-bottom:4px;">5 000 kr</p>
+      <p style="margin-bottom:18px;">Fastpris · ingen skjulte tillegg. Betaling via faktura etter utført kontroll.</p>
+      <a class="btn btn-solid" href="#bestill" style="width:100%;">Bestill elkontroll</a>
       <div class="fine">1 200+ kontroller · svar &lt; 24t · betal enkelt med faktura</div>
     </div>
   </div>
@@ -120,6 +121,85 @@
     <div class="faq-item"><div class="faq-q"><span>Er dette pålagt, eller frivillig?</span><span class="plus">+</span></div><div class="faq-a"><p>Elkontroll av private boliger er frivillig, men anbefales jevnlig — og enkelte forsikringsselskaper gir rabatt ved dokumentert kontroll.</p></div></div>
   </div>
 </section>
+
+<section class="section" style="border-top:1px solid var(--line);" id="bestill">
+  <div class="wrap">
+    <div class="sec-head"><h2>Bestill elkontroll bolig</h2><p>Fastpris 5 000 kr, betaling via faktura etter utført kontroll. Fyll ut skjemaet, så bekrefter vi tidspunkt.</p></div>
+    <div class="form-card" style="max-width:640px;">
+      <form id="bestillForm">
+        <div class="field-row">
+          <div><label class="field-label" for="bs-navn">Navn</label><input type="text" id="bs-navn" name="navn" required></div>
+          <div><label class="field-label" for="bs-adresse">Adresse</label><input type="text" id="bs-adresse" name="adresse" required></div>
+        </div>
+        <div class="field-row">
+          <div><label class="field-label" for="bs-telefon">Telefon</label><input type="tel" id="bs-telefon" name="telefon" required></div>
+          <div><label class="field-label" for="bs-epost">E-post</label><input type="email" id="bs-epost" name="epost" required></div>
+        </div>
+        <div class="field-row">
+          <div><label class="field-label" for="bs-dato">Ønsket dato for elkontroll</label><input type="date" id="bs-dato" name="dato" required></div>
+          <div><label class="field-label" for="bs-tid">Ønsket tidspunkt</label><input type="time" id="bs-tid" name="tidspunkt" required></div>
+        </div>
+        <div class="field-full">
+          <label class="field-label" for="bs-kommentar">Kommentar til montør (valgfritt)</label>
+          <textarea id="bs-kommentar" name="kommentar" placeholder="F.eks. adkomst, parkering, eller ting montøren bør vite på forhånd"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="bestillBtn">Bestill elkontroll — 5 000 kr</button>
+        <p id="bestillStatus" style="font-size:13.5px; margin-top:12px; color:var(--muted);"></p>
+      </form>
+      <div id="bestillSuccess" style="display:none; text-align:center; padding:24px 0;">
+        <h3 style="margin-bottom:10px;">Takk for bestillingen!</h3>
+        <p style="color:var(--muted); font-size:14.5px;">Vi bekrefter tidspunktet innen 24 timer. Faktura sendes etter utført kontroll.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function () {
+  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
+  var EMAILJS_SERVICE_ID = "service_x4thkpu";
+  var EMAILJS_TEMPLATE_ID = "template_ERSTATT_MEG_BESTILL";
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  var form = document.getElementById("bestillForm");
+  var btn = document.getElementById("bestillBtn");
+  var status = document.getElementById("bestillStatus");
+  var success = document.getElementById("bestillSuccess");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = "Sender...";
+    status.textContent = "";
+
+    var params = {
+      navn: form.navn.value,
+      adresse: form.adresse.value,
+      telefon: form.telefon.value,
+      epost: form.epost.value,
+      dato: form.dato.value,
+      tidspunkt: form.tidspunkt.value,
+      kommentar: form.kommentar.value || "-",
+      pris: "5 000 kr",
+      betaling: "Faktura"
+    };
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+      .then(function () {
+        form.style.display = "none";
+        success.style.display = "block";
+      })
+      .catch(function (err) {
+        status.textContent = "Noe gikk galt. Prøv igjen, eller ring oss på 980 19 154. (" + (err && err.text ? err.text : "ukjent feil") + ")";
+        status.style.color = "#C0432A";
+        btn.disabled = false;
+        btn.textContent = "Bestill elkontroll — 5 000 kr";
+      });
+  });
+})();
+</script>
 
 <footer>
   <div class="wrap">
