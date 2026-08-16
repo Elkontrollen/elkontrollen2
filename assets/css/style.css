@@ -1,4 +1,16 @@
 ﻿/* Elkontrollen — delt stilark. Designspråk hentet fra elkontrollen-redesign_2.html */
+
+/* ---------- MOBILE STICKY CTA BAR ---------- */
+.mobile-cta-bar{display:none;}
+@media (max-width: 900px){
+  .mobile-cta-bar{display:flex; gap:10px; position:fixed; left:0; right:0; bottom:0; z-index:60; background:#fff; border-top:1px solid var(--line); box-shadow:0 -6px 18px rgba(36,28,21,0.10); padding:10px 16px; padding-bottom:calc(10px + env(safe-area-inset-bottom));}
+  .mobile-cta-bar a{flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:13px 10px; font-size:14px; font-weight:600; border-radius:2px; font-family:'IBM Plex Sans';}
+  .mobile-cta-bar a svg{width:15px; height:15px; flex-shrink:0;}
+  .mobile-cta-bar .call{border:1.5px solid var(--ink); color:var(--ink);}
+  .mobile-cta-bar .book{background:var(--ink); color:#fff;}
+  body{padding-bottom:66px;}
+}
+
 :root{
   --navy:#EDE0C8;
   --navy-2:#E8DAC0;
