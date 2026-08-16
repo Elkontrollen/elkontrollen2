@@ -77,6 +77,9 @@ nav.links a.current{opacity:1; border-color:var(--green); font-weight:600;}
 
 /* ---------- HERO (homepage) ---------- */
 .hero{background:var(--navy); color:#fff; position:relative; overflow:hidden;}
+.hero.photo{background-size:cover; background-position:center;}
+.hero.photo::before{content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(16,24,43,0.94) 0%, rgba(16,24,43,0.86) 45%, rgba(16,24,43,0.6) 100%);}
+.hero.photo .wrap{position:relative; z-index:1;}
 .hero .wrap{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; padding-top:76px; padding-bottom:0; align-items:end;}
 .hero-copy{padding-bottom:76px;}
 .stamp{display:inline-flex; align-items:center; gap:9px; border:1px solid var(--green-line); color:#B9E3C6; padding:7px 14px; font-size:12.5px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:26px;}
