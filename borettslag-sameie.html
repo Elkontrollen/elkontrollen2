@@ -73,7 +73,7 @@
     <h1>Ett styrevedtak, <span>én rapport for hele bygget.</span></h1>
     <p class="lead">Vi kontrollerer fellesarealer og boenheter samlet, koordinerer direkte med beboerne, og leverer én tydelig rapport styret kan bruke i budsjett- og vedlikeholdsplanen.</p>
     <div class="hero-ctas">
-      <a class="btn btn-solid" href="kontakt.html">Be om tilbud til styret</a>
+      <a class="btn btn-solid" href="#tilbud">Be om tilbud til styret</a>
       <a class="btn btn-outline-light" href="#inkludert">Se hva som er inkludert</a>
     </div>
   </div>
@@ -141,10 +141,122 @@
   <div class="wrap">
     <div class="cta-band">
       <div><h3>Klar for å gi styret full oversikt over bygget?</h3><div class="sub">Fastpris · svar innen 24 timer · hele Østlandet · faktura til sameiet/borettslaget</div></div>
-      <a href="kontakt.html" class="btn btn-solid" style="background:#E8562E;">Be om tilbud til styret</a>
+      <a href="#tilbud" class="btn btn-solid" style="background:#E8562E;">Be om tilbud til styret</a>
     </div>
   </div>
 </section>
+
+<section class="section" style="border-top:1px solid var(--line);" id="tilbud">
+  <div class="wrap">
+    <div class="sec-head"><h2>Be om tilbud til styret</h2><p>Fortell oss litt om bygget, så sender vi et konkret tilbud innen 24 timer.</p></div>
+    <div class="form-card" style="max-width:640px;">
+      <form id="tilbudForm">
+        <div class="field-row">
+          <div><label class="field-label" for="tb-navn">Navn (styreleder/forretningsfører)</label><input type="text" id="tb-navn" name="navn" required></div>
+          <div><label class="field-label" for="tb-adresse">Adresse (borettslaget/sameiet)</label><input type="text" id="tb-adresse" name="adresse" required></div>
+        </div>
+        <div class="field-row">
+          <div><label class="field-label" for="tb-telefon">Telefon</label><input type="tel" id="tb-telefon" name="telefon" required></div>
+          <div><label class="field-label" for="tb-epost">E-post</label><input type="email" id="tb-epost" name="epost" required></div>
+        </div>
+        <div class="field-row">
+          <div>
+            <label class="field-label" for="tb-sikringsskap">Antall sikringsskap (fellesareal)</label>
+            <select id="tb-sikringsskap" name="sikringsskap" required>
+              <option value="">Velg antall</option>
+              <option value="1">1</option>
+              <option value="2–3">2–3</option>
+              <option value="4–6">4–6</option>
+              <option value="7 eller flere">7 eller flere</option>
+              <option value="Vet ikke">Vet ikke</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="tb-seksjoner">Antall boenheter / seksjoner</label>
+            <select id="tb-seksjoner" name="seksjoner" required>
+              <option value="">Velg antall</option>
+              <option value="1–10">1–10</option>
+              <option value="11–25">11–25</option>
+              <option value="26–50">26–50</option>
+              <option value="51 eller flere">51 eller flere</option>
+              <option value="Vet ikke">Vet ikke</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-full">
+          <label class="field-label" for="tb-type">Hva slags kontroll ønsker dere?</label>
+          <select id="tb-type" name="kontrolltype" required>
+            <option value="">Velg type</option>
+            <option value="Elkontroll av fellesareal og boenheter (NEK 405-2-2)">Elkontroll av fellesareal og boenheter</option>
+            <option value="Elkontroll av kun fellesareal">Elkontroll av kun fellesareal</option>
+            <option value="Termografering">Termografering</option>
+            <option value="Brannalarm og nødlys">Brannalarm og nødlys</option>
+            <option value="Kontroll av ladeanlegg for elbil">Kontroll av ladeanlegg for elbil</option>
+            <option value="Kontrollavtale for hele bygget">Kontrollavtale for hele bygget</option>
+            <option value="Vet ikke / vil ha en anbefaling">Vet ikke / vil ha en anbefaling</option>
+          </select>
+        </div>
+        <div class="field-full">
+          <label class="field-label" for="tb-kommentar">Kommentar (valgfritt)</label>
+          <textarea id="tb-kommentar" name="kommentar" placeholder="F.eks. antall bygg, adkomst, eller annet vi bør vite på forhånd"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="tilbudBtn">Send tilbudsforespørsel</button>
+        <p id="tilbudStatus" style="font-size:13.5px; margin-top:12px; color:var(--muted);"></p>
+      </form>
+      <div id="tilbudSuccess" style="display:none; text-align:center; padding:24px 0;">
+        <h3 style="margin-bottom:10px;">Takk for henvendelsen!</h3>
+        <p style="color:var(--muted); font-size:14.5px;">Vi går gjennom opplysningene og sender et konkret tilbud innen 24 timer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function () {
+  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
+  var EMAILJS_SERVICE_ID = "service_x4thkpu";
+  var EMAILJS_TEMPLATE_ID = "template_4gcjfco";
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  var form = document.getElementById("tilbudForm");
+  var btn = document.getElementById("tilbudBtn");
+  var status = document.getElementById("tilbudStatus");
+  var success = document.getElementById("tilbudSuccess");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = "Sender...";
+    status.textContent = "";
+
+    var params = {
+      kilde: "Borettslag/sameie",
+      navn: form.navn.value,
+      adresse: form.adresse.value,
+      telefon: form.telefon.value,
+      epost: form.epost.value,
+      sikringsskap: form.sikringsskap.value,
+      seksjoner: form.seksjoner.value,
+      kontrolltype: form.kontrolltype.value,
+      kommentar: form.kommentar.value || "-"
+    };
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+      .then(function () {
+        form.style.display = "none";
+        success.style.display = "block";
+      })
+      .catch(function (err) {
+        status.textContent = "Noe gikk galt. Prøv igjen, eller ring oss på 980 19 154. (" + (err && err.text ? err.text : "ukjent feil") + ")";
+        status.style.color = "#C0432A";
+        btn.disabled = false;
+        btn.textContent = "Send tilbudsforespørsel";
+      });
+  });
+})();
+</script>
 
 <footer>
   <div class="wrap">
@@ -192,6 +304,6 @@
   </div>
 </footer>
 <script src="assets/js/main.js"></script>
-<div class="mobile-cta-bar"><a class="call" href="tel:+4798019154"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Ring</a><a class="book" href="kontakt.html">Kontakt oss</a></div>
+<div class="mobile-cta-bar"><a class="call" href="tel:+4798019154"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Ring</a><a class="book" href="#tilbud">Be om tilbud</a></div>
 </body>
 </html>
