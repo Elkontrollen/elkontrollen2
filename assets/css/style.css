@@ -91,6 +91,15 @@ nav.links a.current{opacity:1; border-color:var(--green); font-weight:600;}
 .hero .wrap.full{grid-template-columns:1fr;}
 .hero .wrap.full .hero-copy{max-width:740px; padding-bottom:52px;}
 
+/* ---------- TRUST BAR (forside, under hero) ---------- */
+.trust-bar{background:#fff; border-bottom:1px solid var(--line);}
+.trust-bar .wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; padding:20px 32px;}
+.trust-item{display:flex; align-items:flex-start; gap:10px;}
+.trust-item .check{width:18px; height:18px; border-radius:50%; background:var(--paper-2); color:var(--green-dark); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;}
+.trust-item .check svg{width:11px; height:11px;}
+.trust-item h5{font-size:13px; font-weight:600;}
+.trust-item p{font-size:12px; color:var(--muted); margin-top:2px; line-height:1.4;}
+
 /* ---------- PORTAL (forside, fire innganger) ---------- */
 .portal-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
 .portal-card{background:#fff; border:1px solid var(--line); padding:26px 22px; display:flex; flex-direction:column; gap:10px; transition:border-color .18s ease, transform .18s ease;}
@@ -391,6 +400,7 @@ footer .org{font-size:13px; color:#8A7D65; padding:22px 0; text-align:center;}
   .card-grid, .card-grid.cols-4{grid-template-columns:1fr 1fr;}
   .portal-grid{grid-template-columns:1fr 1fr;}
   .team-grid{grid-template-columns:1fr;}
+  .trust-bar .wrap{grid-template-columns:1fr 1fr;}
   .blog-grid{grid-template-columns:1fr;}
   .contact-grid{grid-template-columns:1fr;}
   .field-row{grid-template-columns:1fr;}
