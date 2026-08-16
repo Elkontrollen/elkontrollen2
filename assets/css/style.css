@@ -235,6 +235,20 @@ nav.links a.current{opacity:1; border-color:var(--green); font-weight:600;}
 .why-row h4{font-size:16.5px; margin-bottom:6px;}
 .why-row p{font-size:14px; color:var(--muted); max-width:600px; line-height:1.6;}
 
+/* ---------- COMPARE (forside, vanlig i bransjen vs oss) ---------- */
+.compare-grid{border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+.compare-row{display:grid; grid-template-columns:1fr 1.3fr 1.3fr; border-bottom:1px solid var(--line);}
+.compare-row:last-child{border-bottom:none;}
+.compare-row > div{padding:16px 22px; font-size:14px; line-height:1.55;}
+.compare-row.compare-head{background:var(--paper-2);}
+.compare-row.compare-head > div{padding:13px 22px; font-family:'Space Grotesk'; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--muted);}
+.compare-row.compare-head .compare-us{color:var(--green-dark);}
+.compare-label{font-weight:600; font-family:'Space Grotesk'; font-size:13.5px; background:var(--paper-2); display:flex; align-items:center;}
+.compare-typ{color:var(--muted);}
+.compare-us{color:var(--ink); background:rgba(193,95,46,0.05); font-weight:500; display:flex; align-items:flex-start; gap:8px;}
+.compare-us .chk{color:var(--green-dark); font-weight:700; flex-shrink:0;}
+.compare-tag{display:none;}
+
 /* ---------- HOW IT WORKS / STEPS ---------- */
 .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line);}
 .step{padding:28px 24px 28px 0; border-right:1px solid var(--line);}
@@ -406,6 +420,12 @@ footer .org{font-size:13px; color:var(--muted); padding:22px 0; text-align:cente
   .field-row{grid-template-columns:1fr;}
   .stats-band{grid-template-columns:1fr;}
   .sev-grid{grid-template-columns:1fr;}
+  .compare-row.compare-head{display:none;}
+  .compare-row{grid-template-columns:1fr; border-bottom:2px solid var(--line);}
+  .compare-label{padding-bottom:8px;}
+  .compare-typ, .compare-us{border-top:1px solid var(--line);}
+  .compare-tag{display:block; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); margin-bottom:4px;}
+  .compare-us .compare-tag{color:var(--green-dark);}
   .page-hero h1{font-size:30px;}
   nav.links{display:none; position:absolute; top:100%; left:0; right:0; background:var(--paper); flex-direction:column; padding:16px 32px; border-bottom:1px solid var(--line); gap:14px;}
   nav.links.open{display:flex;}
