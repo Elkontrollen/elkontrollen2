@@ -190,6 +190,21 @@
   </div>
 </section>
 
+<section class="section tight" style="border-top:1px solid var(--line); background:var(--paper-2);" id="sjekkliste">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:0; max-width:640px;">
+      <h2>Gratis sjekkliste for styret</h2>
+      <p>Alle lovpålagte og anbefalte kontroller i borettslag og sameier samlet i ett dokument — internkontroll, brannvern, elsikkerhet, tekniske anlegg, forsikring og et forslag til årshjul. Last ned og bruk direkte, eller få den tilsendt på e-post.</p>
+    </div>
+    <form id="sjekklisteForm" style="max-width:420px; margin:28px 0 0; display:flex; gap:10px; flex-wrap:wrap;">
+      <input type="email" id="sj-epost" name="epost" placeholder="E-postadressen deres" required style="flex:1; min-width:220px;">
+      <button type="submit" class="btn btn-solid" id="sjekklisteBtn">Få sjekklisten</button>
+    </form>
+    <p id="sjekklisteStatus" style="font-size:13.5px; margin-top:12px; color:var(--muted);"></p>
+    <p style="font-size:13px; margin-top:10px;"><a href="#" id="sjekklisteDirekte" style="color:var(--green-dark); font-weight:600;">Eller last ned direkte, uten å oppgi e-post →</a></p>
+  </div>
+</section>
+
 <section class="section tight" style="padding-top:64px;">
   <div class="wrap">
     <div class="cta-band">
@@ -250,5 +265,342 @@
 </footer>
 <script src="../assets/js/main.js"></script>
 <div class="mobile-cta-bar"><a class="call" href="tel:+4798019154"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Ring</a><a class="book" href="kartlegging/">Be om kartlegging</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function () {
+  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
+  var EMAILJS_SERVICE_ID = "service_x4thkpu";
+  var EMAILJS_TEMPLATE_ID = "template_4gcjfco";
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  var seksjoner = [
+    { tittel: "A. Internkontroll – rammeverket", rader: [
+      ["Laget har et skriftlig internkontrollsystem (HMS): mål, ansvarsfordeling, risikovurdering, rutiner, avviksregister", "Internkontrollforskriften § 5 (lovkrav)", "Løpende"],
+      ["Systemet er gjennomgått og oppdatert av styret", "Internkontrollforskriften § 5 (lovkrav)", "Årlig"],
+      ["Det er skriftlig avklart hva laget har ansvar for (fellesanlegg) og hva beboer har ansvar for (egen bolig)", "Internkontrollforskriften; borettslags-/eierseksjonsloven", "Ved oppstart og endring"],
+      ["Beboerne har fått skriftlig informasjon om sitt HMS-ansvar (røykvarsler, slokkeutstyr, el, vann)", "Internkontrollforskriften", "Årlig"],
+      ["Beboerne har levert årlig egenkontrollskjema for egen bolig", "Internkontrollforskriften (praksis)", "Årlig"],
+      ["Avvik registreres med tiltak, ansvarlig, frist og kvittering", "Internkontrollforskriften (lovkrav)", "Løpende"],
+      ["Hvis laget har ansatte (vaktmester o.l.): arbeidsavtale, HMS, opplæring, verneutstyr", "Arbeidsmiljøloven (lovkrav)", "Løpende"]
+    ]},
+    { tittel: "B. Brannvern", rader: [
+      ["Alle boliger har minst én godkjent røykvarsler per etasje", "Forskrift om brannforebygging § 7 (lovkrav)", "Beboer tester; styret påser årlig"],
+      ["Alle boliger har slokkeutstyr (apparat eller husbrannslange)", "Forskrift om brannforebygging § 7 (lovkrav)", "Årlig egenkontroll; apparat kontrolleres hvert 5. år, service hvert 10. år"],
+      ["Brannalarmanlegg i fellesareal er kontrollert av fagbedrift", "Brann- og eksplosjonsvernloven § 6; forskrift om brannforebygging § 4–5; FG-750", "Årlig (lovkrav om forsvarlig stand; årlig er standard)"],
+      ["Nødlys/ledesystem er funksjonstestet", "Forskrift om brannforebygging; NS-EN 1838", "Månedlig egen test; årlig fagkontroll (anbefalt)"],
+      ["Sprinkler-/slokkeanlegg (garasje, fellesareal) er kontrollert", "Forskrift om brannforebygging; FG-krav", "Årlig FG-kontroll"],
+      ["Røyk-/brannventilasjon, takluker, brannporter og branndører er funksjonstestet", "Forskrift om brannforebygging", "Årlig"],
+      ["Rømningsveier er frie, branndører lukker", "Forskrift om brannforebygging § 11 (lovkrav)", "Løpende; månedlig runde anbefalt"],
+      ["Branninstruks og rømningsplan er oppslått i oppgangene", "Forskrift om brannforebygging", "Ved oppstart og endring"],
+      ["Beboerne har fått brannverninformasjon / det er gjennomført brannøvelse", "Forskrift om brannforebygging", "Årlig (anbefalt)"],
+      ["Ildsteder og piper: kommunalt tilsyn og feiing gjennomført", "Forskrift om brannforebygging § 17", "Behovsprøvd (kommunen varsler)"],
+      ["Gassanlegg (hvis aktuelt) er kontrollert", "Forskrift om håndtering av farlig stoff", "Årlig"],
+      ["Brannvernleder er utpekt (større lag / kombinerte bygg)", "Forskrift om brannforebygging", "Utpekt"]
+    ]},
+    { tittel: "C. Elsikkerhet", rader: [
+      ["Fellesanlegget (tavler, stigeledninger, fellesrom, garasje, utebelysning) er kontrollert av sertifisert kontrollør (NEK 405-3)", "El-tilsynsloven; FEL § 9; internkontrollforskriften", "Hvert 3.–5. år etter risiko (anbefalt); forsikring kan kreve hvert 3. år"],
+      ["Hovedtavler og fordelinger er termografert", "Forsikringskrav (FG); NEK 405-1", "Årlig eller sammen med elkontroll (anbefalt)"],
+      ["Ladeanlegg for elbil er kontrollert (vern, lastbalansering, termografi under last, dokumentasjon)", "Internkontrollforskriften; NEK 400-7-722; forsikring", "Årlig (anbefalt)"],
+      ["Samsvarserklæringer for alt el-arbeid i fellesanlegg er mottatt og arkivert", "FEL § 12 (lovkrav)", "Ved hvert arbeid"],
+      ["Skriftlig instruks for hva vaktmester/beboer kan gjøre selv i tavlerom", "FSE; internkontrollforskriften", "Ved oppstart"],
+      ["Beboerne er informert om ansvar for eget el-anlegg (anbefalt kontroll ved eierskifte / hvert 5.–10. år)", "FEL; forsikring", "Årlig informasjon"],
+      ["Eventuelle pålegg fra Det lokale eltilsyn (DLE) er lukket og dokumentert innen frist", "El-tilsynsloven (lovkrav)", "Ved pålegg"]
+    ]},
+    { tittel: "D. Tekniske anlegg og bygning", rader: [
+      ["Heis: sikkerhetskontroll av godkjent kontrollorgan", "Plan- og bygningsloven § 29-9; TEK17 kap. 16 (lovkrav)", "Hvert 2. år"],
+      ["Heis: service etter avtale", "Samme", "Etter avtale (typisk kvartalsvis)"],
+      ["Lekeplass: rutinekontroll etter sjekkliste", "Forskrift om sikkerhet ved lekeplassutstyr § 16 (lovkrav om ettersyn)", "Månedlig (anbefalt)"],
+      ["Lekeplass: hovedkontroll", "Samme; NS-EN 1176/1177", "Årlig (fagkyndig anbefalt)"],
+      ["Ventilasjonsanlegg (felles) har hatt service", "TEK; forsikring", "Årlig (anbefalt)"],
+      ["Legionella: risikovurdering og kontroll av felles varmtvann/dusjanlegg", "Forskrift om miljørettet helsevern kap. 3a (lovkrav der aktuelt)", "Etter plan"],
+      ["Radon er målt", "Strålevernforskriften § 6 (lovkrav ved utleie; anbefalt for alle)", "Hvert 5. år (anbefalt)"],
+      ["Nedgravd oljetank er kontrollert eller sanert", "Forurensningsforskriften kap. 1 (kommunale krav)", "Kontroll typisk hvert 5. år / sanering"],
+      ["Tak, takrenner og snø-/isfare er kontrollert", "Vedlikeholdsplikt; erstatningsansvar", "Årlig; snørydding etter behov"],
+      ["Vannstoppventiler / lekkasjesikring er funksjonstestet", "Forsikringsvilkår", "Årlig"],
+      ["Avløp og drenering er inspisert", "Vedlikeholdsplikt; forsikring", "Rørinspeksjon hvert 5.–10. år (anbefalt)"],
+      ["Garasjeport, bom, adgangskontroll har hatt service", "Maskinforskriften (port)", "Årlig"],
+      ["Asbest/PCB er kartlagt før rehabilitering (bygg før ca. 1985)", "Arbeidsmiljøloven; forurensningsforskriften", "Før arbeid"],
+      ["Laget har en vedlikeholdsplan basert på tilstandsvurdering", "Borettslagsloven § 5-17 / eierseksjonsloven § 33 (vedlikeholdsplikt)", "Tilstandsanalyse hvert 5.–10. år (anbefalt)"]
+    ]},
+    { tittel: "E. Forsikring, økonomi og styre", rader: [
+      ["Bygningsforsikring er tegnet og fornyet", "Borettslagsloven / eierseksjonsloven (lovkrav)", "Årlig"],
+      ["Forsikringens sikkerhetsforskrifter (el, brann, vann, lading) er lest og etterlevd", "Forsikringsvilkår / FG", "Løpende"],
+      ["Årsmøte/generalforsamling er avholdt med protokoll", "Borettslagsloven kap. 7 / eierseksjonsloven kap. VI (lovkrav)", "Årlig innen 30. juni"],
+      ["Regnskap og revisjon er levert", "Regnskapsloven; borettslagsloven (lovkrav)", "Årlig"],
+      ["Styreansvarsforsikring er vurdert/tegnet", "Anbefalt", "Årlig"],
+      ["Personvern: beboerregister og ev. kameraovervåking er dokumentert og skiltet", "Personopplysningsloven / GDPR (lovkrav)", "Løpende"],
+      ["Vedtekter og husordensregler er oppdatert", "Borettslagsloven / eierseksjonsloven", "Ved endring"]
+    ]}
+  ];
+
+  var arshjul = [
+    ["Januar", "Årlig gjennomgang av internkontrollsystemet; planlegg årets kontroller"],
+    ["Februar–mars", "Innkalling til årsmøte; HMS-status til årsmøtet; budsjett"],
+    ["Vår", "Brannalarm-, nødlys- og sprinklerkontroll; lekeplass hovedkontroll; tak og takrenner etter vinter"],
+    ["Vår/sommer", "Elkontroll fellesanlegg og termografi (etter plan); ladeanlegg"],
+    ["Høst", "HMS-informasjon og egenkontrollskjema til beboerne; brannøvelse/informasjon; ventilasjonsservice"],
+    ["Høst", "Vannstopp/lekkasjetest; snøryddingsavtale på plass; heiskontroll (annethvert år)"],
+    ["Løpende", "Månedlig runde: rømningsveier, nødlys, lekeplass, tavlerom, fellesarealer; avvik lukkes"]
+  ];
+
+  var dokumenter = [
+    "Internkontrollsystemet (skriftlig)",
+    "Siste rapporter fra: elkontroll, termografi, ladeanlegg, brannalarm, nødlys, sprinkler, heis, lekeplass",
+    "Avviksregister med kvitterte tiltak",
+    "Samsvarserklæringer for el-arbeid",
+    "Beboerinformasjon og innleverte egenkontrollskjema",
+    "Forsikringspolise med sikkerhetsforskrifter",
+    "Årsmøteprotokoll"
+  ];
+
+  function genererSjekklistePDF() {
+    var doc = new window.jspdf.jsPDF({ unit: "pt", format: "a4" });
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var pageHeight = doc.internal.pageSize.getHeight();
+    var margin = 44;
+    var contentWidth = pageWidth - margin * 2;
+    var y = 0;
+
+    var C_PRIMARY = [31, 92, 64];
+    var C_TEXT = [20, 32, 26];
+    var C_LABEL = [91, 107, 98];
+    var C_DIVIDER = [226, 232, 228];
+    var C_WHITE = [255, 255, 255];
+
+    function setText(rgb) { doc.setTextColor(rgb[0], rgb[1], rgb[2]); }
+    function setFill(rgb) { doc.setFillColor(rgb[0], rgb[1], rgb[2]); }
+    function setDraw(rgb) { doc.setDrawColor(rgb[0], rgb[1], rgb[2]); }
+
+    function drawHeader(subtitle) {
+      setFill(C_PRIMARY);
+      doc.rect(0, 0, pageWidth, 64, "F");
+      setText(C_WHITE);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.text("ELKONTROLLEN — STYRETS SJEKKLISTE", margin, 30);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.text(subtitle || "Lovpålagte kontroller i borettslag og sameier", margin, 46);
+      setText(C_TEXT);
+      y = 86;
+    }
+
+    function ensureSpace(extra) {
+      if (y + extra > pageHeight - 50) {
+        doc.addPage();
+        drawHeader();
+      }
+    }
+
+    function sectionTitle(text) {
+      ensureSpace(34);
+      setText(C_PRIMARY);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(13);
+      doc.text(text, margin, y);
+      y += 8;
+      setDraw(C_PRIMARY);
+      doc.setLineWidth(1.2);
+      doc.line(margin, y, margin + contentWidth, y);
+      y += 18;
+      setText(C_TEXT);
+    }
+
+    function checkRow(punkt, hjemmel, intervall) {
+      var textX = margin + 16;
+      var textWidth = contentWidth - 16;
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9.5);
+      var lines = doc.splitTextToSize(punkt, textWidth);
+      var lineH = 12;
+      var blockH = lines.length * lineH + 46;
+      ensureSpace(blockH);
+
+      setDraw(C_LABEL);
+      doc.setLineWidth(0.8);
+      doc.rect(margin, y - 8, 9, 9);
+
+      setText(C_TEXT);
+      doc.text(lines, textX, y);
+      y += lines.length * lineH + 3;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8.3);
+      setText(C_LABEL);
+      doc.text("Hjemmel: " + hjemmel, textX, y);
+      y += 11;
+      doc.text("Intervall: " + intervall, textX, y);
+      y += 13;
+
+      setText(C_LABEL);
+      doc.setFontSize(8.3);
+      doc.text("Sist utført: _______________        Ansvarlig: _______________", textX, y);
+      y += 9;
+      setDraw(C_DIVIDER);
+      doc.setLineWidth(0.8);
+      doc.line(margin, y, margin + contentWidth, y);
+      y += 15;
+      setText(C_TEXT);
+    }
+
+    drawHeader("Lovpålagte kontroller i borettslag og sameier");
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(17);
+    setText(C_TEXT);
+    doc.text("Styrets sjekkliste", margin, y);
+    y += 24;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    var intro = "Et arbeidsdokument for styret. Kryss av, skriv inn dato for sist utført og hvem som har ansvar. Ta vare på dokumentet - det er en del av lagets internkontroll og skal kunne vises til forsikringsselskap, brannvesen og eltilsyn.";
+    var introLines = doc.splitTextToSize(intro, contentWidth);
+    doc.text(introLines, margin, y);
+    y += introLines.length * 13 + 12;
+
+    setText(C_LABEL);
+    doc.setFontSize(8.5);
+    var note = 'Merk: "Lovkrav" betyr at intervall eller plikt følger direkte av lov/forskrift. "Anbefalt" betyr at intervallet er bransjepraksis eller vanlig forsikringskrav (FG) - sjekk lagets forsikringsvilkår. Listen dekker de vanligste kravene; lag med spesielle anlegg (basseng, kjøletårn, næringslokaler, egne ansatte) kan ha flere.';
+    var noteLines = doc.splitTextToSize(note, contentWidth);
+    doc.text(noteLines, margin, y);
+    y += noteLines.length * 11 + 20;
+
+    setText(C_TEXT);
+    doc.setFontSize(10);
+    doc.text("Lag: _______________________________     Styreleder: _______________________________", margin, y);
+    y += 18;
+    doc.text("Dato for gjennomgang: _______________________________", margin, y);
+    y += 30;
+
+    seksjoner.forEach(function (sek) {
+      sectionTitle(sek.tittel);
+      sek.rader.forEach(function (r) {
+        checkRow(r[0], r[1], r[2]);
+      });
+    });
+
+    sectionTitle("Årshjul – forslag til minimum");
+    doc.setFontSize(9.5);
+    arshjul.forEach(function (rad) {
+      doc.setFont("helvetica", "bold");
+      setText(C_TEXT);
+      var manedWidth = 90;
+      var oppgaveX = margin + manedWidth;
+      var oppgaveWidth = contentWidth - manedWidth;
+      var lines = doc.splitTextToSize(rad[1], oppgaveWidth);
+      var blockH = Math.max(lines.length * 12, 12) + 12;
+      ensureSpace(blockH);
+      doc.text(rad[0], margin, y);
+      doc.setFont("helvetica", "normal");
+      setText(C_LABEL);
+      doc.text(lines, oppgaveX, y);
+      y += Math.max(lines.length * 12, 12) + 12;
+      setText(C_TEXT);
+    });
+
+    sectionTitle("Dokumenter som skal kunne legges frem");
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(9.5);
+    dokumenter.forEach(function (d) {
+      var lines = doc.splitTextToSize("•  " + d, contentWidth);
+      ensureSpace(lines.length * 13 + 4);
+      doc.text(lines, margin, y);
+      y += lines.length * 13 + 4;
+    });
+
+    doc.addPage();
+    drawHeader("Klar for en gratis kartlegging?");
+    y = 120;
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    setText(C_PRIMARY);
+    doc.text("Elkontrollen", margin, y);
+    y += 26;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    setText(C_TEXT);
+    doc.text("Halden-basert kontrollforetak, sertifisert på NEK 405-1/-2/-3 og FG-750/760.", margin, y);
+    y += 16;
+    doc.text("Dekker Østfold og hele Østlandet.", margin, y);
+    y += 30;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    setText(C_LABEL);
+    doc.text("KONTAKT", margin, y);
+    y += 16;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(11);
+    setText(C_TEXT);
+    doc.text("Elkontrollen AS", margin, y); y += 16;
+    doc.text("Lorangløkka 1, 1782 Halden", margin, y); y += 16;
+    doc.text("980 19 154", margin, y); y += 16;
+    doc.text("post@elkontrollen.no", margin, y); y += 16;
+    doc.text("elkontrollen.no/borettslag/", margin, y); y += 34;
+
+    setFill(C_PRIMARY);
+    doc.roundedRect(margin, y, contentWidth, 60, 4, 4, "F");
+    setText(C_WHITE);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.text("Bestill gratis kartlegging", margin + 20, y + 26);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text("elkontrollen.no/borettslag/kartlegging  ·  980 19 154", margin + 20, y + 44);
+
+    doc.save("elkontrollen-styrets-sjekkliste.pdf");
+  }
+
+  var directLink = document.getElementById("sjekklisteDirekte");
+  if (directLink) {
+    directLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      genererSjekklistePDF();
+    });
+  }
+
+  var form = document.getElementById("sjekklisteForm");
+  if (form) {
+    var btn = document.getElementById("sjekklisteBtn");
+    var status = document.getElementById("sjekklisteStatus");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = "Sender...";
+      status.textContent = "";
+
+      var params = {
+        kilde: "Trygt Borettslag - Sjekkliste",
+        navn: "-",
+        adresse: "-",
+        telefon: "-",
+        epost: form.epost.value,
+        sikringsskap: "-",
+        seksjoner: "-",
+        kontrolltype: "Lastet ned sjekkliste",
+        kommentar: "-"
+      };
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+        .then(function () {
+          status.textContent = "Takk! Sjekklisten lastes ned nå.";
+          status.style.color = "";
+          genererSjekklistePDF();
+          btn.textContent = "Få sjekklisten";
+          btn.disabled = false;
+          form.reset();
+        })
+        .catch(function () {
+          status.textContent = "Noe gikk galt med registreringen, men her er sjekklisten. Prøv gjerne igjen, eller ring oss på 980 19 154.";
+          status.style.color = "#C0432A";
+          genererSjekklistePDF();
+          btn.textContent = "Få sjekklisten";
+          btn.disabled = false;
+        });
+    });
+  }
+})();
+</script>
 </body>
 </html>
