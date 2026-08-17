@@ -10,7 +10,6 @@ Elkontrollen er sertifisert etter NEK 405-1 (termografi), NEK 405-3 (næring) og
 - [Elkontroll ved boligkjøp og boligsalg](https://elkontrollen.no/elkontroll-boligsalg.html): Teknisk tilstandsvurdering av det elektriske anlegget ved eierskifte, iht. NEK 405-2-3.
 - [Næring](https://elkontrollen.no/naering.html): Elkontroll for næringsbygg iht. NEK 405-3 og FG-1400, tilpasset bygningstype.
 - [Landbruk](https://elkontrollen.no/landbruk.html): Elkontroll for driftsbygninger og gårdsbruk iht. NEK 405-3 Tillegg B.
-- [Borettslag og sameie](https://elkontrollen.no/borettslag-sameie.html): Brannforebyggende elkontroll for fellesarealer og boenheter, NEK 405-2-2.
 - [Trygt Borettslag](https://elkontrollen.no/borettslag/): Samlet årsavtale for borettslag og sameier — elkontroll (NEK 405-3), termografi, ladeanlegg, brannalarm (FG-750) og nødlys (FG-760), kontrollplan og årsmøterapport. Tre nivåer (Basis/Trygg/Komplett), gratis kartlegging, og en nedlastbar sjekkliste for styret.
 - [Brannalarm og nødlys](https://elkontrollen.no/brannalarm-nodlys.html): Lovpålagt årlig FG-750/760-sertifisert kontroll av brannalarmanlegg og nødlys.
 - [Garantikontroll](https://elkontrollen.no/garantikontroll.html): Kontroll av nye/rehabiliterte anlegg før reklamasjonsfristen (5 år, bustadoppføringslova §30) utløper.
