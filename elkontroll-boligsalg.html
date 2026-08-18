@@ -181,24 +181,12 @@
           <div><label class="field-label" for="bs-epost">E-post</label><input type="email" id="bs-epost" name="epost" required></div>
         </div>
         <div class="field-row">
-          <div>
-            <label class="field-label" for="bs-rolle">Jeg er</label>
-            <select id="bs-rolle" name="rolle" required>
-              <option value="">Velg</option>
-              <option value="Selger">Selger</option>
-              <option value="Kjøper">Kjøper</option>
-              <option value="Megler">Megler</option>
-            </select>
-          </div>
-          <div><label class="field-label" for="bs-frist">Når trenger dere rapporten</label><input type="date" id="bs-frist" name="rapportfrist" required></div>
-        </div>
-        <div class="field-row">
-          <div><label class="field-label" for="bs-dato">Ønsket dato for kontroll</label><input type="date" id="bs-dato" name="kontrolldato" required></div>
-          <div></div>
+          <div><label class="field-label" for="bs-dato">Ønsket dato for elkontroll</label><input type="date" id="bs-dato" name="dato" required></div>
+          <div><label class="field-label" for="bs-tid">Ønsket tidspunkt</label><input type="time" id="bs-tid" name="tidspunkt" required></div>
         </div>
         <div class="field-full">
-          <label class="field-label" for="bs-kommentar">Kommentar (valgfritt)</label>
-          <textarea id="bs-kommentar" name="kommentar" placeholder="F.eks. planlagt visningsdato, adkomst, eller annet vi bør vite på forhånd"></textarea>
+          <label class="field-label" for="bs-kommentar">Kommentar til montør (valgfritt)</label>
+          <textarea id="bs-kommentar" name="kommentar" placeholder="F.eks. om du er kjøper, selger eller megler, planlagt visningsdato, adkomst, eller annet vi bør vite på forhånd"></textarea>
         </div>
         <button type="submit" class="submit-btn" id="bestillBtn">Bestill elkontroll ved boligsalg — 5 000 kr</button>
         <p id="bestillStatus" style="font-size:13.5px; margin-top:12px; color:var(--muted);"></p>
@@ -216,7 +204,7 @@
 (function () {
   var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
   var EMAILJS_SERVICE_ID = "service_x4thkpu";
-  var EMAILJS_TEMPLATE_ID = "TEMPLATE_ID_BOLIGSALG";
+  var EMAILJS_TEMPLATE_ID = "template_jl6dbtc";
 
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
@@ -236,9 +224,8 @@
       adresse: form.adresse.value,
       telefon: form.telefon.value,
       epost: form.epost.value,
-      rolle: form.rolle.value,
-      rapportfrist: form.rapportfrist.value,
-      kontrolldato: form.kontrolldato.value,
+      dato: form.dato.value,
+      tidspunkt: form.tidspunkt.value,
       kommentar: form.kommentar.value || "-",
       pris: "5 000 kr",
       betaling: "Faktura"
