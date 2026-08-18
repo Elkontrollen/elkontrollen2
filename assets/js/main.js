@@ -12,4 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
       q.closest('.faq-item').classList.toggle('open');
     });
   });
+
+  document.querySelectorAll('.nav-drop-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var parent = btn.closest('.nav-dropdown');
+      if (parent) { parent.classList.toggle('open'); }
+    });
+  });
 });

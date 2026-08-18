@@ -89,6 +89,8 @@ nav.links a.current{opacity:1; border-color:var(--green); font-weight:600;}
 .nav-drop-panel-inner .nav-group-label:first-child{padding-top:4px;}
 .phone-icon{display:none;}
 .nav-drop-panel a:hover{background:var(--paper-2); opacity:1; color:var(--green-dark);}
+.foot-group-label{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin:16px 0 6px;}
+.foot-group-label:first-child{margin-top:0;}
 .nav-drop-panel a.current{opacity:1; font-weight:600; color:var(--green-dark);}
 
 /* ---------- HERO (homepage) ---------- */
@@ -484,9 +486,11 @@ footer .org{font-size:13px; color:var(--muted); padding:22px 0; text-align:cente
   .phone-icon svg{width:19px; height:19px;}
   .nav-group-label{padding:12px 0 4px;}
   .btn{min-height:44px;}
-  .nav-drop-trigger{pointer-events:none; opacity:1; font-weight:600;}
-  .nav-drop-trigger .care{display:none;}
-  .nav-drop-panel{display:block; position:static; padding-top:8px;}
+  .nav-drop-trigger{opacity:1; font-weight:600; width:100%; display:flex; align-items:center; justify-content:space-between; cursor:pointer;}
+  .nav-drop-trigger .care{display:inline-block; transition:transform .15s ease;}
+  .nav-dropdown.open .nav-drop-trigger .care{transform:rotate(180deg);}
+  .nav-drop-panel{display:none; position:static; padding-top:8px;}
+  .nav-dropdown.open .nav-drop-panel{display:block;}
   .nav-drop-panel-inner{border:none; box-shadow:none; padding:0 0 0 14px; min-width:0;}
   .nav-drop-panel a{padding:8px 0; opacity:0.75;}
 }
