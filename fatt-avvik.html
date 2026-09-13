@@ -159,7 +159,9 @@
   <div class="wrap">
     <div class="sec-head"><h2>Send oss avvikene — vi sier hva som haster</h2><p>Fyll ut skjemaet og last opp rapporten eller pålegget, så gir vi en konkret vurdering.</p></div>
     <div class="form-card" style="max-width:640px;">
-      <form id="avvikForm">
+      <form id="avvikForm" name="fatt-avvik" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+        <input type="hidden" name="form-name" value="fatt-avvik">
+        <p style="display:none;"><label>Ikke fyll ut dette feltet: <input name="bot-field"></label></p>
         <div class="field-row">
           <div><label class="field-label" for="av-navn">Navn</label><input type="text" id="av-navn" name="navn" required></div>
           <div><label class="field-label" for="av-adresse">Adresse</label><input type="text" id="av-adresse" name="adresse" required></div>
@@ -200,28 +202,12 @@
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function () {
-  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
-  var EMAILJS_SERVICE_ID = "service_x4thkpu";
-  var EMAILJS_TEMPLATE_ID = "template_8sd9bhl";
-
-  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
   var form = document.getElementById("avvikForm");
   var btn = document.getElementById("avvikBtn");
   var status = document.getElementById("avvikStatus");
   var success = document.getElementById("avvikSuccess");
-
-  function fileToDataUri(file) {
-    return new Promise(function (resolve, reject) {
-      var reader = new FileReader();
-      reader.onload = function () { resolve(reader.result); };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -229,45 +215,29 @@
     btn.textContent = "Sender...";
     status.textContent = "";
 
-    var params = {
-      navn: form.navn.value,
-      adresse: form.adresse.value,
-      epost: form.epost.value,
-      telefon: form.telefon.value,
-      kilde: form.kilde.value,
-      frist: form.frist.value || "Ikke oppgitt",
-      dato: form.dato.value || "Ikke oppgitt",
-      melding: form.melding.value || "-"
-    };
-
     var fileInput = document.getElementById("av-dokument");
-    var filePromise = Promise.resolve();
-    if (fileInput.files && fileInput.files[0]) {
-      var file = fileInput.files[0];
-      if (file.size > 4 * 1024 * 1024) {
-        status.textContent = "Filen er for stor (maks 4 MB). Prøv et mindre bilde/dokument, eller send den på e-post til post@elkontrollen.no.";
-        status.style.color = "#C0432A";
-        btn.disabled = false;
-        btn.textContent = "Send inn og få vurdering";
-        return;
-      }
-      filePromise = fileToDataUri(file).then(function (dataUri) {
-        params.attachment_1 = dataUri;
-        params.attachment_1_name = file.name;
-      });
-    }
-
-    filePromise.then(function () {
-      return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-    }).then(function () {
-      form.style.display = "none";
-      success.style.display = "block";
-    }).catch(function (err) {
-      status.textContent = "Noe gikk galt. Prøv igjen, eller send oss en e-post direkte. (" + (err && err.text ? err.text : "ukjent feil") + ")";
+    if (fileInput.files && fileInput.files[0] && fileInput.files[0].size > 4 * 1024 * 1024) {
+      status.textContent = "Filen er for stor (maks 4 MB). Prøv et mindre bilde/dokument, eller send den på e-post til post@elkontrollen.no.";
       status.style.color = "#C0432A";
       btn.disabled = false;
       btn.textContent = "Send inn og få vurdering";
-    });
+      return;
+    }
+
+    fetch("/", {
+      method: "POST",
+      body: new FormData(form)
+    })
+      .then(function () {
+        form.style.display = "none";
+        success.style.display = "block";
+      })
+      .catch(function () {
+        status.textContent = "Noe gikk galt. Prøv igjen, eller send oss en e-post direkte.";
+        status.style.color = "#C0432A";
+        btn.disabled = false;
+        btn.textContent = "Send inn og få vurdering";
+      });
   });
 })();
 </script>

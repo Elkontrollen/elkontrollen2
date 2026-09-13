@@ -138,7 +138,9 @@
   <div class="wrap">
     <div class="sec-head"><h2>Bestill elkontroll bolig</h2><p>Fastpris 5 000 kr, betaling via faktura etter utført kontroll. Fyll ut skjemaet, så bekrefter vi tidspunkt.</p></div>
     <div class="form-card" style="max-width:640px;">
-      <form id="bestillForm">
+      <form id="bestillForm" name="elkontroll-bolig-bestilling" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="elkontroll-bolig-bestilling">
+        <p style="display:none;"><label>Ikke fyll ut dette feltet: <input name="bot-field"></label></p>
         <div class="field-row">
           <div><label class="field-label" for="bs-navn">Navn</label><input type="text" id="bs-navn" name="navn" required></div>
           <div><label class="field-label" for="bs-adresse">Adresse</label><input type="text" id="bs-adresse" name="adresse" required></div>
@@ -166,19 +168,18 @@
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function () {
-  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
-  var EMAILJS_SERVICE_ID = "service_x4thkpu";
-  var EMAILJS_TEMPLATE_ID = "template_jl6dbtc";
-
-  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
   var form = document.getElementById("bestillForm");
   var btn = document.getElementById("bestillBtn");
   var status = document.getElementById("bestillStatus");
   var success = document.getElementById("bestillSuccess");
+
+  function encode(data) {
+    return Object.keys(data).map(function (key) {
+      return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+    }).join("&");
+  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -187,6 +188,7 @@
     status.textContent = "";
 
     var params = {
+      "form-name": "elkontroll-bolig-bestilling",
       navn: form.navn.value,
       adresse: form.adresse.value,
       telefon: form.telefon.value,
@@ -198,13 +200,17 @@
       betaling: "Faktura"
     };
 
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode(params)
+    })
       .then(function () {
         form.style.display = "none";
         success.style.display = "block";
       })
-      .catch(function (err) {
-        status.textContent = "Noe gikk galt. Prøv igjen, eller ring oss på 980 19 154. (" + (err && err.text ? err.text : "ukjent feil") + ")";
+      .catch(function () {
+        status.textContent = "Noe gikk galt. Prøv igjen, eller ring oss på 980 19 154.";
         status.style.color = "#C0432A";
         btn.disabled = false;
         btn.textContent = "Bestill elkontroll — 5 000 kr";

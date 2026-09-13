@@ -84,7 +84,9 @@
   <div class="wrap">
     <div class="form-card" style="max-width:640px; margin:0 auto;">
       <h2 style="margin-bottom:22px;">Be om kartlegging</h2>
-      <form id="kartleggingForm">
+      <form id="kartleggingForm" name="borettslag-kartlegging" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="borettslag-kartlegging">
+        <p style="display:none;"><label>Ikke fyll ut dette feltet: <input name="bot-field"></label></p>
         <div class="field-row">
           <div><label class="field-label" for="kl-navn">Navn (styreleder eller forretningsfører)</label><input type="text" id="kl-navn" name="navn" required></div>
           <div><label class="field-label" for="kl-adresse">Borettslagets/sameiets navn og adresse</label><input type="text" id="kl-adresse" name="adresse" required></div>
@@ -140,19 +142,18 @@
   </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function () {
-  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
-  var EMAILJS_SERVICE_ID = "service_x4thkpu";
-  var EMAILJS_TEMPLATE_ID = "template_4gcjfco";
-
-  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
   var form = document.getElementById("kartleggingForm");
   var btn = document.getElementById("kartleggingBtn");
   var status = document.getElementById("kartleggingStatus");
   var success = document.getElementById("kartleggingSuccess");
+
+  function encode(data) {
+    return Object.keys(data).map(function (key) {
+      return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+    }).join("&");
+  }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -161,6 +162,7 @@
     status.textContent = "";
 
     var params = {
+      "form-name": "borettslag-kartlegging",
       kilde: "Trygt Borettslag - Kartlegging",
       navn: form.navn.value,
       adresse: form.adresse.value,
@@ -172,13 +174,17 @@
       kommentar: form.kommentar.value || "-"
     };
 
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode(params)
+    })
       .then(function () {
         form.style.display = "none";
         success.style.display = "block";
       })
-      .catch(function (err) {
-        status.textContent = "Noe gikk galt. Prøv igjen, eller ring oss på 980 19 154. (" + (err && err.text ? err.text : "ukjent feil") + ")";
+      .catch(function () {
+        status.textContent = "Noe gikk galt. Prøv igjen, eller ring oss på 980 19 154.";
         status.style.color = "#C0432A";
         btn.disabled = false;
         btn.textContent = "Send inn — helt uforpliktende";

@@ -188,7 +188,9 @@
       <h2>Gratis sjekkliste for styret</h2>
       <p>Alle lovpålagte kontroller for borettslag og sameier på ett ark — med hjemmel, intervall og plass til å krysse av. Bruk den selv, eller send den til hele styret.</p>
     </div>
-    <form id="sjekklisteForm" style="max-width:420px; margin:28px 0 0; display:flex; gap:10px; flex-wrap:wrap;">
+    <form id="sjekklisteForm" name="borettslag-sjekkliste" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="max-width:420px; margin:28px 0 0; display:flex; gap:10px; flex-wrap:wrap;">
+      <input type="hidden" name="form-name" value="borettslag-sjekkliste">
+      <p style="display:none;"><label>Ikke fyll ut dette feltet: <input name="bot-field"></label></p>
       <input type="email" id="sj-epost" name="epost" placeholder="E-postadressen deres" required style="flex:1; min-width:220px;">
       <button type="submit" class="btn btn-solid" id="sjekklisteBtn">Få sjekklisten</button>
     </form>
@@ -284,14 +286,8 @@
 <div class="mobile-cta-bar"><a class="call" href="tel:+4798019154"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Ring</a><a class="book" href="kartlegging/">Be om kartlegging</a></div>
 
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function () {
-  var EMAILJS_PUBLIC_KEY = "iY7Y2hva_CsmC1F3J";
-  var EMAILJS_SERVICE_ID = "service_x4thkpu";
-  var EMAILJS_TEMPLATE_ID = "template_4gcjfco";
-  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
   var seksjoner = [
     { tittel: "A. Internkontroll – rammeverket", rader: [
       ["Laget har et skriftlig internkontrollsystem (HMS): mål, ansvarsfordeling, risikovurdering, rutiner, avviksregister", "Internkontrollforskriften § 5 (lovkrav)", "Løpende"],
@@ -589,6 +585,13 @@
   if (form) {
     var btn = document.getElementById("sjekklisteBtn");
     var status = document.getElementById("sjekklisteStatus");
+
+    var encode = function (data) {
+      return Object.keys(data).map(function (key) {
+        return encodeURIComponent(key) + "=" + encodeURIComponent(data[key]);
+      }).join("&");
+    };
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       btn.disabled = true;
@@ -596,18 +599,16 @@
       status.textContent = "";
 
       var params = {
+        "form-name": "borettslag-sjekkliste",
         kilde: "Trygt Borettslag - Sjekkliste",
-        navn: "-",
-        adresse: "-",
-        telefon: "-",
-        epost: form.epost.value,
-        sikringsskap: "-",
-        seksjoner: "-",
-        kontrolltype: "Lastet ned sjekkliste",
-        kommentar: "-"
+        epost: form.epost.value
       };
 
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode(params)
+      })
         .then(function () {
           status.textContent = "Takk! Sjekklisten lastes ned nå.";
           status.style.color = "";
