@@ -9,8 +9,8 @@ deployet** — se «Det viktigste» under.
 
 **1. Jeg har ikke pushet, og det var et bevisst valg.** Ordren sa «ikke deploy», og på
 dette repoet er push til `main` det samme som deploy — Netlify bygger automatisk. Det
-finnes ingen mellomting her. **Ni commits** ligger klare lokalt. Si fra når du vil ha dem
-ut, så pusher jeg. Begrunnelsen står i `BESLUTNINGER.md` punkt 1.
+finnes ingen mellomting her. Commitene ligger klare lokalt, usendte. Si fra når du vil
+ha dem ut, så pusher jeg. Begrunnelsen står i `BESLUTNINGER.md` punkt 1.
 
 **2. Sjekk `TIL_DEG.md` punkt 11 før de nye sidene får trafikk.** De fem sidene utenfor
 Østfold sier ingenting om pris, fordi jeg ikke vet hva den er. Østfold-sidene lover
@@ -196,18 +196,22 @@ Sagt rett ut, ikke bortforklart:
 Sjekkeskriptene er verdt å kjenne til. De tar sekunder og fanger det meste:
 
 ```
-node tools/sjekk-lenking.js      # brutte lenker, JSON-LD, tagbalanse, h1
+node tools/sjekk-alt.js          # brutte lenker, JSON-LD, tagbalanse, h1
+node tools/sjekk-lenking.js      # intern lenking mellom artikler og tjenestesider
 node tools/sjekk-overskrifter.js # hopp i overskriftsnivå
 node tools/sjekk-faq.js          # 5–7 spørsmål per tjenesteside
 node tools/sjekk-sokeord.js      # de 15 søkeordene
 ```
+
+`sjekk-alt.js` returnerer exit-kode 1 hvis noe er galt, så den kan settes rett inn i en
+byggkommando hvis du vil ha den kjørt automatisk.
 
 ---
 
 ## Når du vil ha det ut
 
 ```
-git log --oneline origin/main..HEAD    # de ni som ligger klare
+git log --oneline origin/main..HEAD    # se hva som ligger klart
 git push                               # dette deployer
 ```
 

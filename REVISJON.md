@@ -1468,6 +1468,9 @@ navigert i stedet for å åpne. `main.js` er derfor endret slik at første trykk
 | Søkeord dekket i title eller h1 | 15 av 15 |
 | Sitemap mot filsystem | 85 URL-er, 0 manglende, 0 døde |
 
+Kjøres på nytt med `node tools/sjekk-alt.js`, `sjekk-lenking.js`, `sjekk-overskrifter.js`,
+`sjekk-faq.js` og `sjekk-sokeord.js`. Den første returnerer exit-kode 1 ved feil.
+
 ---
 
 ## Vedlegg: kommandoer brukt i kartleggingen
