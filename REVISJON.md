@@ -856,6 +856,12 @@ mens lenkene pekte på `/blogg/index.html`. Filnavnene er uendret — ingen URL 
 
 `_redirects` genereres av `tools/fase4-redirects.js` og skal ikke redigeres for hånd.
 
+**Ett unntak: `takk.html` har ingen redirect.** Kontaktskjemaet har `action="/takk"`, og en
+301 der ville truffet POST-en før Netlify rakk å behandle skjemaet. Innsendingen ville gått
+tapt uten at noen merket det — brukeren hadde landet på takkesiden uansett, og trodd at
+meldingen var sendt. Verifisert mot produksjon: `POST /takk` ga 301 med regelen på plass.
+Siden er `noindex`, så duplikatet koster ingenting.
+
 ### Schema
 
 All JSON-LD bygges nå ett sted, av `tools/fase4-schema.js`. Det var nødvendig fordi

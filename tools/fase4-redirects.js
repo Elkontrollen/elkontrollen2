@@ -32,6 +32,10 @@ const sider = walk(ROT)
   .map(f => path.relative(ROT, f).split(path.sep).join('/'))
   .filter(r => !/(^|\/)index\.html$/.test(r))   // mappesider har allerede /-form
   .filter(r => r !== '404.html')
+  // takk.html er malet for skjemaenes action="/takk". En 301 her ville truffet
+  // POST-en foer Netlify rakk aa behandle skjemaet, og innsendingen ville gaatt
+  // tapt uten at brukeren merket noe - de hadde landet paa takkesiden uansett.
+  .filter(r => r !== 'takk.html')
   .sort();
 
 const linjer = [
