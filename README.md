@@ -21,7 +21,9 @@ De 7 kontakt-/bestillingsskjemaene (`naering.html`, `landbruk.html`, `elkontroll
 AJAX-innsending via `fetch("/", …)`), ikke lenger EmailJS. Dette krever at siden faktisk
 er deployet via Netlify sitt build-system — Netlify Forms fungerer ikke på GitHub Pages.
 
-`kontakt.html` bruker fortsatt en enkel `mailto:`-lenke, upåvirket.
+`kontakt.html` bruker også Netlify Forms (skjemanavn `kontakt`), men uten AJAX — vanlig
+POST med `action="/takk"`, som lander på takkesiden `takk.html`. Skjemaet må legges til i
+listen over e-postvarslinger på lik linje med de seks andre.
 
 ## Manuelt steg — migrer til Netlify
 1. Opprett en ny Netlify-site koblet til GitHub-repoet `Elkontrollen/elkontrollen2` (branch `main`).

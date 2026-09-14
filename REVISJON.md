@@ -1,6 +1,7 @@
-# REVISJON.md — Fase 0: kartlegging
+# REVISJON.md — SEO-revisjon av elkontrollen.no
 
-Kartlegging av elkontrollen.no før SEO-revisjonen. **Ingenting er endret i denne fasen.**
+Seksjon 1–13 er kartleggingen fra **Fase 0**. Ingenting på siden ble endret mens den ble laget.
+Seksjon 14 og utover dokumenterer endringene som er gjort i de påfølgende fasene.
 
 Dato: 2026-09-14
 Repo: `Elkontrollen/elkontrollen2` (branch `main`, HEAD `0529d69`)
@@ -271,26 +272,28 @@ Følgen: forsidens `og:image` er `service-elkontroll-bolig.jpg` — som altså e
 
 ## 10. Kontaktskjema
 
-| Skjema | Fil | Løsning | Status |
+Åtte skjemaer sender til Netlify Forms. To til ligger i det interne montørverktøyet `skjema/` og går ikke via Netlify (passordport + PDF-generering i JS) — de er utenfor revisjonens omfang.
+
+| Skjema | Fil | Netlify-navn | Status ved kartlegging |
 |---|---|---|---|
-| Bestilling bolig | `elkontroll-bolig.html` | Netlify Forms | ✅ |
-| Bestilling boligsalg | `elkontroll-boligsalg.html` | Netlify Forms | ✅ |
-| Avviksskjema | `fatt-avvik.html` | Netlify Forms (`multipart/form-data`) | ✅ |
-| Tilbud landbruk | `landbruk.html` | Netlify Forms | ✅ |
-| Tilbud næring | `naering.html` | Netlify Forms | ✅ |
-| Gratis kartlegging | `borettslag/kartlegging/index.html` | Netlify Forms | ✅ |
-| **Kontaktskjema** | **`kontakt.html`** | **`<form action="mailto:post@elkontrollen.no" method="post" enctype="text/plain">`** | 🔴 |
+| Bestilling bolig | `elkontroll-bolig.html` | `elkontroll-bolig-bestilling` | ✅ Netlify Forms |
+| Bestilling boligsalg | `elkontroll-boligsalg.html` | `elkontroll-boligsalg-bestilling` | ✅ Netlify Forms |
+| Avviksskjema | `fatt-avvik.html` | `fatt-avvik` | ✅ Netlify Forms (`multipart/form-data`) |
+| Tilbud landbruk | `landbruk.html` | `landbruk-tilbud` | ✅ Netlify Forms |
+| Tilbud næring | `naering.html` | `naering-tilbud` | ✅ Netlify Forms |
+| Last ned styrets sjekkliste | `borettslag/index.html` | `borettslag-sjekkliste` | ✅ Netlify Forms |
+| Gratis kartlegging | `borettslag/kartlegging/index.html` | `borettslag-kartlegging` | ✅ Netlify Forms |
+| **Kontaktskjema** | **`kontakt.html`** | — | 🔴 **`<form action="mailto:post@elkontrollen.no" method="post" enctype="text/plain">`** |
 
-De seks som virker har alle: `data-netlify="true"`, `name="…"`, `netlify-honeypot="bot-field"`, skjult `<input type="hidden" name="form-name">` og AJAX-innsending via `fetch("/", …)`. Riktig oppsett.
+De sju som virket, har alle: `data-netlify="true"`, `name="…"`, `netlify-honeypot="bot-field"`, skjult `<input type="hidden" name="form-name">` og AJAX-innsending via `fetch("/", …)`. Riktig oppsett.
 
-**`kontakt.html` er unntaket og må fikses i Fase 1.** `mailto:`-skjemaer åpner brukerens e-postklient med rå tekst i kroppen. På mobil og for alle som bruker webmail uten registrert `mailto:`-handler skjer det ingenting i det hele tatt. Henvendelser fra hovedkontaktsiden går tapt.
+**`kontakt.html` var unntaket.** `mailto:`-skjemaer åpner brukerens e-postklient med rå tekst i kroppen. På mobil og for alle som bruker webmail uten registrert `mailto:`-handler skjer det ingenting i det hele tatt. Henvendelser fra hovedkontaktsiden gikk tapt. **Rettet i Fase 1 — se seksjon 14.**
 
-Andre funn:
+Andre funn ved kartleggingen:
 
-- **Ingen takkeside.** `/takk` finnes ikke. Ingen av de sju skjemaene har `action="/takk"` — de seks Netlify-skjemaene håndterer kvittering i JS.
+- **Ingen takkeside.** `/takk` fantes ikke. Ingen av skjemaene hadde `action="/takk"` — de sju Netlify-skjemaene håndterer kvittering i JS. **Takkeside laget i Fase 1.**
 - **Ingen Resend-integrasjon** noe sted. Arbeidsordrens «hvis det finnes en Resend-integrasjon som fungerer» er ikke aktuell her.
-- **E-postvarsling i Netlify må bekreftes aktivert.** `README.md` dokumenterer steget som manuelt, men det kan ikke verifiseres herfra — det ligger i Netlify-panelet. Føres videre til `TIL_DEG.md`.
-- `netlify-honeypot` er attributtnavnet som brukes i dag. Arbeidsordren nevner `data-netlify-honeypot` — begge fungerer, og den eksisterende skrivemåten beholdes for konsistens.
+- **E-postvarsling i Netlify må bekreftes aktivert.** `README.md` dokumenterer steget som manuelt, men det kan ikke verifiseres herfra — det ligger i Netlify-panelet. Ført videre til `TIL_DEG.md`.
 
 ---
 
@@ -365,6 +368,78 @@ Rangert etter effekt per innsats, med de tekniske funnene som ikke sto i arbeids
 | 14 | `lang="no"` → `lang="nb"` på alle 59 filer | 4 | Skriptbart. |
 
 **Forutsetning som gjelder hele revisjonen:** det finnes ingen felles layout. Alt som skal gjelde på tvers av sider, må skrives inn i 59 filer med skript. Hver fase bør avsluttes med et verifiseringsskript som bekrefter at endringen faktisk traff alle filene.
+
+---
+
+## 14. Fase 1 — kontaktskjema og e-post (utført)
+
+### Endringer
+
+**`kontakt.html` — skjemaet er flyttet fra `mailto:` til Netlify Forms.**
+
+Før:
+
+```html
+<form action="mailto:post@elkontrollen.no" method="post" enctype="text/plain">
+```
+
+Etter:
+
+```html
+<form name="kontakt" method="POST" action="/takk" data-netlify="true" data-netlify-honeypot="bot-field">
+  <input type="hidden" name="form-name" value="kontakt">
+  <p style="display:none;"><label>Ikke fyll ut dette feltet: <input name="bot-field"></label></p>
+```
+
+| Krav fra arbeidsordren | Status |
+|---|---|
+| `data-netlify="true"` og `name="kontakt"` | ✅ |
+| Skjult honeypot `data-netlify-honeypot="bot-field"` | ✅ Med tilhørende `<input name="bot-field">` i et `display:none`-avsnitt |
+| Alle felt har `name` | ✅ `Navn`, `E-post`, `Telefon`, `Gjelder`, `Melding` — uendret fra før, alle navngitt |
+| Takkeside `/takk` + `action="/takk"` | ✅ Ny fil `takk.html`. Netlify serverer den på `/takk` (samme mekanisme som gjør at `/elkontroll-bolig` svarer 200 — verifisert i seksjon 5) |
+
+**Merk om attributtnavnet:** de sju eksisterende skjemaene bruker `netlify-honeypot`. Arbeidsordren ba eksplisitt om `data-netlify-honeypot` på kontaktskjemaet, og den skrivemåten er brukt her. Begge er gyldige og gjør det samme — Netlify godtar begge. De eksisterende skjemaene er ikke rørt, i tråd med «ikke bygg om noe som virker».
+
+**Hvorfor vanlig POST og ikke AJAX:** de sju andre skjemaene sender via `fetch("/", …)` og viser kvittering i JS. Kontaktskjemaet bruker i stedet en vanlig skjemainnsending med `action="/takk"`, slik arbeidsordren spesifiserer. Det er robust uten JavaScript, og det gir en egen URL å måle konvertering på i Search Console og Analytics.
+
+**Ny fil: `takk.html`**
+
+- Samme header, footer og CSS som resten av siden — ingen visuelle endringer, ingen nye klasser utover det `style.css` allerede definerer.
+- `<meta name="robots" content="noindex, follow">` — takkesider skal ikke indekseres, men skal fordele lenkekraft videre.
+- Ikke lagt inn i `sitemap.xml`, av samme grunn.
+- Én `h1`, canonical, OG-/Twitter-tagger og `Organization`-schema, i tråd med resten av siden.
+- Lenker videre til prisguiden, «el-sjekk vs. elkontroll» og tjenesteoversikten, slik at siden ikke blir en blindvei.
+
+**`README.md`** er oppdatert — avsnittet som sa at `kontakt.html` fortsatt bruker `mailto:`, beskriver nå den faktiske løsningen.
+
+### 🔴 Eieren må aktivere e-postvarsling i Netlify
+
+**Dette kan ikke gjøres fra kode.** Skjemainnsendinger lagres i Netlify uansett, men **det sendes ingen e-post før varsling er satt opp manuelt i panelet.** Uten dette steget må noen huske å logge inn og sjekke innboksen i Netlify — henvendelser blir liggende ulest.
+
+Slik gjøres det:
+
+1. Logg inn på [app.netlify.com](https://app.netlify.com) og velg siten for elkontrollen.no.
+2. Gå til **Site configuration → Forms → Form notifications**.
+3. Velg **Add notification → Email notification**.
+4. Sett **Email to notify** til `post@elkontrollen.no`.
+5. Velg hvilket skjema varslingen gjelder — og **gjenta for hvert av de åtte skjemaene**:
+
+   | # | Skjemanavn i Netlify | Side |
+   |---|---|---|
+   | 1 | `kontakt` | `/kontakt` — **ny, må legges til** |
+   | 2 | `elkontroll-bolig-bestilling` | `/elkontroll-bolig` |
+   | 3 | `elkontroll-boligsalg-bestilling` | `/elkontroll-boligsalg` |
+   | 4 | `fatt-avvik` | `/fatt-avvik` |
+   | 5 | `landbruk-tilbud` | `/landbruk` |
+   | 6 | `naering-tilbud` | `/naering` |
+   | 7 | `borettslag-sjekkliste` | `/borettslag/` |
+   | 8 | `borettslag-kartlegging` | `/borettslag/kartlegging/` |
+
+6. Send en testmelding gjennom kontaktskjemaet og bekreft at den både lander under **Forms → kontakt** i Netlify **og** kommer inn på `post@elkontrollen.no`.
+
+Skjemanavnet `kontakt` dukker først opp i Netlify-panelet **etter første deploy med det nye skjemaet**, og for noen skjematyper først etter første innsending. Gjør derfor punkt 6 før punkt 5 hvis `kontakt` ikke er i lista.
+
+Denne oppgaven er også ført opp i `TIL_DEG.md`.
 
 ---
 
