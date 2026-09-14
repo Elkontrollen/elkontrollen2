@@ -257,7 +257,7 @@ module.exports = [
   slug: 'styret-avvik-i-rapporten',
   dato: '2026-09-27',
   tittel: 'Hva gjør styret når rapporten viser avvik?',
-  metaTittel: 'Avvik i elkontroll-rapporten — hva gjør styret? | Elkontrollen',
+  metaTittel: 'Avvik i rapporten — hva gjør styret? | Elkontrollen',
   beskrivelse: 'Prioritering, budsjettering, frister og hvem som kan lukke avvik i et borettslag. Slik går styret fram uten å få panikk eller la rapporten bli liggende.',
   ingress: 'Kort svar: sorter avvikene etter hvor mye det haster, ikke etter rekkefølgen i rapporten. Kritiske avvik utbedres straks. Resten legges inn i vedlikeholdsbudsjettet med frist og ansvarlig. Og viktigst: dokumenter når hvert avvik ble lukket — det er den dokumentasjonen som etterspørres, ikke selve rapporten.',
   seksjoner: [
@@ -301,7 +301,7 @@ module.exports = [
   slug: 'elkontroll-sameie-eller-borettslag',
   dato: '2026-09-29',
   tittel: 'Elkontroll i sameie kontra borettslag — er kravene ulike?',
-  metaTittel: 'Elkontroll i sameie eller borettslag — ulike krav? | Elkontrollen',
+  metaTittel: 'Sameie eller borettslag — ulike elkrav? | Elkontrollen',
   beskrivelse: 'På elsiden er kravene like. Forskjellen ligger i ansvarsforholdene og hvordan beslutninger tas. Her er hva det betyr i praksis for styret.',
   ingress: 'Kort svar: nei, ikke på elsiden. Kravene til det elektriske anlegget følger av el-tilsynsloven og internkontrollforskriften, og de skiller ikke mellom eierformer. Et sameie og et borettslag med samme bygg har samme plikt. Forskjellen ligger i eierforholdet, i hvordan beslutninger fattes, og i hvem som betaler — og det påvirker hvor lett det er å få gjennomført kontrollen.',
   seksjoner: [
