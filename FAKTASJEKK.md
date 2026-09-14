@@ -301,7 +301,8 @@ Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-sch
 - [x] **Åpningstider.** Mandag–fredag 07:00–16:00, oppgitt av eier 2026-09-14. Lagt inn i schema, i kontaktkortet og i footeren. **Sett samme tid i Google Bedriftsprofil** — Google sammenligner de to.
 - [x] **Navn på kontrollør/forfatter.** Niklas Grønvik, sertifisert kontrollør. Alle 34 artikler har nå `author` som `Person` med NEK 405 som `hasCredential`.
 - [ ] **Team-seksjonen på forsiden** ligger fortsatt som HTML-kommentar, med tre kort og plassholderen «Navn». Trenger bilder og de to andre navnene. Se `TIL_DEG.md` punkt 7.
-- [ ] **Usynlig tekst to steder.** Org.nr og adresse står i hvitt på nesten hvit bakgrunn i `kontakt.html` og `om-oss.html` — en rest fra da paletten var mørk. Pre-eksisterende, ikke innført av revisjonen. Se `TIL_DEG.md` punkt 8b.
+- [x] **Usynlig tekst.** Org.nr og adresse sto i hvitt på nesten hvit bakgrunn i `kontakt.html` og `om-oss.html`, og etikettene i kontaktkortet lå på 3,21:1. Alle fire rettet til `var(--muted)` / `var(--line)`. Begge sider er nå på 100 i tilgjengelighet.
+- [ ] **Alvorlighetsmerkene på `/fatt-avvik.html`** ligger på 4,08:1 og 4,28:1, like under kravet på 4,5:1. Ikke rettet — fargene er del av et bevisst fargekodet system. Se `TIL_DEG.md` punkt 8c.
 
 ### Bør bekreftes
 

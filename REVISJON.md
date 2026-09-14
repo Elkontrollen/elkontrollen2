@@ -1046,6 +1046,39 @@ det viktigste enkelttallet for å vite hvor mye arbeid punkt 2 krever.
 
 ---
 
+## 18b. Kontrastfeil fra den gamle fargepaletten (rettet etterpå)
+
+Oppdaget under visuell kontroll etter at åpningstidene var lagt inn, ikke av Lighthouse —
+forsiden målte 100 på tilgjengelighet hele veien, fordi feilene lå på to andre sider.
+
+Fargepaletten har vært mørk en gang. Variabelen `--navy` heter fortsatt det, men verdien
+er `#F4F6F4`. Fire farger fulgte ikke med da paletten ble byttet, fordi de lå i
+`style`-attributter eller som gjennomsiktige ink-verdier i stedet for i tokens:
+
+| Sted | Før | Etter | Kontrast |
+|---|---|---|---|
+| `kontakt.html` — org.nr i kontaktkortet | `rgba(255,255,255,.55)` | `var(--muted)` | usynlig → 5,19:1 |
+| `kontakt.html` — skillelinja over | `rgba(255,255,255,.12)` | `var(--line)` | usynlig → synlig |
+| `om-oss.html` — navn, adresse, org.nr | `rgba(255,255,255,.6)` | `var(--muted)` | usynlig → 5,19:1 |
+| `style.css` — `.info-row .lbl` | `rgba(var(--ink-rgb),.5)` | `var(--muted)` | 3,21:1 → 5,19:1 |
+
+Den siste kom fram da kontrasten ble målt etter de tre første. Den var ikke usynlig, men
+lå under kravet på 4,5:1 — samme rot, samme fiks.
+
+**Dette er bedriftens NAP-opplysninger.** Navn, adresse og org.nr sto i praksis ikke på
+siden i det hele tatt to steder, samtidig som punkt 5 i `TIL_DEG.md` handler om at
+nettopp de opplysningene skal stå likt overalt for at Google skal feste lit til dem.
+
+`kontakt.html` og `om-oss.html` gikk fra 96 til **100**. Målt på fjorten sider er alle
+nå på 100 unntatt `/fatt-avvik.html`, der alvorlighetsmerkene ligger på 4,08:1 og 4,28:1.
+De er ikke rettet — fargene er del av et bevisst fargekodet system, og hvor mye de tåler
+å mørknes er en designvurdering. Ført som punkt 8c i `TIL_DEG.md`.
+
+`.hero-photo .cap-out` og SVG-illustrasjonen på forsiden bruker samme hvite farge, men
+ligger på faktisk mørk bakgrunn. De er riktige og ikke rørt.
+
+---
+
 ## 19. Byggrekkefølge — viktig hvis sidene genereres på nytt
 
 Elleve sider bygges av generatorer, mens resten er håndskrevet. Kjører du en generator

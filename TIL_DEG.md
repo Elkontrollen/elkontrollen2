@@ -5,7 +5,7 @@ fordi de krever opplysninger bare dere har.
 
 Lista er sortert etter hva som koster mest å la ligge, ikke etter hvor mye arbeid det er.
 
-Sist oppdatert: 2026-09-14 (punkt 6 og 7 er gjort)
+Sist oppdatert: 2026-09-14 (punkt 6, 7 og 8b er gjort)
 
 ---
 
@@ -301,30 +301,52 @@ Send en melding gjennom <https://elkontrollen.no/kontakt.html>. Du skal lande p�
 
 ---
 
-## 8b. Usynlig tekst to steder — bedriftsopplysningene deres
+## 8b. ~~Usynlig tekst~~ ✅ gjort
 
-**Tid: 2 minutter, men det er en fargebeslutning.**
+Tre farger var igjen fra da paletten var mørk. Variabelen heter fortsatt `--navy`, men
+verdien er `#F4F6F4` — nesten hvit. De tre stedene hadde fargen skrevet rett inn i
+`style`-attributtet eller som en gjennomsiktig ink-verdi, og fulgte derfor ikke med da
+paletten ble byttet.
 
-Dette er ikke noe revisjonen innførte — det har ligget der hele tiden, og koden er
-uendret fra før. Men det er verdt å vite om, særlig nå som punkt 5 handler om at navn,
-adresse og org.nr skal stå likt overalt: to steder står de i praksis ikke i det hele tatt.
-
-| Fil | Tekst | Farge | Bakgrunn |
+| Sted | Før | Etter | Kontrast |
 |---|---|---|---|
-| `kontakt.html` | «Org.nr 825 176 942 · Elkontrollen AS» | `rgba(255,255,255,.55)` | `.info-card` → `--navy` = `#F4F6F4` |
-| `om-oss.html` | «Elkontrollen AS / Lorangløkka 1, 1782 Halden / Org.nr …» | `rgba(255,255,255,.6)` | `.cta-band` → `--navy` = `#F4F6F4` |
+| `kontakt.html` — «Org.nr 825 176 942 · Elkontrollen AS» | `rgba(255,255,255,.55)` | `var(--muted)` | usynlig → **5,19:1** |
+| `kontakt.html` — skillelinja over den | `rgba(255,255,255,.12)` | `var(--line)` | usynlig → synlig |
+| `om-oss.html` — navn, adresse, org.nr i «Hvor vi jobber» | `rgba(255,255,255,.6)` | `var(--muted)` | usynlig → **5,19:1** |
+| `style.css` — `.info-row .lbl`, etikettene i kontaktkortet | `rgba(var(--ink-rgb),.5)` | `var(--muted)` | 3,21:1 → **5,19:1** |
 
-Hvit tekst på nesten hvit bakgrunn. Det ser ut som en rest fra da fargepaletten var mørk —
-variabelen heter fortsatt `--navy`, men verdien er lys nå. De to stedene har fargen skrevet
-rett inn i `style`-attributtet, så de fulgte ikke med da paletten ble byttet.
+Den siste kom fram da kontrasten ble målt etter de tre første: etikettene TELEFON,
+E-POST, ADRESSE og de andre lå på 3,21:1, under kravet på 4,5:1. Samme rot, samme fiks.
+`var(--muted)` er tokenet all annen dempet tekst på siden bruker fra før.
 
-Fikset er å bytte `color:rgba(255,255,255,.55)` til `color:var(--muted)` — samme token som
-all annen dempet tekst på siden bruker. Det er ikke gjort her, fordi arbeidsordren sier at
-det visuelle uttrykket ikke skal røres uten at en oppgave ber om det, og hvor dempet
-teksten skal være er en vurdering. Si fra, så tar det et halvt minutt.
+`kontakt.html` og `om-oss.html` gikk fra 96 og 96 til **100** på tilgjengelighet.
 
-Verdt å merke seg: `.hero-photo .cap-out` bruker samme hvite farge, men den ligger på en
-faktisk mørk bakgrunn og er riktig som den er.
+`.hero-photo .cap-out` og SVG-illustrasjonen på forsiden bruker samme hvite farge, men
+ligger på faktisk mørk bakgrunn og er riktige som de er. De er ikke rørt.
+
+---
+
+## 8c. Én kontrastfeil til — ikke rettet
+
+**Tid: 2 minutter, men det er en fargebeslutning i et system.**
+
+Da tilgjengeligheten ble målt på tvers av fjorten sider etter fiksen, var det én igjen:
+alvorlighetsmerkene på `/fatt-avvik.html`.
+
+| Merke | Tekst | Bakgrunn | Kontrast | Krav |
+|---|---|---|---|---|
+| `.sev-card.high .lvl` | `#C0432A` | `#F5E1DB` | 4,08:1 | 4,5:1 |
+| `.sev-card.mid .lvl` | `#96690F` | `#FBEFDF` | 4,28:1 | 4,5:1 |
+
+Begge ligger like under kravet ved 11 px. Dette er ikke rettet, av to grunner: fargene er
+uendret fra før revisjonen, og de er del av et bevisst fargekodet system — rød for
+kritisk, gul for bør utbedres, grønn for kan vente. Hvor mye de tåler å mørknes uten at
+kodingen blir utydelig, er en designvurdering.
+
+Minste endring som holder: mørkne tekstfargene til omtrent `#A93A22` og `#82590C`.
+Bakgrunnene kan stå. Da går `/fatt-avvik.html` fra 96 til 100 som resten.
+
+Si fra, så tar det to minutter.
 
 ---
 
@@ -378,6 +400,6 @@ dere faktisk har sett. Det er den slags detalj konkurrentene ikke kan kopiere.
 | Når | Hva |
 |---|---|
 | **I dag** | Punkt 0 (`xxx`-teksten), punkt 4 (e-postvarsling) |
-| **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå), punkt 8b (usynlig tekst) |
+| **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå), punkt 8c hvis du vil ha 100 overalt |
 | **Neste uke** | Punkt 3 (Search Console), punkt 5 (registre), punkt 9 (rangeringssjekk) |
 | **Løpende** | Punkt 2 (anmeldelser — to til fire i måneden), punkt 10 (faktasjekk) |
