@@ -9,7 +9,7 @@ deployet** — se «Det viktigste» under.
 
 **1. Jeg har ikke pushet, og det var et bevisst valg.** Ordren sa «ikke deploy», og på
 dette repoet er push til `main` det samme som deploy — Netlify bygger automatisk. Det
-finnes ingen mellomting her. **Sju commits** ligger klare lokalt. Si fra når du vil ha dem
+finnes ingen mellomting her. **Ni commits** ligger klare lokalt. Si fra når du vil ha dem
 ut, så pusher jeg. Begrunnelsen står i `BESLUTNINGER.md` punkt 1.
 
 **2. Sjekk `TIL_DEG.md` punkt 11 før de nye sidene får trafikk.** De fem sidene utenfor
@@ -207,7 +207,7 @@ node tools/sjekk-sokeord.js      # de 15 søkeordene
 ## Når du vil ha det ut
 
 ```
-git log --oneline origin/main..HEAD    # de sju som ligger klare
+git log --oneline origin/main..HEAD    # de ni som ligger klare
 git push                               # dette deployer
 ```
 
