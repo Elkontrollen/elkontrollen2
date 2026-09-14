@@ -11,7 +11,7 @@ teksten endres, rett den i `tools/innhold-steder.js` og kjør `node tools/bygg-l
 på nytt — **ikke i HTML-filen direkte**, ellers blir endringen overskrevet neste gang
 sidene genereres.
 
-Sist oppdatert: 2026-09-14 (etter fase 5 og oppfølgingsrettelser)
+Sist oppdatert: 2026-09-14 (etter borettslagssatsingen, fase A–C)
 
 ---
 
@@ -310,6 +310,69 @@ Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-sch
 
 ---
 
+## 9. Borettslagsklyngen (fase B og C)
+
+Tolv avsnitt i de åtte nye artiklene bygger på Elkontrollens egen praksis eller erfaring,
+og kan ikke verifiseres utenfra. De er merket `<!-- TRENGER FAKTASJEKK -->` i HTML-en.
+
+### `blogg/hva-koster-elkontroll-borettslag.html`
+
+- [ ] **Slik går dere fram** — «Be om en kartlegging før dere ber om pris. En leverandør som gir et tall over telefon uten å ha sett bygget, gjetter — og gjetningen er enten for høy for dere eller for lav for dem.»
+- [ ] **Leilighetskontroll som tillegg** — «Kontroll av fellesanlegget går ikke inn i leilighetene. For eldre lag der mange boenheter aldri har vært kontrollert, er det et reelt hull i oversikten.»
+
+### `blogg/elkontroll-forsikring-borettslag.html`
+
+- [ ] **Hva selskapet ber om etter en brann** — «Erfaringsmessig går spørsmålene i denne rekkefølgen:»
+
+### `blogg/internkontroll-elektro-borettslag.html`
+
+- [ ] **Det som oftest mangler** — «Etter vår erfaring har de fleste styrer rapport og faktura — altså punkt 4. Det som mangler er kontrollplanen, avvikslisten med status og beboerinformasjonen.»
+- [ ] **Hvor mye av dette må styret gjøre selv** — «Oversikten over anleggene, kontrollplanen, rapportene og avvikslisten kan leverandøren levere ferdig. Ansvarsfordelingen og beboerinformasjonen må styret eie selv — men malene kan følge med.»
+- [ ] **Hva et tilsyn faktisk ser etter** — «Kommer Det lokale eltilsyn på besøk, er det ikke anlegget de starter med. Det er dokumentasjonen.»
+
+### `blogg/ansvar-elektrisk-styret-eller-andelseier.html`
+
+- [ ] **Leilighetskontroll som løsning** — «Flere lag velger å tilby andelseierne kontroll av egen leilighet mens kontrolløren likevel er i bygget. Det gir hver beboer en kort rapport på sin egen bolig, og styret en samlet oversikt ov…»
+
+### `blogg/slik-forbereder-styret-elkontroll.html`
+
+- [ ] **Hva som forsinker en kontroll mest** — «I rekkefølge: manglende nøkler til ett rom, tavler som er sperret av lagring, og at ingen vet om laget har fått nye anlegg siden sist.»
+
+### `blogg/elkontroll-for-og-etter-rehabilitering.html`
+
+- [ ] **Dokumentasjonen entreprenøren skal levere** — «Ved overtakelse har laget krav på at dokumentasjonen følger med. Erfaringsmessig er dette den delen som oftest mangler, og som oftest ikke etterspørres før det er for sent.»
+
+### `blogg/styret-avvik-i-rapporten.html`
+
+- [ ] **Hvis rapporten blir liggende** — «Det vanligste utfallet av en kontroll er dessverre at rapporten arkiveres og avvikene glemmes til neste kontroll finner de samme feilene.»
+- [ ] **Personlig ansvar for styremedlemmer** — «Spørsmålet kommer alltid: kan et styremedlem holdes personlig ansvarlig?»
+
+### `blogg/elkontroll-sameie-eller-borettslag.html`
+
+- [ ] **Hva det betyr for gjennomføringen** — «Kontrollen gjøres likt. Det som skiller er hvor lett det er å få tilgang og å få vedtatt oppfølging.»
+
+### Påstander på `/borettslag/` som bør bekreftes
+
+- [ ] **«Vi møter også opp ved tilsyn hvis dere ønsker det.»** Står i FAQ. Er dette en tjeneste dere faktisk leverer, og er den inkludert eller et tillegg?
+- [ ] **«Andelseierne kan bestille kontroll av egen leilighet til rabattert pris.»** Står tre steder: hovedsiden, prisavsnittet og en artikkel. Hvor stor er rabatten, og hvem fakturerer — laget eller beboeren?
+- [ ] **«Alt vi leverer lagres på laget og er tilgjengelig for hele styret.»** Hvordan, konkret? En delt mappe, et portalinnlogg, eller en fil dere sender? Formuleringen lover en løsning.
+- [ ] **«Samme person kommer, kontrollerer og skriver rapporten.»** Sto på siden fra før, men er et løfte verdt å bekrefte nå som foretaket dekker fire fylker.
+- [ ] **Kontrollintervaller:** «fellesanlegget hvert tredje til femte år etter forsikringens kontrollklasse, termografi av hovedtavler årlig, brannalarm/nødlys/ladeanlegg årlig». Brukt gjennomgående i klyngen.
+- [ ] **«To av tre branner…»-typen statistikk** er *ikke* brukt i de nye artiklene, siden kilden ikke er verifisert. Har dere en kilde, kan den settes inn — det er et sterkt argument.
+
+### Juridiske påstander som bør leses av noen med fagansvar
+
+Artiklene beskriver ansvarsforhold, reklamasjonsfrister og forsikringsvilkår. Innholdet er
+skrevet ut fra alminnelig kjent regelverk, men står på deres nettside under deres navn.
+
+- [ ] **Femårs reklamasjonsfrist ved rehabilitering**, regnet fra overtakelse — `elkontroll-for-og-etter-rehabilitering.html`
+- [ ] **Grensen mellom fellesanlegg og andelseiers ansvar**, inkludert at vedtektene ikke kan flytte det offentligrettslige ansvaret — `ansvar-elektrisk-styret-eller-andelseier.html`
+- [ ] **At avkortning ved brann er en reell mulighet ved manglende dokumentasjon** — brukt i flere artikler
+- [ ] **At borettslag og sameier er «virksomhet» etter internkontrollforskriften** — grunnpremisset i hele klyngen
+- [ ] **At utbedring krever registrert installatør og samsvarserklæring** — `styret-avvik-i-rapporten.html`
+
+---
+
 ## Oppsummering
 
 | Kategori | Antall punkter |
@@ -323,7 +386,8 @@ Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-sch
 | 6. Bilder | 4 |
 | 7. Priser, forsikringsrabatt og nye FAQ-svar | 19 |
 | 8. Teknisk SEO — åpningstider, forfatternavn, koordinater, bilder | 9 |
-| **Til sammen** | **87** |
+| 9. Borettslagsklyngen — egen praksis, påstander og jus | 23 |
+| **Til sammen** | **110** |
 
 Punkt 0 var det eneste som var en ren feil, og den er rettet. Resten er påstander som
 sannsynligvis stemmer, men som ingen utenfra kan bekrefte.

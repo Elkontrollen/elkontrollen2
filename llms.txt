@@ -35,6 +35,20 @@ Elkontrollen er Halden-basert og tar oppdrag i Østfold, Oslo, Akershus og Buske
 - [Elkontroll i Hvaler](https://elkontrollen.no/elkontroll-hvaler.html): Ca. 63 km fra Halden. Dekker Skjærhalden, Kirkøy, Asmaløy, Spjærøy, Vesterøy m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
 - [Elkontroll i Aremark](https://elkontrollen.no/elkontroll-aremark.html): Ca. 26 km fra Halden. Dekker Fossby, Strømsfoss, Aremark sentrum, Ytre Aremark, Øymark m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
 
+## Borettslag og sameier
+
+Elkontroll for borettslag og sameier samles i årsavtalen Trygt Borettslag: elkontroll av fellesanlegget (NEK 405-3), termografering (NEK 405-1), brannalarm og nødlys (FG-750/760), kontroll av ladeanlegg, og dokumentasjon til internkontrollen. Pris settes etter gratis kartlegging av bygget. Andelseiere kan bestille kontroll av egen leilighet til rabattert pris når kontrolløren er i bygget.
+
+- [Elkontroll for borettslag og sameier](https://elkontrollen.no/borettslag/): Hovedsiden, med pakkeinnhold, prismodell og prosess.
+- [Hva koster elkontroll i borettslag?](https://elkontrollen.no/blogg/hva-koster-elkontroll-borettslag.html): Prismodellen forklart: hva som avgjør prisen på elkontroll av fellesanlegget, hva som inngår, og hvorfor ingen kan oppgi et tall før de har sett bygget.
+- [Elkontroll og forsikring for borettslag](https://elkontrollen.no/blogg/elkontroll-forsikring-borettslag.html): Hva forsikringsselskapet krever av elkontroll i borettslag, hvilken dokumentasjon de ber om, og hva som skjer med erstatningen hvis kontrollen mangler.
+- [Internkontroll elektro for borettslag — hva styret må ha på plass](https://elkontrollen.no/blogg/internkontroll-elektro-borettslag.html): De konkrete dokumentene styret må ha i internkontrollen for elsikkerhet — ikke bare prinsippet. Sjekkliste over hva permen faktisk skal inneholde.
+- [Hvem har ansvaret for det elektriske: styret eller andelseier?](https://elkontrollen.no/blogg/ansvar-elektrisk-styret-eller-andelseier.html): Grensegangen mellom fellesanlegg og leilighet, forklart konkret. Hvor går skillet i sikringsskapet, og hvem betaler hva når det oppstår feil?
+- [Slik forbereder styret en elkontroll](https://elkontrollen.no/blogg/slik-forbereder-styret-elkontroll.html): Praktisk sjekkliste før kontrolløren kommer: tilgang til fellesrom, nøkler, varsling av beboere, hvilke dokumenter som bør ligge klart, og hvem som møter.
+- [Elkontroll før og etter rehabilitering](https://elkontrollen.no/blogg/elkontroll-for-og-etter-rehabilitering.html): Garantikontroll, overtakelse og reklamasjon ved rehabilitering i borettslag. Når kontrollen bør gjøres, og hvorfor fristen er viktigere enn de fleste tror.
+- [Hva gjør styret når rapporten viser avvik?](https://elkontrollen.no/blogg/styret-avvik-i-rapporten.html): Prioritering, budsjettering, frister og hvem som kan lukke avvik i et borettslag. Slik går styret fram uten å få panikk eller la rapporten bli liggende.
+- [Elkontroll i sameie kontra borettslag — er kravene ulike?](https://elkontrollen.no/blogg/elkontroll-sameie-eller-borettslag.html): På elsiden er kravene like. Forskjellen ligger i ansvarsforholdene og hvordan beslutninger tas. Her er hva det betyr i praksis for styret.
+
 ## Om selskapet
 
 - [Om oss](https://elkontrollen.no/om-oss.html)
