@@ -1,6 +1,6 @@
 # Elkontrollen
 
-> Elkontrollen AS er et Halden-basert, sertifisert kontrollforetak som dekker Østfold og hele Østlandet, og utfører lovpålagt elkontroll, termografering og internkontroll for elsikkerhet. Kontrollrapportene brukes overfor forsikringsselskap, eltilsyn (DLE) og leietakere.
+> Elkontrollen AS er et Halden-basert, sertifisert kontrollforetak som dekker Østfold, Oslo, Akershus og Buskerud, og utfører lovpålagt elkontroll, termografering og internkontroll for elsikkerhet. Kontrollrapportene brukes overfor forsikringsselskap, eltilsyn (DLE) og leietakere.
 
 Elkontrollen er sertifisert etter NEK 405-1 (termografi), NEK 405-3 (næring) og NEK 405-4 (foretak). Org.nr 825 176 942. Adresse: Lorangløkka 1, 1782 Halden. Telefon: +47 980 19 154. E-post: post@elkontrollen.no. Åpningstider: mandag–fredag 07:00–16:00.
 
@@ -23,7 +23,7 @@ Elkontrollen er sertifisert etter NEK 405-1 (termografi), NEK 405-3 (næring) og
 
 ## Områder
 
-Elkontrollen er Halden-basert og tar oppdrag i hele Østfold og på Østlandet. Samme fastpris uansett hvor i Østfold kunden bor — ingen kjøretillegg.
+Elkontrollen er Halden-basert og tar oppdrag i Østfold, Oslo, Akershus og Buskerud. Samme fastpris uansett hvor i Østfold kunden bor — ingen kjøretillegg der.
 
 - [Områder vi dekker](https://elkontrollen.no/omrader.html): Samleside med bygningsmassen i tall for hver kommune.
 - [Elkontroll i Fredrikstad](https://elkontrollen.no/elkontroll-fredrikstad.html): Ca. 36 km fra Halden. Dekker Gamlebyen, Cicignon, Trara, Holmen, Kråkerøy m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.

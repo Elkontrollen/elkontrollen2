@@ -52,11 +52,15 @@ function foretak() {
       addressLocality: F.poststed, addressRegion: 'Østfold', addressCountry: F.land
     },
     geo: { '@type': 'GeoCoordinates', latitude: F.lat, longitude: F.lon },
-    areaServed: [
-      ...STEDER.slice().sort((a, b) => a.prioritet - b.prioritet).map(s => ({ '@type': 'AdministrativeArea', name: s.navn })),
-      { '@type': 'AdministrativeArea', name: 'Østfold' },
-      { '@type': 'AdministrativeArea', name: 'Østlandet' }
-    ],
+    // Fylkene først, så kommunene. Dekningsområdet er Østfold, Oslo, Akershus
+    // og Buskerud — «Østlandet» er tatt ut fordi det er videre enn det faktiske
+    // området, og Google vekter samsvar med tjenesteområdet i Bedriftsprofilen.
+    areaServed: (() => {
+      const navn = ['Østfold', 'Oslo', 'Akershus', 'Buskerud',
+        ...STEDER.slice().sort((a, b) => a.prioritet - b.prioritet).map(s => s.navn)];
+      // Oslo er både fylke og kommune — skal bare stå én gang
+      return [...new Set(navn)].map(n => ({ '@type': 'AdministrativeArea', name: n }));
+    })(),
     priceRange: F.prisnivaa,
     currenciesAccepted: 'NOK',
     knowsAbout: ['Elkontroll', 'Termografering', 'NEK 405', 'Internkontroll elsikkerhet', 'FG-750', 'FG-760']
@@ -168,6 +172,13 @@ for (const f of walk('.')) {
     if (t === 'Article' || t === 'BlogPosting') { beholdt.push(JSON.stringify(oppdaterArticle(o, r, h))); tall.article++; continue; }
     if (t === 'Service') {
       o.provider = { '@id': ID };
+      // Tjenestesider uten eget stedsomfang skal speile dekningsområdet.
+      // Lokalsidene har sin egen, mer spesifikke areaServed og røres ikke.
+      const generisk = JSON.stringify((o.areaServed || []).map(a => typeof a === 'string' ? a : a.name));
+      if (generisk === JSON.stringify(['Østfold', 'Østlandet']) || !o.areaServed) {
+        o.areaServed = ['Østfold', 'Oslo', 'Akershus', 'Buskerud']
+          .map(n => ({ '@type': 'AdministrativeArea', name: n }));
+      }
       beholdt.push(JSON.stringify(o)); tall.service++; continue;
     }
     if (t === 'FAQPage') { beholdt.push(JSON.stringify(o)); tall.faq++; continue; }

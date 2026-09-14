@@ -104,7 +104,7 @@ const priserSchemas = [
     '@context': 'https://schema.org', '@type': 'Service',
     serviceType: 'Elkontroll bolig — NEK 405-2',
     provider: { '@type': 'Organization', name: 'Elkontrollen AS', url: BASE + '/' },
-    areaServed: [{ '@type': 'AdministrativeArea', name: 'Østfold' }, { '@type': 'AdministrativeArea', name: 'Østlandet' }],
+    areaServed: ['Østfold', 'Oslo', 'Akershus', 'Buskerud'].map(n => ({ '@type': 'AdministrativeArea', name: n })),
     description: 'Elkontroll av bolig etter NEK 405-2 med termografering inkludert. Fastpris i hele Østfold.',
     offers: {
       '@type': 'Offer', name: 'Elkontroll bolig', price: '5000', priceCurrency: 'NOK',
@@ -338,7 +338,7 @@ const forsikringSchemas = [
     '@context': 'https://schema.org', '@type': 'Service',
     serviceType: 'Elkontroll for forsikringsrabatt — NEK 405',
     provider: { '@type': 'Organization', name: 'Elkontrollen AS', url: BASE + '/' },
-    areaServed: [{ '@type': 'AdministrativeArea', name: 'Østfold' }, { '@type': 'AdministrativeArea', name: 'Østlandet' }],
+    areaServed: ['Østfold', 'Oslo', 'Akershus', 'Buskerud'].map(n => ({ '@type': 'AdministrativeArea', name: n })),
     description: 'Elkontroll etter NEK 405 av sertifisert kontrollør, med rapport utformet for bruk overfor forsikringsselskapet.',
     offers: { '@type': 'Offer', name: 'Elkontroll bolig', price: '5000', priceCurrency: 'NOK', availability: 'https://schema.org/InStock' }
   },
