@@ -129,7 +129,11 @@ indeksert».
 
 ### Slik sjekker du
 
-1. Gå til <https://search.google.com/search-console>. Er ikke domenet lagt til, legg det til som **Domene-eiendom** (`elkontrollen.no`) — det krever en TXT-post i DNS hos Domeneshop.
+Domenet er allerede verifisert. Det ligger en `google-site-verification`-TXT-post i DNS
+for `elkontrollen.no`, så eiendommen finnes som **Domene-eiendom** — du skal ikke sette
+den opp på nytt.
+
+1. Gå til <https://search.google.com/search-console> og velg `elkontrollen.no`.
 2. Åpne **Indeksering → Sider**.
 3. Se på tallet «Ikke indeksert» og bryt det ned på årsak.
 
@@ -140,7 +144,36 @@ indeksert».
 | **Oppdatert – ikke indeksert** | Google kjenner URL-en, men har prioritert den bort | Ofte et kvalitets- eller relevanssignal. Den interne lenkingen som er lagt inn i denne revisjonen hjelper direkte her |
 | **Gjennomsøkt – foreløpig ikke indeksert** | Google har lest siden og valgt å la være | Samme som over |
 | **Duplikat, Google valgte en annen kanonisk** | 🔴 **Dette er det viktigste å se etter.** Kartleggingen fant at hver side svarte på to URL-er | Skal være løst av `_redirects` og `pretty_urls = false`. Sjekk at tallet faller i ukene etter deploy |
-| **Side med omdirigering** | Forventet — det er de 79 redirect-reglene som gjør jobben sin | Ingenting |
+| **Side med omdirigering** | Forventet — det er de 59 redirect-reglene som gjør jobben sin | Ingenting |
+
+### 🔴 Se spesielt etter omdirigeringsfeil
+
+Det lå en omdirigeringsløkke ute på ni sider i omtrent en time **14. september, cirka
+21:20–22:20**. Se `REVISJON.md` seksjon 18d for hva som skjedde. Rammet var:
+
+`/blogg/` · `/borettslag/` · `/borettslag/pris/` · `/borettslag/elkontroll/` ·
+`/borettslag/kartlegging/` · `/borettslag/brannvern/` · `/borettslag/ladeanlegg/` ·
+`/borettslag/leiligheter/` · `/skjema/`
+
+Alle svarer 200 igjen, også for Googlebot — kontrollert. Men hvis Google tilfeldigvis
+gjennomsøkte en av dem i det vinduet, dukker det opp som **«Omdirigeringsfeil»** under
+**Indeksering → Sider**.
+
+**Slik sjekker du, i stigende rekkefølge etter hvor raskt du får svar:**
+
+| Hva | Hvor | Forsinkelse |
+|---|---|---|
+| **URL-inspeksjon → Test live-URL** på `/borettslag/pris/` | Øverst i Search Console | **Ingen.** Dette er sanntid og gir et definitivt svar på om Google klarer å hente sida nå |
+| **Gjennomsøkingsstatistikk** — se etter en topp i 3xx 14. september | Innstillinger → Gjennomsøkingsstatistikk | 1–2 dager |
+| **«Omdirigeringsfeil»** under Ikke indeksert | Indeksering → Sider | 2–3 dager, så tidligst 17. september |
+
+Finner du de ni URL-ene under Omdirigeringsfeil: trykk **Valider rettelse**. Google
+gjennomsøker dem på nytt, ser 200, og fjerner feilen selv. Det krever ingen annen
+handling — problemet er borte i koden.
+
+En time er kort. På en side av denne størrelsen er sjansen for at Googlebot traff nettopp
+de ni URL-ene i akkurat det vinduet liten, men ikke null, og det er verdt å sjekke siden
+det er blogg-indeksen og hele borettslag-seksjonen.
 
 ### Etter deploy
 
