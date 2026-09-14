@@ -109,7 +109,7 @@ module.exports = {
   // ── Trygt Borettslag ──────────────────────────────────────────────────────
 
   'borettslag/brannvern/index.html': {
-    t: 'Brannalarm og nødlys for borettslag | FG-750/760'
+    t: 'Kontroll av brannalarm og nødlys for borettslag'
   },
   'borettslag/elkontroll/index.html': {
     t: 'Elkontroll av fellesanlegget | NEK 405-3'

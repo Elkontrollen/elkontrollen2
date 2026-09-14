@@ -59,12 +59,12 @@ module.exports = [
 {
   slug: 'elkontroll-forsikring-borettslag',
   dato: '2026-09-17',
-  tittel: 'Elkontroll og forsikring for borettslag',
-  metaTittel: 'Elkontroll og forsikring for borettslag | Elkontrollen',
+  tittel: 'Elkontroll og forsikring for borettslag — hvilke krav gjelder?',
+  metaTittel: 'Elkontroll og forsikringskrav for borettslag | Elkontrollen',
   beskrivelse: 'Hva forsikringsselskapet krever av elkontroll i borettslag, hvilken dokumentasjon de ber om, og hva som skjer med erstatningen hvis kontrollen mangler.',
   ingress: 'Kort svar: forsikringsselskapet krever som regel ikke elkontroll av borettslag på samme absolutte måte som i landbruket, men det stiller krav til at anlegget er i forsvarlig stand og at styret kan dokumentere oppfølging. Ved brann er dokumentasjonen det første som etterspørres, og mangler den, er avkortning i erstatningen en reell mulighet. Flere selskaper gir i tillegg sikkerhetsrabatt når kontrollen er utført etter NEK 405 av sertifisert kontrollør.',
   seksjoner: [
-    ['Forskjellen på et krav og et vilkår', [
+    ['Hva forsikringen krever av borettslag — krav eller vilkår?', [
       'Det er verdt å skille mellom to ting som ofte blandes sammen.',
       'Et <strong>krav</strong> er noe som må være oppfylt for at forsikringen skal gjelde som forutsatt. I landbruket er elkontroll med termografi et slikt krav for husdyrbruk hos de fleste selskapene.',
       'Et <strong>vilkår om aktsomhet</strong> er svakere formulert, men får samme praktiske virkning: forsikringstakeren skal holde anlegget i forsvarlig stand og følge offentlige krav. For borettslag er det oftest denne formen som gjelder — og internkontrollforskriften er det offentlige kravet.',
@@ -138,12 +138,12 @@ module.exports = [
 {
   slug: 'ansvar-elektrisk-styret-eller-andelseier',
   dato: '2026-09-21',
-  tittel: 'Hvem har ansvaret for det elektriske: styret eller andelseier?',
-  metaTittel: 'Elektrisk ansvar: styret eller andelseier? | Elkontrollen',
+  tittel: 'Hvem har ansvaret for det elektriske i borettslaget: styret eller andelseier?',
+  metaTittel: 'Elektrisk ansvar i borettslag — hvem har det? | Elkontrollen',
   beskrivelse: 'Grensegangen mellom fellesanlegg og leilighet, forklart konkret. Hvor går skillet i sikringsskapet, og hvem betaler hva når det oppstår feil?',
   ingress: 'Kort svar: styret har ansvaret for fellesanlegget, andelseier for det som ligger innenfor egen bolig. Grensen går som hovedregel ved inntaket til leiligheten — altså ved leilighetens eget sikringsskap. Men grensen er ikke alltid åpenbar i praksis, og det er de uklare tilfellene som skaper konflikt.',
   seksjoner: [
-    ['Hovedregelen', [
+    ['Hvem har ansvaret i borettslag og sameier — hovedregelen', [
       '<strong>Styret har ansvaret for:</strong> hovedtavle og hovedinntak, stigeledninger opp gjennom bygget, fellesmålere, fordelinger i fellesarealer, belysning i oppganger, kjeller, loft og garasje, utebelysning, varmekabler i fellesareal, ladeanlegg for elbil, brannalarm og nødlys.',
       '<strong>Andelseier har ansvaret for:</strong> sikringsskapet i leiligheten og alt innenfor det — kurser, stikkontakter, brytere, lamper, varmekabler på eget bad, eget utstyr.',
       'Skillet følger prinsippet i borettslagsloven om at laget vedlikeholder felles, og andelseier vedlikeholder eget. Vedtektene kan presisere det, men kan sjelden flytte det vesentlig.'
