@@ -767,11 +767,11 @@ arbeidsordrens «lenk fra hovedmeny» til å fungere visuelt.
 | Krav | Status |
 |---|---|
 | `LocalBusiness`-schema (type `Electrician`) i felles layout | ✅ på 69 sider, med org.nr, telefon, adresse, `geo`, `areaServed` og `sameAs` |
-| — med `openingHours` | ⚠️ **utelatt med vilje.** Se avsnittet under |
+| — med `openingHours` | ✅ `Mo-Fr 07:00-16:00`, oppgitt av eier etter at fase 4 var ferdig |
 | `Service`-schema på hver tjenesteside, med `offers` og pris der pris finnes | ✅ 25 blokker |
 | `FAQPage`-schema generert fra FAQ-komponenten | ✅ 29 blokker, gjort i fase 3 |
 | `Article`-schema på alle bloggartikler | ✅ 34, med `dateModified`, `mainEntityOfPage`, `image` og `inLanguage` |
-| — med `author` som `Person` og oppgitt NEK 405-kvalifikasjon | ⚠️ **kvalifikasjonen er på plass, men ikke som `Person`.** Se avsnittet under |
+| — med `author` som `Person` og oppgitt NEK 405-kvalifikasjon | ✅ Niklas Grønvik, oppgitt av eier etter at fase 4 var ferdig |
 | `BreadcrumbList`-schema | ✅ 68 sider |
 | Unik `title` under 60 tegn | ✅ 71 av 71, ingen duplikater |
 | `meta description` under 155 tegn | ✅ 71 av 71, ingen duplikater |
@@ -878,7 +878,24 @@ siden ikke har felles layout — ellers måtte 225 blokker vedlikeholdes i 71 fi
 `geo` er slått opp i OpenStreetMap på Lorangløkka 1, 1782 Halden: 59.134686, 11.380039.
 Punktet lander på Brødløs i Halden. Bør bekreftes av eier.
 
-### ⚠️ To punkter er bevisst ikke gjort
+### To punkter sto åpne, og ble lukket etterpå
+
+Begge krevde opplysninger som ikke fantes noe sted på nettsiden. Eieren oppga dem da
+fasen var dokumentert, og begge var ett felt i `tools/foretak.json` pluss én kommando.
+Beskrivelsen under står som den var — den forklarer hvorfor de ikke kunne gjettes.
+
+**Åpningstider: mandag–fredag 07:00–16:00.** Lagt inn tre steder, ikke bare i schema:
+`openingHours` på alle 69 sider, synlig i kontaktkortet på `/kontakt.html`, og synlig i
+footeren overalt. Google sammenligner strukturerte data mot det som faktisk står på siden,
+så de to må stemme overens.
+
+**Forfatter: Niklas Grønvik, sertifisert kontrollør.** Alle 34 artikler har nå `author`
+som `Person` med `worksFor` og NEK 405 som `hasCredential`.
+
+Team-seksjonen på forsiden ligger fortsatt som en HTML-kommentar — den har tre kort og
+trenger bilder. Ført i `TIL_DEG.md` punkt 7.
+
+### Slik så det ut da fasen ble levert
 
 **1. `openingHours` er utelatt.**
 
@@ -887,8 +904,7 @@ Siden oppgir ikke åpningstider noe sted — verken i tekst, i footer eller i sc
 åpningstid er verre enn ingen: en kunde som ringer på et tidspunkt Google sa dere var
 åpne, og ikke får svar, har fått et dårligere møte enn en som ikke fikk noe løfte.
 
-Feltet ligger klart i `tools/foretak.json` som en tom liste. Fyll inn i schema.org-format
-og kjør generatoren på nytt:
+Feltet lå klart i `tools/foretak.json` som en tom liste, slik at det ble ett felt å fylle:
 
 ```json
 "apningstider": ["Mo-Fr 07:00-16:00"]
@@ -923,8 +939,8 @@ Det som er gjort i stedet: `author` er foretaket, med kvalifikasjonen hengt på 
 }
 ```
 
-Fyll inn navn og stilling i `tools/foretak.json` og kjør `node tools/fase4-schema.js`,
-så bygges `author` om til en `Person` med `worksFor` og samme kvalifikasjon. Én linje.
+Navn og stilling lå klart som tomme felter i `tools/foretak.json`, slik at `author` ble
+bygget om til en `Person` med `worksFor` og samme kvalifikasjon så snart navnet forelå.
 
 ### Bilder
 
@@ -1027,6 +1043,42 @@ konkurrerer, ikke en rangeringsmåling — søkeverktøyene i dette miljøet er 
 og forsøkene på å hente norske søkeresultater ble blokkert. Det tar 20 minutter fra en
 norsk nettleser, og gir i tillegg antall Google-anmeldelser hos konkurrentene, som er
 det viktigste enkelttallet for å vite hvor mye arbeid punkt 2 krever.
+
+---
+
+## 19. Byggrekkefølge — viktig hvis sidene genereres på nytt
+
+Elleve sider bygges av generatorer, mens resten er håndskrevet. Kjører du en generator
+på nytt, skrives den sida fra bunnen av — og mister da alt fase 4 la på etterpå.
+
+**Riktig rekkefølge:**
+
+```bash
+# 1. Innhold
+node tools/bygg-lokalsider.js     # de 8 lokalsidene + /omrader
+node tools/bygg-sider.js          # /priser + /forsikringsrabatt
+node tools/bygg-faq.js            # FAQ + FAQPage-schema
+
+# 2. Teknikk — må kjøres etter generatorene
+node tools/fase4-struktur.js      # lang, <main>, footer-overskrifter, defer
+node tools/fase4-lenking.js       # redaksjonelle lenker
+node tools/fase4-lenker.js        # interne lenker til kanonisk form
+node tools/fase4-overskrifter.js  # hopp i overskriftsnivå
+node tools/fase4-meta.js          # titler og beskrivelser
+node tools/fase4-schema.js        # all JSON-LD — sist, den leser ferdig HTML
+
+# 3. Kontroll
+node tools/sjekk-faq.js
+node tools/sjekk-lenking.js
+node tools/sjekk-overskrifter.js
+```
+
+`fase4-bilder.js`, `fase4-fonter.js` og `fase4-redirects.js` trenger du bare når bilder,
+fonter eller sidelista endres. Alle skriptene er idempotente — kjører du dem to ganger,
+skjer ingenting andre gang.
+
+Header og footer hentes av generatorene fra `om-oss.html`. Endrer du navigasjonen der,
+følger den med til de genererte sidene automatisk.
 
 ---
 

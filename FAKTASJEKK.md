@@ -298,8 +298,10 @@ som allerede sto på siden, men disse er nye påstander som bør leses:
 
 Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-schema.js`.
 
-- [ ] **Åpningstider.** `openingHours` er utelatt fra `LocalBusiness`-schemaet fordi siden ikke oppgir dem noe sted, og de er ikke funnet opp. Google kan vise åpningstider direkte i søkeresultatet — feil tid er verre enn ingen. Format: `["Mo-Fr 07:00-16:00"]`.
-- [ ] **Navn på kontrollør/forfatter.** Arbeidsordren ber om `author` som `Person` med NEK 405-kvalifikasjon på bloggartiklene. Det finnes ikke noe personnavn på siden — team-seksjonen på forsiden er en HTML-kommentar med plassholderen «Navn». Inntil videre står foretaket som forfatter, med kvalifikasjonen på seg. Fyll inn navn og stilling, så bygges det om til `Person`.
+- [x] **Åpningstider.** Mandag–fredag 07:00–16:00, oppgitt av eier 2026-09-14. Lagt inn i schema, i kontaktkortet og i footeren. **Sett samme tid i Google Bedriftsprofil** — Google sammenligner de to.
+- [x] **Navn på kontrollør/forfatter.** Niklas Grønvik, sertifisert kontrollør. Alle 34 artikler har nå `author` som `Person` med NEK 405 som `hasCredential`.
+- [ ] **Team-seksjonen på forsiden** ligger fortsatt som HTML-kommentar, med tre kort og plassholderen «Navn». Trenger bilder og de to andre navnene. Se `TIL_DEG.md` punkt 7.
+- [ ] **Usynlig tekst to steder.** Org.nr og adresse står i hvitt på nesten hvit bakgrunn i `kontakt.html` og `om-oss.html` — en rest fra da paletten var mørk. Pre-eksisterende, ikke innført av revisjonen. Se `TIL_DEG.md` punkt 8b.
 
 ### Bør bekreftes
 

@@ -5,7 +5,7 @@ fordi de krever opplysninger bare dere har.
 
 Lista er sortert etter hva som koster mest å la ligge, ikke etter hvor mye arbeid det er.
 
-Sist oppdatert: 2026-09-14
+Sist oppdatert: 2026-09-14 (punkt 6 og 7 er gjort)
 
 ---
 
@@ -55,7 +55,7 @@ med en bedriftsprofil som har anmeldelser.
 
    Legg gjerne til Marker, Skiptvet, Råde og Våler også hvis dere tar oppdrag der.
 6. **Fyll ut alt:** telefon `980 19 154`, nettside `https://elkontrollen.no`, org.nr, tjenester, og beskrivelse. Bruk samme formuleringer som på nettsiden.
-7. **Legg inn åpningstider.** De samme dere fyller inn i punkt 6 under — de to må stemme overens.
+7. **Legg inn åpningstider:** mandag–fredag 07:00–16:00. Samme som nå står i schema og i footeren — de må stemme overens.
 8. **Last opp bilder.** Minst ti: sikringsskap dere har kontrollert, termografibilder, bil med logo, kontrollør i arbeid. Google vekter profiler med ekte bilder høyere enn profiler med stockbilder.
 9. Verifiser profilen. Google sender som regel et kort i posten. Det tar en til to uker.
 
@@ -213,56 +213,47 @@ Når oppføringene er på plass, legg URL-ene inn i `tools/foretak.json` under `
 
 ---
 
-## 6. Åpningstider — ett felt, og schemaet er komplett
+## 6. ~~Åpningstider~~ ✅ gjort
 
-**Tid: 2 minutter.**
+Mandag–fredag 07:00–16:00 er lagt inn, oppgitt av eier 2026-09-14. Tre steder:
 
-Nettsiden oppgir ikke åpningstider noe sted. De er derfor ikke lagt inn i
-`LocalBusiness`-schemaet — Google kan vise åpningstider direkte i søkeresultatet, og
-en kunde som ringer på et tidspunkt Google sa dere var åpne og ikke får svar, har fått
-et dårligere møte enn en som ikke fikk noe løfte.
+- `openingHours` i `LocalBusiness`-schemaet på alle 69 sider
+- Synlig i kontaktkortet på `/kontakt.html`
+- Synlig i footeren på alle sider
 
-Åpne `tools/foretak.json`, fyll inn i schema.org-format:
-
-```json
-"apningstider": ["Mo-Fr 07:00-16:00"]
-```
-
-Kjør så:
-
-```bash
-node tools/fase4-schema.js
-```
-
-Verdiene må stemme med det som står i Google Bedriftsprofil.
+**Én ting gjenstår:** samme åpningstid må settes i Google Bedriftsprofil (punkt 1).
+Google sammenligner schema mot bedriftsprofilen, og avvik mellom dem svekker begge.
 
 ---
 
-## 7. Navn på kontrolløren
+## 7. ~~Navn på kontrolløren~~ ✅ gjort
 
-**Tid: 2 minutter, men det krever en avgjørelse.**
-
-Arbeidsordren ba om at bloggartiklene skulle ha `author` som en `Person` med oppgitt
-NEK 405-kvalifikasjon. Det er ikke gjort, fordi det ikke finnes noe personnavn på siden —
-team-seksjonen på forsiden ligger som en HTML-kommentar med plassholderen «Navn» og
-notisen «skjult til vi har ekte bilder og navn».
-
-Inntil videre står Elkontrollen AS som forfatter, med NEK 405 som `hasCredential`. Det
-fungerer, men et navngitt menneske med en sertifisering er et sterkere signal — særlig
-på et fagområde der Google vekter hvem som har skrevet det.
-
-Fyll inn i `tools/foretak.json`:
+Alle 34 bloggartikler har nå `author` som `Person`:
 
 ```json
-"forfatter": { "navn": "Fornavn Etternavn", "stilling": "Sertifisert kontrollør" }
+"author": {
+  "@type": "Person",
+  "name": "Niklas Grønvik",
+  "jobTitle": "Sertifisert kontrollør",
+  "worksFor": { "@id": "https://elkontrollen.no/#elkontrollen" },
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "Sertifisering",
+    "name": "NEK 405-sertifisert kontrollør"
+  }
+}
 ```
 
-Kjør `node tools/fase4-schema.js`. Da bygges `author` om til en `Person` med `worksFor`
-og kvalifikasjonen.
+**Det som gjenstår er ikke teknisk.** Team-seksjonen «Hvem kommer hjem til deg?» ligger
+fortsatt som en HTML-kommentar på forsiden, med tre kort og plassholderen «Navn» i hvert.
+Den ble skjult «til vi har ekte bilder og navn». Nå finnes ett navn — men kortene er tre,
+og det mangler bilder.
 
-**Mens du er i gang:** ta bildene og fjern HTML-kommentaren rundt team-seksjonen på
-forsiden. «Du får navnet på kontrolløren din når du bestiller» er et sterkt argument
-mot elektrikerfirmaene som sender hvem som helst.
+Ta bildene, fyll inn navnene, og fjern kommentartegnene rundt seksjonen i `index.html`
+(linje 220 og framover). Teksten som allerede står der — «Ingen anonyme montører. Du får
+navnet på kontrolløren din når du bestiller, og det er samme person som skriver
+rapporten» — er et av de sterkeste argumentene på hele siden mot elektrikerfirmaene som
+sender hvem som helst. Den er usynlig i dag.
 
 ---
 
@@ -307,6 +298,33 @@ npx lighthouse https://elkontrollen.no/ --view
 
 Send en melding gjennom <https://elkontrollen.no/kontakt.html>. Du skal lande på
 `/takk`, og meldingen skal dukke opp både i Netlify og på `post@elkontrollen.no`.
+
+---
+
+## 8b. Usynlig tekst to steder — bedriftsopplysningene deres
+
+**Tid: 2 minutter, men det er en fargebeslutning.**
+
+Dette er ikke noe revisjonen innførte — det har ligget der hele tiden, og koden er
+uendret fra før. Men det er verdt å vite om, særlig nå som punkt 5 handler om at navn,
+adresse og org.nr skal stå likt overalt: to steder står de i praksis ikke i det hele tatt.
+
+| Fil | Tekst | Farge | Bakgrunn |
+|---|---|---|---|
+| `kontakt.html` | «Org.nr 825 176 942 · Elkontrollen AS» | `rgba(255,255,255,.55)` | `.info-card` → `--navy` = `#F4F6F4` |
+| `om-oss.html` | «Elkontrollen AS / Lorangløkka 1, 1782 Halden / Org.nr …» | `rgba(255,255,255,.6)` | `.cta-band` → `--navy` = `#F4F6F4` |
+
+Hvit tekst på nesten hvit bakgrunn. Det ser ut som en rest fra da fargepaletten var mørk —
+variabelen heter fortsatt `--navy`, men verdien er lys nå. De to stedene har fargen skrevet
+rett inn i `style`-attributtet, så de fulgte ikke med da paletten ble byttet.
+
+Fikset er å bytte `color:rgba(255,255,255,.55)` til `color:var(--muted)` — samme token som
+all annen dempet tekst på siden bruker. Det er ikke gjort her, fordi arbeidsordren sier at
+det visuelle uttrykket ikke skal røres uten at en oppgave ber om det, og hvor dempet
+teksten skal være er en vurdering. Si fra, så tar det et halvt minutt.
+
+Verdt å merke seg: `.hero-photo .cap-out` bruker samme hvite farge, men den ligger på en
+faktisk mørk bakgrunn og er riktig som den er.
 
 ---
 
@@ -360,6 +378,6 @@ dere faktisk har sett. Det er den slags detalj konkurrentene ikke kan kopiere.
 | Når | Hva |
 |---|---|
 | **I dag** | Punkt 0 (`xxx`-teksten), punkt 4 (e-postvarsling) |
-| **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå), punkt 6 og 7 (to felt i `foretak.json`), punkt 8 (etter deploy) |
+| **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå), punkt 8b (usynlig tekst) |
 | **Neste uke** | Punkt 3 (Search Console), punkt 5 (registre), punkt 9 (rangeringssjekk) |
 | **Løpende** | Punkt 2 (anmeldelser — to til fire i måneden), punkt 10 (faktasjekk) |
