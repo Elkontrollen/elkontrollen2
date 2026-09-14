@@ -4,32 +4,44 @@ Oppgaver som ikke kan gjøres fra kode. Noen fordi de krever innlogging et sted,
 fordi de krever opplysninger bare dere har.
 
 Lista er sortert etter hva som koster mest å la ligge, ikke etter hvor mye arbeid det er.
+Punktene som er krysset ut, er gjort underveis.
 
-Sist oppdatert: 2026-09-14 (punkt 6, 7, 8b og 8c er gjort)
+Sist oppdatert: 2026-09-14 (punkt 0, 6, 7, 8b og 8c er gjort)
 
 ---
 
-## 0. Fjern «Fra xxx kr/år» — det ligger ute nå
+## 0. ~~«Fra xxx kr/år»~~ ✅ gjort
 
-**Tid: 5 minutter. Dette er det eneste punktet som er en ren feil.**
+Plassholderen er borte fra alle tolv stedene — tre priskort på `/borettslag/` og ni
+tabellceller på `/borettslag/pris/`.
 
-Teksten `Fra xxx kr/år` står synlig i produksjon, seks steder:
+**Priskortene** sier nå «Pris settes etter kartleggingen», i stedet for et beløp som
+aldri ble fylt inn. Linja under sto allerede der: «Pris avhenger av antall enheter,
+tavler og ladepunkter. Fast årspris.»
 
-| Side | Antall |
-|---|---|
-| <https://elkontrollen.no/borettslag/> | 3 (priskortene for Basis, Trygg og Komplett) |
-| <https://elkontrollen.no/borettslag/pris/> | 3 (tabellen «Fra-priser etter lagstørrelse») |
+**Tabellen** er fjernet. Ni celler med samme setning gir ingen mening, og overskriften
+«Fra-priser etter lagstørrelse» lovet tall som ikke fantes. Seksjonen heter nå «Hva koster
+Trygt Borettslag?» og forklarer hvorfor prisen settes etter kartleggingen — at to lag med
+like mange leiligheter kan ha helt ulikt anlegg, og at en fra-pris satt uten å ha sett
+bygget blir for høy for det enkle laget eller for lav for det sammensatte. Under ligger
+en knapp til den gratis kartleggingen.
 
-`/borettslag/pris` er konverteringssiden for hele Trygt Borettslag-produktet. En
-styreleder som kommer dit for å finne en pris, møter bokstavene «xxx».
+Seksjonen «Slik settes prisen» rett etter, som lister de fire faktorene, står som den var
+og flyter nå logisk fra forklaringen.
 
-Dette er ikke rettet i revisjonen, fordi det å velge hva som skal stå der er en
-prisbeslutning, ikke en skrivefeil. To alternativer:
+**Også rettet, fordi de lovet det samme:**
 
-1. **Fyll inn fra-prisene.** Ni tall i tabellen på `/borettslag/pris/` (tre nivåer × tre lagstørrelser) og tre på `/borettslag/`.
-2. **Fjern tallkolonnene** og skriv i stedet «Pris settes etter kartleggingen». Da lover dere ikke et tall dere ikke har bestemt.
+| Sted | Før | Etter |
+|---|---|---|
+| `meta description` på `/borettslag/pris/` | «Fra-priser for Trygt Borettslag etter lagstørrelse og nivå …» | «Pris settes etter en gratis kartlegging av bygget …» |
+| `og:description` og `twitter:description` | samme | samme |
+| Hero-stempelet | «Fra-pris · del av Trygt Borettslag» | «Pris etter kartlegging · del av Trygt Borettslag» |
+| FAQ på `/borettslag/`: «Hva koster det?» | «Se fra-priser for de tre nivåene …» | «Prisen settes etter en gratis og uforpliktende kartlegging …» |
 
-Begge er bedre enn det som står nå.
+FAQ-schemaet er bygget på nytt, så strukturerte data stemmer med teksten.
+
+**Vil dere heller ha tall der?** Fyll inn ni beløp, si fra, så setter jeg tabellen
+tilbake. Formuleringen nå lover ingenting dere ikke kan holde.
 
 ---
 
@@ -394,7 +406,7 @@ dere faktisk har sett. Det er den slags detalj konkurrentene ikke kan kopiere.
 
 | Når | Hva |
 |---|---|
-| **I dag** | Punkt 0 (`xxx`-teksten), punkt 4 (e-postvarsling) |
+| **I dag** | Punkt 4 (e-postvarsling) |
 | **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå) |
 | **Neste uke** | Punkt 3 (Search Console), punkt 5 (registre), punkt 9 (rangeringssjekk) |
 | **Løpende** | Punkt 2 (anmeldelser — to til fire i måneden), punkt 10 (faktasjekk) |

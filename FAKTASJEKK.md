@@ -11,30 +11,19 @@ teksten endres, rett den i `tools/innhold-steder.js` og kjør `node tools/bygg-l
 på nytt — **ikke i HTML-filen direkte**, ellers blir endringen overskrevet neste gang
 sidene genereres.
 
-Sist oppdatert: 2026-09-14 (etter fase 4)
+Sist oppdatert: 2026-09-14 (etter fase 5 og oppfølgingsrettelser)
 
 ---
 
-## 0. HASTER — placeholder-tekst ligger ute i produksjon
+## 0. ~~Placeholder-tekst i produksjon~~ ✅ rettet
 
-`Fra xxx kr/år` står som synlig tekst på to publiserte sider, seks steder til sammen:
+`Fra xxx kr/år` er fjernet fra alle tolv stedene. Priskortene på `/borettslag/` sier nå
+«Pris settes etter kartleggingen», og tabellen på `/borettslag/pris/` er erstattet av en
+forklaring på hvorfor prisen settes etter den gratis kartleggingen.
 
-| Fil | Antall | Hvor |
-|---|---|---|
-| `borettslag/index.html` | 3 | Priskortene for Basis, Trygg og Komplett |
-| `borettslag/pris/index.html` | 3 | Tabellen «Fra-priser etter lagstørrelse», ni celler med samme tekst |
+Sidetittel, beskrivelse, hero-stempel og ett FAQ-svar lovet også «fra-priser» og er rettet.
 
-Verifisert live på <https://elkontrollen.no/borettslag/pris/> 2026-09-14.
-
-Dette er ikke rettet i revisjonen, fordi det å velge hva som skal stå der er en
-prisbeslutning, ikke en skrivefeil. Men det er den enkeltfeilen på hele siden som
-koster mest: `/borettslag/pris` er konverteringssiden for hele Trygt Borettslag-produktet,
-og en styreleder som leter etter en pris møter bokstavene «xxx».
-
-- [ ] **Fyll inn fra-prisene, eller erstatt tabellen med en formulering som ikke lover et tall** — for eksempel «Pris settes etter kartleggingen». Begge deler er bedre enn det som står nå.
-
-Merk at `/priser` (ny i fase 3) lenker til `/borettslag/pris`, men gjentar ikke
-plassholderen — der står det «Årsavtale, etter antall enheter, tavler og ladepunkter».
+- [ ] **Bekreft formuleringen.** «Pris settes etter kartleggingen» lover ingenting dere ikke kan holde, men det er en posisjonering: dere publiserer ikke lenger et startpunkt. Vil dere heller ha tall, er tabellstrukturen enkel å sette tilbake med ni beløp.
 
 ---
 
@@ -325,7 +314,7 @@ Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-sch
 
 | Kategori | Antall punkter |
 |---|---|
-| **0. Placeholder-tekst i produksjon** | **1 — haster** |
+| 0. Placeholder-tekst i produksjon | rettet |
 | 1. Påstander om egen erfaring i området | 24 |
 | 2. Reisetid og tilgjengelighet | 13 |
 | 3. Pris og betingelser | 7 |
@@ -336,13 +325,12 @@ Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-sch
 | 8. Teknisk SEO — åpningstider, forfatternavn, koordinater, bilder | 9 |
 | **Til sammen** | **87** |
 
-**Punkt 0 er det eneste som er en ren feil.** Resten er påstander som sannsynligvis
-stemmer, men som ingen utenfra kan bekrefte.
+Punkt 0 var det eneste som var en ren feil, og den er rettet. Resten er påstander som
+sannsynligvis stemmer, men som ingen utenfra kan bekrefte.
 
 Rekkefølgen vi ville tatt dem i:
 
-1. **Punkt 0** — `Fra xxx kr/år` ligger ute nå og koster salg hver dag den står.
-2. **Punkt 3 og 7** — pris. Beløpene står nå i `Offer`-schema og kan vises direkte i Google.
-3. **Punkt 5** — sertifiseringsomfang. `README.md` og `llms.txt` ramser opp NEK 405-1, -3 og -4, mens boligtjenesten markedsføres etter NEK 405-2. Én av dem er feil.
-4. **Punkt 1, 2 og 4** — påstander om egen erfaring. Lavere risiko, men bør gjennom før sidene får trafikk.
-5. **Punkt 6** — bilder. Kosmetisk, bortsett fra de fire som gir 404.
+1. **Punkt 3 og 7** — pris. Beløpene står nå i `Offer`-schema og kan vises direkte i Google.
+2. **Punkt 5** — sertifiseringsomfang. `README.md` og `llms.txt` ramser opp NEK 405-1, -3 og -4, mens boligtjenesten markedsføres etter NEK 405-2. Én av dem er feil.
+3. **Punkt 1, 2 og 4** — påstander om egen erfaring. Lavere risiko, men bør gjennom før sidene får trafikk.
+4. **Punkt 6** — bilder. Kosmetisk, bortsett fra de fire som gir 404.

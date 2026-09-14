@@ -1089,6 +1089,42 @@ ligger på faktisk mørk bakgrunn. De er riktige og ikke rørt.
 
 ---
 
+## 18c. Plassholderprisene (rettet etterpå)
+
+`Fra xxx kr/år` sto som synlig tekst i produksjon tolv steder — tre priskort på
+`/borettslag/` og ni tabellceller på `/borettslag/pris/`. Funnet under fase 3, da
+prissiden ble bygget. Det ble ikke rettet da, fordi hva som skulle stå i stedet er en
+prisbeslutning. Eieren valgte formuleringen «Pris settes etter kartleggingen».
+
+**Priskortene** har fått den setningen der beløpet skulle stått, i 16,5 px i stedet for
+24 px — det er ikke lenger et tall, og skal ikke se ut som ett. Linja under sto der fra
+før: «Pris avhenger av antall enheter, tavler og ladepunkter. Fast årspris.»
+
+**Tabellen er fjernet.** Ni celler med samme setning gir ingen mening, og overskriften
+«Fra-priser etter lagstørrelse» lovet tall som ikke fantes. Seksjonen heter nå «Hva koster
+Trygt Borettslag?» og forklarer hvorfor: to lag med like mange leiligheter kan ha helt
+ulikt anlegg, og en fra-pris satt uten å ha sett bygget blir enten for høy for det enkle
+laget eller for lav for det sammensatte. Under ligger en knapp til den gratis
+kartleggingen. Seksjonen «Slik settes prisen» rett etter, som lister de fire faktorene,
+er urørt og flyter nå logisk fra forklaringen.
+
+Fire andre steder lovet det samme og er rettet med:
+
+| Sted | Før | Etter |
+|---|---|---|
+| `meta description` på `/borettslag/pris/` | «Fra-priser for Trygt Borettslag etter lagstørrelse og nivå …» | «Pris settes etter en gratis kartlegging av bygget …» |
+| `og:description` og `twitter:description` | samme tekst | samme rettelse |
+| Hero-stempelet | «Fra-pris · del av Trygt Borettslag» | «Pris etter kartlegging · del av Trygt Borettslag» |
+| FAQ på `/borettslag/`: «Hva koster det?» | «Se fra-priser for de tre nivåene …» | «Prisen settes etter en gratis og uforpliktende kartlegging …» |
+
+`FAQPage`-schemaet er bygget på nytt, så strukturerte data stemmer med teksten.
+
+`/borettslag/kartlegging/` sier fortsatt at dere gir «en fra-pris» etter gjennomgangen.
+Det er ikke rørt — det er en pris dere gir kunden etter å ha sett bygget, ikke en dere
+publiserer på forhånd, og den påstanden er fortsatt riktig.
+
+---
+
 ## 19. Byggrekkefølge — viktig hvis sidene genereres på nytt
 
 Elleve sider bygges av generatorer, mens resten er håndskrevet. Kjører du en generator
