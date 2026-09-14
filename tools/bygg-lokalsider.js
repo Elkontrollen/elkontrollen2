@@ -10,7 +10,7 @@ const path = require('path');
 
 const ROT = path.join(__dirname, '..');
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'steder.json'), 'utf8'));
-const innhold = require('./innhold-steder.js');
+const innhold = Object.assign({}, require('./innhold-steder.js'), require('./innhold-steder-nye.js'));
 
 const MAL = fs.readFileSync(path.join(ROT, 'om-oss.html'), 'utf8');
 const HEADER = MAL.match(/<header>[\s\S]*?<\/header>/)[0].replace(/ class="current"/g, '');
@@ -96,7 +96,12 @@ const TJENESTEVALG = {
   'indre-ostfold': ['landbruk', 'bolig', 'naering', 'internkontroll', 'boligsalg', 'avvik'],
   rakkestad: ['landbruk', 'bolig', 'naering', 'internkontroll', 'boligsalg', 'avvik'],
   hvaler: ['bolig', 'boligsalg', 'borettslag', 'naering', 'avvik', 'kontrollavtale'],
-  aremark: ['bolig', 'landbruk', 'boligsalg', 'naering', 'avvik', 'kontrollavtale']
+  aremark: ['bolig', 'landbruk', 'boligsalg', 'naering', 'avvik', 'kontrollavtale'],
+  drammen: ['bolig', 'boligsalg', 'borettslag', 'naering', 'ladeanlegg', 'avvik'],
+  lillestrom: ['bolig', 'boligsalg', 'borettslag', 'naering', 'internkontroll', 'avvik'],
+  oslo: ['bolig', 'borettslag', 'boligsalg', 'naering', 'ladeanlegg', 'kontrollavtale'],
+  baerum: ['bolig', 'boligsalg', 'ladeanlegg', 'borettslag', 'naering', 'avvik'],
+  asker: ['bolig', 'boligsalg', 'borettslag', 'naering', 'avvik', 'kontrollavtale']
 };
 
 // Artikler å lenke til fra hver lokalside (Fase 4 krever minst to per tjenesteside).
@@ -120,7 +125,8 @@ const ARTIKLER = {
 
 const ARTIKKELVALG = {
   fredrikstad: 'standard', sarpsborg: 'standard', halden: 'standard', moss: 'standard',
-  'indre-ostfold': 'landbruk', rakkestad: 'landbruk', hvaler: 'kyst', aremark: 'kyst'
+  'indre-ostfold': 'landbruk', rakkestad: 'landbruk', hvaler: 'kyst', aremark: 'kyst',
+  drammen: 'standard', lillestrom: 'standard', oslo: 'standard', baerum: 'standard', asker: 'kyst'
 };
 
 function byggSide(sted) {
@@ -301,8 +307,8 @@ ${faq.html}
 
 function byggOversikt(steder) {
   const url = BASE + '/omrader.html';
-  const tittel = 'Områder vi dekker i Østfold | Elkontrollen';
-  const beskrivelse = 'Elkontrollen dekker Halden, Fredrikstad, Sarpsborg, Moss, Indre Østfold, Rakkestad, Hvaler og Aremark. Fastpris 5 000 kr, ingen kjøretillegg.';
+  const tittel = 'Områder vi dekker | Elkontrollen';
+  const beskrivelse = 'Elkontrollen dekker Østfold, Oslo, Akershus og Buskerud. Se bygningsmassen i tall for hver kommune, og hva den betyr for det elektriske anlegget.';
 
   const kort = steder.map(s => {
     const c = innhold[s.slug];
@@ -314,12 +320,12 @@ function byggOversikt(steder) {
         </a>`;
   }).join('\n');
 
-  const rader = steder.map(s => `        <tr><td><a href="elkontroll-${s.slug}.html">${s.navn}</a></td><td>${nf(s.boliger)}</td><td>${nf(s.fritidsbygg)}</td><td>${nf(s.gardsbruk)}</td><td>${s.km === 0 ? '—' : s.km + ' km'}</td></tr>`).join('\n');
+  const rader = steder.map(s => `        <tr><td><a href="elkontroll-${s.slug}.html">${s.navn}</a></td><td>${s.fylke}</td><td>${nf(s.boliger)}</td><td>${nf(s.fritidsbygg)}</td><td>${nf(s.gardsbruk)}</td><td>${s.km === 0 ? '—' : s.km + ' km'}</td></tr>`).join('\n');
 
   const faq = faqBlokk([
-    ['Tar dere kjøretillegg?', 'Nei. Fastprisen på 5 000 kr for elkontroll av bolig gjelder i hele Østfold, uavhengig av hvor i fylket du bor.'],
+    ['Tar dere kjøretillegg?', 'Innenfor Østfold: nei. Fastprisen på 5 000 kr for elkontroll av bolig gjelder i hele fylket. For Oslo, Akershus og Buskerud avtaler vi tidspunkt når vi setter opp ruten — ta kontakt, så avklarer vi pris for ditt oppdrag.'],
     ['Dekker dere andre steder enn Østfold?', 'Ja. Vi er Halden-basert og dekker Østfold og hele Østlandet. Sidene her beskriver Østfold-kommunene vi jobber mest i — ta kontakt hvis du er utenfor, så finner vi ut av det.'],
-    ['Hvor raskt kan dere komme?', 'Det avhenger av hvor du er og hvor mye vi har inne. Vi svarer på henvendelser innen 24 timer og avtaler tidspunkt da. I Halden og nabokommunene kan vi ofte rykke ut på kort varsel.'],
+    ['Hvor raskt kan dere komme?', 'Det avhenger av hvor du er. I Halden og nabokommunene kan vi ofte rykke ut på kort varsel. Oslo, Akershus og Buskerud ligger halvannen til to timer unna, og der planlegger vi oppdrag samlet. Vi svarer på henvendelser innen 24 timer og avtaler tidspunkt da.'],
     ['Kan flere naboer bestille samtidig?', 'Ja, og det er en god idé. Vi setter gjerne opp flere oppdrag i samme område på samme dag. Det gir oss bedre logistikk og dere raskere tid.'],
     ['Hva koster det, og varierer prisen med avstand?', 'Elkontroll av bolig koster 5 000 kr som fastpris, med termografering inkludert, og prisen er den samme i hele Østfold. Borettslag, landbruk og næringsbygg får tilbud fordi omfanget varierer for mye til at én pris gir mening. Se prissiden for hele oversikten.']
   ]);
@@ -337,9 +343,9 @@ function byggOversikt(steder) {
   const body = `
 <section class="page-hero">
   <div class="wrap">
-    <span class="stamp"><span class="dot"></span>Halden-basert · dekker Østfold og Østlandet</span>
-    <h1>Områder vi dekker <span>i Østfold.</span></h1>
-    <p class="lead">Vi holder til i Lorangløkka 1 i Halden og tar oppdrag i hele fylket. Samme fastpris uansett hvor i Østfold du bor — vi tar ikke kjøretillegg.</p>
+    <span class="stamp"><span class="dot"></span>Halden-basert · Østfold, Oslo, Akershus og Buskerud</span>
+    <h1>Områder vi dekker <span>— fire fylker.</span></h1>
+    <p class="lead">Vi holder til i Lorangløkka 1 i Halden og tar oppdrag i Østfold, Oslo, Akershus og Buskerud. Innenfor Østfold er fastprisen den samme uansett hvor du bor — der tar vi ikke kjøretillegg.</p>
   </div>
 </section>
 
@@ -354,10 +360,10 @@ ${kort}
 
 <section class="section" style="border-top:1px solid var(--line); background:var(--paper-2);">
   <div class="wrap">
-    <div class="sec-head"><h2>Bygningsmassen i tall</h2><p>Grunnlaget for hvordan vi planlegger oppdrag i hver kommune.</p></div>
+    <div class="sec-head"><h2>Bygningsmassen i tall</h2><p>Grunnlaget for hvordan vi planlegger oppdrag i hver kommune. Kolonnen «Fra Halden» viser hvorfor Østfold-kommunene har kortest responstid.</p></div>
     <div class="data-table-wrap">
       <table class="data-table">
-        <thead><tr><th>Kommune</th><th>Boliger</th><th>Fritidsbygg</th><th>Gårdsbruk</th><th>Fra Halden</th></tr></thead>
+        <thead><tr><th>Kommune</th><th>Fylke</th><th>Boliger</th><th>Fritidsbygg</th><th>Gårdsbruk</th><th>Fra Halden</th></tr></thead>
         <tbody>
 ${rader}
         </tbody>

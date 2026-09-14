@@ -222,5 +222,145 @@
   "seksjon": "Fra Halden til Aremark",
   "nr": 0,
   "tekst": "Kjøreavstand 26 km / 27 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «under en halvtime» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-drammen.html",
+  "sted": "Drammen",
+  "seksjon": "Det vi typisk finner i Drammen",
+  "nr": 1,
+  "tekst": "I den eldre bebyggelsen fra industritiden møter vi anlegg som er bygget ut i flere omganger over lang tid. Et nytt sikringsskap sier ikke nødvendigvis noe om hva som ligger bak det — gamle kurser i rør, skjøter i uinspiserbare hulrom og manglende jording i deler av boligen er ting vi ser jevnlig i denne typen bygg."
+ },
+ {
+  "fil": "elkontroll-drammen.html",
+  "sted": "Drammen",
+  "seksjon": "Det vi typisk finner i Drammen",
+  "nr": 2,
+  "tekst": "I boligfeltene fra 1960- og 70-tallet er de vanligste funnene knyttet til varmgang: løse koblinger i sikringsskap og koblingsbokser, overbelastede kurser, og skrusikringssokler med høy overgangsmotstand. Det er nettopp dette termografering avdekker."
+ },
+ {
+  "fil": "elkontroll-drammen.html",
+  "sted": "Drammen",
+  "seksjon": "Det vi typisk finner i Drammen",
+  "nr": 3,
+  "tekst": "I blokkbebyggelsen er det ofte hovedfordelingen som setter grensen når laget vil ha ladeanlegg. Stigeledningene ble dimensjonert for et forbruk ingen forutså."
+ },
+ {
+  "fil": "elkontroll-drammen.html",
+  "sted": "Drammen",
+  "seksjon": "Fra Halden til Drammen",
+  "nr": 0,
+  "tekst": "Kjøreavstand 133 km / 117 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «i underkant av to timer» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-lillestrom.html",
+  "sted": "Lillestrøm",
+  "seksjon": "Det vi typisk finner i Lillestrøm",
+  "nr": 1,
+  "tekst": "I boligmassen fra 60- og 70-tallet er de gjengående funnene overbelastede kurser og løse koblinger. Typisk er at kjøkkenet er pusset opp med nytt utstyr, men på samme kurs som før, og at varmekabler og varmepumpe er lagt inn i et skap som ikke har fått flere kurser."
+ },
+ {
+  "fil": "elkontroll-lillestrom.html",
+  "sted": "Lillestrøm",
+  "seksjon": "Det vi typisk finner i Lillestrøm",
+  "nr": 2,
+  "tekst": "I nyere bebyggelse er det oftere dokumentasjonen som mangler enn anlegget som svikter. Samsvarserklæringer som aldri ble overlevert, og ladeanlegg montert av en leverandør boligeieren eller laget fant selv — uten at papirene fulgte med."
+ },
+ {
+  "fil": "elkontroll-lillestrom.html",
+  "sted": "Lillestrøm",
+  "seksjon": "Det vi typisk finner i Lillestrøm",
+  "nr": 3,
+  "tekst": "I de østlige delene mot Fetsund og Sørumsand er innslaget av eneboliger og spredt bebyggelse større, med lengre kurser ut til uthus, garasje og brygge."
+ },
+ {
+  "fil": "elkontroll-lillestrom.html",
+  "sted": "Lillestrøm",
+  "seksjon": "Fra Halden til Lillestrøm",
+  "nr": 0,
+  "tekst": "Kjøreavstand 134 km / 109 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «rundt to timer» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-oslo.html",
+  "sted": "Oslo",
+  "seksjon": "Det vi typisk finner i Oslo",
+  "nr": 1,
+  "tekst": "I murgårdene er det lagene som er utfordringen. Vi finner kurser fra ulike tiår i samme boks, skjøter i hulrom som ikke lar seg inspisere, og deler av leiligheten uten jording — gjerne akkurat der det i dag står utstyr som burde hatt den."
+ },
+ {
+  "fil": "elkontroll-oslo.html",
+  "sted": "Oslo",
+  "seksjon": "Det vi typisk finner i Oslo",
+  "nr": 2,
+  "tekst": "I drabantbyene er varmgang i hovedfordelinger det vanligste. Anleggene har gått i femti–seksti år, klemmer har løsnet med temperatursykluser, og det er ikke synlig før man setter varmekamera på det under last."
+ },
+ {
+  "fil": "elkontroll-oslo.html",
+  "sted": "Oslo",
+  "seksjon": "Det vi typisk finner i Oslo",
+  "nr": 3,
+  "tekst": "I den nyere bebyggelsen er det dokumentasjonen som mangler oftere enn anlegget svikter: samsvarserklæringer som ikke ble overlevert, kursfortegnelser som ikke er oppdatert, og ladeanlegg uten papirer."
+ },
+ {
+  "fil": "elkontroll-oslo.html",
+  "sted": "Oslo",
+  "seksjon": "Fra Halden til Oslo",
+  "nr": 0,
+  "tekst": "Kjøreavstand 119 km / 97 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «drøyt halvannen time» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-baerum.html",
+  "sted": "Bærum",
+  "seksjon": "Det vi typisk finner i Bærum",
+  "nr": 1,
+  "tekst": "I villabebyggelsen fra 60- og 70-tallet er det kombinasjonen av alder og påkoblet last som gir funnene. Kjøkken er pusset opp, varmepumpe og varmekabler er lagt inn, og ofte er det montert elbillader — alt på et anlegg som ikke er dimensjonert opp underveis."
+ },
+ {
+  "fil": "elkontroll-baerum.html",
+  "sted": "Bærum",
+  "seksjon": "Det vi typisk finner i Bærum",
+  "nr": 2,
+  "tekst": "Varmekabler på bad fra 70- og 80-tallet er en gjenganger. De har ingen evig levetid, og en isolasjonsmåling avslører tilstanden lenge før feilen blir synlig."
+ },
+ {
+  "fil": "elkontroll-baerum.html",
+  "sted": "Bærum",
+  "seksjon": "Det vi typisk finner i Bærum",
+  "nr": 3,
+  "tekst": "I blokk- og rekkehusbebyggelsen er hovedfordelingen ofte begrensningen når laget vil etablere ladeanlegg for flere plasser samtidig."
+ },
+ {
+  "fil": "elkontroll-baerum.html",
+  "sted": "Bærum",
+  "seksjon": "Fra Halden til Bærum",
+  "nr": 0,
+  "tekst": "Kjøreavstand 133 km / 111 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «rundt to timer» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-asker.html",
+  "sted": "Asker",
+  "seksjon": "Det vi typisk finner i Asker",
+  "nr": 1,
+  "tekst": "På hytter og fritidsboliger langs kysten ser vi korrosjon i utvendige koblinger og uttak, og anlegg som er utvidet stykkevis over mange år uten en samlet vurdering av kapasitet og vern."
+ },
+ {
+  "fil": "elkontroll-asker.html",
+  "sted": "Asker",
+  "seksjon": "Det vi typisk finner i Asker",
+  "nr": 2,
+  "tekst": "I villabebyggelsen i nord er funnene de samme som ellers i Oslo-området: kurser som går tett opp mot merkestrøm, manglende jordfeilvern på eldre kurser, og varmekabler fra 70- og 80-tallet som nærmer seg teknisk levetid."
+ },
+ {
+  "fil": "elkontroll-asker.html",
+  "sted": "Asker",
+  "seksjon": "Det vi typisk finner i Asker",
+  "nr": 3,
+  "tekst": "I bygg som er omgjort fra industri til annen bruk, er anlegget ofte lagt for en helt annen virksomhet enn den som drives der i dag. Da stemmer verken kurstall, vern eller dokumentasjon med faktisk bruk."
+ },
+ {
+  "fil": "elkontroll-asker.html",
+  "sted": "Asker",
+  "seksjon": "Fra Halden til Asker",
+  "nr": 0,
+  "tekst": "Kjøreavstand 130 km / 113 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «rundt to timer» og påstanden om at dere er i området jevnlig stemmer."
  }
 ]

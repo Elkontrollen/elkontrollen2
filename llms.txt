@@ -23,17 +23,27 @@ Elkontrollen er sertifisert etter NEK 405-1 (termografi), NEK 405-3 (næring) og
 
 ## Områder
 
-Elkontrollen er Halden-basert og tar oppdrag i Østfold, Oslo, Akershus og Buskerud. Samme fastpris uansett hvor i Østfold kunden bor — ingen kjøretillegg der.
+Elkontrollen er Halden-basert og dekker Østfold, Oslo, Akershus og Buskerud. Innenfor Østfold er fastprisen den samme uansett hvor kunden bor, uten kjøretillegg.
 
 - [Områder vi dekker](https://elkontrollen.no/omrader.html): Samleside med bygningsmassen i tall for hver kommune.
-- [Elkontroll i Fredrikstad](https://elkontrollen.no/elkontroll-fredrikstad.html): Ca. 36 km fra Halden. Dekker Gamlebyen, Cicignon, Trara, Holmen, Kråkerøy m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
-- [Elkontroll i Sarpsborg](https://elkontrollen.no/elkontroll-sarpsborg.html): Ca. 31 km fra Halden. Dekker Sarpsborg sentrum, Greåker, Sandesund, Opsund, Grina m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
-- [Elkontroll i Halden](https://elkontrollen.no/elkontroll-halden.html): Hjemmemarked — kontoret ligger i Lorangløkka 1 i Halden. Dekker Sørsiden, Nordsiden, Tistedalen, Isebakke, Sponvika m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
-- [Elkontroll i Moss](https://elkontrollen.no/elkontroll-moss.html): Ca. 61 km fra Halden. Dekker Moss sentrum, Jeløy, Kambo, Melløs, Krapfoss m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
-- [Elkontroll i Indre Østfold](https://elkontrollen.no/elkontroll-indre-ostfold.html): Ca. 56 km fra Halden. Dekker Askim, Mysen, Spydeberg, Eidsberg, Trøgstad m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
-- [Elkontroll i Rakkestad](https://elkontrollen.no/elkontroll-rakkestad.html): Ca. 39 km fra Halden. Dekker Rakkestad sentrum, Degernes, Os, Bergenhus, Fladstad m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
-- [Elkontroll i Hvaler](https://elkontrollen.no/elkontroll-hvaler.html): Ca. 63 km fra Halden. Dekker Skjærhalden, Kirkøy, Asmaløy, Spjærøy, Vesterøy m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
-- [Elkontroll i Aremark](https://elkontrollen.no/elkontroll-aremark.html): Ca. 26 km fra Halden. Dekker Fossby, Strømsfoss, Aremark sentrum, Ytre Aremark, Øymark m.fl. Fastpris 5000 kr for bolig, ingen kjøretillegg innenfor Østfold.
+- [Elkontroll i Fredrikstad](https://elkontrollen.no/elkontroll-fredrikstad.html): Østfold. Ca. 36 km fra Halden. Dekker Gamlebyen, Cicignon, Trara, Holmen, Kråkerøy m.fl.
+- [Elkontroll i Sarpsborg](https://elkontrollen.no/elkontroll-sarpsborg.html): Østfold. Ca. 31 km fra Halden. Dekker Sarpsborg sentrum, Greåker, Sandesund, Opsund, Grina m.fl.
+- [Elkontroll i Halden](https://elkontrollen.no/elkontroll-halden.html): Østfold. Hjemmemarked — kontoret ligger i Lorangløkka 1 i Halden. Dekker Sørsiden, Nordsiden, Tistedalen, Isebakke, Sponvika m.fl.
+- [Elkontroll i Moss](https://elkontrollen.no/elkontroll-moss.html): Østfold. Ca. 61 km fra Halden. Dekker Moss sentrum, Jeløy, Kambo, Melløs, Krapfoss m.fl.
+- [Elkontroll i Indre Østfold](https://elkontrollen.no/elkontroll-indre-ostfold.html): Østfold. Ca. 56 km fra Halden. Dekker Askim, Mysen, Spydeberg, Eidsberg, Trøgstad m.fl.
+- [Elkontroll i Rakkestad](https://elkontrollen.no/elkontroll-rakkestad.html): Østfold. Ca. 39 km fra Halden. Dekker Rakkestad sentrum, Degernes, Os, Bergenhus, Fladstad m.fl.
+- [Elkontroll i Hvaler](https://elkontrollen.no/elkontroll-hvaler.html): Østfold. Ca. 63 km fra Halden. Dekker Skjærhalden, Kirkøy, Asmaløy, Spjærøy, Vesterøy m.fl.
+- [Elkontroll i Aremark](https://elkontrollen.no/elkontroll-aremark.html): Østfold. Ca. 26 km fra Halden. Dekker Fossby, Strømsfoss, Aremark sentrum, Ytre Aremark, Øymark m.fl.
+- [Elkontroll i Drammen](https://elkontrollen.no/elkontroll-drammen.html): Buskerud. Ca. 133 km fra Halden. Dekker Bragernes, Strømsø, Konnerud, Åssiden, Skoger m.fl.
+- [Elkontroll i Lillestrøm](https://elkontrollen.no/elkontroll-lillestrom.html): Akershus. Ca. 134 km fra Halden. Dekker Lillestrøm, Strømmen, Skedsmokorset, Kjeller, Fetsund m.fl.
+- [Elkontroll i Oslo](https://elkontrollen.no/elkontroll-oslo.html): Oslo. Ca. 119 km fra Halden. Dekker Gamle Oslo, Grünerløkka, Sagene, St. Hanshaugen, Frogner m.fl.
+- [Elkontroll i Bærum](https://elkontrollen.no/elkontroll-baerum.html): Akershus. Ca. 133 km fra Halden. Dekker Sandvika, Bekkestua, Stabekk, Høvik, Lysaker m.fl.
+- [Elkontroll i Asker](https://elkontrollen.no/elkontroll-asker.html): Akershus. Ca. 130 km fra Halden. Dekker Asker sentrum, Heggedal, Holmen, Vollen, Slemmestad m.fl.
+
+- [Elkontroll borettslag Fredrikstad](https://elkontrollen.no/elkontroll-borettslag-fredrikstad.html): 214 borettslag og 499 sameier i kommunen.
+- [Elkontroll borettslag Sarpsborg](https://elkontrollen.no/elkontroll-borettslag-sarpsborg.html): 226 borettslag — flest i Østfold.
+- [Elkontroll borettslag Halden](https://elkontrollen.no/elkontroll-borettslag-halden.html): 99 borettslag og 154 sameier. Hjemmemarked.
+- [Elkontroll borettslag Moss](https://elkontrollen.no/elkontroll-borettslag-moss.html): 8 549 blokkleiligheter — flest i Østfold.
 
 ## Borettslag og sameier
 

@@ -27,8 +27,10 @@ for (const f of walk('.').sort()) {
     if (o['@type'] === 'FAQPage') n = o.mainEntity.length;
   }
   const html = (h.match(/<div class="faq-item">/g) || []).length;
-  const ok = n >= 5 && n <= 7;
+  // /borettslag/ følger tilleggsordren, som ber om 7–8 spørsmål på hovedsiden.
+  const tak = rel === "borettslag/index.html" ? 8 : 7;
+  const ok = n >= 5 && n <= tak;
   console.log((ok ? '  ok  ' : '  !!  ') + rel.padEnd(38) + 'schema:' + String(n).padStart(2) + '  faq-item i html:' + String(html).padStart(2));
   if (!ok) utenfor.push(rel + ' (' + n + ')');
 }
-console.log('\nutenfor 5-7: ' + (utenfor.length ? utenfor.join(', ') : 'ingen'));
+console.log('\nutenfor kravet: ' + (utenfor.length ? utenfor.join(', ') : 'ingen'));
