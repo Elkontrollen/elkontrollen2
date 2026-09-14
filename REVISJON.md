@@ -11,6 +11,7 @@ Seksjon 14–18 dokumenterer endringene i de påfølgende fasene.
 | 3 | `/priser`, `/forsikringsrabatt`, FAQ overalt | 16 |
 | 4 | Teknisk SEO | 17 |
 | 5 | Oppgaver til eieren | 18 |
+| A–F | Plassholdere, borettslagssatsing, lokale sider | 20–21 |
 
 **Leveranser:** `REVISJON.md` (denne), `FAKTASJEKK.md` (87 punkter som må bekreftes),
 `TIL_DEG.md` (11 oppgaver eieren må gjøre selv).
@@ -1339,6 +1340,133 @@ ryddet tidligere samme dag (seksjon 18c).
 
 Resten av treffene var `placeholder`-attributter på skjemafelt, fotokreditering og
 «kommer» i vanlige setninger. Alle listet med begrunnelse i `FJERNET.md`.
+
+---
+
+## 21. Fase B–F — borettslagssatsingen (utført)
+
+### Fase B — `/borettslag/` bygget om
+
+| | Før | Etter |
+|---|---|---|
+| `h1` | «Trygt Borettslag — vi tar de lovpålagte kontrollene …» | «Elkontroll for borettslag og sameier» |
+| Pakkeinnhold | Tre nivåer i en tabell langt nede | Fem punkter med standard, høyt på siden |
+| Prismodell | På egen underside | På hovedsiden, konkret om hva som avgjør |
+| Prosess | Fire steg | Tre steg |
+| FAQ | 7 | 8, med `FAQPage`-schema |
+| Artikkellenker | 3 | 12 |
+| Ord i brødteksten | 707 | **1 343** |
+
+De to elementene tilleggsordren ber om å løfte fram har fått egen seksjon:
+**avviksliste med status** og **dokumentasjon som overlever styreskifte**. Mersalg av
+leilighetskontroll har også egen seksjon, med begrunnelsen om at reise og rigg deles.
+
+Ingen superlativer. Omfanget vises ved å liste hva som faktisk inngår — kontrollert med
+søk etter «Norges beste», «markedsledende», «mest komplette» og liknende i alt nytt
+innhold.
+
+### Fase C — åtte nye artikler
+
+| Artikkel | Ord | Publiseres |
+|---|---|---|
+| Hva koster elkontroll i borettslag? | 1 115 | 15. sep |
+| Elkontroll og forsikring for borettslag | 984 | 17. sep |
+| Internkontroll elektro for borettslag | 907 | 19. sep |
+| Hvem har ansvaret: styret eller andelseier? | 950 | 21. sep |
+| Slik forbereder styret en elkontroll | 823 | 23. sep |
+| Elkontroll før og etter rehabilitering | 882 | 25. sep |
+| Hva gjør styret når rapporten viser avvik? | 1 016 | 27. sep |
+| Elkontroll i sameie kontra borettslag | 918 | 29. sep |
+
+Alle innenfor kravet på 700–1200 ord. Hver svarer på hovedspørsmålet i første avsnitt,
+har FAQ med `FAQPage`-schema, lenker tilbake til `/borettslag/` og krysslenker til tre
+naboartikler.
+
+**Publiseringsdatoene er spredt med to dagers mellomrom.** De 34 eksisterende artiklene
+ble publisert på få dager i august, og det er nettopp det mønsteret som gjør det
+sannsynlig at mange står som «Oppdaget – foreløpig ikke indeksert» (seksjon 3 i
+`TIL_DEG.md`). Å gjenta det med åtte nye ville forsterket signalet.
+
+### Fase D — ni nye lokale sider
+
+**Fire lokale borettslagssider.** Tallene er hentet fra Brønnøysundregistrene og SSB, ikke
+gjettet:
+
+| Kommune | Borettslag | Sameier | Blokkleiligheter | Tyngdepunkt |
+|---|---|---|---|---|
+| Fredrikstad | 214 | 499 | 8 198 | 2011–2020 og 2021+ |
+| Sarpsborg | 226 | 200 | 5 364 | 1971–1980 |
+| Halden | 99 | 154 | 2 455 | 1971–80, men 16 % fra før 1901 |
+| Moss | 141 | 289 | 8 549 | 2011–2020 og 1961–1970 |
+
+Det gir reell differensiering. Sarpsborg har flest borettslag i fylket og et tydelig
+syttitallspreg. Halden har 16 prosent av blokkleilighetene fra før 1901 — bygårdene på
+Sørsiden — mot 3 prosent i nabobyene. Fredrikstad og Moss har over 40 prosent bygget
+etter 2010, der reklamasjonsfristen er poenget, ikke slitasje.
+
+**Fem nye generelle lokalsider** for Drammen, Lillestrøm, Oslo, Bærum og Asker, med samme
+SSB-metode som Østfold-sidene. Ingen av dem lover rask utrykning — avstanden er 119–134
+km, og det står i teksten.
+
+### Fase E — søkeord
+
+**15 av 15 dekket i `title` eller `h1`**, verifisert med `tools/sjekk-sokeord.js`.
+
+Tre hull ble funnet og lukket underveis ved å justere overskrifter, ikke ved å stappe inn
+ord: `borettslag/brannvern` manglet «kontroll» i tittelen, artikkelen om ansvar manglet
+«borettslag», og forsikringsartikkelen manglet «krav» som selvstendig ord.
+
+> Sjekkeskriptet måtte skrives om to ganger før det var til å stole på. Første versjon
+> krevde eksakt form og ordstilling og meldte åtte falske hull — norsk bøyning gjør at
+> «Styrets ansvar for det elektriske anlegget» skal treffe søket «styrets ansvar
+> elektrisk anlegg». Andre versjon ble for løs: «Les mer»-blokkene nederst på sidene
+> lenker til alle artiklene, så hver side så ut til å dekke hvert søkeord. Tredje versjon
+> fjerner lenkeblokkene og krever prefiksmatch bare én vei.
+
+### Fase F — teknisk
+
+| Krav | Status |
+|---|---|
+| `Service`-schema på `/borettslag/` med `serviceType`, `areaServed` og `offers` | ✅ |
+| `FAQPage`-schema på hovedsiden og alle artikler med FAQ | ✅ 46 blokker totalt |
+| Brødsmuler på alle borettslagssider | ✅ 85 `BreadcrumbList` |
+| Hver artikkel lenker til `/borettslag/`, hovedsiden lenker til alle | ✅ |
+| Borettslag tydelig i hovedmenyen | ✅ se under |
+
+**Menypunktet** er gjort om fra `<button>` til `<a href="/borettslag/">`, så det går rett
+til hovedsiden i stedet for bare å åpne et nedtrekk. Nedtrekket er utvidet med
+fellesanlegg, leilighetskontroll og pris.
+
+Det brøt mobilmenyen, der nedtrekket er eneste vei til undersidene — en lenke ville
+navigert i stedet for å åpne. `main.js` er derfor endret slik at første trykk på mobil
+åpner nedtrekket og andre trykk følger lenken.
+
+### Lighthouse på de nye sidene
+
+| Side | Perf | Tilgj. | Beste praksis | SEO |
+|---|---|---|---|---|
+| `/borettslag/` | 100 | 100 | 100 | 100 |
+| `/elkontroll-borettslag-fredrikstad` | 100 | 100 | 100 | 100 |
+| `/elkontroll-oslo` | 100 | 100 | 100 | 100 |
+| `/blogg/hva-koster-elkontroll-borettslag` | 100 | 100 | 100 | 100 |
+| `/omrader` | 100 | 100 | 100 | 100 |
+
+### Sluttvalidering
+
+| Sjekk | Resultat |
+|---|---|
+| Sider totalt | 88 (var 71) |
+| Brutte interne lenker | **0 av 4 738** |
+| JSON-LD som parser | **293 av 293** |
+| Tagbalanse | 88 av 88 |
+| Nøyaktig én `h1` | 88 av 88 |
+| Hopp i overskriftsnivå | 0 av 88 |
+| `title` under 60 / `description` under 155 | alle, ingen duplikater |
+| FAQ innenfor kravet | 33 av 33 tjenestesider |
+| Artikler med tematisk tjenestelenke | 42 av 42 |
+| Tjenestesider med minst to bloggenker | 29 av 29 |
+| Søkeord dekket i title eller h1 | 15 av 15 |
+| Sitemap mot filsystem | 85 URL-er, 0 manglende, 0 døde |
 
 ---
 

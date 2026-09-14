@@ -426,18 +426,51 @@ ZK Elektro, Moss Elektro, og takstmann Erik Laursen på termografering.
 
 ## 10. Faktasjekk av de nye sidene
 
-Se `FAKTASJEKK.md`. **87 punkter**, men de fleste er avkrysning.
+Se `FAKTASJEKK.md`. **142 punkter**, men de fleste er avkrysning.
 
 De to som bør gjøres før sidene får trafikk:
 
 - **Pris.** Fastprisen på 5 000 kr står nå i `Offer`-schema på elleve sider og kan vises direkte i Google. Bekreft at den stemmer — også for hytte på Hvaler og Aremark, der turen er over en time hver vei.
 - **Sertifiseringsomfang.** `README.md` og `llms.txt` oppgir NEK 405-1, -3 og -4. Boligtjenesten markedsføres etter NEK 405-2, som ikke står i oppramsingen. Én av de to er feil.
 
-Det som tar lengst tid, men som er verdt det: de **24 påstandene om hva dere typisk
+Det som tar lengst tid, men som er verdt det: de **51 påstandene om hva dere typisk
 finner** i hver kommune. De står merket med `<!-- TRENGER LOKALKUNNSKAP -->` i HTML-en.
 Påstandene følger av byggeåret og er faglig rimelige, men de er ikke bygget på deres
 faktiske oppdragshistorikk. Les gjennom, og bytt gjerne ut et generelt avsnitt med noe
 dere faktisk har sett. Det er den slags detalj konkurrentene ikke kan kopiere.
+
+---
+
+## 11. To spørsmål jeg ikke kunne svare på selv
+
+Begge kom opp i natt, begge handler om de nye sidene utenfor Østfold.
+
+### Hva koster en kontroll i Drammen, Oslo, Bærum, Asker og Lillestrøm?
+
+Østfold-sidene lover **fastpris uten kjøretillegg**. De fem nye sidene lover ingenting om
+pris — fordi jeg ikke vet hva den er. Avstanden fra Lorangløkka er 119–134 km, mot 10–60
+km innenfor Østfold.
+
+Tre muligheter, og dere må velge én:
+
+| Valg | Konsekvens |
+|---|---|
+| Samme fastpris overalt | Enklest å kommunisere, sterkest salgsargument, men dere tar reisekostnaden |
+| Fastpris + oppgitt kjøretillegg | Ærlig, og et konkret tall selger bedre enn «tas etter avtale» |
+| Kun etter avtale | Svakest. Uoppgitt pris er den vanligste grunnen til at folk ikke tar kontakt |
+
+Si hvilken dere vil ha, så setter jeg det inn på alle fem sidene og i `Offer`-schema.
+
+### Er dere faktisk nærmest Drammen?
+
+Ordren sa «Prioriter Østfold og Drammen først — der er vi nærmest». Målt kjøreavstand sier
+noe annet: Drammen er **1 t 57 min**, den lengste av de fem. Oslo er nærmest, 1 t 37 min.
+
+Prioriteringen er fulgt som bedt — Drammen ligger foran de fire andre. Men hvis premisset
+skyldes noe som ikke står på nettsiden, som en kontrollør som bor der eller en fast kunde
+i Drammensområdet, så er det verdt å skrive om. Lokal tilstedeværelse er et av de
+sterkeste signalene som finnes, både for kunder og for Google. Og hvis premisset bare var
+en glipp, bør Oslo og Lillestrøm kanskje få oppmerksomheten først.
 
 ---
 
@@ -448,4 +481,5 @@ dere faktisk har sett. Det er den slags detalj konkurrentene ikke kan kopiere.
 | **I dag** | Punkt 4 (e-postvarsling) |
 | **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå) |
 | **Neste uke** | Punkt 3 (Search Console), punkt 5 (registre), punkt 9 (rangeringssjekk) |
+| **Før de nye sidene får trafikk** | Punkt 11 (pris utenfor Østfold) |
 | **Løpende** | Punkt 2 (anmeldelser — to til fire i måneden), punkt 10 (faktasjekk) |

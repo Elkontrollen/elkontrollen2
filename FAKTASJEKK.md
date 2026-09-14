@@ -11,7 +11,7 @@ teksten endres, rett den i `tools/innhold-steder.js` og kjør `node tools/bygg-l
 på nytt — **ikke i HTML-filen direkte**, ellers blir endringen overskrevet neste gang
 sidene genereres.
 
-Sist oppdatert: 2026-09-14 (etter borettslagssatsingen, fase A–C)
+Sist oppdatert: 2026-09-14 (etter fase A–F)
 
 ---
 
@@ -373,6 +373,93 @@ skrevet ut fra alminnelig kjent regelverk, men står på deres nettside under de
 
 ---
 
+## 10. Lokale sider (fase D)
+
+### Tall som IKKE trenger faktasjekk
+
+Hentet, ikke gjettet. Kan slås opp på nytt når som helst.
+
+| Opplysning | Kilde |
+|---|---|
+| Antall borettslag og eierseksjonssameier per kommune | Brønnøysundregistrene, Enhetsregisteret, organisasjonsform BRL og ESEK per kommunenummer |
+| Blokkleiligheter fordelt på byggeår | SSB tabell 06266, bygningstype Boligblokk, 2026 |
+| Boliger, fritidsbygg og jordbruksbedrifter | SSB tabell 06266, 03174 og 08646 |
+| Bydeler, tettsteder og industrihistorie | Store norske leksikon |
+
+De konkrete tallene som står på sidene:
+
+| Kommune | Borettslag | Sameier | Blokkleiligheter |
+|---|---|---|---|
+| Fredrikstad | 214 | 499 | 8 198 |
+| Sarpsborg | 226 | 200 | 5 364 |
+| Halden | 99 | 154 | 2 455 |
+| Moss | 141 | 289 | 8 549 |
+
+### 🔴 Avstandene motsier premisset i ordren
+
+Ordren sier «Prioriter Østfold og Drammen først — der er vi nærmest». Kjøreavstand fra
+Lorangløkka 1, målt med OSRM:
+
+| Sted | Avstand | Tid |
+|---|---|---|
+| Oslo | 119 km | ~1 t 37 min |
+| Lillestrøm | 134 km | ~1 t 49 min |
+| Bærum | 133 km | ~1 t 51 min |
+| Asker | 130 km | ~1 t 53 min |
+| **Drammen** | **133 km** | **~1 t 57 min** |
+
+Drammen er altså den **lengste** av de fem, ikke den nærmeste. Oslo er nærmest med god
+margin.
+
+Prioriteringen er fulgt som bedt — Drammen ligger som nummer 9, foran de fire andre.
+
+- [ ] **Har dere en base, en kontrollør eller en fast kunde i Drammensområdet som ikke framgår av nettsiden?** I så fall er premisset riktig og tallene irrelevante — men da bør det stå på siden, for lokal tilstedeværelse er et sterkt signal både for kunder og for Google.
+
+### Påstander om egen erfaring på de lokale borettslagssidene
+
+Tolv avsnitt, tre per side, merket `<!-- TRENGER LOKALKUNNSKAP -->` i HTML-en.
+
+**`elkontroll-borettslag-fredrikstad.html`**
+
+- [ ] I sytti- og åttitallslagene er det oftest hovedfordelingen som setter grensen. Laget vil ha ladeanlegg, og oppdager at stigeledningen ikke har kapasitet — noe som burde vært avklart før leverandøren b…
+- [ ] I den nye bebyggelsen finner vi løse klemmer i fordelinger som aldri har vært etterkontrollert, og dokumentasjon som ikke ble overlevert ved ferdigstillelse. Begge deler er entreprenørens ansvar så le…
+- [ ] I bygårdene i sentrum er det lagene med blandet bruk — næring i første etasje, boliger over — som krever mest. Der gjelder ofte en høyere kontrollklasse for næringsdelen enn for boligdelen.
+
+**`elkontroll-borettslag-sarpsborg.html`**
+
+- [ ] I syttitallslagene er det stigeledningene som oftest er den skjulte begrensningen. De ble dimensjonert for et forbruk ingen forutså, og et lag som vil ha lading på 30 plasser møter veggen der.
+- [ ] Vi ser også at mange lag i denne aldersgruppen har fått nye sikringsskap i fellesarealene uten at kursene bak er skiftet. Et nytt skap sier ingenting om hva som ligger bak det.
+- [ ] I lagene rundt Opsund og de gamle industriområdene er bygningsmassen sammensatt — arbeiderboliger som er seksjonert, påbygd og delt over tid. Der er anlegget utvidet i mange omganger, og oversikten ov…
+
+**`elkontroll-borettslag-halden.html`**
+
+- [ ] I bygårdene på Sørsiden er det oversikten som mangler oftest. Hvilke kurser hører til fellesanlegget, hvilke til leilighetene, og hvor går de? For mange lag er kartleggingen den mest verdifulle delen …
+- [ ] Vi ser også at lag i vernet bebyggelse utsetter oppgraderinger fordi de tror det ikke lar seg gjøre. Det finnes som regel en løsning, men den må planlegges — og den blir dyrere hvis den hastes fram et…
+- [ ] Fordi vi holder til i Halden, kan vi som regel rykke ut samme eller neste dag når noe haster — for eksempel når Det lokale eltilsyn har gitt et pålegg med kort frist.
+
+**`elkontroll-borettslag-moss.html`**
+
+- [ ] I sekstitallsblokkene er varmgang i hovedfordelinger det vanligste funnet. Anleggene har gått i seksti år, klemmer har løsnet med temperatursykluser, og det er ikke synlig før man setter varmekamera p…
+- [ ] I den nye bebyggelsen er det dokumentasjonen som mangler oftere enn anlegget svikter. Samsvarserklæringer som aldri ble overlevert, kursfortegnelser som ikke er oppdatert etter endringer, og ladeanleg…
+- [ ] På Jeløy ser vi en del lag med bygg fra ulike tiår i samme sameie, der fellesanlegget er koblet sammen over tid uten en samlet gjennomgang.
+
+### De fem nye lokalsidene utenfor Østfold
+
+Femten avsnitt merket `<!-- TRENGER LOKALKUNNSKAP -->` — tre per side for Drammen,
+Lillestrøm, Oslo, Bærum og Asker. Alle beskriver hva dere typisk finner i den
+bygningsmassen, og følger av byggeåret. Ingen av dem bygger på oppdrag dere faktisk har
+hatt der.
+
+- [ ] **Har dere overhodet hatt oppdrag i disse kommunene?** Hvis ikke, bør «det vi typisk finner»-avsnittene omformuleres til hva bygningsmassen tilsier, ikke hva dere har sett. Forskjellen er liten i ord og stor i troverdighet.
+- [ ] **Ingen av de fem lover rask utrykning**, og ingen gjentar løftet om «ingen kjøretillegg». Bekreft at det er riktig — og avklar hva prisen faktisk blir utenfor Østfold. Se `BESLUTNINGER.md` punkt 3.
+
+### Nye påstander på `/borettslag/` og de lokale sidene
+
+- [ ] **«Vi er i området jevnlig og setter gjerne opp flere lag samme dag.»** Står på tre av de fire lokale borettslagssidene.
+- [ ] **«Fordi vi holder til i Halden, kan vi som regel rykke ut samme eller neste dag når noe haster.»** Står på Halden-siden. Løfte om responstid.
+
+---
+
 ## Oppsummering
 
 | Kategori | Antall punkter |
@@ -387,7 +474,8 @@ skrevet ut fra alminnelig kjent regelverk, men står på deres nettside under de
 | 7. Priser, forsikringsrabatt og nye FAQ-svar | 19 |
 | 8. Teknisk SEO — åpningstider, forfatternavn, koordinater, bilder | 9 |
 | 9. Borettslagsklyngen — egen praksis, påstander og jus | 23 |
-| **Til sammen** | **110** |
+| 10. Lokale sider — avstander, egen erfaring, pris utenfor Østfold | 32 |
+| **Til sammen** | **142** |
 
 Punkt 0 var det eneste som var en ren feil, og den er rettet. Resten er påstander som
 sannsynligvis stemmer, men som ingen utenfra kan bekrefte.
