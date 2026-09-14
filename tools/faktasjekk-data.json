@@ -1,0 +1,226 @@
+[
+ {
+  "fil": "elkontroll-fredrikstad.html",
+  "sted": "Fredrikstad",
+  "seksjon": "Det vi typisk finner i Fredrikstad",
+  "nr": 1,
+  "tekst": "I den eldste trehusbebyggelsen møter vi ofte anlegg som er bygget ut i flere omganger uten at hovedfordelingen er oppgradert tilsvarende. Et nytt sikringsskap sier ikke nødvendigvis noe om hva som ligger bak det — gamle kurser i rør, skjøter i uinspiserbare hulrom og manglende jording i deler av boligen er ting vi ser jevnlig."
+ },
+ {
+  "fil": "elkontroll-fredrikstad.html",
+  "sted": "Fredrikstad",
+  "seksjon": "Det vi typisk finner i Fredrikstad",
+  "nr": 2,
+  "tekst": "I bebyggelsen fra 1960- og 70-tallet er de vanligste funnene knyttet til varmgang: løse koblinger i sikringsskap og koblingsbokser, overbelastede kurser, og skrusikringssokler med høy overgangsmotstand. Dette er nettopp det termografering avdekker — og grunnen til at det er inkludert i prisen."
+ },
+ {
+  "fil": "elkontroll-fredrikstad.html",
+  "sted": "Fredrikstad",
+  "seksjon": "Det vi typisk finner i Fredrikstad",
+  "nr": 3,
+  "tekst": "På hytter og fritidsboliger langs kysten ser vi korrosjon i utvendige koblinger og uttak, og anlegg som er utvidet stykkevis over mange år uten en samlet vurdering av kapasitet og vern."
+ },
+ {
+  "fil": "elkontroll-fredrikstad.html",
+  "sted": "Fredrikstad",
+  "seksjon": "Fra Halden til Fredrikstad",
+  "nr": 0,
+  "tekst": "Kjøreavstand 36 km / 40 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «rundt 40 minutter» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-sarpsborg.html",
+  "sted": "Sarpsborg",
+  "seksjon": "Det vi typisk finner i Sarpsborg",
+  "nr": 1,
+  "tekst": "I den eldre arbeider- og funksjonærbebyggelsen ser vi ofte spor etter at boligen har vært bygget om. Kurser lagt til i flere omganger, blandingsanlegg der nye og gamle føringsveier møtes i samme koblingsboks, og hovedsikring som ikke er dimensjonert opp i takt med utvidelsene."
+ },
+ {
+  "fil": "elkontroll-sarpsborg.html",
+  "sted": "Sarpsborg",
+  "seksjon": "Det vi typisk finner i Sarpsborg",
+  "nr": 2,
+  "tekst": "I boligfeltene fra 1960- og 70-tallet er det først og fremst varmgang vi leter etter — løse klemmer, overbelastede kurser, og sikringssokler med høy overgangsmotstand. Termograferingen gjør dette synlig før det blir en brann, og den er inkludert i fastprisen."
+ },
+ {
+  "fil": "elkontroll-sarpsborg.html",
+  "sted": "Sarpsborg",
+  "seksjon": "Det vi typisk finner i Sarpsborg",
+  "nr": 3,
+  "tekst": "På gårdsbrukene i Tune, Varteig og Skjeberg er bildet et annet: støv, fuktighet og vibrasjon sliter på anlegget i driftsbygninger, og avvikene sitter typisk i fordelinger og motorvern som har stått i et hardt miljø i mange år."
+ },
+ {
+  "fil": "elkontroll-sarpsborg.html",
+  "sted": "Sarpsborg",
+  "seksjon": "Fra Halden til Sarpsborg",
+  "nr": 0,
+  "tekst": "Kjøreavstand 31 km / 29 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «rundt en halvtime» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-halden.html",
+  "sted": "Halden",
+  "seksjon": "Det vi typisk finner i Halden",
+  "nr": 1,
+  "tekst": "I den eldste bebyggelsen på Sørsiden er det lagene som er utfordringen. Vi finner ofte kurser fra ulike tiår i samme boks, skjøter i hulrom som ikke lar seg inspisere, og deler av boligen uten jording — gjerne akkurat der det i dag står utstyr som burde hatt den."
+ },
+ {
+  "fil": "elkontroll-halden.html",
+  "sted": "Halden",
+  "seksjon": "Det vi typisk finner i Halden",
+  "nr": 2,
+  "tekst": "I villabebyggelsen og boligfeltene er varmgang det vanligste. Løse koblinger i sikringsskapet, kurser som går tett opp mot merkestrøm, og varmekabler på bad fra 70- og 80-tallet som nærmer seg eller har passert teknisk levetid."
+ },
+ {
+  "fil": "elkontroll-halden.html",
+  "sted": "Halden",
+  "seksjon": "Det vi typisk finner i Halden",
+  "nr": 3,
+  "tekst": "Fordi vi holder til i Halden, kan vi som regel rykke ut samme eller neste dag når noe haster — for eksempel etter et pålegg fra Det lokale eltilsyn med kort frist."
+ },
+ {
+  "fil": "elkontroll-halden.html",
+  "sted": "Halden",
+  "seksjon": "Fra Halden til Halden",
+  "nr": 0,
+  "tekst": "Påstanden om at dere kan rykke ut på kort varsel i Halden må bekreftes av eier."
+ },
+ {
+  "fil": "elkontroll-moss.html",
+  "sted": "Moss",
+  "seksjon": "Det vi typisk finner i Moss",
+  "nr": 1,
+  "tekst": "I boligmassen fra 60- og 70-tallet er de gjengående funnene overbelastede kurser og løse koblinger. Typisk er at kjøkkenet er pusset opp med nytt utstyr, men på samme kurs som før — og at varmekabler og varmepumpe er lagt inn i et skap som ikke har fått flere kurser."
+ },
+ {
+  "fil": "elkontroll-moss.html",
+  "sted": "Moss",
+  "seksjon": "Det vi typisk finner i Moss",
+  "nr": 2,
+  "tekst": "I villabebyggelsen på Jeløy ser vi en del anlegg som er utvidet mot uthus, brygge eller garasje med lange kurser og skjøter utendørs, der fukt og korrosjon over tid gir dårlige forbindelser."
+ },
+ {
+  "fil": "elkontroll-moss.html",
+  "sted": "Moss",
+  "seksjon": "Det vi typisk finner i Moss",
+  "nr": 3,
+  "tekst": "I Rygge-delen av kommunen er innslaget av gårdsbruk og landbruksbygg større, og der er det driftsbygningene som krever mest oppmerksomhet — støv, fuktighet og vibrasjon sliter hardt på fordelinger og motorvern."
+ },
+ {
+  "fil": "elkontroll-moss.html",
+  "sted": "Moss",
+  "seksjon": "Fra Halden til Moss",
+  "nr": 0,
+  "tekst": "Kjøreavstand 61 km / 52 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «under en time» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-indre-ostfold.html",
+  "sted": "Indre Østfold",
+  "seksjon": "Det vi typisk finner i Indre Østfold",
+  "nr": 1,
+  "tekst": "I driftsbygninger er de gjennomgående funnene knyttet til miljøet: støv i fordelinger, fukt i uttak og koblingsbokser, og varmgang i kontaktorer og motorvern som har gått mange driftstimer. I fjørfehus ser vi i tillegg ofte at anlegget er utvidet i takt med produksjonen uten at hovedfordelingen er dimensjonert opp."
+ },
+ {
+  "fil": "elkontroll-indre-ostfold.html",
+  "sted": "Indre Østfold",
+  "seksjon": "Det vi typisk finner i Indre Østfold",
+  "nr": 2,
+  "tekst": "I våningshusene på gårdene finner vi ofte anlegg som er gamle, men godt vedlikeholdt på overflaten — nytt skap, gamle kurser. Kombinasjonen av bolig og driftsbygning på samme abonnement gjør også at det er verdt å se på fordelingen mellom dem."
+ },
+ {
+  "fil": "elkontroll-indre-ostfold.html",
+  "sted": "Indre Østfold",
+  "seksjon": "Det vi typisk finner i Indre Østfold",
+  "nr": 3,
+  "tekst": "I boligfeltene rundt Askim, Mysen og Spydeberg er bildet det samme som i resten av Østfold: overbelastede kurser, manglende jordfeilvern på eldre kurser, og varmgang i sikringsskap."
+ },
+ {
+  "fil": "elkontroll-indre-ostfold.html",
+  "sted": "Indre Østfold",
+  "seksjon": "Fra Halden til Indre Østfold",
+  "nr": 0,
+  "tekst": "Kjøreavstand 56 km / 61 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «rundt en time» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-rakkestad.html",
+  "sted": "Rakkestad",
+  "seksjon": "Det vi typisk finner i Rakkestad",
+  "nr": 1,
+  "tekst": "I driftsbygninger er de vanligste funnene knyttet til miljøbelastning over tid: støv i fordelingsskap, korrosjon i uttak og koblinger, og varmgang i kontaktorer og motorvern. Termografering under normal drift er det som gjør dette synlig — et skap kan se helt greit ut med øyet og likevel ha en kobling på 90 grader."
+ },
+ {
+  "fil": "elkontroll-rakkestad.html",
+  "sted": "Rakkestad",
+  "seksjon": "Det vi typisk finner i Rakkestad",
+  "nr": 2,
+  "tekst": "På storfebruk ser vi ofte anlegg som er utvidet i flere etapper i takt med at besetningen har vokst, uten at hovedfordelingen er oppgradert tilsvarende."
+ },
+ {
+  "fil": "elkontroll-rakkestad.html",
+  "sted": "Rakkestad",
+  "seksjon": "Det vi typisk finner i Rakkestad",
+  "nr": 3,
+  "tekst": "I våningshus og boliger i tettstedene er funnene de samme som ellers i Østfold: kurser som går tett opp mot merkestrøm, manglende jordfeilvern på eldre kurser, og løse koblinger i sikringsskap."
+ },
+ {
+  "fil": "elkontroll-rakkestad.html",
+  "sted": "Rakkestad",
+  "seksjon": "Fra Halden til Rakkestad",
+  "nr": 0,
+  "tekst": "Kjøreavstand 39 km / 43 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «rundt 45 minutter» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-hvaler.html",
+  "sted": "Hvaler",
+  "seksjon": "Det vi typisk finner på Hvaler",
+  "nr": 1,
+  "tekst": "Korrosjon er det gjennomgående. Vi finner det i utvendige uttak, i koblinger på brygge og i naust, i kurser som går ut til utebelysning og båtplass, og i skjøter som er gjort provisorisk og deretter blitt permanente."
+ },
+ {
+  "fil": "elkontroll-hvaler.html",
+  "sted": "Hvaler",
+  "seksjon": "Det vi typisk finner på Hvaler",
+  "nr": 2,
+  "tekst": "På hytter ser vi ofte anlegg som er utvidet i flere omganger uten en samlet vurdering — for eksempel varmepumpe og varmtvannsbereder lagt inn på et skap som opprinnelig forsynte belysning og et par stikkontakter."
+ },
+ {
+  "fil": "elkontroll-hvaler.html",
+  "sted": "Hvaler",
+  "seksjon": "Det vi typisk finner på Hvaler",
+  "nr": 3,
+  "tekst": "I den gamle kystbebyggelsen finner vi anlegg lagt i bygg som ikke var tenkt for det, med føringsveier gjennom uoppvarmede rom der kondens og fukt er et vedvarende problem."
+ },
+ {
+  "fil": "elkontroll-hvaler.html",
+  "sted": "Hvaler",
+  "seksjon": "Fra Halden til Hvaler",
+  "nr": 0,
+  "tekst": "Kjøreavstand 63 km / 71 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «drøyt en time» og påstanden om at dere er i området jevnlig stemmer."
+ },
+ {
+  "fil": "elkontroll-aremark.html",
+  "sted": "Aremark",
+  "seksjon": "Det vi typisk finner i Aremark",
+  "nr": 1,
+  "tekst": "I den eldste bebyggelsen finner vi anlegg som er lagt i flere lag over lang tid, med gamle føringsveier bak nye skap, og deler av bygget uten jording."
+ },
+ {
+  "fil": "elkontroll-aremark.html",
+  "sted": "Aremark",
+  "seksjon": "Det vi typisk finner i Aremark",
+  "nr": 2,
+  "tekst": "Spredt bebyggelse gir lange kurser ut til uthus, garasje, pumpehus og brygge. Der ser vi ofte spenningsfall, underdimensjonerte ledere og skjøter utendørs som har fått stå i mange år."
+ },
+ {
+  "fil": "elkontroll-aremark.html",
+  "sted": "Aremark",
+  "seksjon": "Det vi typisk finner i Aremark",
+  "nr": 3,
+  "tekst": "På hyttene langs vassdraget er bildet likt det vi ser andre steder med sesongbruk: anlegg utvidet i etapper, fukt i uoppvarmede rom, og feil som får stå uoppdaget mellom sesongene."
+ },
+ {
+  "fil": "elkontroll-aremark.html",
+  "sted": "Aremark",
+  "seksjon": "Fra Halden til Aremark",
+  "nr": 0,
+  "tekst": "Kjøreavstand 26 km / 27 min er beregnet med OSRM (fri flyt) fra Halden sentrum. Bekreft at «under en halvtime» og påstanden om at dere er i området jevnlig stemmer."
+ }
+]

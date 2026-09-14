@@ -443,6 +443,158 @@ Denne oppgaven er også ført opp i `TIL_DEG.md`.
 
 ---
 
+## 15. Fase 2 — lokale landingssider (utført)
+
+Åtte lokale landingssider og én oversiktsside. Dette var revisjonens viktigste oppgave,
+og feltet er helt åpent: ingen av konkurrentene i Østfold har ordentlige lokale sider
+(se seksjon 12).
+
+### Sidene
+
+| Prio | URL | Kommune | Boliger | Fritidsbygg | Gårdsbruk | Fra Halden | Stedsprosa |
+|---|---|---|---|---|---|---|---|
+| 1 | [`/elkontroll-fredrikstad`](https://elkontrollen.no/elkontroll-fredrikstad.html) | Fredrikstad | 40 250 | 4 493 | 184 | 36 km | 504 |
+| 2 | [`/elkontroll-sarpsborg`](https://elkontrollen.no/elkontroll-sarpsborg.html) | Sarpsborg | 27 531 | 2 819 | 251 | 31 km | 466 |
+| 3 | [`/elkontroll-halden`](https://elkontrollen.no/elkontroll-halden.html) | Halden | 16 799 | 1 903 | 177 | — | 455 |
+| 4 | [`/elkontroll-moss`](https://elkontrollen.no/elkontroll-moss.html) | Moss | 25 193 | 1 528 | 86 | 61 km | 458 |
+| 5 | [`/elkontroll-indre-ostfold`](https://elkontrollen.no/elkontroll-indre-ostfold.html) | Indre Østfold | 21 982 | 1 571 | 546 | 56 km | 454 |
+| 6 | [`/elkontroll-rakkestad`](https://elkontrollen.no/elkontroll-rakkestad.html) | Rakkestad | 4 143 | 301 | 265 | 39 km | 437 |
+| 7 | [`/elkontroll-hvaler`](https://elkontrollen.no/elkontroll-hvaler.html) | Hvaler | 2 587 | 4 479 | 18 | 63 km | 450 |
+| 8 | [`/elkontroll-aremark`](https://elkontrollen.no/elkontroll-aremark.html) | Aremark | 755 | 750 | 54 | 26 km | 380 |
+
+Kolonnen «Stedsprosa» er antall ord i innhold som er unikt for stedet — ingress,
+områdebeskrivelse, boligmasseanalyse og funn-avsnitt. Mal, FAQ, tjenestekort og CTA
+er holdt utenfor.
+
+I tillegg: **`/omrader`** — oversiktsside med kort per kommune, en tabell over
+bygningsmassen i tall, og fire FAQ-punkter om dekningsområde.
+
+### Hvordan sidene unngår å bli tynne
+
+Arbeidsordren advarte eksplisitt: «Hvis sidene bare er samme tekst med byttet stedsnavn,
+blir de tynne, rangerer dårlig og kan skade hele domenet.» Det er håndtert på to måter.
+
+**1. Innholdet er bygget på faktiske tall per kommune.**
+
+| Kilde | Hva den gir |
+|---|---|
+| SSB tabell 06266 (2026) | Antall boliger per kommune, fordelt på 13 byggeårsintervaller |
+| SSB tabell 03174 (2026) | Antall fritidsbygg per kommune |
+| SSB tabell 08646 (2025) | Antall jordbruksbedrifter per kommune |
+| Store norske leksikon | Tettsteder, bosetningsmønster, industrihistorie, vernet bebyggelse |
+| OSRM | Kjøreavstand og -tid fra Halden sentrum |
+
+Det gir hver side noe å si som bare gjelder der. Eksempler på funn som faktisk
+differensierer sidene:
+
+- **Fredrikstad** har 3 603 boliger fra 1900 eller tidligere — en tredjedel av hele Østfolds eldste boligmasse.
+- **Sarpsborg** har 31 prosent av boligmassen fra 1961–1980, høyest andel i utvalget.
+- **Hvaler** har 4 479 fritidsbygg mot 2 587 boliger — nesten to hytter per helårsbolig.
+- **Aremark** har 17 prosent av boligene fra før 1901, høyest andel i utvalget, og omtrent én hytte per bolig.
+- **Indre Østfold** har 546 jordbruksbedrifter, klart flest i fylket.
+- **Rakkestad** har 265 gårdsbruk på drøyt 8 500 innbyggere — omtrent ett per 32 innbygger.
+
+**2. Overlappet er målt, ikke antatt.**
+
+Målt på 5-gram over ren stedsprosa er **høyeste overlapp mellom to sider 5,8 prosent**
+(Fredrikstad mot Moss). Med mal, navigasjon, FAQ og tjenestekort inkludert stiger tallet
+til 20–35 prosent, men det er felles struktur — ikke duplisert brødtekst.
+
+| Mål | Resultat |
+|---|---|
+| Stedsspesifikke avsnitt per side (krav: minst 3) | 4 på alle åtte |
+| Ord unik stedsprosa per side | 380–504 |
+| Høyeste 5-gram-overlapp, ren prosa | 5,8 % |
+
+### Hva hver side inneholder
+
+| Element | Detalj |
+|---|---|
+| `h1` med søkeordet | «Elkontroll i Fredrikstad — …» på alle åtte |
+| Pris uten å scrolle | Fastpris 5 000 kr i `buybox` i hero, synlig over folden |
+| Tallbånd | Tre SSB-tall per kommune rett under hero |
+| Områdedekning | 5–14 navngitte bydeler/tettsteder per side, som `area-tags` |
+| Boligmasseanalyse | Fire avsnitt med SSB-tall koblet til hva byggeåret betyr elektrisk |
+| Typiske funn | Tre punkter — **alle merket med `<!-- TRENGER LOKALKUNNSKAP -->`** |
+| Reisetid | Avstand fra Halden, med logistikk |
+| Tjenestelenker | Seks tjenestekort, prioritert etter stedet (landbruk først i Rakkestad og Indre Østfold) |
+| Bloggenker | Tre artikler per side, valgt etter tema |
+| FAQ | Fem spørsmål per side, med `FAQPage`-schema |
+| Schema | `Organization`, `Service` med `areaServed` og `Offer` (5 000 kr), `FAQPage` |
+
+`areaServed` på hver lokalside inneholder kommunen som `AdministrativeArea` pluss de
+seks første stedsnavnene som `Place`.
+
+### Intern lenking
+
+- **Forsiden** har fått en ny seksjon `#omrader` med lenke til alle åtte sidene og til oversikten. Dette dekker arbeidsordrens punkt «Lenk fra forsiden til en oversikt over områder dere dekker» — og gir i tillegg direkte inngang til hver enkelt side, noe som er bedre for indeksering enn én enkelt lenke.
+- **Footeren på alle 67 sider** har fått «Områder vi dekker» i Selskap-kolonnen. `404.html` og `skjema/` har ingen slik footer og er utelatt.
+- Hver lokalside lenker til seks tjenestesider og tre bloggartikler.
+- Hver lokalside lenker nederst til `/omrader`.
+
+### areaServed i LocalBusiness
+
+`areaServed` i `LocalBusiness`-blokken på `index.html` og `kontakt.html` er utvidet fra
+`["Østfold","Østlandet"]` til ti `AdministrativeArea`-objekter: de åtte kommunene pluss
+Østfold og Østlandet.
+
+> **Merk:** blokken har fortsatt den ugyldige typen `ElectricianService` (seksjon 3). Så
+> lenge typen er ugyldig, leser ikke Google `areaServed` i det hele tatt. Typefiksen står
+> i fase 4, og det er først da denne utvidelsen får effekt.
+
+### Oppdatert
+
+- **`sitemap.xml`** — ni nye URL-er (8 lokalsider med `priority` 0.9, oversikten med 0.8). Sitemap har nå 66 URL-er, og full diff mot filsystemet viser ingen manglende og ingen døde. `takk.html`, `404.html` og `skjema/` er utelatt — alle tre er `noindex`.
+- **`llms.txt`** — ny «Områder»-seksjon med alle ni sidene.
+
+### Generatoren
+
+Sidene er generert, ikke håndskrevet. Det er nødvendig fordi siden ikke har felles layout
+(seksjon 1) — header og footer måtte ellers vedlikeholdes ni steder til.
+
+| Fil | Rolle |
+|---|---|
+| `tools/steder.json` | Tall og stedsnavn per kommune, med kildeangivelse |
+| `tools/innhold-steder.js` | All prosa. **Her rettes tekst — ikke i HTML-filene.** |
+| `tools/bygg-lokalsider.js` | Generator. Henter header og footer fra `om-oss.html`, så navigasjonen alltid følger resten av siden |
+| `tools/faktasjekk-data.json` | Genereres automatisk, brukt som grunnlag for `FAKTASJEKK.md` |
+
+Kjøres med `node tools/bygg-lokalsider.js` fra repo-roten. Generatoren er idempotent.
+
+> `tools/` ligger i repoet og blir dermed publisert på Netlify, siden `publish = "."`.
+> Filene inneholder ingen hemmeligheter og er ikke lenket fra noen side. Ryddigere hadde
+> vært å holde dem utenfor, men det krever en byggkommando siden hele roten publiseres.
+
+### Verifisering
+
+| Sjekk | Resultat |
+|---|---|
+| Brutte interne lenker på hele siden | 0 av 2 859 |
+| Tagbalanse på nye sider | 10 av 10 OK |
+| Nøyaktig én `h1` per side | 10 av 10 |
+| JSON-LD parser | 31 blokker, 0 feil |
+| `<title>` under 60 tegn | 9 av 9 (42–59 tegn) |
+| `meta description` under 155 tegn | 9 av 9 (139–150 tegn) |
+| Sitemap mot filsystem | 0 manglende, 0 døde |
+| Visuell kontroll | Gjengitt i headless Chrome. Følger eksisterende uttrykk, ingen nye CSS-klasser |
+
+### Faktasjekk
+
+**24 påstander er merket `<!-- TRENGER LOKALKUNNSKAP -->`** i HTML-en — tre per side, alle
+under «Det vi typisk finner i …». Disse beskriver Elkontrollens egen erfaring i området og
+kan ikke verifiseres utenfra.
+
+Skillet som er trukket: **bygningsmassen er sourcet, funnene i den er det ikke.** At
+Fredrikstad har 3 603 boliger fra før 1901 er et SSB-tall. At disse boligene typisk har
+skjøter i uinspiserbare hulrom er en faglig slutning eieren må stå inne for.
+
+Til sammen **58 punkter** i `FAKTASJEKK.md`, fordelt på seks kategorier. De to som haster
+mest er pris (7 punkter — fastprisen står i `FAQPage`-schema og kan vises direkte i Google)
+og sertifiseringsomfang (2 punkter — `README.md` og `llms.txt` ramser opp NEK 405-1, -3 og
+-4, mens boligtjenesten markedsføres etter NEK 405-2).
+
+---
+
 ## Vedlegg: kommandoer brukt i kartleggingen
 
 Kjørt fra repo-roten. Kan gjentas for å verifisere funnene.
