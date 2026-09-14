@@ -68,7 +68,7 @@ Fra «Østfold» til «Østfold, Oslo, Akershus og Buskerud» — **89 tekststed
 
 ### Fase B — `/borettslag/` bygget om
 
-Hovedsiden gikk fra 707 til **1 343 ord**. Pakkeinnholdet står nå som fem punkter høyt på
+Hovedsiden gikk fra 707 til **1 311 ord**. Pakkeinnholdet står nå som fem punkter høyt på
 siden i stedet for i en tabell langt nede. Prismodellen er flyttet opp fra undersiden.
 Avviksliste med status og dokumentasjon som overlever styreskifte har fått egne seksjoner.
 FAQ utvidet fra 7 til 8 spørsmål. Artikkellenker fra 3 til 12.

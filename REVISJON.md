@@ -1355,7 +1355,7 @@ Resten av treffene var `placeholder`-attributter på skjemafelt, fotokreditering
 | Prosess | Fire steg | Tre steg |
 | FAQ | 7 | 8, med `FAQPage`-schema |
 | Artikkellenker | 3 | 12 |
-| Ord i brødteksten | 707 | **1 343** |
+| Ord i brødteksten | 707 | **1 311** |
 
 De to elementene tilleggsordren ber om å løfte fram har fått egen seksjon:
 **avviksliste med status** og **dokumentasjon som overlever styreskifte**. Mersalg av
