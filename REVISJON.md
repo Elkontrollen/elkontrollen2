@@ -1215,6 +1215,133 @@ følger den med til de genererte sidene automatisk.
 
 ---
 
+## 20. Ny kartlegging etter korrigert omfang (fase 0, andre runde)
+
+To ting endret forutsetningene etter at revisjonen var levert: dekningsområdet ble
+korrigert, og det kom en egen tilleggsordre om borettslag. Denne seksjonen kartlegger
+utgangspunktet på nytt mot det.
+
+### Hva som er endret i oppdraget
+
+| | Før | Nå |
+|---|---|---|
+| Dekningsområde | Østfold (og «Østlandet» som løs formulering) | **Østfold, Oslo, Akershus og Buskerud** |
+| Lokale sider | 8 Østfold-kommuner | **13** — de 8 pluss Drammen, Lillestrøm, Oslo, Bærum, Asker |
+| Borettslag | Én produktside med tre nivåer | Egen satsing: pakke, innholdsklynge på 8 nye artikler, 4 lokale borettslagssider |
+
+### Dekningsområdet — omfanget av rettelsen
+
+«Østfold og hele Østlandet» sto **89 steder**. Fordelingen viser hvorfor det var verdt å
+gjøre med skript og ikke for hånd:
+
+| Sted | Antall |
+|---|---|
+| Footeren | 69 sider |
+| Meta-beskrivelser, `og:description`, `twitter:description` | 11 |
+| Stempler og ingresser | 6 |
+| Områdetagger på `kontakt.html` og `om-oss.html` | 2 |
+| `llms.txt` | 1 |
+
+I tillegg sto `areaServed` som `["Østfold","Østlandet"]` i **16 `Service`-blokker** og som
+10 kommuner uten fylkesnivå i `Electrician`-blokka.
+
+Områdetaggene på `kontakt.html` og `om-oss.html` sa allerede «Østfold · Akershus · Oslo».
+Deler av siden opererte altså med et videre område enn resten — nå er alt likt.
+
+### Bygningsmassen i de fem nye kommunene
+
+Samme metode som for Østfold: SSB tabell 06266 og 03174, hentet per kommune.
+
+| Kommune | Fylke | Boliger | Før 1901 | Før 1961 | 1961–80 | Fritidsbygg | Fra Halden |
+|---|---|---|---|---|---|---|---|
+| Drammen | Buskerud | 49 116 | 2 877 (6 %) | 14 675 (30 %) | 13 666 (28 %) | 1 474 | 133 km |
+| Lillestrøm | Akershus | 41 363 | 960 (2 %) | 7 149 (17 %) | 9 242 (22 %) | 709 | 134 km |
+| Oslo | Oslo | **357 673** | **38 956 (11 %)** | **151 451 (42 %)** | 70 987 (20 %) | 2 190 | 119 km |
+| Bærum | Akershus | 55 460 | 1 393 (3 %) | 13 407 (24 %) | 16 002 (29 %) | 685 | 133 km |
+| Asker | Akershus | 42 220 | 1 151 (3 %) | 6 634 (16 %) | 10 646 (25 %) | 4 007 | 130 km |
+
+To ting stikker seg ut:
+
+- **Oslo alene har 151 451 boliger fra før 1961** — nesten fem ganger hele Østfolds
+  boligmasse fra samme periode, og 38 956 fra før 1901. Murgårdsbebyggelsen fra
+  1890-tallet er en egen kategori som ikke finnes i Østfold i noe omfang.
+- **Asker har 4 007 fritidsbygg**, nesten like mange som Hvaler. Hurum-siden med
+  Holmsbu, Sætre og Tofte er kystbebyggelse, ikke forstad.
+
+### 🔴 Avstandene er en reell begrensning
+
+Kjøreavstand fra Lorangløkka 1 i Halden, beregnet med OSRM:
+
+| Sted | Avstand | Tid |
+|---|---|---|
+| Oslo | 119 km | ~1 t 37 min |
+| Lillestrøm | 134 km | ~1 t 49 min |
+| Bærum (Sandvika) | 133 km | ~1 t 51 min |
+| Asker | 130 km | ~1 t 53 min |
+| Drammen | 133 km | ~1 t 57 min |
+
+Til sammenligning: Fredrikstad 40 min, Sarpsborg 29 min.
+
+**Ordren sier «Prioriter Østfold og Drammen først — der er vi nærmest».** Det stemmer for
+Østfold, men målingen sier at Drammen er den **lengste** av de fem, ikke den nærmeste.
+Oslo er nærmest med god margin.
+
+Prioriteringen er fulgt som bedt — Drammen ligger som nummer 9, foran Lillestrøm, Oslo,
+Bærum og Asker. Men hvis begrunnelsen var avstand, er premisset feil. Har dere en base
+eller en kontrollør i Drammensområdet som ikke framgår av nettsiden, endrer det bildet —
+og da bør det stå på siden, for det er et sterkt lokalt signal.
+
+Ført i `FAKTASJEKK.md`. Ingen av de fem nye sidene lover rask utrykning.
+
+### Borettslag — utgangspunktet
+
+`/borettslag/` finnes og er et godt utgangspunkt, men er ikke en produktside i den
+formen tilleggsordren beskriver.
+
+| | I dag | Kravet i tilleggsordren |
+|---|---|---|
+| `h1` | «Trygt Borettslag — vi tar de lovpålagte kontrollene for el og brann, så styret slipper.» | «Elkontroll for borettslag og sameier» |
+| Pakkeinnhold | Tre nivåer (Basis/Trygg/Komplett) i en sammenligningstabell langt nede | Fem tydelige punkter, høyt på siden |
+| Prismodell | Forklart på egen underside | Skal stå på hovedsiden, konkret om modellen |
+| Prosess | Fire steg | Tre steg |
+| FAQ | 7 spørsmål ✅ | 7–8 ✅ |
+| Lenker til artikler | 3 | Alle artiklene i klyngen |
+| Ord i brødteksten | 707 | — |
+| Avviksliste med status | Nevnt i tabellen som «Avviksrapport» | Skal fram som et eget salgsargument |
+| Dokumentasjon som overlever styreskifte | Nevnt som «Dokumentarkiv» | Samme |
+| Mersalg leilighetskontroll | Egen underside | Skal nevnes på hovedsiden |
+
+**Artikler som finnes og skal beholdes:** fire av fire.
+
+- `styrets-ansvar-for-det-elektriske-anlegget-dette-bor-dere-vite.html`
+- `hvor-ofte-elkontroll-borettslag.html`
+- `ladeanlegg-borettslag-kontroll.html`
+- `arlig-kontroll-av-brannalarm-og-nodlys-i-sameier-dette-er-lovpalagt.html`
+
+**Artikler som mangler:** åtte, listet i tilleggsordren fase C.
+
+**Borettslag i hovedmenyen:** ligger i dag som et nedtrekk, «Borettslag & sameie», med
+tre punkter. Tilleggsordren krever at det legges «tydelig i hovedmenyen, ikke bare i en
+nedtrekksmeny».
+
+### Plassholdere (fase A)
+
+Søk gjennom hele kodebasen etter «kommer», «TODO», «lorem», «placeholder», «[lag»,
+«[navn», «Bilde kommer», «Referanse kommer», «xxx» og «TBD» ga **to ekte treff**:
+
+| Fil | Hva | Synlig i produksjon? |
+|---|---|---|
+| `borettslag/index.html` | «Bilde kommer» i stiplet ramme, «Referanse kommer», «— Styreleder, [lag kommer]» | **Ja** |
+| `index.html` | Utkommentert team-seksjon med tre kort som alle sa «Navn» | Nei, lå som HTML-kommentar |
+
+Begge er fjernet med full markup bevart i `FJERNET.md`. `Fra xxx kr/år` var allerede
+ryddet tidligere samme dag (seksjon 18c).
+
+Resten av treffene var `placeholder`-attributter på skjemafelt, fotokreditering og
+«kommer» i vanlige setninger. Alle listet med begrunnelse i `FJERNET.md`.
+
+---
+
 ## Vedlegg: kommandoer brukt i kartleggingen
 
 Kjørt fra repo-roten. Kan gjentas for å verifisere funnene.
