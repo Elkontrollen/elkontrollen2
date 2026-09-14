@@ -65,23 +65,3 @@
 /priser  /priser.html  301!
 /skjemaer  /skjemaer.html  301!
 /tjenester  /tjenester.html  301!
-
-# Mappesider: både med og uten skråstrek skal ende på skråstrek.
-/blogg  /blogg/  301!
-/blogg/index.html  /blogg/  301!
-/borettslag/brannvern  /borettslag/brannvern/  301!
-/borettslag/brannvern/index.html  /borettslag/brannvern/  301!
-/borettslag/elkontroll  /borettslag/elkontroll/  301!
-/borettslag/elkontroll/index.html  /borettslag/elkontroll/  301!
-/borettslag  /borettslag/  301!
-/borettslag/index.html  /borettslag/  301!
-/borettslag/kartlegging  /borettslag/kartlegging/  301!
-/borettslag/kartlegging/index.html  /borettslag/kartlegging/  301!
-/borettslag/ladeanlegg  /borettslag/ladeanlegg/  301!
-/borettslag/ladeanlegg/index.html  /borettslag/ladeanlegg/  301!
-/borettslag/leiligheter  /borettslag/leiligheter/  301!
-/borettslag/leiligheter/index.html  /borettslag/leiligheter/  301!
-/borettslag/pris  /borettslag/pris/  301!
-/borettslag/pris/index.html  /borettslag/pris/  301!
-/skjema  /skjema/  301!
-/skjema/index.html  /skjema/  301!

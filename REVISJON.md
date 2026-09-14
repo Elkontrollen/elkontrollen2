@@ -848,7 +848,7 @@ til utvidelsesløse URL-er ville vært en full URL-migrasjon.
 | Tiltak | Fil |
 |---|---|
 | `pretty_urls = false` — Netlify slutter å skrive om lenkene | `netlify.toml` |
-| 79 regler: 301 fra utvidelsesløs URL til `.html` | `_redirects` (ny) |
+| 59 regler: 301 fra utvidelsesløs URL til `.html` | `_redirects` (ny) |
 | 472 interne lenker til mappesider endret fra `index.html` til kanonisk form (`/`, `/blogg/`, `/borettslag/…/`) | alle sider |
 
 Det siste punktet er den samme konflikten for mappesidene: canonical sa `/blogg/`,
@@ -1122,6 +1122,60 @@ Fire andre steder lovet det samme og er rettet med:
 `/borettslag/kartlegging/` sier fortsatt at dere gir «en fra-pris» etter gjennomgangen.
 Det er ikke rørt — det er en pris dere gir kunden etter å ha sett bygget, ikke en dere
 publiserer på forhånd, og den påstanden er fortsatt riktig.
+
+---
+
+## 18d. Omdirigeringsløkke i produksjon (funnet og rettet)
+
+**Dette var en feil revisjonen selv innførte, og den lå ute i flere timer.**
+
+`_redirects` fra fase 4 hadde regler som skulle samle mappesidene på formen med
+avsluttende skråstrek:
+
+```
+/borettslag/pris  /borettslag/pris/  301!
+```
+
+Regelen ser riktig ut, og den gjorde det den skulle for forespørsler uten skråstrek.
+Problemet er at **Netlify behandler kilden med og uten avsluttende skråstrek som samme
+sti.** En forespørsel mot `/borettslag/pris/` traff derfor sin egen regel, og utropstegnet
+tvang omdirigeringen foran filoppslaget. Resultatet var at siden sendte til seg selv, i
+det uendelige.
+
+Ni sider var rammet:
+
+`/blogg/` · `/borettslag/` · `/borettslag/pris/` · `/borettslag/elkontroll/` ·
+`/borettslag/kartlegging/` · `/borettslag/brannvern/` · `/borettslag/ladeanlegg/` ·
+`/borettslag/leiligheter/` · `/skjema/`
+
+Altså blogg-indeksen og hele Trygt Borettslag-seksjonen — den delen av siden som selger
+den dyreste tjenesten.
+
+### Hvorfor det ikke ble fanget
+
+Verifiseringen etter deploy sjekket formen **uten** skråstrek:
+
+```
+/blogg           -> 301 https://elkontrollen.no/blogg/
+/borettslag/pris -> 301 https://elkontrollen.no/borettslag/pris/
+```
+
+Det så riktig ut, og jeg konkluderte med at reglene virket. Men jeg fulgte aldri
+omdirigeringen. Hadde jeg kjørt `curl -L` i stedet for `curl -o /dev/null`, ville
+løkken kommet fram med én gang. **En 301 til riktig adresse er ikke det samme som at
+adressen svarer.**
+
+De vanlige `.html`-sidene var aldri rammet — de utgjør 59 av reglene og fungerte hele
+tiden.
+
+### Rettelsen
+
+Mapperegler er fjernet helt. Netlify sender `/borettslag/pris` til formen med skråstrek
+på egen hånd, som er den canonical peker på — reglene løste et problem som ikke fantes.
+`_redirects` gikk fra 79 til 59 regler.
+
+Generatoren har fått en sikring som kaster hvis en regel peker på seg selv, på samme sti
+med eller uten skråstrek, eller på en mappe. Testet mot nettopp det mønsteret som feilet.
 
 ---
 

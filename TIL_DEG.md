@@ -278,13 +278,19 @@ sender hvem som helst. Den er usynlig i dag.
 Dette var det alvorligste tekniske funnet i kartleggingen. Kjør i en terminal:
 
 ```bash
-curl -sS -o /dev/null -w "%{http_code} -> %{redirect_url}\n" https://elkontrollen.no/elkontroll-bolig
+curl -sSL -o /dev/null -w "%{http_code} etter %{num_redirects} hopp\n" https://elkontrollen.no/elkontroll-bolig
+curl -sSL -o /dev/null -w "%{http_code} etter %{num_redirects} hopp\n" https://elkontrollen.no/borettslag/pris/
 ```
 
-**Forventet: `301 -> https://elkontrollen.no/elkontroll-bolig.html`**
+**Forventet: `200 etter 1 hopp` og `200 etter 0 hopp`.**
 
-Får du `200` i stedet, har ikke `_redirects` slått inn. Sjekk at fila ligger i
-publiseringsroten i Netlify-loggen.
+Merk `-L`. Uten den ser du bare at det blir en 301, ikke om adressen den peker til
+faktisk svarer. Første versjon av `_redirects` sendte ni mappesider i en uendelig løkke,
+og det ble ikke fanget nettopp fordi omdirigeringen aldri ble fulgt — den så riktig ut på
+overflaten. Se `REVISJON.md` seksjon 18d.
+
+Får du `200 etter 0 hopp` på den første, har ikke `_redirects` slått inn i det hele tatt.
+Sjekk at fila ligger i publiseringsroten i Netlify-loggen.
 
 ### Bekreft at Pretty URLs er av
 

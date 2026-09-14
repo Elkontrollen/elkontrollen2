@@ -54,13 +54,26 @@ for (const r of sider) {
   linjer.push(`${uten}  /${r}  301!`);
 }
 
-linjer.push('');
-linjer.push('# Mappesider: både med og uten skråstrek skal ende på skråstrek.');
-for (const f of walk(ROT).map(x => path.relative(ROT, x).split(path.sep).join('/')).filter(r => /(^|\/)index\.html$/.test(r)).sort()) {
-  const mappe = f.replace(/index\.html$/, '');
-  if (!mappe) continue;                                   // forsiden
-  linjer.push(`/${mappe.replace(/\/$/, '')}  /${mappe}  301!`);
-  linjer.push(`/${mappe}index.html  /${mappe}  301!`);
+// Mappesidene har med vilje INGEN regler her.
+//
+// En regel som '/borettslag/pris  /borettslag/pris/  301!' ser riktig ut, men Netlify
+// behandler kilden med og uten avsluttende skrastrek som samme sti. Forespørselen mot
+// /borettslag/pris/ traff da sin egen regel, og med utropstegnet gikk den foran
+// filoppslaget. Resultatet var en uendelig omdirigeringsløkke som slo ut blogg-indeksen
+// og hele Trygt Borettslag-seksjonen i produksjon.
+//
+// Netlify håndterer mappesider riktig på egen hånd: /borettslag/pris uten skråstrek
+// sendes til formen med skråstrek, som er den canonical peker på.
+
+// Sikring mot løkker: ingen regel får peke på seg selv, på samme sti med eller uten
+// avsluttende skråstrek, eller på en mappe. Det var nettopp det som slo ut blogg- og
+// borettslag-seksjonen i produksjon første gang denne fila ble generert.
+for (const l of linjer) {
+  if (!l.trim() || l.startsWith('#')) continue;
+  const [fra, til] = l.trim().split(/\s+/);
+  const n = x => x.replace(/\/$/, '');
+  if (n(fra) === n(til)) throw new Error('Omdirigeringsløkke: ' + l);
+  if (til.endsWith('/')) throw new Error('Regelen peker på en mappe, som gir løkke: ' + l);
 }
 
 fs.writeFileSync(path.join(ROT, '_redirects'), linjer.join('\n') + '\n');
