@@ -5,7 +5,7 @@ fordi de krever opplysninger bare dere har.
 
 Lista er sortert etter hva som koster mest å la ligge, ikke etter hvor mye arbeid det er.
 
-Sist oppdatert: 2026-09-14 (punkt 6, 7 og 8b er gjort)
+Sist oppdatert: 2026-09-14 (punkt 6, 7, 8b og 8c er gjort)
 
 ---
 
@@ -326,27 +326,22 @@ ligger på faktisk mørk bakgrunn og er riktige som de er. De er ikke rørt.
 
 ---
 
-## 8c. Én kontrastfeil til — ikke rettet
+## 8c. ~~Siste kontrastfeil~~ ✅ gjort
 
-**Tid: 2 minutter, men det er en fargebeslutning i et system.**
+Alvorlighetsmerkene på `/fatt-avvik.html` lå like under kravet. Tekstfargene er mørknet,
+bakgrunnene står som de var. Fargetonen er beholdt nøyaktig — RGB-verdiene er skalert
+proporsjonalt, ikke justert i tone.
 
-Da tilgjengeligheten ble målt på tvers av fjorten sider etter fiksen, var det én igjen:
-alvorlighetsmerkene på `/fatt-avvik.html`.
+| Merke | Før | Etter | Kontrast |
+|---|---|---|---|
+| ALVORLIG | `#C0432A` | `#B13E27` | 4,09:1 → **4,65:1** |
+| AVVIK | `#96690F` | `#8F640E` | 4,28:1 → **4,63:1** |
+| MINDRE | `var(--green-dark)` | uendret | 11,01:1 |
 
-| Merke | Tekst | Bakgrunn | Kontrast | Krav |
-|---|---|---|---|---|
-| `.sev-card.high .lvl` | `#C0432A` | `#F5E1DB` | 4,08:1 | 4,5:1 |
-| `.sev-card.mid .lvl` | `#96690F` | `#FBEFDF` | 4,28:1 | 4,5:1 |
+8 og 5 prosent mørkere. Fargekodingen — rød for kritisk, gul for bør utbedres, grønn for
+kan vente — leser like tydelig som før, kontrollert visuelt.
 
-Begge ligger like under kravet ved 11 px. Dette er ikke rettet, av to grunner: fargene er
-uendret fra før revisjonen, og de er del av et bevisst fargekodet system — rød for
-kritisk, gul for bør utbedres, grønn for kan vente. Hvor mye de tåler å mørknes uten at
-kodingen blir utydelig, er en designvurdering.
-
-Minste endring som holder: mørkne tekstfargene til omtrent `#A93A22` og `#82590C`.
-Bakgrunnene kan stå. Da går `/fatt-avvik.html` fra 96 til 100 som resten.
-
-Si fra, så tar det to minutter.
+**Alle 20 sider målt er nå på 100 i tilgjengelighet.**
 
 ---
 
@@ -400,6 +395,6 @@ dere faktisk har sett. Det er den slags detalj konkurrentene ikke kan kopiere.
 | Når | Hva |
 |---|---|
 | **I dag** | Punkt 0 (`xxx`-teksten), punkt 4 (e-postvarsling) |
-| **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå), punkt 8c hvis du vil ha 100 overalt |
+| **Denne uka** | Punkt 1 (bedriftsprofil — verifiseringen tar tid, start nå) |
 | **Neste uke** | Punkt 3 (Search Console), punkt 5 (registre), punkt 9 (rangeringssjekk) |
 | **Løpende** | Punkt 2 (anmeldelser — to til fire i måneden), punkt 10 (faktasjekk) |

@@ -1069,10 +1069,20 @@ lå under kravet på 4,5:1 — samme rot, samme fiks.
 siden i det hele tatt to steder, samtidig som punkt 5 i `TIL_DEG.md` handler om at
 nettopp de opplysningene skal stå likt overalt for at Google skal feste lit til dem.
 
-`kontakt.html` og `om-oss.html` gikk fra 96 til **100**. Målt på fjorten sider er alle
-nå på 100 unntatt `/fatt-avvik.html`, der alvorlighetsmerkene ligger på 4,08:1 og 4,28:1.
-De er ikke rettet — fargene er del av et bevisst fargekodet system, og hvor mye de tåler
-å mørknes er en designvurdering. Ført som punkt 8c i `TIL_DEG.md`.
+Én til kom fram i samme måling: alvorlighetsmerkene på `/fatt-avvik.html` lå på 4,09:1 og
+4,28:1. De er mørknet 8 og 5 prosent, med fargetonen beholdt — RGB-verdiene er skalert
+proporsjonalt, ikke justert i tone — og bakgrunnene urørt:
+
+| Merke | Før | Etter | Kontrast |
+|---|---|---|---|
+| ALVORLIG | `#C0432A` | `#B13E27` | 4,09:1 → 4,65:1 |
+| AVVIK | `#96690F` | `#8F640E` | 4,28:1 → 4,63:1 |
+| MINDRE | `var(--green-dark)` | uendret | 11,01:1 |
+
+Fargekodingen leser like tydelig som før, kontrollert visuelt.
+
+`kontakt.html`, `om-oss.html` og `fatt-avvik.html` gikk fra 96 til **100**. Målt på 20
+sider er alle nå på 100 i tilgjengelighet.
 
 `.hero-photo .cap-out` og SVG-illustrasjonen på forsiden bruker samme hvite farge, men
 ligger på faktisk mørk bakgrunn. De er riktige og ikke rørt.

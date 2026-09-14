@@ -401,8 +401,8 @@ textarea{resize:vertical; min-height:130px;}
 .sev-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
 .sev-card{border:1px solid var(--line); background:#fff; padding:24px;}
 .sev-card .lvl{font-size:11px; font-weight:600; padding:5px 10px; border-radius:100px; display:inline-block; margin-bottom:14px; letter-spacing:.03em;}
-.sev-card.high .lvl{background:#F5E1DB; color:#C0432A;}
-.sev-card.mid .lvl{background:#FBEFDF; color:#96690F;}
+.sev-card.high .lvl{background:#F5E1DB; color:#B13E27;}
+.sev-card.mid .lvl{background:#FBEFDF; color:#8F640E;}
 .sev-card.low .lvl{background:var(--paper-2); color:var(--green-dark);}
 .sev-card h3, .sev-card h2{font-size:16px; margin-bottom:8px;}
 .sev-card p{font-size:13.5px; color:var(--muted); line-height:1.55;}

@@ -302,7 +302,7 @@ Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-sch
 - [x] **Navn på kontrollør/forfatter.** Niklas Grønvik, sertifisert kontrollør. Alle 34 artikler har nå `author` som `Person` med NEK 405 som `hasCredential`.
 - [ ] **Team-seksjonen på forsiden** ligger fortsatt som HTML-kommentar, med tre kort og plassholderen «Navn». Trenger bilder og de to andre navnene. Se `TIL_DEG.md` punkt 7.
 - [x] **Usynlig tekst.** Org.nr og adresse sto i hvitt på nesten hvit bakgrunn i `kontakt.html` og `om-oss.html`, og etikettene i kontaktkortet lå på 3,21:1. Alle fire rettet til `var(--muted)` / `var(--line)`. Begge sider er nå på 100 i tilgjengelighet.
-- [ ] **Alvorlighetsmerkene på `/fatt-avvik.html`** ligger på 4,08:1 og 4,28:1, like under kravet på 4,5:1. Ikke rettet — fargene er del av et bevisst fargekodet system. Se `TIL_DEG.md` punkt 8c.
+- [x] **Alvorlighetsmerkene på `/fatt-avvik.html`** er mørknet 8 og 5 prosent: `#C0432A` → `#B13E27` (4,65:1) og `#96690F` → `#8F640E` (4,63:1). Fargetonen er beholdt, bakgrunnene står. Alle 20 målte sider er nå på 100 i tilgjengelighet.
 
 ### Bør bekreftes
 
