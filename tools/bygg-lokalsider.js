@@ -321,7 +321,8 @@ function byggOversikt(steder) {
     ['Tar dere kjøretillegg?', 'Nei. Fastprisen på 5 000 kr for elkontroll av bolig gjelder i hele Østfold, uavhengig av hvor i fylket du bor.'],
     ['Dekker dere andre steder enn Østfold?', 'Ja. Vi er Halden-basert og dekker Østfold og hele Østlandet. Sidene her beskriver Østfold-kommunene vi jobber mest i — ta kontakt hvis du er utenfor, så finner vi ut av det.'],
     ['Hvor raskt kan dere komme?', 'Det avhenger av hvor du er og hvor mye vi har inne. Vi svarer på henvendelser innen 24 timer og avtaler tidspunkt da. I Halden og nabokommunene kan vi ofte rykke ut på kort varsel.'],
-    ['Kan flere naboer bestille samtidig?', 'Ja, og det er en god idé. Vi setter gjerne opp flere oppdrag i samme område på samme dag. Det gir oss bedre logistikk og dere raskere tid.']
+    ['Kan flere naboer bestille samtidig?', 'Ja, og det er en god idé. Vi setter gjerne opp flere oppdrag i samme område på samme dag. Det gir oss bedre logistikk og dere raskere tid.'],
+    ['Hva koster det, og varierer prisen med avstand?', 'Elkontroll av bolig koster 5 000 kr som fastpris, med termografering inkludert, og prisen er den samme i hele Østfold. Borettslag, landbruk og næringsbygg får tilbud fordi omfanget varierer for mye til at én pris gir mening. Se prissiden for hele oversikten.']
   ]);
 
   const service = {

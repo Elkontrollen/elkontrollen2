@@ -11,7 +11,30 @@ teksten endres, rett den i `tools/innhold-steder.js` og kjør `node tools/bygg-l
 på nytt — **ikke i HTML-filen direkte**, ellers blir endringen overskrevet neste gang
 sidene genereres.
 
-Sist oppdatert: 2026-09-14 (etter fase 2)
+Sist oppdatert: 2026-09-14 (etter fase 3)
+
+---
+
+## 0. HASTER — placeholder-tekst ligger ute i produksjon
+
+`Fra xxx kr/år` står som synlig tekst på to publiserte sider, seks steder til sammen:
+
+| Fil | Antall | Hvor |
+|---|---|---|
+| `borettslag/index.html` | 3 | Priskortene for Basis, Trygg og Komplett |
+| `borettslag/pris/index.html` | 3 | Tabellen «Fra-priser etter lagstørrelse», ni celler med samme tekst |
+
+Verifisert live på <https://elkontrollen.no/borettslag/pris/> 2026-09-14.
+
+Dette er ikke rettet i revisjonen, fordi det å velge hva som skal stå der er en
+prisbeslutning, ikke en skrivefeil. Men det er den enkeltfeilen på hele siden som
+koster mest: `/borettslag/pris` er konverteringssiden for hele Trygt Borettslag-produktet,
+og en styreleder som leter etter en pris møter bokstavene «xxx».
+
+- [ ] **Fyll inn fra-prisene, eller erstatt tabellen med en formulering som ikke lover et tall** — for eksempel «Pris settes etter kartleggingen». Begge deler er bedre enn det som står nå.
+
+Merk at `/priser` (ny i fase 3) lenker til `/borettslag/pris`, men gjentar ikke
+plassholderen — der står det «Årsavtale, etter antall enheter, tavler og ladepunkter».
 
 ---
 
@@ -205,19 +228,91 @@ fordi de nye sidene arver formuleringene.
 
 ---
 
+## 7. Fase 3 — priser og forsikringsrabatt
+
+### Priser
+
+Prissiden gjengir bare beløp som allerede sto på tjenestesidene. Ingenting er funnet opp.
+Men beløpene bør bekreftes, siden de nå står samlet ett sted og i `Offer`-schema.
+
+| Påstand | Hentet fra | Bekreftet? |
+|---|---|---|
+| Elkontroll bolig: 5 000 kr fastpris, termografering inkludert | `elkontroll-bolig.html` | [ ] |
+| Elkontroll ved kjøp og salg: 5 000 kr fastpris | `elkontroll-boligsalg.html` | [ ] |
+| Elkontroll landbruk: fast pris etter kort avklaring, pris samme dag | `landbruk.html` | [ ] |
+| Garantikontroll: fast pris, avtales etter opplysninger om anlegget | `garantikontroll.html` (siden sier «fastpris», uten beløp) | [ ] |
+| Næring, brannalarm/nødlys, ladeanlegg, internkontroll, kontrollavtale: tilbud | respektive tjenestesider | [ ] |
+| Markedsintervall 4 000–8 000 kr, termografi ca. 2 500 kr i tillegg | `blogg/hva-koster-elkontroll-full-prisguide.html` | [ ] |
+| «Vi utfører ikke utbedring selv» | Ny formulering på `/priser` og `borettslag/pris` | [ ] — se punkt 4, samme spørsmål som om uavhengighet |
+
+### Forsikringsrabatt
+
+**Arbeidsordren ba om å skrive at «Gjensidige oppgir rundt 10 %». Det er ikke gjort, og
+her er hvorfor.**
+
+Gjensidiges egen side om billigere husforsikring tallfester ikke rabatten. Den sier
+ordrett at du «får en av våre største sikkerhetsrabatter» i fem år etter kontrollen, men
+oppgir ingen prosentsats. Å publisere 10 % som om det kom fra Gjensidige ville derfor vært
+en påstand vi ikke kan belegge — på en side som handler om hva kunden får igjen i kroner.
+
+Siden sier i stedet rett ut at rabattens størrelse varierer og må bekreftes med eget
+selskap. Det er en svakere overskrift, men den holder.
+
+- [ ] **Har dere en kilde for 10 %-tallet for bolig?** Et skjermbilde fra et vilkårsdokument, en e-post fra en rådgiver, eller en henvisning i vilkårene holder. Har dere det, setter vi tallet inn — det er et sterkere salgsargument enn «varierer».
+
+Dette er verifisert og publisert som fakta på siden:
+
+| Påstand | Kilde | Bekreftet? |
+|---|---|---|
+| Gjensidige: «en av våre største sikkerhetsrabatter» | gjensidige.no, husforsikring/billigere-forsikring | ✅ sitert |
+| Gjensidige: rabatten gjelder i fem år etter kontrollen | samme | ✅ sitert |
+| Gjensidige: ingen egenandel på brannskade som skyldes feil i el-anlegget | samme | ✅ sitert |
+| Gjensidige: feil må være rettet før rabatten gis | samme | ✅ sitert |
+| Kontrollen må være merket NEK 405 | samme | ✅ sitert |
+
+Dette er derimot hentet fra deres egen eksisterende artikkel, og bør bekreftes:
+
+- [ ] **«Flere selskaper — blant dem Gjensidige, Fremtind, Eika, Varig og Landkreditt — gir rundt 10 prosent rabatt på brannforsikringen hvis alle el-skap på gården har fastmontert temperatursensor med varsling.»** Hentet ordrett fra `blogg/forsikringskrav-elkontroll-landbruk.html`. Gjelder det fortsatt, og gjelder det alle fem selskapene?
+- [ ] **«De fleste landbruksforsikringene krever kontroll etter NEK 405-3 med termografi, som hovedregel hvert tredje år for husdyrbruk.»** Samme kilde.
+- [ ] **«If, Tryg, Fremtind, Frende, Eika og de andre har liknende ordninger.»** Formulert forsiktig, men bekreft at dere kjenner til at de faktisk har det.
+
+### Nye FAQ-svar
+
+47 nye spørsmål og svar er lagt inn på tjenestesidene. De fleste er omskrivinger av det
+som allerede sto på siden, men disse er nye påstander som bør leses:
+
+- [ ] `internkontroll.html`: «Gårdeier har ansvar for bygget og det faste anlegget, men virksomheten har ansvar for internkontroll knyttet til egen bruk av anlegget og eget elektrisk utstyr.»
+- [ ] `internkontroll.html`: «DLE kan gi pålegg med frist, og i alvorlige tilfeller varsle tvangsmulkt eller stenging.»
+- [ ] `kontrollavtale.html`: «Vi purrer til avviket er lukket, og dokumenterer når det skjedde.» — er dette en tjeneste dere faktisk leverer?
+- [ ] `borettslag/brannvern`: «Ved brann kan manglende dokumentasjon føre til avkortning i erstatningen.»
+- [ ] `borettslag/leiligheter`: «Som regel under en time» per leilighet.
+- [ ] `borettslag/kartlegging`: «Selve gjennomgangen tar som regel én til to timer.»
+- [ ] `borettslag/ladeanlegg`: beskrivelsen av hva som konkret sjekkes (termografi under last, vern og jordfeilvern, lastbalansering, kabling, dokumentasjon).
+- [ ] `tjenester.html`: «I markedet kommer termografering ofte som et tillegg på rundt 2 500 kr.»
+
+---
+
 ## Oppsummering
 
 | Kategori | Antall punkter |
 |---|---|
+| **0. Placeholder-tekst i produksjon** | **1 — haster** |
 | 1. Påstander om egen erfaring i området | 24 |
 | 2. Reisetid og tilgjengelighet | 13 |
 | 3. Pris og betingelser | 7 |
 | 4. Faglige påstander | 8 |
 | 5. Sertifiseringsomfang | 2 |
 | 6. Bilder | 4 |
-| **Til sammen** | **58** |
+| 7. Priser, forsikringsrabatt og nye FAQ-svar | 19 |
+| **Til sammen** | **78** |
 
-Ingen av punktene stopper publisering i seg selv — sidene er skrevet forsiktig og påstår
-ikke noe som virker usannsynlig. Men **punkt 3 (pris) og punkt 5 (sertifisering) bør
-avklares før sidene begynner å få trafikk**, fordi de handler om hva kunden får og hva
-dere faktisk er godkjent for.
+**Punkt 0 er det eneste som er en ren feil.** Resten er påstander som sannsynligvis
+stemmer, men som ingen utenfra kan bekrefte.
+
+Rekkefølgen vi ville tatt dem i:
+
+1. **Punkt 0** — `Fra xxx kr/år` ligger ute nå og koster salg hver dag den står.
+2. **Punkt 3 og 7** — pris. Beløpene står nå i `Offer`-schema og kan vises direkte i Google.
+3. **Punkt 5** — sertifiseringsomfang. `README.md` og `llms.txt` ramser opp NEK 405-1, -3 og -4, mens boligtjenesten markedsføres etter NEK 405-2. Én av dem er feil.
+4. **Punkt 1, 2 og 4** — påstander om egen erfaring. Lavere risiko, men bør gjennom før sidene får trafikk.
+5. **Punkt 6** — bilder. Kosmetisk, bortsett fra de fire som gir 404.

@@ -61,7 +61,7 @@ header{background:var(--paper); border-bottom:1px solid var(--line); position:st
 .logo .mark{width:30px; height:30px; border:1.5px solid var(--ink); border-radius:50%; display:flex; align-items:center; justify-content:center;}
 .logo .mark svg{width:14px; height:14px;}
 .logo .el{color:var(--green);}
-nav.links{display:flex; gap:22px; font-size:14px; color:var(--ink); flex-wrap:wrap;}
+nav.links{display:flex; gap:17px; font-size:13.5px; color:var(--ink); flex-wrap:wrap;}
 nav.links a{opacity:0.82; border-bottom:1px solid transparent; padding-bottom:2px; white-space:nowrap;}
 nav.links a:hover{opacity:1; border-color:var(--green);}
 nav.links a.current{opacity:1; border-color:var(--green); font-weight:600;}

@@ -18,6 +18,9 @@ Elkontrollen er sertifisert etter NEK 405-1 (termografi), NEK 405-3 (næring) og
 - [Internkontroll for elsikkerhet](https://elkontrollen.no/internkontroll.html): Lovpålagt internkontroll for alle virksomheter, inkl. termografering og elsikkerhet årsavtale.
 - [Fått avvik i rapporten?](https://elkontrollen.no/fatt-avvik.html): Veiledning for hva man gjør etter en kontrollrapport med avvik, inkl. pålegg fra DLE.
 
+- [Priser](https://elkontrollen.no/priser.html): Samlet prisoversikt. Elkontroll bolig 5000 kr fastpris med termografering inkludert, ingen kjøretillegg i Østfold. Næring, borettslag og landbruk prises etter tilbud.
+- [Forsikringsrabatt](https://elkontrollen.no/forsikringsrabatt.html): Hva som kreves for at forsikringsselskapet godtar elkontrollen - NEK 405-sertifisert kontrollør, NEK 405-4-sertifisert foretak, rapport merket NEK 405, avvik lukket. Rabatten varer typisk fem år.
+
 ## Områder
 
 Elkontrollen er Halden-basert og tar oppdrag i hele Østfold og på Østlandet. Samme fastpris uansett hvor i Østfold kunden bor — ingen kjøretillegg.

@@ -595,6 +595,159 @@ og sertifiseringsomfang (2 punkter — `README.md` og `llms.txt` ramser opp NEK 
 
 ---
 
+## 16. Fase 3 — de kommersielle sidene (utført)
+
+### `/priser` — ny samleside
+
+Prisene lå spredt på tjenestesidene, uten noe sted å se dem samlet. Nå finnes
+`/priser` med:
+
+- Fastpris 5 000 kr synlig i hero, over folden
+- Prisoversikt for alle ti tjenestene, med standard, pris og merknad
+- Hva de 5 000 kronene faktisk dekker — seks kort
+- En begrunnelse for hvorfor noen tjenester prises etter tilbud
+- Sammenligning mot markedet (4 000–8 000 kr, termografi ofte +2 500 kr)
+- Sju FAQ-spørsmål med `FAQPage`-schema
+- `Offer`-schema med `price: 5000`, `priceCurrency: NOK` og `eligibleRegion: Østfold`
+
+**Ingen priser er funnet opp.** Alle beløp er hentet fra det som allerede sto på
+tjenestesidene. Tjenester uten oppgitt pris står som «Tilbud» — ikke med et gjettet tall.
+
+**Lenket fra hovedmenyen**, slik arbeidsordren ba om. Bloggartikkelen «Hva koster
+elkontroll» er beholdt, og de to lenker nå til hverandre: artikkelen har fått en ny
+avslutningsblokk som skiller markedsintervallene fra Elkontrollens egne priser og sender
+leseren videre til `/priser`.
+
+### `/forsikringsrabatt` — ny side
+
+Høyintensjonssøk som var helt udekket, også hos alle konkurrentene (seksjon 12, punkt 4).
+
+Innholdet: hva som kreves for at rapporten godtas, hvor lenge rabatten varer, hva som
+skjer med egenandelen, hvordan dokumentasjonen leveres, og et eget avsnitt om landbruk
+der elkontroll ikke er en rabattmulighet men et vilkår. Fire steg for hvordan man går
+fram, og sju FAQ-spørsmål.
+
+#### 🔴 Om «Gjensidige oppgir rundt 10 %»
+
+Arbeidsordren ba om å skrive dette. **Det er ikke gjort.**
+
+Gjensidiges egen side om billigere husforsikring tallfester ikke rabatten. Den sier
+ordrett at du «får en av våre største sikkerhetsrabatter» i fem år etter kontrollen, og
+at du slipper egenandel på brannskader som skyldes feil i det elektriske anlegget — men
+den oppgir ingen prosentsats.
+
+Å publisere «Gjensidige oppgir rundt 10 %» ville derfor vært en påstand vi ikke kan
+belegge, på en side som handler om nettopp hva kunden får igjen i kroner. Siden sier i
+stedet rett ut at rabattens størrelse varierer og må bekreftes med eget selskap.
+
+10 %-tallet finnes derimot i deres eget innhold — i `blogg/forsikringskrav-elkontroll-landbruk.html`,
+knyttet til **temperatursensorer i el-skap på gårdsbruk**, ikke til vanlig boligkontroll.
+Det er sannsynligvis der tallet i arbeidsordren kommer fra. Den påstanden er gjengitt på
+`/forsikringsrabatt` i landbruksavsnittet, konsistent med artikkelen, og ført i
+`FAKTASJEKK.md` punkt 7.
+
+Har eieren en kilde for 10 % på bolig — et vilkårsdokument, en e-post fra en rådgiver —
+settes tallet inn. Det er et langt sterkere salgsargument enn «varierer».
+
+### FAQ på alle tjenestesider
+
+Kravet var 5–7 spørsmål per tjenesteside med `FAQPage`-schema. Slik så det ut før og etter:
+
+| Side | Før | Etter |
+|---|---|---|
+| `internkontroll` | 0 | 6 |
+| `kontrollavtale` | 0 | 6 |
+| `tjenester` | 0 | 5 |
+| `borettslag/kartlegging` | 0 | 5 |
+| `borettslag/elkontroll` | 3 | 6 |
+| `borettslag/ladeanlegg` | 3 | 6 |
+| `borettslag/brannvern` | 3 | 6 |
+| `borettslag/leiligheter` | 3 | 6 |
+| `borettslag/pris` | 3 | 6 |
+| `elkontroll-bolig` | 4 | 6 |
+| `naering` | 4 | 6 |
+| `elkontroll-boligsalg`, `landbruk`, `garantikontroll`, `brannalarm-nodlys`, `elbillading-kontroll`, `fatt-avvik` | 5 | 5 (urørt) |
+| `borettslag/` | 7 | 7 (urørt) |
+| `priser`, `forsikringsrabatt` (nye) | — | 7 |
+| 8 lokalsider, `omrader` (nye) | — | 5 |
+
+**47 nye spørsmål og svar.** Alle 29 tjenestesider ligger nå innenfor 5–7, verifisert med
+`node tools/sjekk-faq.js`.
+
+#### En feil som ble funnet underveis
+
+`borettslag/pris` bruker `.faq-item`-markupen også til trekkspill som ikke er spørsmål og
+svar — de åtte tilleggstjenestene under overskriften «Tillegg». Første versjon av
+generatoren dro alle fjorten inn i `FAQPage`-schemaet, altså også «Leilighetskontroll» og
+«HMS-perm digital» som spørsmål.
+
+Det ville vært ugyldig FAQ-markup og kunne gitt en manuell reaksjon fra Google.
+Generatoren bygger nå schemaet bare fra den siste seksjonen som inneholder FAQ-elementer,
+som er den faktiske «Vanlige spørsmål»-seksjonen. Schemaet på siden er 6 spørsmål, mens
+HTML-en har 14 `.faq-item` — det er riktig.
+
+### 🔴 Funn: placeholder-tekst ligger ute i produksjon
+
+Under arbeidet med prissiden ble dette oppdaget:
+
+```
+Fra xxx kr/år
+```
+
+står som **synlig tekst i produksjon**, seks steder: tre priskort på `/borettslag/` og tre
+tabellrader på `/borettslag/pris/`. Verifisert live med curl mot
+<https://elkontrollen.no/borettslag/pris/>.
+
+`/borettslag/pris` er konverteringssiden for hele Trygt Borettslag-produktet. En
+styreleder som kommer dit for å finne en pris, møter bokstavene «xxx».
+
+**Dette er ikke rettet her,** fordi det å velge hva som skal stå i stedet er en
+prisbeslutning, ikke en skrivefeil. Det er ført som punkt 0 i `FAKTASJEKK.md` og som
+første punkt i `TIL_DEG.md`. `/priser` lenker til siden, men gjentar ikke plassholderen —
+der står det «Årsavtale, etter antall enheter, tavler og ladepunkter».
+
+### Navigasjon
+
+- **Hovedmeny:** «Priser» lagt inn mellom «Bedrift & næring» og «Fått avvik?», på alle 68 sider med meny.
+- **Bolig-nedtrekket:** «Forsikringsrabatt» lagt til.
+- **Footer, Bolig-gruppa:** begge sidene lagt til.
+
+Menyen fikk ett punkt mer enn den hadde plass til på 1280 px, og brøt til to linjer.
+`nav.links` er derfor strammet fra `gap:22px; font-size:14px` til `gap:17px; font-size:13.5px`.
+Kontrollert mot HEAD før endringen: menyen brøt allerede til to linjer i båndet 901–1100 px,
+så den oppførselen er uendret. På 1280 px ligger den nå på én linje igjen.
+
+Dette er den eneste CSS-endringen i hele revisjonen, og den var nødvendig for å få
+arbeidsordrens «lenk fra hovedmeny» til å fungere visuelt.
+
+### Oppdatert
+
+- `sitemap.xml`: 66 → 68 URL-er
+- `llms.txt`: `/priser` og `/forsikringsrabatt` lagt inn
+- `blogg/hva-koster-elkontroll-full-prisguide.html`: krysslenke til begge nye sidene
+
+### Verifisering
+
+| Sjekk | Resultat |
+|---|---|
+| Brutte interne lenker på hele siden | 0 av 3 257 |
+| JSON-LD parser | 159 blokker, 0 feil |
+| FAQ-spørsmål innenfor 5–7 på alle tjenestesider | 29 av 29 |
+| `<title>` og `meta description` på de nye sidene | 55/56 tegn og 133/150 tegn |
+| Sitemap mot filsystem | 0 manglende, 0 døde |
+| Nav på 950/1000/1100/1280 px | Kontrollert i headless Chrome |
+
+### Verktøy
+
+| Fil | Rolle |
+|---|---|
+| `tools/bygg-sider.js` | Genererer `/priser` og `/forsikringsrabatt` |
+| `tools/faq-tillegg.js` | Alle nye FAQ-spørsmål, per side. **Her rettes tekst.** |
+| `tools/bygg-faq.js` | Setter inn FAQ i HTML og bygger `FAQPage`-schema. Idempotent |
+| `tools/sjekk-faq.js` | Verifiserer at alle tjenestesider ligger på 5–7 spørsmål |
+
+---
+
 ## Vedlegg: kommandoer brukt i kartleggingen
 
 Kjørt fra repo-roten. Kan gjentas for å verifisere funnene.
