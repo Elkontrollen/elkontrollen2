@@ -1,0 +1,33 @@
+{
+  "_om": "Foretaksopplysninger som brukes i LocalBusiness-schema på alle sider. Rett her, kjør deretter: node tools/fase4-schema.js",
+
+  "navn": "Elkontrollen AS",
+  "orgnr": "825176942",
+  "telefon": "+4798019154",
+  "epost": "post@elkontrollen.no",
+  "gate": "Lorangløkka 1",
+  "postnr": "1782",
+  "poststed": "Halden",
+  "land": "NO",
+
+  "_geo": "Koordinater slått opp i OpenStreetMap/Nominatim på adressen Lorangløkka 1, 1782 Halden (Brødløs). Bekreft at punktet stemmer med der dere faktisk holder til.",
+  "lat": 59.134686,
+  "lon": 11.380039,
+
+  "_apningstider": "TOM MED VILJE. Siden oppgir ingen åpningstider noe sted, og de er ikke funnet opp her. Fyll inn i schema.org-format for å få dem ut i LocalBusiness-schema, f.eks. [\"Mo-Fr 07:00-16:00\"]. Tom liste betyr at openingHours utelates fra schemaet.",
+  "apningstider": [],
+
+  "_sameAs": "Legg inn URL til Google Bedriftsprofil, Proff, 1881 og Elvirksomhetsregisteret når profilene er på plass (se TIL_DEG.md). Styrker koblingen mellom nettsted og bedrift i Googles øyne.",
+  "sameAs": [
+    "https://virksomhet.brreg.no/nb/oppslag/enheter/825176942"
+  ],
+
+  "_prisnivaa": "priceRange i schema.org. $$ er det som allerede lå på siden.",
+  "prisnivaa": "$$",
+
+  "_forfatter": "TOM MED VILJE. Arbeidsordren ber om author som Person med NEK 405-kvalifikasjon på bloggartiklene, men det finnes ikke noe personnavn på siden i dag — team-seksjonen på forsiden står som en HTML-kommentar med plassholderen «Navn». Fyll inn navn og tittel her, så bygges author om fra Organization til Person med hasCredential. Uten navn brukes Elkontrollen AS som forfatter, med NEK 405 som credential på foretaket.",
+  "forfatter": {
+    "navn": "",
+    "stilling": ""
+  }
+}

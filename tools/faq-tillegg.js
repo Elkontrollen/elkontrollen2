@@ -85,7 +85,7 @@ module.exports = {
     ['Hvem har ansvaret — styret eller den enkelte andelseier?',
      'Styret har ansvaret for fellesanlegget: hovedtavle, stigere, fellesrom, kjeller, garasje, utelys og varmekabler. Andelseier har ansvaret for det elektriske innenfor egen boenhet. Vi har skrevet mer om <a href="../../blogg/styrets-ansvar-for-det-elektriske-anlegget-dette-bor-dere-vite.html">styrets ansvar</a>.'],
     ['Er leilighetene inkludert?',
-     'Nei, ikke i elkontroll av fellesanlegget. Kontroll av de enkelte boenhetene er en egen tjeneste — se <a href="../leiligheter/index.html">leilighetskontroll</a>, som kan legges til uansett hvilket nivå laget velger.']
+     'Nei, ikke i elkontroll av fellesanlegget. Kontroll av de enkelte boenhetene er en egen tjeneste — se <a href="/borettslag/leiligheter/">leilighetskontroll</a>, som kan legges til uansett hvilket nivå laget velger.']
   ],
 
   'borettslag/ladeanlegg/index.html': [

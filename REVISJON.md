@@ -748,6 +748,238 @@ arbeidsordrens «lenk fra hovedmeny» til å fungere visuelt.
 
 ---
 
+## 17. Fase 4 — teknisk SEO (utført)
+
+### Sjekklista fra arbeidsordren
+
+| Krav | Status |
+|---|---|
+| `LocalBusiness`-schema (type `Electrician`) i felles layout | ✅ på 69 sider, med org.nr, telefon, adresse, `geo`, `areaServed` og `sameAs` |
+| — med `openingHours` | ⚠️ **utelatt med vilje.** Se avsnittet under |
+| `Service`-schema på hver tjenesteside, med `offers` og pris der pris finnes | ✅ 25 blokker |
+| `FAQPage`-schema generert fra FAQ-komponenten | ✅ 29 blokker, gjort i fase 3 |
+| `Article`-schema på alle bloggartikler | ✅ 34, med `dateModified`, `mainEntityOfPage`, `image` og `inLanguage` |
+| — med `author` som `Person` og oppgitt NEK 405-kvalifikasjon | ⚠️ **kvalifikasjonen er på plass, men ikke som `Person`.** Se avsnittet under |
+| `BreadcrumbList`-schema | ✅ 68 sider |
+| Unik `title` under 60 tegn | ✅ 71 av 71, ingen duplikater |
+| `meta description` under 155 tegn | ✅ 71 av 71, ingen duplikater |
+| `canonical` på alle sider | ✅ 71 av 71 |
+| Oppdatert `sitemap.xml` | ✅ 68 URL-er, `lastmod` 2026-09-14 |
+| Alle bilder i WebP | ✅ 8 WebP, 768 kB samlet |
+| `loading="lazy"` under folden | ✅ — og bildet over folden er satt til `fetchpriority="high"` i stedet |
+| Meningsfull alt-tekst | ✅ omskrevet, inkludert «Næringsbygg i Oslo» på en side om Østfold |
+| `width` og `height` på alle bilder | ✅ 10 av 10 |
+| `lang="nb"` | ✅ 71 av 71 |
+| Lighthouse 95+ på alle fire på forsiden | ✅ **100 / 100 / 100 / 100** |
+| Hver bloggartikkel lenker til minst én tjenesteside | ✅ 34 av 34 |
+| Hver tjenesteside lenker til minst to artikler | ✅ 29 av 29 |
+
+### Lighthouse
+
+Målt mot en lokal server som etterligner Netlify med Brotli og samme cache-header.
+Uten komprimering måler Lighthouse feil, fordi CSS og HTML da lastes rått.
+
+| Side | Perf | Tilgj. | Beste praksis | SEO |
+|---|---|---|---|---|
+| `/` (mobil) | **100** | **100** | **100** | **100** |
+| `/` (desktop) | **100** | **100** | **100** | **100** |
+| `/elkontroll-fredrikstad` | 100 | 100 | 100 | 100 |
+| `/priser` | 100 | 100 | 100 | 100 |
+| `/forsikringsrabatt` | 100 | 100 | 100 | 100 |
+| `/garantikontroll` | 96 | 100 | 100 | 100 |
+| `/borettslag/` | 95 | 100 | 100 | 100 |
+| `/blogg/dle-tilsyn-bedrift` | 100 | 100 | 100 | 100 |
+| `/tjenester` | 99 | 100 | 100 | 100 |
+
+Utgangspunktet var 96 / 91 / 100 / 100 på mobil (seksjon 8). De to som flyttet seg:
+
+**Tilgjengelighet 91 → 100.** Tre feil, alle i felles header og footer:
+
+- `landmark-one-main` — det fantes ikke et `<main>`-element på noen side i hele repoet. Innholdet mellom `</header>` og `<footer>` er nå pakket i `<main id="innhold">` på alle 71 sider.
+- `heading-order` — footeren brukte `<h5>` for kolonneoverskriftene rett etter `<h4>` i brødteksten. Endret til `<h2>`, og CSS-selektoren `footer h5` fulgte med. I tillegg hoppet 28 sider et nivå i selve innholdet, mest `h1 → h3` i prisboksen i heroen og `h2 → h4` i stegkort. 41 overskrifter er justert til nærmeste tillatte nivå, og CSS-reglene er utvidet (`.step h4` → `.step h4, .step h3`) slik at utseendet er uendret. Verifisert visuelt.
+- `target-size` — menyknappen på mobil var for liten. `.menu-toggle` og `.phone-icon` har fått `min-width`/`min-height: 44px`, og lenkene i mobilmenyen har fått `min-height: 44px`.
+
+**Ytelse 96 → 100, og FCP fra 2,2 s til 0,8 s.** Én endring gjorde nesten hele jobben.
+
+### Selvhostede fonter
+
+Google Fonts-stilarket var den enkeltressursen som blokkerte rendringen mest —
+Lighthouse målte **893 ms**. Kjeden var:
+
+```
+HTML → fonts.googleapis.com (CSS) → fonts.gstatic.com (woff2)
+```
+
+To ekstra opphav, hver med sin DNS-oppslag og TLS-runde, før første tekst kunne
+tegnes. Fontfilene ligger nå i `assets/fonts/`, og `@font-face` er lagt inn øverst i
+`style.css`. `font-display: swap` er beholdt.
+
+To ting ble gjort samtidig:
+
+- **Bare latin og latin-ext hentes.** Kyrillisk, gresk og vietnamesisk trengs ikke på en norsk side, og utgjorde over halvparten av filene.
+- **Vektene er slått sammen.** Google leverer variable fonter, så alle fire vektene av IBM Plex Sans pekte på nøyaktig samme fil. Uten sammenslåing ville nettleseren lastet de samme bytene fire ganger. Fire `@font-face`-regler med vektområde, fire filer, **115 kB totalt**.
+
+I tillegg er de to latin-filene forhåndslastet med `<link rel="preload">`, siden de ellers først oppdages når CSS-en er ferdig parset.
+
+Resultatet er at siden nå ikke gjør noen forespørsler til tredjepart i det hele tatt.
+
+### Canonical-konflikten (seksjon 5)
+
+Dette var det alvorligste tekniske funnet i kartleggingen: hver side svarte 200 på
+to URL-er, og Netlifys «Pretty URLs» skrev om alle interne lenker til den varianten
+canonical sa ikke var den riktige.
+
+Løsningen holder de eksisterende `.html`-URL-ene. Arbeidsordren sier uttrykkelig at
+URL-er ikke skal endres, og 57 av dem er allerede indeksert i den formen — å gå over
+til utvidelsesløse URL-er ville vært en full URL-migrasjon.
+
+| Tiltak | Fil |
+|---|---|
+| `pretty_urls = false` — Netlify slutter å skrive om lenkene | `netlify.toml` |
+| 79 regler: 301 fra utvidelsesløs URL til `.html` | `_redirects` (ny) |
+| 472 interne lenker til mappesider endret fra `index.html` til kanonisk form (`/`, `/blogg/`, `/borettslag/…/`) | alle sider |
+
+Det siste punktet er den samme konflikten for mappesidene: canonical sa `/blogg/`,
+mens lenkene pekte på `/blogg/index.html`. Filnavnene er uendret — ingen URL forsvinner.
+
+`_redirects` genereres av `tools/fase4-redirects.js` og skal ikke redigeres for hånd.
+
+### Schema
+
+All JSON-LD bygges nå ett sted, av `tools/fase4-schema.js`. Det var nødvendig fordi
+siden ikke har felles layout — ellers måtte 225 blokker vedlikeholdes i 71 filer.
+
+| Type | Antall | Merknad |
+|---|---|---|
+| `Electrician` | 69 | Erstatter `Organization` og den ugyldige `ElectricianService`. Har `@id`, org.nr som `vatID` og `identifier`, `geo`, `areaServed` med alle åtte kommunene pluss Østfold og Østlandet, `sameAs` til Brønnøysundregistrene, `knowsAbout` |
+| `BreadcrumbList` | 68 | Alle unntatt forsiden, `404` og `skjema/` |
+| `Article` | 34 | `dateModified`, `mainEntityOfPage`, `image`, `inLanguage`, og `publisher` som `@id`-referanse |
+| `Service` | 25 | `provider` peker nå på `@id` i stedet for å gjenta navnet |
+| `FAQPage` | 29 | Fra fase 3 |
+
+`geo` er slått opp i OpenStreetMap på Lorangløkka 1, 1782 Halden: 59.134686, 11.380039.
+Punktet lander på Brødløs i Halden. Bør bekreftes av eier.
+
+### ⚠️ To punkter er bevisst ikke gjort
+
+**1. `openingHours` er utelatt.**
+
+Siden oppgir ikke åpningstider noe sted — verken i tekst, i footer eller i schema.
+Å gjette dem ville gitt Google et konkret tidsrom å vise i søkeresultatet, og feil
+åpningstid er verre enn ingen: en kunde som ringer på et tidspunkt Google sa dere var
+åpne, og ikke får svar, har fått et dårligere møte enn en som ikke fikk noe løfte.
+
+Feltet ligger klart i `tools/foretak.json` som en tom liste. Fyll inn i schema.org-format
+og kjør generatoren på nytt:
+
+```json
+"apningstider": ["Mo-Fr 07:00-16:00"]
+```
+
+```bash
+node tools/fase4-schema.js
+```
+
+Alt annet i `LocalBusiness`-blokka er på plass.
+
+**2. `author` er ikke en `Person`.**
+
+Arbeidsordren ber om `author` som `Person` med oppgitt NEK 405-kvalifikasjon. Det
+finnes ikke noe personnavn på siden i dag — team-seksjonen på forsiden ligger som en
+HTML-kommentar med plassholderen «Navn», med en notis om at den er «skjult til vi har
+ekte bilder og navn». Å finne opp et navn er ikke et alternativ.
+
+Det som er gjort i stedet: `author` er foretaket, med kvalifikasjonen hengt på som
+`hasCredential`:
+
+```json
+"author": {
+  "@id": "https://elkontrollen.no/#elkontrollen",
+  "@type": "Electrician",
+  "name": "Elkontrollen AS",
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "Sertifisering",
+    "name": "NEK 405-sertifisert kontrollør"
+  }
+}
+```
+
+Fyll inn navn og stilling i `tools/foretak.json` og kjør `node tools/fase4-schema.js`,
+så bygges `author` om til en `Person` med `worksFor` og samme kvalifikasjon. Én linje.
+
+### Bilder
+
+| | Før | Etter |
+|---|---|---|
+| Format | 12 JPG | 8 WebP (4:3-beskåret til formatet `.service-photo` faktisk viser) |
+| Størrelse på det som lastes | ~1,8 MB | **768 kB** |
+| `width`/`height` | 0 av 10 | 10 av 10 |
+| `og:image` som gir 404 | **4 filnavn, brukt i 5 artikler** | 0 |
+| `og:image`-format | Originalene, bl.a. 1400×2373 portrett | 16 egne varianter i 1200×630 |
+
+De fire filnavnene som ikke fantes (`elkontroll-bolig.jpg`, `elkontroll-landbruk.jpg`,
+`internkontroll.jpg`, `termografi.jpg`) er pekt om til et eksisterende, relevant bilde.
+Hvilket bilde som hører til hvilken artikkel er en redaksjonell vurdering — ført i
+`FAKTASJEKK.md`.
+
+`og:image` er beholdt som JPG med vilje. Noen sosiale skrapere håndterer fortsatt ikke
+WebP, og delingsbildet er ikke en del av sidevekten.
+
+JPG-originalene ligger igjen i `assets/img/` som kilder for generatoren. Ingen side
+lenker til dem, så de koster ingen båndbredde.
+
+### Intern lenking
+
+| | Før (seksjon 7) | Etter |
+|---|---|---|
+| Artikler med tematisk tjenestelenke i brødteksten | 10 av 34 | **34 av 34** |
+| Tjenestesider med minst to bloggenker | 3 av 22 | **29 av 29** |
+
+24 artikler hadde `/kontakt` som eneste utgang — en generisk oppfordring, ikke en
+tematisk lenke. Alle 22 som fortsatt manglet etter fase 2 og 3 har fått en
+«Relevante tjenester»-blokk, og 18 tjenestesider har fått en «Les mer»-blokk.
+Koblingene ligger i `tools/lenking.js`.
+
+### Verktøy lagt til i fase 4
+
+| Fil | Rolle |
+|---|---|
+| `tools/foretak.json` | Foretaksopplysninger til `LocalBusiness`. **Åpningstider og forfatternavn fylles inn her.** |
+| `tools/fase4-struktur.js` | `lang="nb"`, `<main>`, footer-overskrifter, `defer` på `main.js` |
+| `tools/fase4-schema.js` | All JSON-LD |
+| `tools/fase4-redirects.js` | `_redirects` og `netlify.toml` |
+| `tools/fase4-lenker.js` | Interne lenker til kanonisk form |
+| `tools/meta-tekster.js` + `fase4-meta.js` | Nye titler og beskrivelser |
+| `tools/fase4-bilder.js` | WebP, `og:image`-varianter, alt-tekst |
+| `tools/fase4-fonter.js` | Selvhosting av fonter |
+| `tools/fase4-overskrifter.js` | Retter hopp i overskriftsnivå |
+| `tools/lenking.js` + `fase4-lenking.js` | Redaksjonell intern lenking |
+| `tools/sjekk-faq.js`, `sjekk-lenking.js`, `sjekk-overskrifter.js` | Verifisering |
+
+Alle er idempotente og kan kjøres om igjen.
+
+### Sluttvalidering
+
+| Sjekk | Resultat |
+|---|---|
+| Brutte interne lenker | **0 av 3 478** |
+| JSON-LD som parser | **225 av 225** |
+| Tagbalanse | 71 av 71 filer |
+| Nøyaktig én `h1` | 71 av 71 |
+| `lang="nb"` | 71 av 71 |
+| `<main>` | 71 av 71 |
+| Hopp i overskriftsnivå | 0 av 71 sider |
+| `title` under 60 / `description` under 155 | 71 av 71, ingen duplikater |
+| FAQ innenfor 5–7 på tjenestesider | 29 av 29 |
+| Sitemap mot filsystem | 0 manglende, 0 døde |
+
+> **Lighthouse-tallene over er målt lokalt.** De bør kjøres på nytt mot
+> `https://elkontrollen.no` etter deploy — særlig fordi `pretty_urls = false` og
+> `_redirects` først får virkning der.
+
+---
+
 ## Vedlegg: kommandoer brukt i kartleggingen
 
 Kjørt fra repo-roten. Kan gjentas for å verifisere funnene.

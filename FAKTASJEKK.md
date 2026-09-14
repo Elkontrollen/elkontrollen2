@@ -11,7 +11,7 @@ teksten endres, rett den i `tools/innhold-steder.js` og kjør `node tools/bygg-l
 på nytt — **ikke i HTML-filen direkte**, ellers blir endringen overskrevet neste gang
 sidene genereres.
 
-Sist oppdatert: 2026-09-14 (etter fase 3)
+Sist oppdatert: 2026-09-14 (etter fase 4)
 
 ---
 
@@ -292,6 +292,32 @@ som allerede sto på siden, men disse er nye påstander som bør leses:
 
 ---
 
+## 8. Fase 4 — teknisk SEO
+
+### Må fylles inn for at schemaet skal bli komplett
+
+Begge ligger klare i `tools/foretak.json`. Fyll inn, kjør `node tools/fase4-schema.js`.
+
+- [ ] **Åpningstider.** `openingHours` er utelatt fra `LocalBusiness`-schemaet fordi siden ikke oppgir dem noe sted, og de er ikke funnet opp. Google kan vise åpningstider direkte i søkeresultatet — feil tid er verre enn ingen. Format: `["Mo-Fr 07:00-16:00"]`.
+- [ ] **Navn på kontrollør/forfatter.** Arbeidsordren ber om `author` som `Person` med NEK 405-kvalifikasjon på bloggartiklene. Det finnes ikke noe personnavn på siden — team-seksjonen på forsiden er en HTML-kommentar med plassholderen «Navn». Inntil videre står foretaket som forfatter, med kvalifikasjonen på seg. Fyll inn navn og stilling, så bygges det om til `Person`.
+
+### Bør bekreftes
+
+- [ ] **Koordinatene.** `geo` er slått opp i OpenStreetMap på Lorangløkka 1, 1782 Halden og gir 59.134686, 11.380039 (Brødløs). Stemmer punktet med der dere faktisk holder til?
+- [ ] **`sameAs`.** Peker foreløpig bare på Brønnøysundregistrene. Legg til Google Bedriftsprofil, Proff, 1881 og Elvirksomhetsregisteret når profilene er på plass — det styrker koblingen mellom nettsted og bedrift.
+- [ ] **Fire og:image-filer manglet** og er pekt om til et eksisterende bilde. Hvilket bilde som passer til hvilken artikkel er en redaksjonell vurdering:
+  | Artikkel | Peker nå på |
+  |---|---|
+  | `elektriker-eller-kontrollor` | `elkontroll-bolig-enebolig` |
+  | `forsikringskrav-elkontroll-landbruk`, `temperatursensor-sikringsskap` | `landbruk-driftsbygning` |
+  | `internkontroll-elektro-sma-bedrifter` | `naering-kontorbygg` |
+  | `hva-sjekker-en-termografor` | `sikringsskap-norsk` |
+- [ ] **Nye alt-tekster.** Skrevet ut fra hva bildene viser. «Næringsbygg i Oslo» er rettet til «Næringsbygg med elektrisk anlegg som kontrolleres etter NEK 405-3».
+- [ ] **44 titler og 18 beskrivelser er skrevet om** for å komme under 60/155 tegn. Ingen endrer hva siden handler om, men les gjerne gjennom `tools/meta-tekster.js` — det er disse tekstene som står i Google.
+- [ ] **`pretty_urls = false`** er satt i `netlify.toml`. Bekreft etter deploy at interne lenker serveres som `.html` og at `/elkontroll-bolig` gir 301 til `/elkontroll-bolig.html`.
+
+---
+
 ## Oppsummering
 
 | Kategori | Antall punkter |
@@ -304,7 +330,8 @@ som allerede sto på siden, men disse er nye påstander som bør leses:
 | 5. Sertifiseringsomfang | 2 |
 | 6. Bilder | 4 |
 | 7. Priser, forsikringsrabatt og nye FAQ-svar | 19 |
-| **Til sammen** | **78** |
+| 8. Teknisk SEO — åpningstider, forfatternavn, koordinater, bilder | 9 |
+| **Til sammen** | **87** |
 
 **Punkt 0 er det eneste som er en ren feil.** Resten er påstander som sannsynligvis
 stemmer, men som ingen utenfra kan bekrefte.

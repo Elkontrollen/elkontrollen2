@@ -1,0 +1,88 @@
+# Hver side skal svare på én URL.
+#
+# Netlify serverer /elkontroll-bolig og /elkontroll-bolig.html som to URL-er som
+# begge gir 200. Canonical peker på .html-varianten, så her sendes den andre dit
+# med 301. Utropstegnet tvinger regelen foran Netlifys egen filoppslag.
+#
+# Generert av tools/fase4-redirects.js — ikke rediger for hånd.
+
+/blogg/10-tegn-pa-at-det-elektriske-anlegget-bor-kontrolleres  /blogg/10-tegn-pa-at-det-elektriske-anlegget-bor-kontrolleres.html  301!
+/blogg/arlig-kontroll-av-brannalarm-og-nodlys-i-sameier-dette-er-lovpalagt  /blogg/arlig-kontroll-av-brannalarm-og-nodlys-i-sameier-dette-er-lovpalagt.html  301!
+/blogg/dle-tilsyn-bedrift  /blogg/dle-tilsyn-bedrift.html  301!
+/blogg/el-sjekk-vs-elkontroll-hva-er-egentlig-forskjellen  /blogg/el-sjekk-vs-elkontroll-hva-er-egentlig-forskjellen.html  301!
+/blogg/elektriker-eller-kontrollor  /blogg/elektriker-eller-kontrollor.html  301!
+/blogg/elektrisk-due-diligence-ved-kjop-av-naeringseiendom-dette-bor-du-vite  /blogg/elektrisk-due-diligence-ved-kjop-av-naeringseiendom-dette-bor-du-vite.html  301!
+/blogg/elkontroll-for-avfallshandtering-og-gjenvinningsanlegg-arlig-kontroll-er-kravet  /blogg/elkontroll-for-avfallshandtering-og-gjenvinningsanlegg-arlig-kontroll-er-kravet.html  301!
+/blogg/elkontroll-for-bathavner-og-marinaer-ofte-oversett-men-reelt-palagt  /blogg/elkontroll-for-bathavner-og-marinaer-ofte-oversett-men-reelt-palagt.html  301!
+/blogg/elkontroll-for-bensinstasjoner-og-vaskehaller-dette-sier-forsikringsbransjen  /blogg/elkontroll-for-bensinstasjoner-og-vaskehaller-dette-sier-forsikringsbransjen.html  301!
+/blogg/elkontroll-for-butikklokaler  /blogg/elkontroll-for-butikklokaler.html  301!
+/blogg/elkontroll-for-campingplasser  /blogg/elkontroll-for-campingplasser.html  301!
+/blogg/elkontroll-for-dagligvarebutikker-nar-strombrudd-betyr-tapt-vareverdi-i-sanntid  /blogg/elkontroll-for-dagligvarebutikker-nar-strombrudd-betyr-tapt-vareverdi-i-sanntid.html  301!
+/blogg/elkontroll-for-fredede-og-verneverdige-bygninger-strengere-krav-enn-de-fleste-tror  /blogg/elkontroll-for-fredede-og-verneverdige-bygninger-strengere-krav-enn-de-fleste-tror.html  301!
+/blogg/elkontroll-for-hoteller-den-strengeste-risikoklassen-som-finnes  /blogg/elkontroll-for-hoteller-den-strengeste-risikoklassen-som-finnes.html  301!
+/blogg/elkontroll-for-internat-folkehoyskoler-skoler-og-andre-bygg-med-overnatting  /blogg/elkontroll-for-internat-folkehoyskoler-skoler-og-andre-bygg-med-overnatting.html  301!
+/blogg/elkontroll-for-kirker-og-menighetshus  /blogg/elkontroll-for-kirker-og-menighetshus.html  301!
+/blogg/elkontroll-for-lagerbygg-ofte-lite-bemannet-men-hoy-verdi-a-beskytte  /blogg/elkontroll-for-lagerbygg-ofte-lite-bemannet-men-hoy-verdi-a-beskytte.html  301!
+/blogg/elkontroll-for-parkeringshus-og-hvorfor-elbillading-gjor-det-enda-viktigere-1  /blogg/elkontroll-for-parkeringshus-og-hvorfor-elbillading-gjor-det-enda-viktigere-1.html  301!
+/blogg/elkontroll-for-pumpestasjoner-kritisk-infrastruktur-som-lett-blir-glemt  /blogg/elkontroll-for-pumpestasjoner-kritisk-infrastruktur-som-lett-blir-glemt.html  301!
+/blogg/elkontroll-for-svommehaller-idrettshaller-og-treningssentre  /blogg/elkontroll-for-svommehaller-idrettshaller-og-treningssentre.html  301!
+/blogg/elkontroll-for-veterinaerklinikker  /blogg/elkontroll-for-veterinaerklinikker.html  301!
+/blogg/elkontroll-landbruk-slik-kan-du-fa-rabatt-pa-forsikringen  /blogg/elkontroll-landbruk-slik-kan-du-fa-rabatt-pa-forsikringen.html  301!
+/blogg/fatt-palegg-fra-eltilsynet  /blogg/fatt-palegg-fra-eltilsynet.html  301!
+/blogg/forsikringskrav-elkontroll-landbruk  /blogg/forsikringskrav-elkontroll-landbruk.html  301!
+/blogg/hva-er-samsvarserklaering-og-hvorfor-trenger-du-den  /blogg/hva-er-samsvarserklaering-og-hvorfor-trenger-du-den.html  301!
+/blogg/hva-koster-elkontroll-full-prisguide  /blogg/hva-koster-elkontroll-full-prisguide.html  301!
+/blogg/hva-sjekker-en-termografor  /blogg/hva-sjekker-en-termografor.html  301!
+/blogg/hvor-ofte-elkontroll-borettslag  /blogg/hvor-ofte-elkontroll-borettslag.html  301!
+/blogg/hvordan-oppstar-boligbranner-forebygg-med-elkontroll  /blogg/hvordan-oppstar-boligbranner-forebygg-med-elkontroll.html  301!
+/blogg/internkontroll-elektro-sma-bedrifter  /blogg/internkontroll-elektro-sma-bedrifter.html  301!
+/blogg/kan-et-darlig-elektrisk-anlegg-koste-deg-boligsalget-dette-sier-rettspraksis  /blogg/kan-et-darlig-elektrisk-anlegg-koste-deg-boligsalget-dette-sier-rettspraksis.html  301!
+/blogg/ladeanlegg-borettslag-kontroll  /blogg/ladeanlegg-borettslag-kontroll.html  301!
+/blogg/styrets-ansvar-for-det-elektriske-anlegget-dette-bor-dere-vite  /blogg/styrets-ansvar-for-det-elektriske-anlegget-dette-bor-dere-vite.html  301!
+/blogg/temperatursensor-sikringsskap  /blogg/temperatursensor-sikringsskap.html  301!
+/brannalarm-nodlys  /brannalarm-nodlys.html  301!
+/elbillading-kontroll  /elbillading-kontroll.html  301!
+/elkontroll-aremark  /elkontroll-aremark.html  301!
+/elkontroll-bolig  /elkontroll-bolig.html  301!
+/elkontroll-boligsalg  /elkontroll-boligsalg.html  301!
+/elkontroll-fredrikstad  /elkontroll-fredrikstad.html  301!
+/elkontroll-halden  /elkontroll-halden.html  301!
+/elkontroll-hvaler  /elkontroll-hvaler.html  301!
+/elkontroll-indre-ostfold  /elkontroll-indre-ostfold.html  301!
+/elkontroll-moss  /elkontroll-moss.html  301!
+/elkontroll-rakkestad  /elkontroll-rakkestad.html  301!
+/elkontroll-sarpsborg  /elkontroll-sarpsborg.html  301!
+/fatt-avvik  /fatt-avvik.html  301!
+/forsikringsrabatt  /forsikringsrabatt.html  301!
+/garantikontroll  /garantikontroll.html  301!
+/internkontroll  /internkontroll.html  301!
+/kontakt  /kontakt.html  301!
+/kontrollavtale  /kontrollavtale.html  301!
+/landbruk  /landbruk.html  301!
+/naering  /naering.html  301!
+/om-oss  /om-oss.html  301!
+/omrader  /omrader.html  301!
+/priser  /priser.html  301!
+/skjemaer  /skjemaer.html  301!
+/takk  /takk.html  301!
+/tjenester  /tjenester.html  301!
+
+# Mappesider: både med og uten skråstrek skal ende på skråstrek.
+/blogg  /blogg/  301!
+/blogg/index.html  /blogg/  301!
+/borettslag/brannvern  /borettslag/brannvern/  301!
+/borettslag/brannvern/index.html  /borettslag/brannvern/  301!
+/borettslag/elkontroll  /borettslag/elkontroll/  301!
+/borettslag/elkontroll/index.html  /borettslag/elkontroll/  301!
+/borettslag  /borettslag/  301!
+/borettslag/index.html  /borettslag/  301!
+/borettslag/kartlegging  /borettslag/kartlegging/  301!
+/borettslag/kartlegging/index.html  /borettslag/kartlegging/  301!
+/borettslag/ladeanlegg  /borettslag/ladeanlegg/  301!
+/borettslag/ladeanlegg/index.html  /borettslag/ladeanlegg/  301!
+/borettslag/leiligheter  /borettslag/leiligheter/  301!
+/borettslag/leiligheter/index.html  /borettslag/leiligheter/  301!
+/borettslag/pris  /borettslag/pris/  301!
+/borettslag/pris/index.html  /borettslag/pris/  301!
+/skjema  /skjema/  301!
+/skjema/index.html  /skjema/  301!

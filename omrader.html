@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="nb">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Områder vi dekker i Østfold | Elkontrollen</title>
 <meta name="description" content="Elkontrollen dekker Halden, Fredrikstad, Sarpsborg, Moss, Indre Østfold, Rakkestad, Hvaler og Aremark. Fastpris 5 000 kr, ingen kjøretillegg.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://elkontrollen.no/omrader.html">
@@ -15,18 +14,21 @@
 <meta property="og:title" content="Områder vi dekker i Østfold">
 <meta property="og:description" content="Elkontrollen dekker Halden, Fredrikstad, Sarpsborg, Moss, Indre Østfold, Rakkestad, Hvaler og Aremark. Fastpris 5 000 kr, ingen kjøretillegg.">
 <meta property="og:url" content="https://elkontrollen.no/omrader.html">
-<meta property="og:image" content="https://elkontrollen.no/assets/img/elkontroll-bolig-enebolig.jpg">
+<meta property="og:image" content="https://elkontrollen.no/assets/img/elkontroll-bolig-enebolig-og.jpg">
 <meta property="og:locale" content="nb_NO">
 <meta property="og:site_name" content="Elkontrollen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Områder vi dekker i Østfold">
 <meta name="twitter:description" content="Elkontrollen dekker Halden, Fredrikstad, Sarpsborg, Moss, Indre Østfold, Rakkestad, Hvaler og Aremark. Fastpris 5 000 kr, ingen kjøretillegg.">
-<meta name="twitter:image" content="https://elkontrollen.no/assets/img/elkontroll-bolig-enebolig.jpg">
+<meta name="twitter:image" content="https://elkontrollen.no/assets/img/elkontroll-bolig-enebolig-og.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Elkontrollen AS","url":"https://elkontrollen.no/","logo":"https://elkontrollen.no/assets/favicon.svg","telephone":"+4798019154","email":"post@elkontrollen.no","address":{"@type":"PostalAddress","streetAddress":"Lorangløkka 1","postalCode":"1782","addressLocality":"Halden","addressCountry":"NO"}}
+{"@context":"https://schema.org","@type":"Electrician","@id":"https://elkontrollen.no/#elkontrollen","name":"Elkontrollen AS","url":"https://elkontrollen.no/","logo":"https://elkontrollen.no/assets/favicon.svg","image":"https://elkontrollen.no/assets/img/om-oss-elektriker.jpg","telephone":"+4798019154","email":"post@elkontrollen.no","vatID":"NO825176942MVA","identifier":{"@type":"PropertyValue","propertyID":"Organisasjonsnummer","value":"825176942"},"address":{"@type":"PostalAddress","streetAddress":"Lorangløkka 1","postalCode":"1782","addressLocality":"Halden","addressRegion":"Østfold","addressCountry":"NO"},"geo":{"@type":"GeoCoordinates","latitude":59.134686,"longitude":11.380039},"areaServed":[{"@type":"AdministrativeArea","name":"Fredrikstad"},{"@type":"AdministrativeArea","name":"Sarpsborg"},{"@type":"AdministrativeArea","name":"Halden"},{"@type":"AdministrativeArea","name":"Moss"},{"@type":"AdministrativeArea","name":"Indre Østfold"},{"@type":"AdministrativeArea","name":"Rakkestad"},{"@type":"AdministrativeArea","name":"Hvaler"},{"@type":"AdministrativeArea","name":"Aremark"},{"@type":"AdministrativeArea","name":"Østfold"},{"@type":"AdministrativeArea","name":"Østlandet"}],"priceRange":"$","currenciesAccepted":"NOK","knowsAbout":["Elkontroll","Termografering","NEK 405","Internkontroll elsikkerhet","FG-750","FG-760"],"sameAs":["https://virksomhet.brreg.no/nb/oppslag/enheter/825176942"]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","serviceType":"Elkontroll og termografering","provider":{"@type":"Organization","name":"Elkontrollen AS","url":"https://elkontrollen.no/"},"areaServed":[{"@type":"AdministrativeArea","name":"Fredrikstad"},{"@type":"AdministrativeArea","name":"Sarpsborg"},{"@type":"AdministrativeArea","name":"Halden"},{"@type":"AdministrativeArea","name":"Moss"},{"@type":"AdministrativeArea","name":"Indre Østfold"},{"@type":"AdministrativeArea","name":"Rakkestad"},{"@type":"AdministrativeArea","name":"Hvaler"},{"@type":"AdministrativeArea","name":"Aremark"}],"description":"Elkontrollen dekker Halden, Fredrikstad, Sarpsborg, Moss, Indre Østfold, Rakkestad, Hvaler og Aremark. Fastpris 5 000 kr, ingen kjøretillegg.","offers":{"@type":"Offer","name":"Elkontroll bolig","price":"5000","priceCurrency":"NOK","availability":"https://schema.org/InStock"}}
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Hjem","item":"https://elkontrollen.no/"},{"@type":"ListItem","position":2,"name":"Områder vi dekker i Østfold","item":"https://elkontrollen.no/omrader.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","serviceType":"Elkontroll og termografering","provider":{"@id":"https://elkontrollen.no/#elkontrollen"},"areaServed":[{"@type":"AdministrativeArea","name":"Fredrikstad"},{"@type":"AdministrativeArea","name":"Sarpsborg"},{"@type":"AdministrativeArea","name":"Halden"},{"@type":"AdministrativeArea","name":"Moss"},{"@type":"AdministrativeArea","name":"Indre Østfold"},{"@type":"AdministrativeArea","name":"Rakkestad"},{"@type":"AdministrativeArea","name":"Hvaler"},{"@type":"AdministrativeArea","name":"Aremark"}],"description":"Elkontrollen dekker Halden, Fredrikstad, Sarpsborg, Moss, Indre Østfold, Rakkestad, Hvaler og Aremark. Fastpris 5 000 kr, ingen kjøretillegg.","offers":{"@type":"Offer","name":"Elkontroll bolig","price":"5000","priceCurrency":"NOK","availability":"https://schema.org/InStock"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Tar dere kjøretillegg?","acceptedAnswer":{"@type":"Answer","text":"Nei. Fastprisen på 5 000 kr for elkontroll av bolig gjelder i hele Østfold, uavhengig av hvor i fylket du bor."}},{"@type":"Question","name":"Dekker dere andre steder enn Østfold?","acceptedAnswer":{"@type":"Answer","text":"Ja. Vi er Halden-basert og dekker Østfold og hele Østlandet. Sidene her beskriver Østfold-kommunene vi jobber mest i — ta kontakt hvis du er utenfor, så finner vi ut av det."}},{"@type":"Question","name":"Hvor raskt kan dere komme?","acceptedAnswer":{"@type":"Answer","text":"Det avhenger av hvor du er og hvor mye vi har inne. Vi svarer på henvendelser innen 24 timer og avtaler tidspunkt da. I Halden og nabokommunene kan vi ofte rykke ut på kort varsel."}},{"@type":"Question","name":"Kan flere naboer bestille samtidig?","acceptedAnswer":{"@type":"Answer","text":"Ja, og det er en god idé. Vi setter gjerne opp flere oppdrag i samme område på samme dag. Det gir oss bedre logistikk og dere raskere tid."}},{"@type":"Question","name":"Hva koster det, og varierer prisen med avstand?","acceptedAnswer":{"@type":"Answer","text":"Elkontroll av bolig koster 5 000 kr som fastpris, med termografering inkludert, og prisen er den samme i hele Østfold. Borettslag, landbruk og næringsbygg får tilbud fordi omfanget varierer for mye til at én pris gir mening. Se prissiden for hele oversikten."}}]}
@@ -36,11 +38,11 @@
 <header>
   <div class="nav-row">
     <div class="logo">
-      <a href="index.html" style="display:flex;align-items:center;gap:10px;"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><span><span class="el">El</span>kontrollen</span></a>
+      <a href="/" style="display:flex;align-items:center;gap:10px;"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><span><span class="el">El</span>kontrollen</span></a>
     </div>
     <button class="menu-toggle" aria-label="Meny">&#9776;</button>
     <nav class="links">
-      <a href="index.html">Hjem</a>
+      <a href="/">Hjem</a>
       <div class="nav-dropdown">
         <button class="nav-drop-trigger" type="button">Bolig <span class="care">&#9662;</span></button>
         <div class="nav-drop-panel"><div class="nav-drop-panel-inner">
@@ -52,7 +54,7 @@
       <div class="nav-dropdown">
         <button class="nav-drop-trigger" type="button">Borettslag &amp; sameie <span class="care">&#9662;</span></button>
         <div class="nav-drop-panel"><div class="nav-drop-panel-inner">
-          <a href="borettslag/index.html">Trygt Borettslag</a>
+          <a href="/borettslag/">Trygt Borettslag</a>
           <a href="elbillading-kontroll.html">Kontroll av ladeanlegg</a>
           <a href="brannalarm-nodlys.html">Brannalarm &amp; n&#248;dlys</a>
         </div></div>
@@ -71,7 +73,7 @@
       <a href="priser.html">Priser</a>
       <a href="fatt-avvik.html">F&#229;tt avvik?</a>
       <a href="om-oss.html">Om oss</a>
-      <a href="blogg/index.html">Blogg</a>
+      <a href="/blogg/">Blogg</a>
     </nav>
     <div class="nav-right">
       <a class="phone" href="tel:+4798019154">+47 980 19 154</a>
@@ -79,6 +81,7 @@
     </div>
   </div>
 </header>
+<main id="innhold">
 <section class="page-hero">
   <div class="wrap">
     <span class="stamp"><span class="dot"></span>Halden-basert · dekker Østfold og Østlandet</span>
@@ -180,6 +183,18 @@
     </div>
   </div>
 </section>
+
+<section data-relatert class="section tight" style="border-top:1px solid var(--line); background:var(--paper-2);">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:14px;"><h2>Les mer</h2></div>
+    <ul class="bullet-list" style="display:block;">
+        <li><a href="blogg/hva-koster-elkontroll-full-prisguide.html">Hva koster elkontroll? Full prisguide</a></li>
+        <li><a href="blogg/10-tegn-pa-at-det-elektriske-anlegget-bor-kontrolleres.html">10 tegn på at anlegget bør kontrolleres</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -188,7 +203,7 @@
         <p class="foot-desc">Halden-basert kontrollforetak som dekker Østfold og hele Østlandet. Sertifisert, kvalitet og sikkerhet.</p>
       </div>
       <div>
-        <h5>Tjenester</h5>
+        <h2>Tjenester</h2>
         <div class="foot-group-label">Bolig</div>
         <ul>
           <li><a href="elkontroll-bolig.html">Elkontroll bolig</a></li>
@@ -198,7 +213,7 @@
         </ul>
         <div class="foot-group-label">Borettslag &amp; sameie</div>
         <ul>
-          <li><a href="borettslag/index.html">Trygt Borettslag</a></li>
+          <li><a href="/borettslag/">Trygt Borettslag</a></li>
           <li><a href="elbillading-kontroll.html">Kontroll av ladeanlegg</a></li>
           <li><a href="brannalarm-nodlys.html">Brannalarm &amp; n&#248;dlys</a></li>
         </ul>
@@ -218,18 +233,18 @@
         </ul>
       </div>
       <div>
-        <h5>Selskap</h5>
+        <h2>Selskap</h2>
         <ul>
           <li><a href="om-oss.html">Om oss</a></li>
           <li><a href="omrader.html">Områder vi dekker</a></li>
-          <li><a href="blogg/index.html">Blogg</a></li>
+          <li><a href="/blogg/">Blogg</a></li>
           <li><a href="fatt-avvik.html">Fått avvik?</a></li>
           <li><a href="skjemaer.html">Skjemaer</a></li>
           <li><a href="kontakt.html">Kontakt oss</a></li>
         </ul>
       </div>
       <div>
-        <h5>Kontakt</h5>
+        <h2>Kontakt</h2>
         <ul>
           <li>Elkontrollen AS</li>
           <li>Lorangløkka 1, 1782 Halden</li>
@@ -241,6 +256,6 @@
     <div class="org">Elkontrollen AS · <a href="https://virksomhet.brreg.no/nb/oppslag/enheter/825176942" target="_blank" rel="noopener">Org.nr 825 176 942</a> · Sertifisert kontrollforetak · © 2026</div>
   </div>
 </footer>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>

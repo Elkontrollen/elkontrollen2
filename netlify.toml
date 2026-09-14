@@ -1,2 +1,8 @@
 [build]
   publish = "."
+
+# Netlifys «Pretty URLs» skriver om interne lenker fra x.html til /x etter deploy.
+# Canonical på sidene peker på .html, så omskrivingen sendte all intern lenkekraft
+# til den varianten canonical sier ikke er den riktige. Se REVISJON.md seksjon 5.
+[build.processing.html]
+  pretty_urls = false

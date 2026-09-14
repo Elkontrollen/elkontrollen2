@@ -29,15 +29,14 @@ const ld = o => `<script type="application/ld+json">\n${JSON.stringify(o)}\n</sc
 
 function head({ tittel, beskrivelse, url, bilde }) {
   return `<!DOCTYPE html>
-<html lang="no">
+<html lang="nb">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${tittel}</title>
 <meta name="description" content="${beskrivelse}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="${url}">
@@ -70,7 +69,7 @@ function skriv(fil, { tittel, beskrivelse, bilde, schemas, body }) {
   const html = head({ tittel, beskrivelse, url, bilde })
     + '\n' + [ORG, ...schemas].map(ld).join('\n')
     + '\n</head>\n<body>\n' + HEADER + body + FOOTER
-    + '\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n';
+    + '\n<script src="assets/js/main.js" defer></script>\n</body>\n</html>\n';
   fs.writeFileSync(path.join(ROT, fil), html);
   console.log('skrev', fil);
 }
@@ -83,7 +82,7 @@ const PRISRADER = [
   ['<a href="landbruk.html">Elkontroll landbruk</a>', 'NEK 405-3 m/tillegg', 'Fast pris', 'Avklares på telefon — du får pris samme dag.'],
   ['<a href="garantikontroll.html">Garantikontroll</a>', 'NEK 405-3', 'Fast pris', 'Avtales etter opplysninger om anlegget.'],
   ['<a href="naering.html">Elkontroll næring</a>', 'NEK 405-3 / FG-1400', 'Tilbud', 'Etter bygningstype, areal og risikoklasse.'],
-  ['<a href="borettslag/pris/index.html">Trygt Borettslag</a>', 'NEK 405-3 + FG-750/760', 'Årsavtale', 'Etter antall enheter, tavler og ladepunkter. Gratis kartlegging først.'],
+  ['<a href="/borettslag/pris/">Trygt Borettslag</a>', 'NEK 405-3 + FG-750/760', 'Årsavtale', 'Etter antall enheter, tavler og ladepunkter. Gratis kartlegging først.'],
   ['<a href="brannalarm-nodlys.html">Brannalarm og nødlys</a>', 'FG-750 / FG-760', 'Tilbud', 'Etter anleggets størrelse og antall armaturer.'],
   ['<a href="elbillading-kontroll.html">Kontroll av ladeanlegg</a>', 'NEK 400 / NEK 405-3', 'Tilbud', 'Etter antall ladepunkter og fordelinger.'],
   ['<a href="internkontroll.html">Internkontroll elektro</a>', 'Internkontrollforskriften', 'Tilbud', 'Årsavtale, etter virksomhetens omfang.'],
@@ -175,7 +174,7 @@ ${PRISRADER.map(r => `          <tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}<
     <div style="max-width:760px;">
       <p style="color:var(--muted); line-height:1.75; margin-bottom:18px;">En bolig er forutsigbar nok til at vi tør binde oss til én pris. Et næringsbygg er det ikke. Forskjellen mellom et butikklokale på 90 kvadratmeter og et lagerbygg på 4 000 er ikke bare areal — det er antall tavler og fordelinger, antall kurser, hvilken risikoklasse bygget faller i etter FG-1400, og hvor mye som må kontrolleres under drift.</p>
       <p style="color:var(--muted); line-height:1.75; margin-bottom:18px;">Setter vi én fastpris på alt dette, blir den enten for høy for det lille bygget eller for lav for det store. Ingen av delene er en god handel for noen. Derfor får du et konkret tilbud, basert på opplysninger om bygget — ikke et prisintervall du må gjette deg gjennom.</p>
-      <p style="color:var(--muted); line-height:1.75;">Det samme gjelder borettslag og sameier. Der er det antall enheter, oppganger, tavler og ladepunkter som avgjør, og vi gjør en <a href="borettslag/kartlegging/index.html">gratis kartlegging</a> først, slik at prisen bygger på hva laget faktisk har — ikke på et anslag.</p>
+      <p style="color:var(--muted); line-height:1.75;">Det samme gjelder borettslag og sameier. Der er det antall enheter, oppganger, tavler og ladepunkter som avgjør, og vi gjør en <a href="/borettslag/kartlegging/">gratis kartlegging</a> først, slik at prisen bygger på hva laget faktisk har — ikke på et anslag.</p>
     </div>
   </div>
 </section>

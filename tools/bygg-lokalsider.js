@@ -36,15 +36,14 @@ const ORG = {
 
 function head({ tittel, beskrivelse, url, bilde }) {
   return `<!DOCTYPE html>
-<html lang="no">
+<html lang="nb">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${tittel}</title>
 <meta name="description" content="${beskrivelse}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="${url}">
@@ -79,7 +78,7 @@ function faqBlokk(faq) {
 const TJENESTER = {
   bolig: ['elkontroll-bolig.html', 'Elkontroll bolig', 'NEK 405-2 med termografering. Fastpris 5 000 kr, rapport samme dag.'],
   boligsalg: ['elkontroll-boligsalg.html', 'Ved kjøp og salg', 'Dokumentert tilstand før visning eller bud — før det blir en tvist.'],
-  borettslag: ['borettslag/index.html', 'Borettslag og sameie', 'Trygt Borettslag: el, brann og ladeanlegg i én årsavtale for styret.'],
+  borettslag: ['/borettslag/', 'Borettslag og sameie', 'Trygt Borettslag: el, brann og ladeanlegg i én årsavtale for styret.'],
   landbruk: ['landbruk.html', 'Elkontroll landbruk', 'NEK 405-3 med landbrukstillegg. Godkjent av landbruksforsikringen.'],
   naering: ['naering.html', 'Elkontroll næring', 'NEK 405-3 tilpasset bygningstype og FG-1400.'],
   internkontroll: ['internkontroll.html', 'Internkontroll elektro', 'Lovpålagt for alle virksomheter med ansatte.'],
@@ -294,7 +293,7 @@ ${faq.html}
   const html = head({ tittel: c.metaTittel, beskrivelse: c.metaBeskrivelse, url, bilde: 'elkontroll-bolig-enebolig.jpg' })
     + '\n' + ld(ORG) + '\n' + ld(service) + '\n' + ld(faq.schema)
     + '\n</head>\n<body>\n' + HEADER + body + FOOTER
-    + '\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n';
+    + '\n<script src="assets/js/main.js" defer></script>\n</body>\n</html>\n';
 
   fs.writeFileSync(path.join(ROT, fil), html);
   return fil;
@@ -392,7 +391,7 @@ ${faq.html}
   const html = head({ tittel, beskrivelse, url, bilde: 'elkontroll-bolig-enebolig.jpg' })
     + '\n' + ld(ORG) + '\n' + ld(service) + '\n' + ld(faq.schema)
     + '\n</head>\n<body>\n' + HEADER + body + FOOTER
-    + '\n<script src="assets/js/main.js"></script>\n</body>\n</html>\n';
+    + '\n<script src="assets/js/main.js" defer></script>\n</body>\n</html>\n';
 
   fs.writeFileSync(path.join(ROT, 'omrader.html'), html);
   return 'omrader.html';
