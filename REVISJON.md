@@ -1,7 +1,19 @@
 # REVISJON.md — SEO-revisjon av elkontrollen.no
 
-Seksjon 1–13 er kartleggingen fra **Fase 0**. Ingenting på siden ble endret mens den ble laget.
-Seksjon 14 og utover dokumenterer endringene som er gjort i de påfølgende fasene.
+Seksjon 1–13 er kartleggingen fra **fase 0**. Ingenting på siden ble endret mens den ble laget.
+Seksjon 14–18 dokumenterer endringene i de påfølgende fasene.
+
+| Fase | Hva | Seksjon |
+|---|---|---|
+| 0 | Kartlegging og konkurrentanalyse | 1–13 |
+| 1 | Kontaktskjema og e-post | 14 |
+| 2 | Åtte lokale landingssider | 15 |
+| 3 | `/priser`, `/forsikringsrabatt`, FAQ overalt | 16 |
+| 4 | Teknisk SEO | 17 |
+| 5 | Oppgaver til eieren | 18 |
+
+**Leveranser:** `REVISJON.md` (denne), `FAKTASJEKK.md` (87 punkter som må bekreftes),
+`TIL_DEG.md` (11 oppgaver eieren må gjøre selv).
 
 Dato: 2026-09-14
 Repo: `Elkontrollen/elkontrollen2` (branch `main`, HEAD `0529d69`)
@@ -977,6 +989,38 @@ Alle er idempotente og kan kjøres om igjen.
 > **Lighthouse-tallene over er målt lokalt.** De bør kjøres på nytt mot
 > `https://elkontrollen.no` etter deploy — særlig fordi `pretty_urls = false` og
 > `_redirects` først får virkning der.
+
+---
+
+## 18. Fase 5 — det eieren må gjøre selv (dokumentert)
+
+Skrevet til `TIL_DEG.md`, med konkrete steg for hvert punkt.
+
+De fem fra arbeidsordren, pluss fem som kom ut av revisjonen:
+
+| # | Oppgave | Kilde | Tid |
+|---|---|---|---|
+| 0 | **Fjern «Fra xxx kr/år»** — plassholdertekst som ligger ute i produksjon på to sider, seks steder | Funnet i fase 3 | 5 min |
+| 1 | Google Bedriftsprofil — tjenesteområdebedrift med alle åtte kommunene | Arbeidsordren | 20 min + verifisering |
+| 2 | Anmeldelser — SMS med direktelenke etter levert rapport, mål to til fire i måneden | Arbeidsordren | 2 min per kunde |
+| 3 | Search Console — sjekk indeksering, send inn ny sitemap, be om indeksering av de ni viktigste nye sidene | Arbeidsordren | 15 min |
+| 4 | Netlify Forms — e-postvarsling for åtte skjemaer | Arbeidsordren | 10 min |
+| 5 | Bransjeregistre — identisk NAP i Proff, 1881, Bedriftsdatabasen, Elvirksomhetsregisteret | Arbeidsordren | 45 min |
+| 6 | **Åpningstider** — ett felt i `tools/foretak.json` | Åpent punkt fra fase 4 | 2 min |
+| 7 | **Navn på kontrollør** — så `author` kan bli en `Person` | Åpent punkt fra fase 4 | 2 min |
+| 8 | **Etter deploy** — bekreft at redirects virker, at Pretty URLs er av, kjør Lighthouse mot produksjon, test kontaktskjemaet | Fase 4 | 15 min |
+| 9 | **Rangeringssjekk fra norsk IP** — det vi ikke kunne måle | Fase 0, seksjon 12 | 20 min |
+| 10 | Faktasjekk av de nye sidene | `FAKTASJEKK.md` | Løpende |
+
+Punkt 3 er skrevet med en tabell over hva de ulike statusene i Search Console betyr,
+fordi det er der canonical-konflikten fra fase 4 vil vise seg om den ikke er løst:
+«Duplikat, Google valgte en annen kanonisk» skal falle i ukene etter deploy.
+
+Punkt 9 er tatt med fordi konkurrentanalysen i seksjon 12 er en kartlegging av hvem som
+konkurrerer, ikke en rangeringsmåling — søkeverktøyene i dette miljøet er USA-baserte,
+og forsøkene på å hente norske søkeresultater ble blokkert. Det tar 20 minutter fra en
+norsk nettleser, og gir i tillegg antall Google-anmeldelser hos konkurrentene, som er
+det viktigste enkelttallet for å vite hvor mye arbeid punkt 2 krever.
 
 ---
 
