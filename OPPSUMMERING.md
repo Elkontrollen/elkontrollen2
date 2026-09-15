@@ -1,16 +1,21 @@
 # Oppsummering
 
-**Natten 13.–14. september 2026.** Alt ligger som lokale commits på `main`. **Ingenting er
-deployet** — se «Det viktigste» under.
+**Natten 13.–14. september 2026.** **Deployet 15. september** etter beskjed, og verifisert
+mot produksjon.
 
 ---
 
 ## Det viktigste, hvis du bare leser tre avsnitt
 
-**1. Jeg har ikke pushet, og det var et bevisst valg.** Ordren sa «ikke deploy», og på
-dette repoet er push til `main` det samme som deploy — Netlify bygger automatisk. Det
-finnes ingen mellomting her. Commitene ligger klare lokalt, usendte. Si fra når du vil
-ha dem ut, så pusher jeg. Begrunnelsen står i `BESLUTNINGER.md` punkt 1.
+**1. Det er ute nå.** Arbeidet ble holdt tilbake til du ga beskjed, fordi push til `main`
+på dette repoet er det samme som deploy — det finnes ingen mellomting. Tolv commits er
+sendt, og alt under er verifisert mot den ekte siden, ikke bare lokalt.
+
+Deployen avdekket én ting til: de ni nye sidene og de åtte nye artiklene manglet regel i
+`_redirects`, fordi generatoren sist ble kjørt før de fantes. De svarte 200 på både
+`/elkontroll-drammen` og `/elkontroll-drammen.html`. Canonical pekte riktig hele veien, så
+Google ville slått dem sammen uansett, men nå er det likt på tvers. Rettet og deployet på
+nytt.
 
 **2. Sjekk `TIL_DEG.md` punkt 11 før de nye sidene får trafikk.** De fem sidene utenfor
 Østfold sier ingenting om pris, fordi jeg ikke vet hva den er. Østfold-sidene lover
@@ -126,17 +131,25 @@ lenken.
 | Artikler med tematisk tjenestelenke | — | 42 av 42 |
 | Tjenestesider med minst to bloggenker | — | 29 av 29 |
 | Søkeord dekket i title eller h1 | — | 15 av 15 |
-| Omdirigeringsregler | 79 | 59, alle løkkefrie |
+| Omdirigeringsregler | 79 | 76, alle løkkefrie |
 
-**Lighthouse, alle fire kategorier, på fem representative nye sider:**
+**Lighthouse mot produksjon, 15. september:**
 
 | Side | Perf | Tilgj. | Beste praksis | SEO |
 |---|---|---|---|---|
+| `/` | 100 | 100 | 100 | 100 |
 | `/borettslag/` | 100 | 100 | 100 | 100 |
 | `/elkontroll-borettslag-fredrikstad` | 100 | 100 | 100 | 100 |
-| `/elkontroll-oslo` | 100 | 100 | 100 | 100 |
 | `/blogg/hva-koster-elkontroll-borettslag` | 100 | 100 | 100 | 100 |
-| `/omrader` | 100 | 100 | 100 | 100 |
+
+**Verifisert på den ekte siden etter deploy:**
+
+| Sjekk | Resultat |
+|---|---|
+| Omdirigeringer fulgt hele veien med `curl -L` | 200 etter 0 eller 1 hopp, ingen løkker |
+| `POST /takk` | 200, ikke 301 — skjemaene slipper gjennom |
+| Pretty URLs i Netlify | av, ingen omskrevne lenker i kilden |
+| Alle 17 nye sider | svarer på både med og uten `.html` |
 
 ---
 
@@ -208,13 +221,14 @@ byggkommando hvis du vil ha den kjørt automatisk.
 
 ---
 
-## Når du vil ha det ut
+## Etter deploy
 
-```
-git log --oneline origin/main..HEAD    # se hva som ligger klart
-git push                               # dette deployer
-```
+De fire sjekkene i `TIL_DEG.md` punkt 8 er kjørt, og alle er grønne. Verdt å huske til
+neste gang: følg alltid omdirigeringene med `curl -L`, ikke bare status på første hopp.
+Det var akkurat den snarveien som kostet ni sider i en time.
 
-Etter deploy: `TIL_DEG.md` punkt 8 har fire ting å sjekke, og den første er den viktigste —
-følg omdirigeringene med `curl -L`, ikke bare status på første hopp. Det var akkurat den
-snarveien som kostet ni sider i en time.
+Det som gjenstår er punkt 11 (pris utenfor Østfold), punkt 4 (e-postvarsling i Netlify) og
+punkt 1 (Google Bedriftsprofil). Ingen av dem kan jeg gjøre uten deg.
+
+Husk også at åtte artikler har publiseringsdato fram til 29. september. De ligger ute nå,
+men datoene er spredt med vilje — se Fase C over.
